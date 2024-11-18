@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"
+            integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+
+<body class="bg-light bg-gradient">
+<th:block th:fragment="footer">
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="m-4 ">
+                    <img class="rounded-2" style="width: 100px;height: 100px"
+                         th:src="@{/access/image/c085ad076c442c8191e6b7f48ef59aad.jpg}" alt="logo">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row d-flex flex-nowrap mt-5">
+                    <div class="col-md-2 mt-2">
+                        <svg font-size="32px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path xmlns="http://www.w3.org/2000/svg"
+                                  d="M14.5 6.5C15.2371 6.64382 15.9689 6.96892 16.5 7.5C17.031 8.03108 17.3561 8.76284 17.5 9.5M15 3C16.5315 3.17014 17.9096 3.91107 19 5C20.0903 6.08893 20.8279 7.46869 21 9M20.9994 16.4767V19.1864C21.0036 20.2223 20.0722 21.0873 19.0264 20.9929C10 21 3 13.935 3.00706 4.96919C2.91287 3.92895 3.77358 3.00106 4.80811 3.00009H7.52325C7.96247 2.99577 8.38828 3.151 8.72131 3.43684C9.66813 4.24949 10.2771 7.00777 10.0428 8.10428C9.85987 8.96036 8.9969 9.55929 8.41019 10.1448C9.69858 12.4062 11.5746 14.2785 13.8405 15.5644C14.4272 14.9788 15.0273 14.1176 15.8851 13.935C16.9855 13.7008 19.7615 14.3106 20.5709 15.264C20.8579 15.6021 21.0104 16.0337 20.9994 16.4767Z"
+                                  stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
+                                  stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="fw-light">Hotline</h6>
+                        <p class="fw-bold">1900 1080</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row d-flex flex-nowrap mt-5">
+
+                    <div class="col-md-2 mt-2">
+                        <svg font-size="32px" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M12 3.75C10.2051 3.75 8.75 5.20507 8.75 7C8.75 8.79493 10.2051 10.25 12 10.25C13.7949 10.25 15.25 8.79493 15.25 7C15.25 5.20507 13.7949 3.75 12 3.75ZM7.25 7C7.25 4.37665 9.37665 2.25 12 2.25C14.6234 2.25 16.75 4.37665 16.75 7C16.75 9.62335 14.6234 11.75 12 11.75C9.37665 11.75 7.25 9.62335 7.25 7ZM21 6.75C20.4015 6.75 19.8701 7.17411 19.7273 7.7415C19.6262 8.14319 19.2186 8.38686 18.8169 8.28576C18.4153 8.18466 18.1716 7.77707 18.2727 7.37538C18.581 6.15033 19.7049 5.25 21 5.25C22.5675 5.25 23.75 6.54779 23.75 8.07792C23.75 9.21634 22.9549 9.79559 22.482 10.1401C22.4685 10.1499 22.4553 10.1595 22.4424 10.1689C21.8868 10.5748 21.75 10.7206 21.75 11C21.75 11.4142 21.4142 11.75 21 11.75C20.5858 11.75 20.25 11.4142 20.25 11C20.25 9.90483 21.034 9.33702 21.4923 9.00509C21.5149 8.98873 21.5367 8.97294 21.5576 8.9577C22.0911 8.56799 22.25 8.4006 22.25 8.07792C22.25 7.31284 21.677 6.75 21 6.75ZM21 12.25C21.4142 12.25 21.75 12.5858 21.75 13V13.01C21.75 13.4242 21.4142 13.76 21 13.76C20.5858 13.76 20.25 13.4242 20.25 13.01V13C20.25 12.5858 20.5858 12.25 21 12.25ZM3.25 19C3.25 16.3766 5.37665 14.25 8 14.25H16C18.6234 14.25 20.75 16.3766 20.75 19V21C20.75 21.4142 20.4142 21.75 20 21.75C19.5858 21.75 19.25 21.4142 19.25 21V19C19.25 17.2051 17.7949 15.75 16 15.75H8C6.20507 15.75 4.75 17.2051 4.75 19V21C4.75 21.4142 4.41421 21.75 4 21.75C3.58579 21.75 3.25 21.4142 3.25 21V19Z"></path>
+                        </svg>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="fw-light">Hỗ trợ khách hàng</h6>
+                        <p class="fw-bold">trandokhanhminh@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row d-flex flex-nowrap mt-5">
+                    <div class="col-md-2 mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                             class="bi bi-headset" viewBox="0 0 16 16">
+                            <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+                        </svg>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="fw-light">Chăm sóc khác hàng</h6>
+                        <p class="fw-bold">trandokhanhminh@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <ul style="list-style: none;">
+                    <h6 class="text-uppercase fw-bold">CÔNG TY CỔ PHẦN Thỏ bảy màu VIỆT NAM</h6>
+                    <li>
+                        <div class="mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                            </svg>
+                            <span>Tầng 45, LandMark 81, 720A Điện Biên Phủ Street, Ward 22, Bình Thạnh, Ho Chi Minh City, Vietnam</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mt-2 ">
+                            <svg font-size="16px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path xmlns="http://www.w3.org/2000/svg"
+                                      d="M14.5 6.5C15.2371 6.64382 15.9689 6.96892 16.5 7.5C17.031 8.03108 17.3561 8.76284 17.5 9.5M15 3C16.5315 3.17014 17.9096 3.91107 19 5C20.0903 6.08893 20.8279 7.46869 21 9M20.9994 16.4767V19.1864C21.0036 20.2223 20.0722 21.0873 19.0264 20.9929C10 21 3 13.935 3.00706 4.96919C2.91287 3.92895 3.77358 3.00106 4.80811 3.00009H7.52325C7.96247 2.99577 8.38828 3.151 8.72131 3.43684C9.66813 4.24949 10.2771 7.00777 10.0428 8.10428C9.85987 8.96036 8.9969 9.55929 8.41019 10.1448C9.69858 12.4062 11.5746 14.2785 13.8405 15.5644C14.4272 14.9788 15.0273 14.1176 15.8851 13.935C16.9855 13.7008 19.7615 14.3106 20.5709 15.264C20.8579 15.6021 21.0104 16.0337 20.9994 16.4767Z"
+                                      stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                            <span>(024) 3562 5939-(024) 3562 5940</span>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+            <div class="col-md-3 ">
+                <ul style="list-style: none;">
+                    <h6 class="text-uppercase fw-bold">Về chúng tôi</h6>
+                    <li><i class="fab fa-facebook"></i> Facebook</li>
+                    <li><i class="fab fa-twitter"></i> Twitter</li>
+                    <li><i class="fab fa-instagram"></i> Instagram</li>
+                    <li><i class="fab fa-youtube"></i> Youtube</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul style="list-style: none">
+                    <h6 class="text-uppercase fw-bold">Hỗ trợ khách hàng</h6>
+                    <li>Hướng dẫn mua hàng</li>
+                    <li>Phương thức thanh toán</li>
+                    <li>Chính sách trả góp</li>
+                    <li>Chính sách bảo hành</li>
+                    <li>Phương thức vận chuyển</li>
+                    <li>Chính sách bảo mật thông tin</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul style="list-style: none">
+                    <h6 class="text-uppercase fw-bold">Tải ứng dụng</h6>
+                    <li>
+                        <div class="mx-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-google-play" viewBox="0 0 16 16">
+                                <path d="M14.222 9.374c1.037-.61 1.037-2.137 0-2.748L11.528 5.04 8.32 8l3.207 2.96zm-3.595 2.116L7.583 8.68 1.03 14.73c.201 1.029 1.36 1.61 2.303 1.055zM1 13.396V2.603L6.846 8zM1.03 1.27l6.553 6.05 3.044-2.81L3.333.215C2.39-.341 1.231.24 1.03 1.27"/>
+                            </svg>
+                            Google Play
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 viewBox="0 0 384 512">
+                                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                            </svg>
+                            App Store
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-center align-items-center"
+         style="background-color: #2e59d9; height: 55px">
+        <div class="copyright">
+            <span class="text-white">Copyright &copy; <strong>Bất động sản Website</strong> 2024</span>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+</html>

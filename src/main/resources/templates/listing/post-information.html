@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" th:href="@{/access/css/home.css}">
+</head>
+<style>
+    .place-address {
+        border-radius: 16px;
+    }
+
+    .option-unit {
+        background-color: rgb(225, 225, 225);
+        border: 1px solid black;
+        margin-left: 12px;
+        cursor: default;
+        font-weight: 700;
+    }
+
+    .container input {
+        max-width: 660px;
+        border-radius: 24px;
+    }
+
+    .container-fix-60 {
+        max-width: 60%;
+    }
+</style>
+
+<body>
+<th:block th:insert="~{ home/header :: header}"></th:block>
+
+
+<div class="container">
+    <div class="my-4">
+        <div class="d-flex justify-content-between">
+            <div class="step-1">
+                <h4 class=""><strong>Tạo bài đăng</strong></h4>
+                <span><strong>Bước 2: Thông tin bất động sản</strong></span>
+            </div>
+            <div class="exit">
+                <a th:href="@{/listing/exit-post/{id}(id=${propertyOld.getPropertyId()})}"
+                   class="btn btn-outline-dark rounded-pill btn-lg fw-light">Thoát</a>
+            </div>
+        </div>
+        <hr>
+        <form th:action="@{/listing/information}" th:object="${propertyOld}" method="post">
+            <input type="hidden" th:value="${propertyNew.propertyId}" name="property-old-id">
+            <div class="container-sm border place-address container-fix-60">
+                <h5 class="py-3 mx-2"><strong>Thông tin chính</strong></h5>
+                <div class="container mb-4">
+                    <h6>Loại BĐS</h6>
+                    <select class="text-start btn btn-outline-dark " name="property-type" id="type"
+                            style="width: 267px">
+                        <option>-- Chọn loại BĐS --</option>
+                        <option value="Căn hộ">Căn hộ chung cư</option>
+                        <option value="Nhà riêng">Nhà riêng</option>
+                        <option value="Biệt thự">Nhà biệt thự</option>
+                        <option value="Nhà mặt phố">Nhà mặt phố</option>
+                        <option value="Nhà trọ">Nhà trọ/Phòng trọ</option>
+                    </select>
+                </div>
+                <div class="container my-4">
+                    <h6>Diện tích</h6>
+                    <div class="d-flex flex-nowrap">
+                        <input th:field="*{squareMeters}" type="number" class="form-control"
+                               placeholder="Nhập diện tích">
+                        <div class="btn rounded-pill option-unit "> m²</div>
+                    </div>
+                </div>
+                <div class="container my-4">
+                    <h6>Mức giá</h6>
+                    <div class="d-flex flex-nowrap">
+                        <input th:field="*{propertyPrice}" type="number" class="form-control " placeholder="Nhập giá">
+                        <div class="btn rounded-pill option-unit"> VNĐ</div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-sm border place-address my-4 container-fix-60">
+                <h6 class="py-3 mx-2"><strong>Thông tin khác</strong></h6>
+                <div class="container">
+                    <h6>Nội thất</h6>
+                    <select  class="text-start btn btn-outline-dark" name="interior"
+                            id="house" style="width: 267px">
+                        <option>-- Chọn nội thất --</option>
+                        <option value="Đầy đủ">Đầy đủ</option>
+                        <option value="Cơ bản">Cơ bản</option>
+                        <option value="Không">Không có nội thất</option>
+                    </select>
+                </div>
+                <div class="container my-4">
+                    <h6>Số tầng</h6>
+                    <div class="">
+                        <input th:field="*{propertyFloor}" type="number" class="form-control "
+                               placeholder="Nhập số tầng">
+                    </div>
+                </div>
+                <div class="container my-4">
+                    <h6>Số phòng ngủ</h6>
+                    <div class="">
+                        <input th:field="*{bedrooms}" type="number" class="form-control "
+                               placeholder="Nhập số phòng ngủ">
+                    </div>
+                </div>
+                <div class="container my-4">
+                    <h6>Số phòng tắm/vệ sinh</h6>
+                    <div class="">
+                        <input th:field="*{bathrooms}" type="number" class="form-control"
+                               placeholder="Nhập số phòng tắm/vệ sinh">
+                    </div>
+                </div>
+            </div>
+            <div class="container-sm my-4 d-flex justify-content-between container-fix-60">
+                <a th:href="@{/listing/post-address}" class="btn btn-primary rounded-pill">Quay lại</a>
+                <button type="submit" value="Submit" class="btn btn-primary rounded-pill">Tiếp theo</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<th:block th:insert="~{ home/footer :: footer}"></th:block>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        referrerpolicy="no-referrer"></script>
+<script th:src="@{/access/js/apiprovince.js}"></script>
+</body>
+
+</html>

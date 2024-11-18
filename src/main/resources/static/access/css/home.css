@@ -1,0 +1,102 @@
+.btn-active,
+.btn-re-active {
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.active {
+    color: white;
+    background-color: red;
+}
+
+.inactive {
+    color: black;
+    background-color: white;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 8.255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+.dropdown-toggle1::after {
+    display: inline-block;
+    margin-left: 10.255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+.province-district-ward {
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+.province-district-ward select {
+    color: white !important;
+    background-color: #6c757d;
+}
+
+
+.property-info {
+    text-decoration: none !important;
+    color: black;
+    cursor: pointer;
+}
+
+.property-info h6,
+span,
+p {
+    text-decoration: none !important;
+    color: black;
+    cursor: pointer;
+}
+
+.place-info {
+    position: relative;
+}
+
+.place-name {
+    position: absolute;
+    top: -160px;
+    left: -10px;
+    padding-left: 10px;
+    font-size: 20px;
+    color: white;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.place-name:hover {
+    text-decoration: underline;
+}
+
+.place-info-small {
+    position: relative;
+}
+
+.place-name-small {
+    position: absolute;
+    top: -70px;
+    left: -10px;
+    padding-left: 10px;
+    font-size: 20px;
+    color: white;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.place-name-small:hover {
+    text-decoration: underline;
+}
