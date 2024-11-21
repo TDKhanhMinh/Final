@@ -6,6 +6,8 @@ import com.example.Final.entity.listingservice.Images;
 import com.example.Final.entity.listingservice.Properties;
 import com.example.Final.repository.AddressRepo;
 import com.example.Final.repository.ContactRepo;
+import com.example.Final.repository.ImagesRepo;
+import com.example.Final.service.ImageUploadService;
 import com.example.Final.service.PropertyService;
 import com.example.Final.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +15,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +34,8 @@ public class ListingController {
     private final PropertyService propertyService;
     private final UserService userService;
     private final ContactRepo contactRepo;
+    private final ImageUploadService imageUploadService;
+    private final ImagesRepo imagesRepo;
 
     @GetMapping("/post-address")
     public String getPost(Model model) {
@@ -35,7 +43,7 @@ public class ListingController {
         return "listing/post-address";
     }
 
-    @GetMapping("/post-info")
+    @GetMapping("/post-info/")
     public String getPostInfo(Model model) {
         return "listing/post-information";
     }
@@ -106,6 +114,16 @@ public class ListingController {
         properties.setPropertyDescription(description);
         properties.setPropertyTitle(title);
         contact.setProperties(properties);
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate endDate = currentDate.plusDays(7);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = currentDate.format(formatter);
+        String formattedEndDate = endDate.format(formatter);
+        contact.setDatePost(formattedDate);
+        contact.setDateEnd(formattedEndDate);
+
+
         properties.setUser(userService.findUserByEmail(principal.getName()));
         properties.setContact(contactRepo.save(contact));
         propertyService.save(properties);
@@ -116,17 +134,26 @@ public class ListingController {
     @PostMapping("/complete")
     public String complete(Model model,
                            @RequestParam("images") ArrayList<MultipartFile> images,
-                           Principal principal){
-        List<Images> imageList =  new ArrayList<Images>();
-        for(MultipartFile file: images){
+                           @RequestParam("propertyId") int propertyId) throws Exception {
+        Properties properties = propertyService.getById(propertyId);
+        List<Images> imageList = new ArrayList<>();
+        for (MultipartFile file : images) {
             String path = imageUploadService.uploadImage(file);
             Images image = new Images();
-            image.setPath(path);
+            image.setImageUrl(path);
+            image.setProperty(properties);
+            imagesRepo.save(image);
             imageList.add(image);
         }
+        properties.setListImages(imageList);
+        propertyService.updateImages(properties);
+        return "listing/listing-info";
     }
-    @GetMapping("/listing-info")
-    public String getListingInfo() {
+
+    @GetMapping("/listing-info/{id}")
+    public String getListingInfo(@PathVariable int id, Model model) {
+        Properties property =propertyService.getById(id);
+        model.addAttribute("property",property);
         return "listing/listing-info";
     }
 

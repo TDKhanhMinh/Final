@@ -48,6 +48,7 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
                 return;
             }
         }
+        System.err.println("Error here");
         response.sendRedirect(request.getContextPath() + "/login?error=true");
     }
 

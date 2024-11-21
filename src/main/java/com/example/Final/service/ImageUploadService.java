@@ -12,8 +12,6 @@ import java.util.Map;
 @Service
 public class ImageUploadService {
 
-    private final String accessToken = "825c6d32b1d3b4781692a8648e87273cd0889cf9";
-
     public String uploadImage(MultipartFile image) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://api.imgur.com/3/image";
@@ -22,6 +20,7 @@ public class ImageUploadService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        String accessToken = "825c6d32b1d3b4781692a8648e87273cd0889cf9";
         headers.setBearerAuth(accessToken);
 
         // Prepare request body
@@ -38,8 +37,7 @@ public class ImageUploadService {
             Map<String, Object> responseBody = response.getBody();
             if (responseBody != null && (Boolean) responseBody.get("success")) {
                 Map<String, Object> data = (Map<String, Object>) responseBody.get("data");
-                String imageUrl = (String) data.get("link");
-                return imageUrl;
+                return (String) data.get("link");
             } else {
                 throw new Exception("Image upload failed.");
             }

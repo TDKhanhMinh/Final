@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -18,6 +21,8 @@ public class Contact {
     private String fullName;
     private String email;
     private String phone;
+    private String datePost;
+    private String dateEnd;
 
     @OneToOne
     @JoinColumn(name = "contact_property_id")

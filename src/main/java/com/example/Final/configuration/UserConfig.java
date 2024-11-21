@@ -48,7 +48,7 @@ public class UserConfig {
                         .clearAuthentication(true)
                         .permitAll()
                 )
-                .exceptionHandling(exception -> exception.accessDeniedPage("/access-denied"));
+                .exceptionHandling(exception -> exception.accessDeniedPage("/user/login"));
         return httpSecurity.build();
     }
 

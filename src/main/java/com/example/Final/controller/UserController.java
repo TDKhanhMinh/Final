@@ -1,18 +1,25 @@
 package com.example.Final.controller;
 
+import com.example.Final.entity.listingservice.Images;
 import com.example.Final.entity.securityservice.User;
+import com.example.Final.repository.ImagesRepo;
+import com.example.Final.service.ImageUploadService;
 import com.example.Final.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -22,6 +29,8 @@ public class UserController {
     private final UserService userService;
 
     private final BCryptPasswordEncoder encoder;
+    private final ImageUploadService imageUploadService;
+    private final ImagesRepo imagesRepo;
 
     @GetMapping("/register")
     public String getRegister(Model model) {
@@ -58,9 +67,40 @@ public class UserController {
         }
     }
 
+    @PostMapping("/update-info")
+    public String updateInfo(Model model,
+                             @Param("images") ArrayList<MultipartFile> images,
+                             @Param("fullName") String fullName,
+                             @Param("email") String email,
+                             @Param("phone") String phone,
+                             Principal principal
+    ) throws Exception {
+        User user = userService.findUserByEmail(principal.getName());
+        if (!images.isEmpty()) {
+            List<Images> imageList = new ArrayList<>();
+            for (MultipartFile file : images) {
+                String path = imageUploadService.uploadImage(file);
+                Images image = new Images();
+                image.setImageUrl(path);
+                image.setUser(user);
+//                sửa chỗ này
+                imagesRepo.save(image);
+                userService.updateImage(user, image);
+                imageList.add(image);
+            }
+        }
+        userService.updateInfo(email, fullName, phone);
+        return "redirect:/user/user-info";
+    }
+
     @GetMapping("/changePassword")
     public String changePassword(Model model, Principal principal) {
         return "user/change-password";
+    }
+
+    @GetMapping("/cancelChange")
+    public String cancelChange(Model model, Principal principal) {
+        return "redirect:/user/user-info";
     }
 
     @PostMapping("/changePassword")
@@ -96,8 +136,11 @@ public class UserController {
             return "redirect:/user/login";
         }
     }
+
     @GetMapping("/user-info")
-    public String getUserInfo(){
+    public String getUserInfo(Model model, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        model.addAttribute("user", user);
         return "user/user-information";
     }
 

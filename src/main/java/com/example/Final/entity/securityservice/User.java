@@ -1,5 +1,6 @@
 package com.example.Final.entity.securityservice;
 
+import com.example.Final.entity.listingservice.Images;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -38,6 +39,12 @@ public class User {
     @Size(min = 1, message = "Please fill in this field")
     @Column(name = "email", unique = true)
     private String email;
+
+
+    private String phone;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Images images;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id")

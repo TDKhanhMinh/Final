@@ -5,17 +5,23 @@ import com.example.Final.repository.PropertyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PropertyService {
     @Autowired
     private PropertyRepo propertyRepo;
 
+    public List<Properties> getAll() {
+        return propertyRepo.findAll();
+    }
+
     public Properties create(Properties properties) {
         return propertyRepo.save(properties);
     }
 
-    public Properties save(Properties properties) {
-        return propertyRepo.save(properties);
+    public void save(Properties properties) {
+        propertyRepo.save(properties);
     }
 
     public void deleteById(int id) {
@@ -39,4 +45,11 @@ public class PropertyService {
         oldProperties.setAddress(oldProperties.getAddress());
         propertyRepo.save(oldProperties);
     }
+
+    public void updateImages(Properties properties) {
+        Properties oldProperties = propertyRepo.findById(properties.getPropertyId()).orElseThrow();
+        oldProperties.setListImages(properties.getListImages());
+        propertyRepo.save(oldProperties);
+    }
+
 }

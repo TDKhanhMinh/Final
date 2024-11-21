@@ -1,5 +1,6 @@
 package com.example.Final.service;
 
+import com.example.Final.entity.listingservice.Images;
 import com.example.Final.entity.securityservice.Roles;
 import com.example.Final.entity.securityservice.User;
 import com.example.Final.repository.RolesRepository;
@@ -44,12 +45,27 @@ public class UserService implements UserDetailsService {
         oldUser.setRoles(oldUser.getRoles());
         return userRepository.save(oldUser);
     }
+
     public void updateByEmail(String email, String password, String confirmPassword) {
         User oldUser = userRepository.findUserByEmail(email);
         oldUser.setEmail(email);
         oldUser.setPassword(passwordEncoder.encode(password));
         oldUser.setConfirmPassword(confirmPassword);
         oldUser.setRoles(oldUser.getRoles());
+        userRepository.save(oldUser);
+    }
+
+    public void updateImage(User user, Images image) {
+        User oldUser = userRepository.findUserByEmail(user.getEmail());
+        oldUser.setImages(image);
+        userRepository.save(oldUser);
+    }
+
+    public void updateInfo(String email, String fullName, String phone) {
+        User oldUser = userRepository.findUserByEmail(email);
+        oldUser.setEmail(email);
+        oldUser.setPhone(phone);
+        oldUser.setFullName(fullName);
         userRepository.save(oldUser);
     }
 

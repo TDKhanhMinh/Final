@@ -7,222 +7,226 @@
 
     <!-- CSS imports -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"
-        integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 </head>
 
 <body>
-    <th:block th:fragment="header">
-        <div class="container-fluid shadow fixed-top" style="background-color: #f6f6f6; ">
-            <div class="row flex-nowrap" style="min-height: 85px">
-                <div class="col-md-8 mt-2 ml-5">
-                    <div class="row">
-                        <div class="col-md-1 mx-2">
-                            <a class="d-flex justify-content-center m-2" th:href="@{/home/home}">
-                                <img style="width: 50px; height: 50px"
-                                    th:src="@{/access/image/c085ad076c442c8191e6b7f48ef59aad.jpg}" alt="image of logo"
-                                    class="rounded-circle">
-                            </a>
-                        </div>
-                        <div class="col-md-9 d-flex flex-nowrap align-items-center">
-                            <a class="d-flex justify-content-center m-2 text-decoration-none text-dark fw-bold fs-6"
-                                th:href="@{/uploadHome}">
-                                Nhà đất bán
-                            </a>
-                            <a class="d-flex justify-content-center m-2 text-decoration-none text-dark fw-bold fs-6"
-                                th:href="@{/uploadHome}">
-                                Nhà đất cho thuê
-                            </a>
-                            <a class="d-flex justify-content-center m-2 text-decoration-none text-dark fw-bold fs-6"
-                                th:href="@{/uploadHome}">
-                                Tin tức
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex flex-nowrap justify-content-end">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-sm  rounded mx-2 dropdown-toggle9" type="button" id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 448 512">
-                                <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                <path
-                                    d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 25.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416l400 0c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4l0-25.4c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm0 96c61.9 0 112 50.1 112 112l0 25.4c0 47.9 13.9 94.6 39.7 134.6L72.3 368C98.1 328 112 281.3 112 233.4l0-25.4c0-61.9 50.1-112 112-112zm64 352l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z" />
-                            </svg>
-                        </button>
-                        <ul class="dropdown-menu shadow dropdown-menu-end mt-4" aria-labelledby="dropdownMenuButton"
-                            style="width: 275px">
-                            <li>
-                                <a style="font-size:large;color: black" class="dropdown-item mt-2 disabled">
-                                    <i class="fa-solid fa-circle-user"></i>
-                                    <label class="mx-2" th:text="${session.USERNAME}"></label>
-                                </a>
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/home/home}">
-                                    <h6><i class="fa-solid fa-house"></i> Trang chủ</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2"
-                                    th:href="@{/profile(customerId=${session.id})}">
-                                    <h6><i class="fa-regular fa-address-card"></i>
-                                        Tài khoản của tôi</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item mt-2" th:href="@{/placeOrder}">
-                                    <h6>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-layout-text-sidebar-reverse"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M12.5 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm.5 3.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z" />
-                                            <path
-                                                d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM4 1v14H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 0h9a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5z" />
-                                        </svg>
-                                        Đơn hàng của tôi
-                                    </h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/changePassword}">
-                                    <h6>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1" />
-                                        </svg>
-                                        Đổi mật khẩu
-                                    </h6>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/user/logout}">
-                                    <h6><i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                        Đăng xuất</h6>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-sm btn-hover-on rounded mx-2 dropdown-toggle9" type="button"
-                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
-                                <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                <path
-                                    d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
-                            </svg>
-                        </button>
-                        <ul class="dropdown-menu shadow dropdown-menu-end mt-4" aria-labelledby="dropdownMenuButton"
-                            style="width: 275px">
-                            <li>
-                                <a style="font-size:large;color: black" class="dropdown-item mt-2 disabled">
-                                    <i class="fa-solid fa-circle-user"></i>
-                                    <label class="mx-2" th:text="${session.USERNAME}"></label>
-                                </a>
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/home/home}">
-                                    <h6><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
-                                        </svg></i> Trang chủ</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2"
-                                    th:href="@{/user/user-info}">
-                                    <h6><i class="fa-regular fa-address-card"></i>
-                                        Chỉnh sửa thông tin cá nhân</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item mt-2" th:href="@{/placeOrder}">
-                                    <h6>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-layout-text-sidebar-reverse"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M12.5 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm.5 3.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z" />
-                                            <path
-                                                d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM4 1v14H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 0h9a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5z" />
-                                        </svg>
-                                        Quản lí bài đăng
-                                    </h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2"
-                                    th:href="@{/user/changePassword}">
-                                    <h6>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1" />
-                                        </svg>
-                                        Đổi mật khẩu
-                                    </h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2"
-                                    th:href="@{/user/changePassword}">
-                                    <h6>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-window-plus" viewBox="0 0 16 16">
-                                            <path
-                                                d="M2.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1M4 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
-                                            <path
-                                                d="M0 4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4a.5.5 0 0 1-1 0V7H1v5a1 1 0 0 0 1 1h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-2zm1 2h13V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1z" />
-                                            <path
-                                                d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5" />
-                                        </svg>
-                                        Nạp tiền
-                                    </h6>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/user/logout}">
-                                    <h6>
-                                        <i class="fa-solid fa-arrow-right-from-bracket" style="transform: rotate(180deg);"></i>
-                                        Đăng xuất
-                                    </h6>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <a th:href="@{/listing/post-address}" class="btn btn-sm">
-                            <div class="form-control rounded-pill btn-outline-secondary mt-2">
-                                <h5 class="fs-6 mt-1">Đăng tin</h5>
-                            </div>
+<th:block th:fragment="header">
+    <div class="container-fluid shadow fixed-top" style="background-color: #f6f6f6; ">
+        <div class="row flex-nowrap" style="min-height: 85px">
+            <div class="col-md-8 mt-2 ml-5">
+                <div class="row">
+                    <div class="col-md-1 mx-2">
+                        <a class="d-flex justify-content-center m-2" th:href="@{/home/home}">
+                            <img style="width: 50px; height: 50px"
+                                 th:src="@{/access/image/c085ad076c442c8191e6b7f48ef59aad.jpg}" alt="image of logo"
+                                 class="rounded-circle">
                         </a>
                     </div>
+                    <div class="col-md-9 d-flex flex-nowrap align-items-center">
+                        <a class="d-flex justify-content-center m-2 text-decoration-none text-dark fw-bold fs-6"
+                           th:href="@{/uploadHome}">
+                            Nhà đất bán
+                        </a>
+                        <a class="d-flex justify-content-center m-2 text-decoration-none text-dark fw-bold fs-6"
+                           th:href="@{/uploadHome}">
+                            Nhà đất cho thuê
+                        </a>
+                        <a class="d-flex justify-content-center m-2 text-decoration-none text-dark fw-bold fs-6"
+                           th:href="@{/uploadHome}">
+                            Tin tức
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4 d-flex flex-nowrap justify-content-end">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-sm  rounded mx-2 dropdown-toggle9" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 448 512">
+                            <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                    d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 25.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416l400 0c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4l0-25.4c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm0 96c61.9 0 112 50.1 112 112l0 25.4c0 47.9 13.9 94.6 39.7 134.6L72.3 368C98.1 328 112 281.3 112 233.4l0-25.4c0-61.9 50.1-112 112-112zm64 352l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"/>
+                        </svg>
+                    </button>
+                    <ul class="dropdown-menu shadow dropdown-menu-end mt-4" aria-labelledby="dropdownMenuButton"
+                        style="width: 275px">
+                        <li>
+                            <a style="font-size:large;color: black" class="dropdown-item mt-2 disabled">
+                                <i class="fa-solid fa-circle-user"></i>
+                                <label class="mx-2" th:text="${session.USERNAME}"></label>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/home/home}">
+                                <h6><i class="fa-solid fa-house"></i> Trang chủ</h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2"
+                               th:href="@{/profile(customerId=${session.id})}">
+                                <h6><i class="fa-regular fa-address-card"></i>
+                                    Tài khoản của tôi</h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item mt-2" th:href="@{/placeOrder}">
+                                <h6>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" class="bi bi-layout-text-sidebar-reverse"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M12.5 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm.5 3.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+                                        <path
+                                                d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM4 1v14H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 0h9a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5z"/>
+                                    </svg>
+                                    Đơn hàng của tôi
+                                </h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/changePassword}">
+                                <h6>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
+                                        <path
+                                                d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
+                                    </svg>
+                                    Đổi mật khẩu
+                                </h6>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/user/logout}">
+                                <h6><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    Đăng xuất</h6>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-sm btn-hover-on rounded mx-2 dropdown-toggle9" type="button"
+                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
+                            <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                    d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/>
+                        </svg>
+                    </button>
+                    <ul class="dropdown-menu shadow dropdown-menu-end mt-4" aria-labelledby="dropdownMenuButton"
+                        style="width: 275px">
+                        <li>
+                            <a style="font-size:large;color: black" class="dropdown-item mt-2 disabled">
+                                <i class="fa-solid fa-circle-user"></i>
+                                <label class="mx-2" th:text="${session.USERNAME}"></label>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/home/home}">
+                                <h6>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                                        <path
+                                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                                    </svg>
+                                    </i> Trang chủ
+                                </h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2"
+                               th:href="@{/user/user-info}">
+                                <h6><i class="fa-regular fa-address-card"></i>
+                                    Chỉnh sửa thông tin cá nhân</h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item mt-2" th:href="@{/placeOrder}">
+                                <h6>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" class="bi bi-layout-text-sidebar-reverse"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M12.5 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm.5 3.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+                                        <path
+                                                d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM4 1v14H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 0h9a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5z"/>
+                                    </svg>
+                                    Quản lí bài đăng
+                                </h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2"
+                               th:href="@{/user/changePassword}">
+                                <h6>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                                        <path
+                                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+                                    </svg>
+                                    Đổi mật khẩu
+                                </h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2"
+                               th:href="@{/user/changePassword}">
+                                <h6>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" class="bi bi-window-plus" viewBox="0 0 16 16">
+                                        <path
+                                                d="M2.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1M4 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+                                        <path
+                                                d="M0 4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4a.5.5 0 0 1-1 0V7H1v5a1 1 0 0 0 1 1h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-2zm1 2h13V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1z"/>
+                                        <path
+                                                d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5"/>
+                                    </svg>
+                                    Nạp tiền
+                                </h6>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/user/logout}">
+                                <h6>
+                                    <i class="fa-solid fa-arrow-right-from-bracket"
+                                       style="transform: rotate(180deg);"></i>
+                                    Đăng xuất
+                                </h6>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <a th:href="@{/listing/post-address}" class="btn btn-sm">
+                        <div class="form-control rounded-pill btn-outline-secondary mt-2">
+                            <h5 class="fs-6 mt-1">Đăng tin</h5>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
 
 
-    </th:block>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+</th:block>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </body>

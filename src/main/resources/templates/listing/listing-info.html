@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <title>Listing information</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 </head>
 <style>
@@ -42,495 +42,468 @@
 </style>
 
 <body>
-    <th:block th:insert="~{ home/header :: header}"></th:block>
+<th:block th:insert="~{ home/header :: header}"></th:block>
 
 
+<!-- THÔNG TIN BĐS -->
+<div class="container mt-4" style="padding-top: 70px;">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <!-- Nội dụng lấy từ đây -->
+            <div class="input-group row mt-3 d-flex justify-content-center rounded-2">
+                <div class="container rounded-3 shadow my-4" style="background-color: whitesmoke;">
+                    <div class="image d-flex justify-content-center">
+                        <img class="rounded-2"
+                             src="https://file4.batdongsan.com.vn/crop/562x284/2024/08/17/20240817085611-05ec_wm.jpg"
+                             alt="photo">
+                    </div>
+                    <div th:text="${property.propertyTitle}" class="h5 mt-4 text-uppercase mx-4">
+                        8 suất ngoại giao - hàng đẹp - góc-Penthouse- shop-căn hộ Masteri Grand View - The Global
+                        City
+                    </div>
+                    <div th:text="${property.address.ward}+', '+${property.address.district }+', '+${property.address.province}"
+                         class="mx-4 mb-4">
+                        Dự án Celadon City, Đường N1, Phường Sơn Kỳ, Tân Phú, Hồ Chí Minh
+                    </div>
+                    <hr>
+                    <div class="information row">
+                        <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
+                            <h6 class="text-secondary">Mức giá</h6>
 
-    <!-- THÔNG TIN BĐS -->
-    <div class="container mt-4" style="padding-top: 70px;">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <!-- Nội dụng lấy từ đây -->
-                <div class="input-group row mt-3 d-flex justify-content-center rounded-2">
-                    <div class="container rounded-3 shadow my-4" style="background-color: whitesmoke;">
-                        <div class="image d-flex justify-content-center">
-                            <img class="rounded-2"
-                                src="https://file4.batdongsan.com.vn/crop/562x284/2024/08/17/20240817085611-05ec_wm.jpg"
-                                alt="photo">
                         </div>
-                        <div class="h5 mt-4 text-uppercase mx-4">
-                            8 suất ngoại giao - hàng đẹp - góc-Penthouse- shop-căn hộ Masteri Grand View - The Global
-                            City
+                        <div class="col-md-2 d-flex justify-content-center">
+                            <h6 class="text-secondary ">Diện tích</h6>
                         </div>
-                        <div class="mx-4 mb-4">
-                            Dự án Celadon City, Đường N1, Phường Sơn Kỳ, Tân Phú, Hồ Chí Minh
+                        <div class="col-md-2 d-flex justify-content-center">
+                            <h6 class=" text-secondary">Phòng ngủ</h6>
                         </div>
-                        <hr>
-                        <div class="information row">
-                            <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
-                                <h6 class="text-secondary">Mức giá</h6>
-
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <h6 class="text-secondary ">Diện tích</h6>
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <h6 class=" text-secondary">Phòng ngủ</h6>
-                            </div>
+                        <div class="col-md-2 d-flex justify-content-center">
+                            <h6 class=" text-secondary">Phòng tắm</h6>
                         </div>
-                        <div class="information row mb-4">
-                            <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
-                                <h6 class=" fw-bold fs-5">3 tỷ</h6>
+                    </div>
+                    <div class="information row mb-4">
+                        <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
+                            <h6 th:text="${property.propertyPrice}" class=" fw-bold fs-5">3 tỷ</h6>
 
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <h6 class=" fw-bold fs-5">65 m2</h6>
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <h6 class="fw-bold fs-5">2 PN</h6>
-                            </div>
-
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center">
+                            <h6 th:text="${property.squareMeters}+' m²'" class=" fw-bold fs-5">65 m2</h6>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center">
+                            <h6 th:text="${property.bedrooms}+' PN'" class="fw-bold fs-5">2 PN</h6>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center">
+                            <h6 th:text="${property.bathrooms}+' PT'" class="fw-bold fs-5">2 PN</h6>
                         </div>
 
                     </div>
+
                 </div>
-                <!-- Tới đây -->
             </div>
-            <div class="col-md-2">
-                <div class="container border rounded-3" style="margin-top: 40px;">
-                    <div class="text-center">
-                        <img class="rounded-circle m-2" style="width: 50px; height: 50px;"
-                            src="https://file4.batdongsan.com.vn/resize/200x200/2024/07/30/20240730153731-b584.jpg"
-                            alt="photo">
+            <!-- Tới đây -->
+        </div>
+        <div class="col-md-2">
+            <div class="container border rounded-3" style="margin-top: 40px;">
+                <div class="text-center">
+                    <img class="rounded-circle m-2" style="width: 50px; height: 50px;"
+                         src="https://file4.batdongsan.com.vn/resize/200x200/2024/07/30/20240730153731-b584.jpg"
+                         alt="photo">
 
-                    </div>
-                    <div class="text-center my-3">
+                </div>
+                <div class="text-center my-3">
                         <span style="font-size: 12px;color: rgb(5, 194, 194);"><strong>Môi giới chuyên
                                 nghiệp</strong></span>
-                        <span><strong>Lê Thành Lộc</strong></span>
-                        <div class="btn mt-3 btn-sm btn-info d-flex align-items-center justify-content-center rounded-3"
-                            style="width:150px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white"
-                                class="bi bi-telephone" viewBox="0 0 16 16">
-                                <path
-                                    d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
-                            </svg>
-                            <span class="mx-2 text-white"><strong>Liên hệ: 0345738256</strong></span>
-                        </div>
+                    <span><strong th:text="${property.contact.fullName}">Lê Thành Lộc</strong></span>
+                    <div class="btn mt-3 btn-sm btn-info d-flex align-items-center justify-content-center rounded-3"
+                         style="width:150px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white"
+                             class="bi bi-telephone" viewBox="0 0 16 16">
+                            <path
+                                    d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                        </svg>
+                        <span class="mx-2 text-white"><strong th:text="'Liên hệ: '+${property.contact.phone}">Liên hệ: 0345738256</strong></span>
+                    </div>
 
-                        <a href="https://www.facebook.com/profile.php?id=100037132626258"
-                            class="btn mt-3 btn-sm btn-outline-dark d-flex align-items-center justify-content-center rounded-3"
-                            style="width:150px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
-                                viewBox="0 0 48 48">
-                                <path fill="#2962ff"
-                                    d="M15,36V6.827l-1.211-0.811C8.64,8.083,5,13.112,5,19v10c0,7.732,6.268,14,14,14h10	c4.722,0,8.883-2.348,11.417-5.931V36H15z">
-                                </path>
-                                <path fill="#eee"
-                                    d="M29,5H19c-1.845,0-3.601,0.366-5.214,1.014C10.453,9.25,8,14.528,8,19	c0,6.771,0.936,10.735,3.712,14.607c0.216,0.301,0.357,0.653,0.376,1.022c0.043,0.835-0.129,2.365-1.634,3.742	c-0.162,0.148-0.059,0.419,0.16,0.428c0.942,0.041,2.843-0.014,4.797-0.877c0.557-0.246,1.191-0.203,1.729,0.083	C20.453,39.764,24.333,40,28,40c4.676,0,9.339-1.04,12.417-2.916C42.038,34.799,43,32.014,43,29V19C43,11.268,36.732,5,29,5z">
-                                </path>
-                                <path fill="#2962ff"
-                                    d="M36.75,27C34.683,27,33,25.317,33,23.25s1.683-3.75,3.75-3.75s3.75,1.683,3.75,3.75	S38.817,27,36.75,27z M36.75,21c-1.24,0-2.25,1.01-2.25,2.25s1.01,2.25,2.25,2.25S39,24.49,39,23.25S37.99,21,36.75,21z">
-                                </path>
-                                <path fill="#2962ff" d="M31.5,27h-1c-0.276,0-0.5-0.224-0.5-0.5V18h1.5V27z"></path>
-                                <path fill="#2962ff"
-                                    d="M27,19.75v0.519c-0.629-0.476-1.403-0.769-2.25-0.769c-2.067,0-3.75,1.683-3.75,3.75	S22.683,27,24.75,27c0.847,0,1.621-0.293,2.25-0.769V26.5c0,0.276,0.224,0.5,0.5,0.5h1v-7.25H27z M24.75,25.5	c-1.24,0-2.25-1.01-2.25-2.25S23.51,21,24.75,21S27,22.01,27,23.25S25.99,25.5,24.75,25.5z">
-                                </path>
-                                <path fill="#2962ff"
-                                    d="M21.25,18h-8v1.5h5.321L13,26h0.026c-0.163,0.211-0.276,0.463-0.276,0.75V27h7.5	c0.276,0,0.5-0.224,0.5-0.5v-1h-5.321L21,19h-0.026c0.163-0.211,0.276-0.463,0.276-0.75V18z">
-                                </path>
-                            </svg>
-                            <span class="mx-2"><strong>Chat qua Zalo</strong></span>
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100037132626258"
-                            class="btn mt-3 btn-sm btn-outline-dark d-flex align-items-center justify-content-center rounded-3"
-                            style="width:150px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
-                                viewBox="0 0 48 48">
-                                <path fill="#4caf50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z">
-                                </path>
-                                <path fill="#1e88e5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z">
-                                </path>
-                                <polygon fill="#e53935"
-                                    points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17"></polygon>
-                                <path fill="#c62828"
-                                    d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C9.132,8.301,8.228,8,7.298,8h0C4.924,8,3,9.924,3,12.298z">
-                                </path>
-                                <path fill="#fbc02d"
-                                    d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0 C43.076,8,45,9.924,45,12.298z">
-                                </path>
-                            </svg>
-                            <span class="mx-2"><strong>Gửi mail</strong></span>
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100037132626258"
-                            class="btn mt-3 btn-sm btn-outline-dark d-flex align-items-center justify-content-center rounded-3"
-                            style="width:150px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
-                                viewBox="0 0 48 48">
-                                <radialGradient id="8O3wK6b5ASW2Wn6hRCB5xa_YFbzdUk7Q3F8_gr1" cx="11.087" cy="7.022"
-                                    r="47.612" gradientTransform="matrix(1 0 0 -1 0 50)" gradientUnits="userSpaceOnUse">
-                                    <stop offset="0" stop-color="#1292ff"></stop>
-                                    <stop offset=".079" stop-color="#2982ff"></stop>
-                                    <stop offset=".23" stop-color="#4e69ff"></stop>
-                                    <stop offset=".351" stop-color="#6559ff"></stop>
-                                    <stop offset=".428" stop-color="#6d53ff"></stop>
-                                    <stop offset=".754" stop-color="#df47aa"></stop>
-                                    <stop offset=".946" stop-color="#ff6257"></stop>
-                                </radialGradient>
-                                <path fill="url(#8O3wK6b5ASW2Wn6hRCB5xa_YFbzdUk7Q3F8_gr1)"
-                                    d="M44,23.5C44,34.27,35.05,43,24,43c-1.651,0-3.25-0.194-4.784-0.564	c-0.465-0.112-0.951-0.069-1.379,0.145L13.46,44.77C12.33,45.335,11,44.513,11,43.249v-4.025c0-0.575-0.257-1.111-0.681-1.499	C6.425,34.165,4,29.11,4,23.5C4,12.73,12.95,4,24,4S44,12.73,44,23.5z">
-                                </path>
-                                <path
+                    <a href="https://www.facebook.com/profile.php?id=100037132626258"
+                       class="btn mt-3 btn-sm btn-outline-dark d-flex align-items-center justify-content-center rounded-3"
+                       style="width:150px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
+                             viewBox="0 0 48 48">
+                            <path fill="#2962ff"
+                                  d="M15,36V6.827l-1.211-0.811C8.64,8.083,5,13.112,5,19v10c0,7.732,6.268,14,14,14h10	c4.722,0,8.883-2.348,11.417-5.931V36H15z">
+                            </path>
+                            <path fill="#eee"
+                                  d="M29,5H19c-1.845,0-3.601,0.366-5.214,1.014C10.453,9.25,8,14.528,8,19	c0,6.771,0.936,10.735,3.712,14.607c0.216,0.301,0.357,0.653,0.376,1.022c0.043,0.835-0.129,2.365-1.634,3.742	c-0.162,0.148-0.059,0.419,0.16,0.428c0.942,0.041,2.843-0.014,4.797-0.877c0.557-0.246,1.191-0.203,1.729,0.083	C20.453,39.764,24.333,40,28,40c4.676,0,9.339-1.04,12.417-2.916C42.038,34.799,43,32.014,43,29V19C43,11.268,36.732,5,29,5z">
+                            </path>
+                            <path fill="#2962ff"
+                                  d="M36.75,27C34.683,27,33,25.317,33,23.25s1.683-3.75,3.75-3.75s3.75,1.683,3.75,3.75	S38.817,27,36.75,27z M36.75,21c-1.24,0-2.25,1.01-2.25,2.25s1.01,2.25,2.25,2.25S39,24.49,39,23.25S37.99,21,36.75,21z">
+                            </path>
+                            <path fill="#2962ff" d="M31.5,27h-1c-0.276,0-0.5-0.224-0.5-0.5V18h1.5V27z"></path>
+                            <path fill="#2962ff"
+                                  d="M27,19.75v0.519c-0.629-0.476-1.403-0.769-2.25-0.769c-2.067,0-3.75,1.683-3.75,3.75	S22.683,27,24.75,27c0.847,0,1.621-0.293,2.25-0.769V26.5c0,0.276,0.224,0.5,0.5,0.5h1v-7.25H27z M24.75,25.5	c-1.24,0-2.25-1.01-2.25-2.25S23.51,21,24.75,21S27,22.01,27,23.25S25.99,25.5,24.75,25.5z">
+                            </path>
+                            <path fill="#2962ff"
+                                  d="M21.25,18h-8v1.5h5.321L13,26h0.026c-0.163,0.211-0.276,0.463-0.276,0.75V27h7.5	c0.276,0,0.5-0.224,0.5-0.5v-1h-5.321L21,19h-0.026c0.163-0.211,0.276-0.463,0.276-0.75V18z">
+                            </path>
+                        </svg>
+                        <span class="mx-2"><strong>Chat qua Zalo</strong></span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100037132626258"
+                       class="btn mt-3 btn-sm btn-outline-dark d-flex align-items-center justify-content-center rounded-3"
+                       style="width:150px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
+                             viewBox="0 0 48 48">
+                            <path fill="#4caf50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z">
+                            </path>
+                            <path fill="#1e88e5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z">
+                            </path>
+                            <polygon fill="#e53935"
+                                     points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17"></polygon>
+                            <path fill="#c62828"
+                                  d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C9.132,8.301,8.228,8,7.298,8h0C4.924,8,3,9.924,3,12.298z">
+                            </path>
+                            <path fill="#fbc02d"
+                                  d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0 C43.076,8,45,9.924,45,12.298z">
+                            </path>
+                        </svg>
+                        <span class="mx-2"><strong>Gửi mail</strong></span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100037132626258"
+                       class="btn mt-3 btn-sm btn-outline-dark d-flex align-items-center justify-content-center rounded-3"
+                       style="width:150px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
+                             viewBox="0 0 48 48">
+                            <radialGradient id="8O3wK6b5ASW2Wn6hRCB5xa_YFbzdUk7Q3F8_gr1" cx="11.087" cy="7.022"
+                                            r="47.612" gradientTransform="matrix(1 0 0 -1 0 50)"
+                                            gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="#1292ff"></stop>
+                                <stop offset=".079" stop-color="#2982ff"></stop>
+                                <stop offset=".23" stop-color="#4e69ff"></stop>
+                                <stop offset=".351" stop-color="#6559ff"></stop>
+                                <stop offset=".428" stop-color="#6d53ff"></stop>
+                                <stop offset=".754" stop-color="#df47aa"></stop>
+                                <stop offset=".946" stop-color="#ff6257"></stop>
+                            </radialGradient>
+                            <path fill="url(#8O3wK6b5ASW2Wn6hRCB5xa_YFbzdUk7Q3F8_gr1)"
+                                  d="M44,23.5C44,34.27,35.05,43,24,43c-1.651,0-3.25-0.194-4.784-0.564	c-0.465-0.112-0.951-0.069-1.379,0.145L13.46,44.77C12.33,45.335,11,44.513,11,43.249v-4.025c0-0.575-0.257-1.111-0.681-1.499	C6.425,34.165,4,29.11,4,23.5C4,12.73,12.95,4,24,4S44,12.73,44,23.5z">
+                            </path>
+                            <path
                                     d="M34.992,17.292c-0.428,0-0.843,0.142-1.2,0.411l-5.694,4.215	c-0.133,0.1-0.28,0.15-0.435,0.15c-0.15,0-0.291-0.047-0.41-0.136l-3.972-2.99c-0.808-0.601-1.76-0.918-2.757-0.918	c-1.576,0-3.025,0.791-3.876,2.116l-1.211,1.891l-4.12,6.695c-0.392,0.614-0.422,1.372-0.071,2.014	c0.358,0.654,1.034,1.06,1.764,1.06c0.428,0,0.843-0.142,1.2-0.411l5.694-4.215c0.133-0.1,0.28-0.15,0.435-0.15	c0.15,0,0.291,0.047,0.41,0.136l3.972,2.99c0.809,0.602,1.76,0.918,2.757,0.918c1.576,0,3.025-0.791,3.876-2.116l1.211-1.891	l4.12-6.695c0.392-0.614,0.422-1.372,0.071-2.014C36.398,17.698,35.722,17.292,34.992,17.292L34.992,17.292z"
                                     opacity=".05"></path>
-                                <path
+                            <path
                                     d="M34.992,17.792c-0.319,0-0.63,0.107-0.899,0.31l-5.697,4.218	c-0.216,0.163-0.468,0.248-0.732,0.248c-0.259,0-0.504-0.082-0.71-0.236l-3.973-2.991c-0.719-0.535-1.568-0.817-2.457-0.817	c-1.405,0-2.696,0.705-3.455,1.887l-1.21,1.891l-4.115,6.688c-0.297,0.465-0.32,1.033-0.058,1.511c0.266,0.486,0.787,0.8,1.325,0.8	c0.319,0,0.63-0.107,0.899-0.31l5.697-4.218c0.216-0.163,0.468-0.248,0.732-0.248c0.259,0,0.504,0.082,0.71,0.236l3.973,2.991	c0.719,0.535,1.568,0.817,2.457,0.817c1.405,0,2.696-0.705,3.455-1.887l1.21-1.891l4.115-6.688c0.297-0.465,0.32-1.033,0.058-1.511	C36.051,18.106,35.531,17.792,34.992,17.792L34.992,17.792z"
                                     opacity=".07"></path>
-                                <path fill="#fff"
-                                    d="M34.394,18.501l-5.7,4.22c-0.61,0.46-1.44,0.46-2.04,0.01L22.68,19.74	c-1.68-1.25-4.06-0.82-5.19,0.94l-1.21,1.89l-4.11,6.68c-0.6,0.94,0.55,2.01,1.44,1.34l5.7-4.22c0.61-0.46,1.44-0.46,2.04-0.01	l3.974,2.991c1.68,1.25,4.06,0.82,5.19-0.94l1.21-1.89l4.11-6.68C36.434,18.901,35.284,17.831,34.394,18.501z">
-                                </path>
-                            </svg>
-                            <span class="mx-2"><strong>Messenger</strong></span>
-                        </a>
-                    </div>
+                            <path fill="#fff"
+                                  d="M34.394,18.501l-5.7,4.22c-0.61,0.46-1.44,0.46-2.04,0.01L22.68,19.74	c-1.68-1.25-4.06-0.82-5.19,0.94l-1.21,1.89l-4.11,6.68c-0.6,0.94,0.55,2.01,1.44,1.34l5.7-4.22c0.61-0.46,1.44-0.46,2.04-0.01	l3.974,2.991c1.68,1.25,4.06,0.82,5.19-0.94l1.21-1.89l4.11-6.68C36.434,18.901,35.284,17.831,34.394,18.501z">
+                            </path>
+                        </svg>
+                        <span class="mx-2"><strong>Messenger</strong></span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container my-4 ">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-10">
-                <div class="container-sm mt-4 rounded-3 shadow" style="max-width: 85%; background-color: whitesmoke;">
-                    <h5 class="py-4 ">Thông tin mô tả</h5>
-                    <p class="pb-4">Căn hộ Celadon City Tân Phú - Ưu đãi từ chủ đầu tư Gamuda Land mua trực tiếp CĐT với
-                        nhiều chính sách hấp dẫn:
+</div>
+<div class="container my-4 ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="container-sm mt-4 rounded-3 shadow" style="max-width: 85%; background-color: whitesmoke;">
+                <h5 class="py-4 ">Thông tin mô tả</h5>
+                <p th:text="${property.propertyDescription}" class="pb-4">Căn hộ Celadon City Tân Phú - Ưu đãi từ chủ
+                    đầu tư Gamuda Land mua trực tiếp CĐT với
+                </p>
+            </div>
+            <div class="container-sm mt-4 rounded-3 shadow" style="max-width: 85%; background-color: whitesmoke;">
+                <h5 class="pt-3">Đặc điểm bất động sản</h5>
+                <div class="container-fluid d-flex justify-content-end">
 
-                        The Glen @ Brilliant - 68 căn liền kề.
-                        Căn góc view hồ sinh thái giá chỉ 30,5 tỷ đồng (giá đã bao gồm thuế phí không phát sinh
-                        chi phí).
-
-                        Các căn hộ mua trực tiếp từ chủ đầu tư.
-                        - Ân hạn gốc (ngân hàng hỗ trơ không thu tiền gốc 24 tháng) & hỗ trợ lãi suất (chủ đầu
-                        tư đóng lãi 24 tháng).
-                        - Chiết khấu ngay 27% khi áp dụng lịch thanh toán 95%.
-                        Liên hệ ngay để nhận thông tin: 0967 893 ***Lê Lộc PKD Gamuda Land).
-
-                        Celadon City Tân Phú - Các phân khu nổi bật.
-
-                        1. Diamond Brilliant nhận nhà ngay, vị trí trung tâm:
-                        2PN (97m²): Giá từ 5.25 tỷ VNĐ.
-                        2PN + 1 (112m²): Giá từ 6.15 tỷ VNĐ (linh hoạt thành 3PN).
-                        3PN (131m²): Giá từ 7.8 tỷ VNĐ.
-                        3PN + 1 (160m²): Giá từ 9.2 tỷ VNĐ.
-                        The Glen 68 căn liền kề chiết khấu 27%.
-
-                        2. Diamond Alnata giá sang nhượng tốt, nhận nhà ngay:
-                        2PN (85m²): Giá từ 4.4 tỷ VNĐ.
-                        3PN (107m²): Giá từ 5.8 6.3 tỷ VNĐ.
-                        Skylinked Villa (160m²): Giá từ 9 tỷ VNĐ (xe hơi đậu tại nhà).
-
-                        3. Diamond Alnata Plus bàn giao cao cấp, tặng kèm ô đậu xe ô tô định danh:
-                        2PN (85m²): Giá từ 5.15 tỷ VNĐ.
-                        3PN (107m²): Giá từ 6.4 tỷ VNĐ.
-                        3PN (117m²): Giá từ 7.4 tỷ VNĐ.
-                        Skylinked Villa (226m², 3PN 2WC): Giá 13.33 tỷ VNĐ.
-
-                        4. Diamond Centery bàn giao cao cấp mua trực tiếp từ CĐT, bàn giao nội thất đầy đủ:
-                        * Cam kết thuê lại lãi suất 24% trong 4 năm.
-                        2PN (96m²): Giá từ 6.1 tỷ VNĐ.
-                        3PN 3WC (121m²): Giá từ 7.3 tỷ VNĐ.
-                        * Duplex, Penthouse, Shophouse liên hệ 0967 893 ***Lê Lộc PKD Gamuda Land) để tham quan
-                        căn hộ thực tế.
-
-                        Lý do chọn Celadon City Tân Phú.
-                        - Không gian sống xanh với công viên trung tâm rộng 16 ha.
-                        - Vị trí đắc địa: Tọa lạc tại Tân Phú, kết nối dễ dàng với trung tâm TP. HCM.
-                        - Tiện ích đa dạng: Trung tâm thương mại AEON Mall, trường học quốc tế, khu thể thao
-                        phức hợp.
-                        - Bàn giao tiêu chuẩn cao: Tủ bếp hoàn thiện, bếp từ, máy hút mùi, điều hòa
-                        Daikin/Samsung, thiết bị vệ sinh Grohe/Duravit.
-                        - Tặng ô đậu xe hơi định danh sở hữu lâu dài.
-                        - Chính sách thanh toán linh hoạt:
-                        - Hỗ trợ vay vốn lên đến 80% giá trị căn hộ trong vòng 25 năm từ các ngân hàng liên kết:
-                        Vietcombank, MB Bank, BIDV, Public Bank, Hong Leong Bank.
-
-                        Hotline/Zalo: 0967 893 ***Lê Lộc PKD Gamuda Land).</p>
-                </div>
-                <div class="container-sm mt-4 rounded-3 shadow" style="max-width: 85%; background-color: whitesmoke;">
-                    <h5 class="pt-3">Đặc điểm bất động sản</h5>
-                    <div class="container-fluid d-flex justify-content-end">
-
-                        <div class="col-md-12">
-                            <div class="m-4 rounded-2 location-shop">
-                                <hr>
-                                <div class="row bg-secondary-subtle product-detail">
-                                    <div class="col-md-6 d-flex align-items-center">
-                                        <div> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-aspect-ratio mx-2" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z" />
-                                                <path
-                                                    d="M2 4.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H3v2.5a.5.5 0 0 1-1 0zm12 7a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H13V8.5a.5.5 0 0 1 1 0z" />
-                                            </svg><strong>Diện tích: </strong><span></span></div>
-                                    </div>
-                                    <div class="col-md-6 d-flex align-items-center">
-                                        <div><svg width="16" height="16" fill="currentColor" class="mx-2"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                <path
-                                                    d="M0 112.5L0 422.3c0 18 10.1 35 27 41.3c87 32.5 174 10.3 261-11.9c79.8-20.3 159.6-40.7 239.3-18.9c23 6.3 48.7-9.5 48.7-33.4l0-309.9c0-18-10.1-35-27-41.3C462 15.9 375 38.1 288 60.3C208.2 80.6 128.4 100.9 48.7 79.1C25.6 72.8 0 88.6 0 112.5zM128 416l-64 0 0-64c35.3 0 64 28.7 64 64zM64 224l0-64 64 0c0 35.3-28.7 64-64 64zM448 352c0-35.3 28.7-64 64-64l0 64-64 0zm64-192c-35.3 0-64-28.7-64-64l64 0 0 64zM384 256c0 61.9-43 112-96 112s-96-50.1-96-112s43-112 96-112s96 50.1 96 112zM252 208c0 9.7 6.9 17.7 16 19.6l0 48.4-4 0c-11 0-20 9-20 20s9 20 20 20l24 0 24 0c11 0 20-9 20-20s-9-20-20-20l-4 0 0-68c0-11-9-20-20-20l-16 0c-11 0-20 9-20 20z" />
-                                            </svg><strong>Mức giá: </strong><span>Nhật Bản</span></div>
-                                    </div>
+                    <div class="col-md-12">
+                        <div class="m-4 rounded-2 location-shop">
+                            <hr>
+                            <div class="row bg-secondary-subtle product-detail">
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-aspect-ratio mx-2" viewBox="0 0 16 16">
+                                            <path
+                                                    d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z"/>
+                                            <path
+                                                    d="M2 4.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H3v2.5a.5.5 0 0 1-1 0zm12 7a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H13V8.5a.5.5 0 0 1 1 0z"/>
+                                        </svg>
+                                        <strong>Diện tích: </strong><span th:text="${property.squareMeters}+' m²'"></span></div>
                                 </div>
-                                <hr>
-                                <div class="row product-detail">
-                                    <div class="col-md-6 d-flex align-items-center">
-                                        <div><svg width="16" height="16" fill="currentColor" class="mx-2"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                <path
-                                                    d="M32 32c17.7 0 32 14.3 32 32l0 256 224 0 0-160c0-17.7 14.3-32 32-32l224 0c53 0 96 43 96 96l0 224c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-32-224 0-32 0L64 416l0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32L0 64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z" />
-                                            </svg><strong>Số phòng ngủ: </strong><span></span></div>
-                                    </div>
-                                    <div class="col-md-6 d-flex align-items-center">
-                                        <div><svg width="16" height="16" fill="currentColor" class="mx-2"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                <path
-                                                    d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48l8 0 0 148.9c-1.9 1.4-3.8 2.9-5.6 4.4C10.9 214.5 0 232.9 0 256c0 46.9 14.3 84.1 37 112.5c14.2 17.7 31.1 31.3 48.5 41.8L65.6 469.9c-3.3 9.8-1.6 20.5 4.4 28.8s15.7 13.3 26 13.3l256 0c10.3 0 19.9-4.9 26-13.3s7.7-19.1 4.4-28.8l-19.8-59.5c17.4-10.5 34.3-24.1 48.5-41.8c22.7-28.4 37-65.5 37-112.5c0-23.1-10.9-41.5-26.4-54.6c-1.8-1.5-3.7-3-5.6-4.4L416 48l8 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L24 0zM384 256.3c0 1-.3 2.6-3.8 5.6c-4.8 4.1-14 9-29.3 13.4C320.5 284 276.1 288 224 288s-96.5-4-126.9-12.8c-15.3-4.4-24.5-9.3-29.3-13.4c-3.5-3-3.8-4.6-3.8-5.6l0-.3c0 0 0-.1 0-.1c0-1 0-2.5 3.8-5.8c4.8-4.1 14-9 29.3-13.4C127.5 228 171.9 224 224 224s96.5 4 126.9 12.8c15.3 4.4 24.5 9.3 29.3 13.4c3.8 3.2 3.8 4.8 3.8 5.8c0 0 0 .1 0 .1l0 .3zM328.2 384l-.2 .5 0-.5 .2 0zM112 64l32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
-                                            </svg><strong>Số toilet: </strong><span id="atm"></span></div>
-                                    </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div>
+                                        <svg width="16" height="16" fill="currentColor" class="mx-2"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 576 512">
+                                            <!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path
+                                                    d="M0 112.5L0 422.3c0 18 10.1 35 27 41.3c87 32.5 174 10.3 261-11.9c79.8-20.3 159.6-40.7 239.3-18.9c23 6.3 48.7-9.5 48.7-33.4l0-309.9c0-18-10.1-35-27-41.3C462 15.9 375 38.1 288 60.3C208.2 80.6 128.4 100.9 48.7 79.1C25.6 72.8 0 88.6 0 112.5zM128 416l-64 0 0-64c35.3 0 64 28.7 64 64zM64 224l0-64 64 0c0 35.3-28.7 64-64 64zM448 352c0-35.3 28.7-64 64-64l0 64-64 0zm64-192c-35.3 0-64-28.7-64-64l64 0 0 64zM384 256c0 61.9-43 112-96 112s-96-50.1-96-112s43-112 96-112s96 50.1 96 112zM252 208c0 9.7 6.9 17.7 16 19.6l0 48.4-4 0c-11 0-20 9-20 20s9 20 20 20l24 0 24 0c11 0 20-9 20-20s-9-20-20-20l-4 0 0-68c0-11-9-20-20-20l-16 0c-11 0-20 9-20 20z"/>
+                                        </svg>
+                                        <strong>Mức giá: </strong><span th:text="${property.propertyPrice}">Nhật Bản</span></div>
                                 </div>
-                                <hr>
-                                <div class="row product-detail bg-secondary-subtle">
-                                    <div class="col-md-6 d-flex align-items-center">
-                                        <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-file-earmark mx-2" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                                            </svg><strong>Pháp lý: </strong><span>Cơ tự động</span></div>
-                                    </div>
-                                    <div class="col-md-6 d-flex align-items-center">
-                                        <div><svg width="16" height="16" fill="currentColor" class="mx-2"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                <path
-                                                    d="M64 160C64 89.3 121.3 32 192 32l256 0c70.7 0 128 57.3 128 128l0 33.6c-36.5 7.4-64 39.7-64 78.4l0 48-384 0 0-48c0-38.7-27.5-71-64-78.4L64 160zM544 272c0-20.9 13.4-38.7 32-45.3c5-1.8 10.4-2.7 16-2.7c26.5 0 48 21.5 48 48l0 176c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L96 448c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L0 272c0-26.5 21.5-48 48-48c5.6 0 11 1 16 2.7c18.6 6.6 32 24.4 32 45.3l0 48 0 32 32 0 384 0 32 0 0-32 0-48z" />
-                                            </svg><strong>Nội thất: </strong><span>Kính Sapphire</span></div>
-                                    </div>
-                                </div>
-
-
                             </div>
-                        </div>
+                            <hr>
+                            <div class="row product-detail">
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div>
+                                        <svg width="16" height="16" fill="currentColor" class="mx-2"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 640 512">
+                                            <!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path
+                                                    d="M32 32c17.7 0 32 14.3 32 32l0 256 224 0 0-160c0-17.7 14.3-32 32-32l224 0c53 0 96 43 96 96l0 224c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-32-224 0-32 0L64 416l0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32L0 64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/>
+                                        </svg>
+                                        <strong>Số phòng ngủ: </strong><span th:text="${property.bedrooms}"></span></div>
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div>
+                                        <svg width="16" height="16" fill="currentColor" class="mx-2"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 448 512">
+                                            <!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path
+                                                    d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48l8 0 0 148.9c-1.9 1.4-3.8 2.9-5.6 4.4C10.9 214.5 0 232.9 0 256c0 46.9 14.3 84.1 37 112.5c14.2 17.7 31.1 31.3 48.5 41.8L65.6 469.9c-3.3 9.8-1.6 20.5 4.4 28.8s15.7 13.3 26 13.3l256 0c10.3 0 19.9-4.9 26-13.3s7.7-19.1 4.4-28.8l-19.8-59.5c17.4-10.5 34.3-24.1 48.5-41.8c22.7-28.4 37-65.5 37-112.5c0-23.1-10.9-41.5-26.4-54.6c-1.8-1.5-3.7-3-5.6-4.4L416 48l8 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L24 0zM384 256.3c0 1-.3 2.6-3.8 5.6c-4.8 4.1-14 9-29.3 13.4C320.5 284 276.1 288 224 288s-96.5-4-126.9-12.8c-15.3-4.4-24.5-9.3-29.3-13.4c-3.5-3-3.8-4.6-3.8-5.6l0-.3c0 0 0-.1 0-.1c0-1 0-2.5 3.8-5.8c4.8-4.1 14-9 29.3-13.4C127.5 228 171.9 224 224 224s96.5 4 126.9 12.8c15.3 4.4 24.5 9.3 29.3 13.4c3.8 3.2 3.8 4.8 3.8 5.8c0 0 0 .1 0 .1l0 .3zM328.2 384l-.2 .5 0-.5 .2 0zM112 64l32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+                                        </svg>
+                                        <strong>Số toilet: </strong><span th:text="${property.bathrooms}" id="atm"></span></div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row product-detail bg-secondary-subtle">
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-file-earmark mx-2" viewBox="0 0 16 16">
+                                            <path
+                                                    d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                                        </svg>
+                                        <strong>Pháp lý: </strong><span>Sổ đỏ/Sổ hồng</span></div>
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div>
+                                        <svg width="16" height="16" fill="currentColor" class="mx-2"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 640 512">
+                                            <!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path
+                                                    d="M64 160C64 89.3 121.3 32 192 32l256 0c70.7 0 128 57.3 128 128l0 33.6c-36.5 7.4-64 39.7-64 78.4l0 48-384 0 0-48c0-38.7-27.5-71-64-78.4L64 160zM544 272c0-20.9 13.4-38.7 32-45.3c5-1.8 10.4-2.7 16-2.7c26.5 0 48 21.5 48 48l0 176c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L96 448c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L0 272c0-26.5 21.5-48 48-48c5.6 0 11 1 16 2.7c18.6 6.6 32 24.4 32 45.3l0 48 0 32 32 0 384 0 32 0 0-32 0-48z"/>
+                                        </svg>
+                                        <strong>Nội thất: </strong><span th:text="${property.propertyInterior}">Kính Sapphire</span></div>
+                                </div>
+                            </div>
 
+
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- END THÔNG TIN BĐS -->
-    <div class="container mt-4" style="max-width: 80%;">
-        <div class="row d-flex justify-content-center">
-            <hr>
-            <div class="information row">
-                <div class="col-md-3"></div>
-                <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
-                    <h6 class="text-secondary">Ngày đăng</h6>
+</div>
+<!-- END THÔNG TIN BĐS -->
+<div class="container mt-4" style="max-width: 80%;">
+    <div class="row d-flex justify-content-center">
+        <hr>
+        <div class="information row">
+            <div class="col-md-3"></div>
+            <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
+                <h6 class="text-secondary">Ngày đăng</h6>
 
-                </div>
-                <div class="col-md-2 d-flex justify-content-center">
-                    <h6 class="text-secondary ">Ngày hết hạn</h6>
-                </div>
-                <div class="col-md-2 d-flex justify-content-center">
-                    <h6 class=" text-secondary">Mã tin</h6>
-                </div>
             </div>
-            <div class="information row mb-4">
-                <div class="col-md-3"></div>
-                <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
-                    <h6 class=" fw-bold ">20/11/2024</h6>
-
-                </div>
-                <div class="col-md-2 d-flex justify-content-center">
-                    <h6 class=" fw-bold ">27/11/2024</h6>
-                </div>
-                <div class="col-md-2 d-flex justify-content-center">
-                    <h6 class="fw-bold">123468789</h6>
-                </div>
-                <hr class="my-2">
+            <div class="col-md-2 d-flex justify-content-center">
+                <h6 class="text-secondary ">Ngày hết hạn</h6>
             </div>
-
-        </div>
-    </div>
-    <!-- GỢI Ý CHO BẠN -->
-    <div class="container-fluid mt-4">
-        <h4 class="mx-4 pt-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                class="mx-2 bi bi-lightbulb" viewBox="0 0 16 16">
-                <path
-                    d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1" />
-            </svg>Gợi ý cho bạn</h4>
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
-                <a href="#" class="property-info shadow rounded-2 text-decoration-none">
-                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
-                        alt="home-photo">
-                    <div class="mx-3">
-                        <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
-                        <div class="fw-bold">
-                            <span class="text-danger">4.1 tỷ</span>
-                            <span class="mx-2">.</span>
-                            <span class="text-danger">30 m2</span>
-                        </div>
-                        <div class="my-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                            </svg>
-                            <span class="text-dark">Long biên</span>
-                            <span class="text-dark">Hà nội</span>
-                        </div>
-                        <div class="my-4">
-                            <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
-                <a href="#" class="property-info shadow rounded-2 text-decoration-none">
-                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
-                        alt="home-photo">
-                    <div class="mx-3">
-                        <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
-                        <div class="fw-bold">
-                            <span class="text-danger">4.1 tỷ</span>
-                            <span class="mx-2">.</span>
-                            <span class="text-danger">30 m2</span>
-                        </div>
-                        <div class="my-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                            </svg>
-                            <span class="text-dark">Long biên</span>
-                            <span class="text-dark">Hà nội</span>
-                        </div>
-                        <div class="my-4">
-                            <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
-                <a href="#" class="property-info shadow rounded-2 text-decoration-none">
-                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
-                        alt="home-photo">
-                    <div class="mx-3">
-                        <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
-                        <div class="fw-bold">
-                            <span class="text-danger">4.1 tỷ</span>
-                            <span class="mx-2">.</span>
-                            <span class="text-danger">30 m2</span>
-                        </div>
-                        <div class="my-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                            </svg>
-                            <span class="text-dark">Long biên</span>
-                            <span class="text-dark">Hà nội</span>
-                        </div>
-                        <div class="my-4">
-                            <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
-                <a href="#" class="property-info shadow rounded-2 text-decoration-none">
-                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
-                        alt="home-photo">
-                    <div class="mx-3">
-                        <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
-                        <div class="fw-bold">
-                            <span class="text-danger">4.1 tỷ</span>
-                            <span class="mx-2">.</span>
-                            <span class="text-danger">30 m2</span>
-                        </div>
-                        <div class="my-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                            </svg>
-                            <span class="text-dark">Long biên</span>
-                            <span class="text-dark">Hà nội</span>
-                        </div>
-                        <div class="my-4">
-                            <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
-                <a href="#" class="property-info shadow rounded-2 text-decoration-none">
-                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
-                        alt="home-photo">
-                    <div class="mx-3">
-                        <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
-                        <div class="fw-bold">
-                            <span class="text-danger">4.1 tỷ</span>
-                            <span class="mx-2">.</span>
-                            <span class="text-danger">30 m2</span>
-                        </div>
-                        <div class="my-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                            </svg>
-                            <span class="text-dark">Long biên</span>
-                            <span class="text-dark">Hà nội</span>
-                        </div>
-                        <div class="my-4">
-                            <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
-                        </div>
-                    </div>
-                </a>
+            <div class="col-md-2 d-flex justify-content-center">
+                <h6 class=" text-secondary">Mã tin</h6>
             </div>
         </div>
+        <div class="information row mb-4">
+            <div class="col-md-3"></div>
+            <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
+                <h6 th:text="${property.contact.datePost}" class=" fw-bold ">20/11/2024</h6>
+
+            </div>
+            <div class="col-md-2 d-flex justify-content-center">
+                <h6 th:text="${property.contact.dateEnd}" class=" fw-bold ">27/11/2024</h6>
+            </div>
+            <div class="col-md-2 d-flex justify-content-center">
+                <h6 th:text="${property.contact.contactId}" class="fw-bold">123468789</h6>
+            </div>
+            <hr class="my-2">
+        </div>
+
     </div>
-    <!-- END GỢI Ý CHO BẠN -->
+</div>
+<!-- GỢI Ý CHO BẠN -->
+<div class="container-fluid mt-4">
+    <h4 class="mx-4 pt-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+             class="mx-2 bi bi-lightbulb" viewBox="0 0 16 16">
+            <path
+                    d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+        </svg>
+        Gợi ý cho bạn
+    </h4>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
+            <a href="#" class="property-info shadow rounded-2 text-decoration-none">
+                <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                     alt="home-photo">
+                <div class="mx-3">
+                    <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
+                    <div class="fw-bold">
+                        <span class="text-danger">4.1 tỷ</span>
+                        <span class="mx-2">.</span>
+                        <span class="text-danger">30 m2</span>
+                    </div>
+                    <div class="my-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-geo-alt" viewBox="0 0 16 16">
+                            <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                        </svg>
+                        <span class="text-dark">Long biên</span>
+                        <span class="text-dark">Hà nội</span>
+                    </div>
+                    <div class="my-4">
+                        <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
+            <a href="#" class="property-info shadow rounded-2 text-decoration-none">
+                <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                     alt="home-photo">
+                <div class="mx-3">
+                    <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
+                    <div class="fw-bold">
+                        <span class="text-danger">4.1 tỷ</span>
+                        <span class="mx-2">.</span>
+                        <span class="text-danger">30 m2</span>
+                    </div>
+                    <div class="my-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-geo-alt" viewBox="0 0 16 16">
+                            <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                        </svg>
+                        <span class="text-dark">Long biên</span>
+                        <span class="text-dark">Hà nội</span>
+                    </div>
+                    <div class="my-4">
+                        <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
+            <a href="#" class="property-info shadow rounded-2 text-decoration-none">
+                <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                     alt="home-photo">
+                <div class="mx-3">
+                    <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
+                    <div class="fw-bold">
+                        <span class="text-danger">4.1 tỷ</span>
+                        <span class="mx-2">.</span>
+                        <span class="text-danger">30 m2</span>
+                    </div>
+                    <div class="my-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-geo-alt" viewBox="0 0 16 16">
+                            <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                        </svg>
+                        <span class="text-dark">Long biên</span>
+                        <span class="text-dark">Hà nội</span>
+                    </div>
+                    <div class="my-4">
+                        <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
+            <a href="#" class="property-info shadow rounded-2 text-decoration-none">
+                <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                     alt="home-photo">
+                <div class="mx-3">
+                    <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
+                    <div class="fw-bold">
+                        <span class="text-danger">4.1 tỷ</span>
+                        <span class="mx-2">.</span>
+                        <span class="text-danger">30 m2</span>
+                    </div>
+                    <div class="my-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-geo-alt" viewBox="0 0 16 16">
+                            <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                        </svg>
+                        <span class="text-dark">Long biên</span>
+                        <span class="text-dark">Hà nội</span>
+                    </div>
+                    <div class="my-4">
+                        <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2 m-2 d-flex align-items-center justify-content-center property option-choose">
+            <a href="#" class="property-info shadow rounded-2 text-decoration-none">
+                <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                     alt="home-photo">
+                <div class="mx-3">
+                    <h6 class="my-2 text-dark">Chi 10 tỷ có nhà ở long biên</h6>
+                    <div class="fw-bold">
+                        <span class="text-danger">4.1 tỷ</span>
+                        <span class="mx-2">.</span>
+                        <span class="text-danger">30 m2</span>
+                    </div>
+                    <div class="my-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-geo-alt" viewBox="0 0 16 16">
+                            <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                        </svg>
+                        <span class="text-dark">Long biên</span>
+                        <span class="text-dark">Hà nội</span>
+                    </div>
+                    <div class="my-4">
+                        <p class="text-dark" style="opacity: 0.5;">Đăng hôm nay</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- END GỢI Ý CHO BẠN -->
 
 
+<th:block th:insert="~{ home/footer :: footer}"></th:block>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
 
-    <th:block th:insert="~{ home/footer :: footer}"></th:block>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-
-    <script type="text/javascript"
+<script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
-    <script th:src="@{/access/js/apiprovince.js}"></script>
+<script th:src="@{/access/js/apiprovince.js}"></script>
 
 </body>
 
