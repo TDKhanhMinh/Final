@@ -2,6 +2,7 @@ package com.example.Final.controller;
 
 import com.example.Final.entity.listingservice.Address;
 import com.example.Final.entity.listingservice.Contact;
+import com.example.Final.entity.listingservice.Images;
 import com.example.Final.entity.listingservice.Properties;
 import com.example.Final.repository.AddressRepo;
 import com.example.Final.repository.ContactRepo;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/listing")
@@ -108,6 +111,19 @@ public class ListingController {
         propertyService.save(properties);
         model.addAttribute("property", properties);
         return "listing/post-image";
+    }
+
+    @PostMapping("/complete")
+    public String complete(Model model,
+                           @RequestParam("images") ArrayList<MultipartFile> images,
+                           Principal principal){
+        List<Images> imageList =  new ArrayList<Images>();
+        for(MultipartFile file: images){
+            String path = imageUploadService.uploadImage(file);
+            Images image = new Images();
+            image.setPath(path);
+            imageList.add(image);
+        }
     }
     @GetMapping("/listing-info")
     public String getListingInfo() {
