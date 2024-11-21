@@ -32,15 +32,14 @@ public class UserConfig {
         httpSecurity.authorizeHttpRequests(config -> config
                         .requestMatchers("/").hasRole("REALTOR")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/showRegister", "/checkRegisterCustomer", "/showLogin", "/forgotPassword", "/resetPassword").permitAll()
-//                        .anyRequest().authenticated())
-                        .anyRequest().permitAll())
+                        .requestMatchers("/user/register", "/user/register", "/user/login", "/user/forgotPassword", "/user/resetPassword").permitAll()
+                        .anyRequest().authenticated())
 
                 .formLogin(login -> login
-                        .loginPage("/showLogin")
+                        .loginPage("/user/login")
                         .loginProcessingUrl("/login")
                         .successHandler(userSuccessHandler)
-                        .failureUrl("/showLogin?error=true")
+                        .failureUrl("/login?error=true")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")

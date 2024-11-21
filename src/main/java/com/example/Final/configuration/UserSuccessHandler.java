@@ -40,11 +40,11 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
         }
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
-            if (authority.getAuthority().equals("ROLE_ADMIN")) {
-                response.sendRedirect(request.getContextPath() + "/admin/admin");
+            if (authority.getAuthority().equals("ROLE_REALTOR")) {
+                response.sendRedirect(request.getContextPath() + "/home/home");
                 return;
-            } else if (authority.getAuthority().equals("ROLE_USER")) {
-                response.sendRedirect(request.getContextPath() + "/home-page");
+            } else if (authority.getAuthority().equals("ROLE_ADMIN")) {
+                response.sendRedirect(request.getContextPath() + "/home/home");
                 return;
             }
         }

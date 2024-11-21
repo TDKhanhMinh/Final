@@ -14,8 +14,16 @@ public class PropertyService {
         return propertyRepo.save(properties);
     }
 
+    public Properties save(Properties properties) {
+        return propertyRepo.save(properties);
+    }
+
     public void deleteById(int id) {
         propertyRepo.deleteById(id);
+    }
+
+    public Properties getById(int id) {
+        return propertyRepo.findById(id).orElseThrow(() -> new RuntimeException("Not found property"));
     }
 
     public void updateInfo(Properties oldProperties, Properties properties) {

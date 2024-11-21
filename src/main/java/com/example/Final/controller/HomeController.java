@@ -15,9 +15,13 @@ public class HomeController {
 
 
 
-    @GetMapping
+    @GetMapping("/home")
     public String getHome() {
         return "home/homebody";
+    }
+    @GetMapping("/all-listings")
+    public String getAllListings() {
+        return "listing/all-listing";
     }
 
 

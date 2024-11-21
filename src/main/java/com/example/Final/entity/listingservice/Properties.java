@@ -1,6 +1,5 @@
 package com.example.Final.entity.listingservice;
 
-import com.example.Final.entity.salesservice.SalesTransactions;
 import com.example.Final.entity.securityservice.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -49,9 +48,11 @@ public class Properties {
     private User user;
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Images> listImages;
+
     @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
-
+    @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Contact contact;
 
 
 }

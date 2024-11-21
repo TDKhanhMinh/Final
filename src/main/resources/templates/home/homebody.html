@@ -12,15 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" th:href="@{/access/css/home.css}">
+    <link rel="stylesheet" th:href="@{/access/css/home.css}">
 </head>
 
 
 <body>
     <th:block th:insert="~{ home/header :: header}"></th:block>
-
     <!-- CAROSELL VÀ TÌM KIẾM -->
-    <div class="container">
+    <div class="container" style="padding-top: 150px;">
         <div class="row d-flex align-items-center justify-content-center">
             <div class="col-md-12">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -75,7 +74,6 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-10">
                 <div class="input-group row mt-3 d-flex justify-content-center bg-secondary rounded-2">
-
                     <form th:action="@{/search}" method="get" class="col-md-10 m-4">
                         <div class="container">
                             <div class="btn btn-sm btn-outline-light btn-active">
@@ -252,36 +250,37 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <a href="#" class="place-info">
+                <a th:href="@{/home/all-listings}" class="place-info">
                     <div class="place-name mx-4"><strong>TP Hồ Chí Minh</strong></div>
-                    <img class="rounded-3" style="width: 570px; height: 375px;" th:src="@{/access/image/Landmark-81-HCMC.jpg}" alt="HCM-picture">
+                    <img class="rounded-3" style="width: 570px; height: 375px;"
+                        th:src="@{/access/image/Landmark-81-HCMC.jpg}" alt="HCM-picture">
                 </a>
             </div>
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="#" class="place-info-small">
+                        <a th:href="@{/home/all-listings}" class="place-info-small">
                             <div class="place-name-small mx-4"><strong>Hà Nội</strong></div>
                             <img class="rounded-3 mb-4" th:src="@{/access/image/hn.jpg}"
                                 style="width: 260px; height: 175px;" alt="HCM-picture">
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="#" class="place-info-small">
+                        <a th:href="@{/home/all-listings}" class="place-info-small">
                             <div class="place-name-small mx-4"><strong>Đà Nẵng</strong></div>
                             <img class="rounded-3 mb-4" th:src="@{/access/image/R.png}"
                                 style="width: 260px; height: 175px;" alt="HCM-picture">
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="#" class="place-info-small">
+                        <a th:href="@{/home/all-listings}" class="place-info-small">
                             <div class="place-name-small mx-4"><strong>Bình Dương</strong></div>
-                            <img class="rounded-3" th:src="@{/access/image/R.jpg}"
-                                style="width: 260px; height: 175px;" alt="HCM-picture">
+                            <img class="rounded-3" th:src="@{/access/image/BD-web-2.jpg}" style="width: 260px; height: 175px;"
+                                alt="HCM-picture">
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="#" class="place-info-small">
+                        <a th:href="@{/home/all-listing}" class="place-info-small">
                             <div class="place-name-small mx-4"><strong>Cần Thơ</strong></div>
                             <img class="rounded-3" th:src="@{/access/image/hinh-dep-can-tho-1650301511.jpg}"
                                 style="width: 260px; height: 175px;" alt="HCM-picture">
@@ -303,7 +302,10 @@
                     <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
                         alt="home-photo">
                     <div class="mx-3">
-                        <h6 class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <h6 style="width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
                         <div class="fw-bold">
                             <span class="text-danger">4.1 tỷ</span>
                             <span class="mx-2">.</span>
@@ -330,7 +332,10 @@
                     <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
                         alt="home-photo">
                     <div class="mx-3">
-                        <h6 class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <h6 style="width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
                         <div class="fw-bold">
                             <span class="text-danger">4.1 tỷ</span>
                             <span class="mx-2">.</span>
@@ -357,7 +362,10 @@
                     <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
                         alt="home-photo">
                     <div class="mx-3">
-                        <h6 class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <h6 style="width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
                         <div class="fw-bold">
                             <span class="text-danger">4.1 tỷ</span>
                             <span class="mx-2">.</span>
@@ -384,7 +392,10 @@
                     <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
                         alt="home-photo">
                     <div class="mx-3">
-                        <h6 class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <h6 style="width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
                         <div class="fw-bold">
                             <span class="text-danger">4.1 tỷ</span>
                             <span class="mx-2">.</span>
@@ -407,14 +418,223 @@
                 </a>
             </div>
 
+            <div class="col-md-3 my-4 d-flex align-items-center justify-content-center property">
+                <a href="#" class="property-info shadow rounded-2">
+                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                        alt="home-photo">
+                    <div class="mx-3">
+                        <h6 style="width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <div class="fw-bold">
+                            <span class="text-danger">4.1 tỷ</span>
+                            <span class="mx-2">.</span>
+                            <span class="text-danger">30 m2</span>
+                        </div>
+                        <div class="my-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                            <span>Long biên</span>
+                            <span>Hà nội</span>
+                        </div>
+                        <div class="my-4">
+                            <p style="opacity: 0.5;">Đăng hôm nay</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 my-4 d-flex align-items-center justify-content-center property">
+                <a href="#" class="property-info shadow rounded-2">
+                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                        alt="home-photo">
+                    <div class="mx-3">
+                        <h6 style="width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <div class="fw-bold">
+                            <span class="text-danger">4.1 tỷ</span>
+                            <span class="mx-2">.</span>
+                            <span class="text-danger">30 m2</span>
+                        </div>
+                        <div class="my-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                            <span>Long biên</span>
+                            <span>Hà nội</span>
+                        </div>
+                        <div class="my-4">
+                            <p style="opacity: 0.5;">Đăng hôm nay</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 my-4 d-flex align-items-center justify-content-center property">
+                <a href="#" class="property-info shadow rounded-2">
+                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                        alt="home-photo">
+                    <div class="mx-3">
+                        <h6 style="width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <div class="fw-bold">
+                            <span class="text-danger">4.1 tỷ</span>
+                            <span class="mx-2">.</span>
+                            <span class="text-danger">30 m2</span>
+                        </div>
+                        <div class="my-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                            <span>Long biên</span>
+                            <span>Hà nội</span>
+                        </div>
+                        <div class="my-4">
+                            <p style="opacity: 0.5;">Đăng hôm nay</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 my-4 d-flex align-items-center justify-content-center property">
+                <a href="#" class="property-info shadow rounded-2">
+                    <img class="rounded-top" style="width: 250px;height: 150px;" th:src="@{/access/image/OIP.jpg}"
+                        alt="home-photo">
+                    <div class="mx-3">
+                        <h6 style="width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <div class="fw-bold">
+                            <span class="text-danger">4.1 tỷ</span>
+                            <span class="mx-2">.</span>
+                            <span class="text-danger">30 m2</span>
+                        </div>
+                        <div class="my-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                            <span>Long biên</span>
+                            <span>Hà nội</span>
+                        </div>
+                        <div class="my-4">
+                            <p style="opacity: 0.5;">Đăng hôm nay</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="container-sm d-flex justify-content-center my-4">
+                <a href="#" class="btn btn-outline-dark" style="min-width: 200px;">Xem thêm</a>
+            </div>
+
         </div>
-        <div class="d-flex justify-content-center pb-4">
-            <a style="width: 200px" class="btn btn-sm btn-outline-dark float-right mt-5">Xem
-                Thêm</a>
-        </div>
+
     </div>
     <!-- END BẤT ĐỌNG SẢN DÀNH CHO BẠN -->
 
+    <!--    TIN TỨC BẤT ĐỘNG SẢN -->
+    <div class="container-sm" style="max-width: 85%;padding-top: 48px;">
+        <h4 class="text-uppercase text-center my-4 ">Tin Tức Nổi Bật</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="https://laodong.vn/bat-dong-san/gia-chung-cu-tang-nhanh-khien-nhieu-nguoi-dan-bat-ngo-sung-sot-1324227.ldo"
+                    class="container-sm d-flex justify-content-center text-decoration-none" style="cursor: pointer;">
+                    <div class="image mx-4 bg-secondary-subtle rounded-3 ">
+                        <img class="rounded-top"
+                            src="https://img.iproperty.com.my/angel/610x342-crop/wp-content/uploads/sites/7/2023/12/DJI_0050.jpg"
+                            alt="image" style="object-fit: contain; max-height: 340px;">
+                        <div class="container-sm">
+                            <h5 class="mt-4">Giá Nhà Liền Thổ Giảm Mạnh, Chung Cư Liên Tục Tăng</h5>
+                            <p class="text-body">
+                                Tiếp nối thành công của các trung tâm thương mại Saigon Centre và Estella Place tại
+                                TP.HCM,
+                                Keppel đã chính thức gia nhập "cuộc đua" bất động sản thương mại tại Hà Nội với việc
+                                thuê
+                                toàn bộ khu trung tâm thương mại Hanoi Centre tại quận Ba Đình để quản lý, vận hành và
+                                khai
+                                thác.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="https://tienphong.vn/kinh-doanh-bat-dong-san-dung-thu-2-ve-thu-hut-von-fdi-post1674532.tpo"
+                    class="d-flex flex-nowrap bg-secondary-subtle rounded-3 text-decoration-none"
+                    style="max-height: 120px;">
+                    <img class="rounded-2 m-2"
+                        src="https://img.iproperty.com.my/angel/750x1000-fit/wp-content/uploads/sites/7/2024/11/von-FDI-1.webp"
+                        alt="image" style="max-width: 180px; max-height: 100px;">
+                    <div class="content mx-2">
+                        <h6 class="mt-2">Phân Khúc Bất Động Sản Nào Đang Thăng Hoa Nhờ Nguồn Vốn FDI?</h6>
+                        <p class="text-body">Báo cáo mới nhất của Tổng cục Thống kê đưa ra những thông tin đáng chú ý về
+                            nguồn vốn FDI...</p>
+                    </div>
+                </a>
+                <a href="https://dantri.com.vn/bat-dong-san/co-hoi-tham-gia-su-kien-hang-dau-nganh-bat-dong-san-20241119231458488.htm"
+                    class="d-flex flex-nowrap bg-secondary-subtle rounded-3 my-3 text-decoration-none"
+                    style="max-height: 120px;">
+                    <img class="rounded-2 m-2"
+                        src="https://img.iproperty.com.my/angel/750x1000-fit/wp-content/uploads/sites/7/2024/11/Hoi-nghi-VRES-2023-scaled.jpg"
+                        alt="image" style="max-width: 180px; max-height: 100px;">
+                    <div class="content mx-2">
+                        <h6 class="mt-2">
+                            Cơ Hội Tham Gia Sự Kiện Lớn Bậc Nhất Ngành Bất Động Sản
+                        </h6>
+                        <p class="text-body">Khởi động từ năm 2014 và được tổ chức liên tục cho đến nay, Hội nghị Bất
+                            động
+                            sản Việt Nam – VRES quy tụ ...</p>
+                    </div>
+                </a>
+                <a href="https://baothanhhoa.vn/du-an-bat-dong-san-gap-kho-vi-cach-tinh-tien-su-dung-dat-230761.htm"
+                    class="d-flex flex-nowrap bg-secondary-subtle rounded-3 my-3 text-decoration-none"
+                    style="max-height: 120px;">
+                    <img class="rounded-2 m-2"
+                        src="https://img.iproperty.com.my/angel/750x1000-fit/wp-content/uploads/sites/7/2024/11/chung-cu-1.jpg"
+                        alt="image" style="max-width: 180px; max-height: 100px;">
+                    <div class="content mx-2">
+                        <h6 class="mt-2">
+                            Dự Án Bất Động Sản Gặp Khó Vì Cách Tính Tiền Sử Dụng Đất
+                        </h6>
+                        <p class="text-body">Thị trường bất động sản đang trên đà phục hồi. Trên thực tế, nhiều dự án
+                            bất
+                            động sản đang khởi động...</p>
+                    </div>
+                </a>
+                <a href="https://batdongsan.com.vn/tin-tuc/gia-nha-lien-tho-giam-manh-chung-cu-lien-tuc-tang-cd-hcm-789890"
+                    class="d-flex flex-nowrap bg-secondary-subtle rounded-3 my-3 text-decoration-none"
+                    style="max-height: 120px;">
+                    <img class="rounded-2 m-2"
+                        src="https://img.iproperty.com.my/angel/610x342-crop/wp-content/uploads/sites/7/2024/11/Hot-2_anh-1-1.jpg"
+                        alt="image" style="max-width: 180px; max-height: 100px;">
+                    <div class="content mx-2">
+                        <h6 class="mt-2">
+                            Giá Nhà Liền Thổ Giảm Mạnh, Chung Cư Liên Tục Tăng</h6>
+                        <p class="text-body">
+                            Giá bán nhà liền thổ và một số sản phẩm bất động sản khác ghi nhận có sự giảm mạnh từ 10–
+                            20%
+                            trong năm 2023. Tuy nhiên, giá nhà chung cư tiếp tục tăng cao...</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
 
     <th:block th:insert="~{ home/footer :: footer}"></th:block>
 

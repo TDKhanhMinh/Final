@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <title>Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" th:href="@{/access/css/home.css}">
 </head>
 <style>
@@ -23,93 +23,96 @@
         max-width: 750px;
         border-radius: 24px;
     }
-    .description{
+
+    .description {
         border-radius: 24px;
     }
-    .container-fix-60{
+
+    .container-fix-60 {
         max-width: 60%;
     }
 </style>
 
 <body>
-    <th:block th:insert="~{ home/header :: header}"></th:block>
+<th:block th:insert="~{ home/header :: header}"></th:block>
 
 
-    <div class="container ">
-        <div class="my-4">
-            <div class="d-flex justify-content-between">
-                <div class="step-1">
-                    <h4 class=""><strong>Tạo bài đăng</strong></h4>
-                    <span><strong>Bước 3: Thông tin liên hệ</strong></span>
+<div class="container " style="padding-top: 100px;">
+    <div class="my-4">
+        <div class="d-flex justify-content-between">
+            <div class="step-1">
+                <h4 class=""><strong>Tạo bài đăng</strong></h4>
+                <span><strong>Bước 3: Thông tin liên hệ</strong></span>
+            </div>
+            <div class="exit">
+                <a th:href="@{/listing/exit-post/{id}(id=${properties.getPropertyId()})}"
+                   class="btn btn-outline-dark rounded-pill btn-lg fw-light">Thoát</a>
+            </div>
+        </div>
+        <hr>
+        <form th:action="@{/listing/contact}" th:object="${contact}" method="post">
+            <input type="hidden" th:value="${properties.propertyId}" name="propertyId">
+            <div class="container-sm border place-address container-fix-60">
+                <h5 class="py-3 mx-2"><strong>Thông tin liên hệ</strong></h5>
+                <div class="container">
+                    <h6>Họ và tên</h6>
+                    <input th:field="*{fullName}" type="text" name="contact-user" id="" class="form-control" placeholder="Nhập họ và tên">
                 </div>
-                <div class="exit">
-                    <a th:href="@{/listing/exit-post/{id}(id=${properties.getPropertyId()})}" class="btn btn-outline-dark rounded-pill btn-lg fw-light">Thoát</a>
+                <div class="container my-4">
+                    <h6>Email</h6>
+                    <div class="">
+                        <input th:field="*{email}" type="email" class="form-control" name="contact-email" placeholder="Nhập email">
+                    </div>
+                </div>
+                <div class="container my-4">
+                    <h6>Số điện thoại</h6>
+                    <div class="">
+                        <input th:field="*{phone}" type="text" name="contact-phone" class="form-control" placeholder="Nhập số điện thoại">
+
+                    </div>
                 </div>
             </div>
-            <hr>
-            <form th:action="@{/listing/contact}" th:field="${propertyOld}" method="post">
-                <div class="container-sm border place-address container-fix-60">
-                    <h5 class="py-3 mx-2"><strong>Thông tin liên hệ</strong></h5>
-                    <div class="container">
-                        <h6>Họ và tên</h6>
-                        <input type="text" name="" id="" class="form-control" placeholder="Nhập họ và tên">
-                    </div>
-                    <div class="container my-4">
-                        <h6>Email</h6>
-                        <div class="">
-                            <input type="email" class="form-control" placeholder="Nhập email">
-
-                        </div>
-                    </div>
-                    <div class="container my-4">
-                        <h6>Số điện thoại</h6>
-                        <div class="">
-                            <input type="text" class="form-control" placeholder="Nhập số điện thoại">
-
-                        </div>
+            <div class="container-sm border place-address my-4 container-fix-60">
+                <h5 class="py-3 mx-2"><strong>Tiêu đề và Mô tả</strong></h5>
+                <div class="container">
+                    <h6>Tiêu đề</h6>
+                    <div class="input-group">
+                            <textarea name="title" class="form-control description" aria-label="With textarea"
+                                      placeholder="Mô tả ngắn gọn về loại hình bất đọng sản, diện tích, địa chỉ"></textarea>
                     </div>
                 </div>
-                <div class="container-sm border place-address my-4 container-fix-60" >
-                    <h5 class="py-3 mx-2"><strong>Tiêu đề và Mô tả</strong></h5>
-                    <div class="container">
-                        <h6>Tiêu đề</h6>
-                        <div class="input-group">
-                            <textarea th:field="*{propertyOld.propertyTitle}" class="form-control description" aria-label="With textarea"
-                                placeholder="Mô tả ngắn gọn về loại hình bất đọng sản, diện tích, địa chỉ"></textarea>
-                        </div>
-                    </div>
-                    <div class="container my-4">
-                        <h6>Mô tả</h6>
-                        <div class="input-group">
-                            <textarea th:field="*{propertyOld.propertyDescription}" class="form-control description" aria-label="With textarea"
-                                placeholder="Mô tả chi tiết về: loại hình bất đọng sản, vị trí, diện tích, tiện ích, tình trạng nội thất, ..."></textarea>
-                        </div>
+                <div class="container my-4">
+                    <h6>Mô tả</h6>
+                    <div class="input-group">
+                            <textarea name="description" class="form-control description" aria-label="With textarea"
+                                      placeholder="Mô tả chi tiết về: loại hình bất đọng sản, vị trí, diện tích, tiện ích, tình trạng nội thất, ..."></textarea>
                     </div>
                 </div>
-                <div class="container-sm my-4 d-flex justify-content-end container-fix-60">
-                    <button type="submit" value="Submit" class="btn btn-primary rounded-pill">Tiếp theo</button>
-                </div>
-            </form>
-        </div>
+            </div>
+            <div class="container-sm my-4 d-flex justify-content-end container-fix-60">
+                <button type="submit" value="Submit" class="btn btn-primary rounded-pill">Tiếp theo</button>
+            </div>
+        </form>
     </div>
+</div>
 
 
-    <th:block th:insert="~{ home/footer :: footer}"></th:block>
+<th:block th:insert="~{ home/footer :: footer}"></th:block>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
-    <script type="text/javascript"
+<script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
-    <script th:src="@{/access/js/apiprovince.js}"></script>
+<script th:src="@{/access/js/apiprovince.js}"></script>
 </body>
 
 </html>
