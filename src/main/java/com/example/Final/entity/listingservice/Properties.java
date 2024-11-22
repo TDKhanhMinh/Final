@@ -46,7 +46,8 @@ public class Properties {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Images> listImages;
 
     @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL, orphanRemoval = true)

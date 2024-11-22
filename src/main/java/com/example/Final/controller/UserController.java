@@ -67,28 +67,28 @@ public class UserController {
         }
     }
 
+    @PostMapping("/update-image")
+    public String updateImage(Model model, @Param("images") ArrayList<MultipartFile> images,
+                              Principal principal) throws Exception {
+        User user = userService.findUserByEmail(principal.getName());
+        List<Images> imageList = new ArrayList<>();
+        for (MultipartFile file : images) {
+            String path = imageUploadService.uploadImage(file);
+            Images image = new Images();
+            image.setImageUrl(path);
+            userService.updateImage(user, image);
+            image.setUser(user);
+            imagesRepo.save(image);
+            imageList.add(image);
+        }
+        return "redirect:/user/user-info";
+    }
+
     @PostMapping("/update-info")
     public String updateInfo(Model model,
-                             @Param("images") ArrayList<MultipartFile> images,
                              @Param("fullName") String fullName,
                              @Param("email") String email,
-                             @Param("phone") String phone,
-                             Principal principal
-    ) throws Exception {
-        User user = userService.findUserByEmail(principal.getName());
-        if (!images.isEmpty()) {
-            List<Images> imageList = new ArrayList<>();
-            for (MultipartFile file : images) {
-                String path = imageUploadService.uploadImage(file);
-                Images image = new Images();
-                image.setImageUrl(path);
-                image.setUser(user);
-//                sửa chỗ này
-                imagesRepo.save(image);
-                userService.updateImage(user, image);
-                imageList.add(image);
-            }
-        }
+                             @Param("phone") String phone) {
         userService.updateInfo(email, fullName, phone);
         return "redirect:/user/user-info";
     }

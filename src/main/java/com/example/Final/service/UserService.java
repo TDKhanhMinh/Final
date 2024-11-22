@@ -66,6 +66,7 @@ public class UserService implements UserDetailsService {
         oldUser.setEmail(email);
         oldUser.setPhone(phone);
         oldUser.setFullName(fullName);
+        oldUser.setImages(oldUser.getImages());
         userRepository.save(oldUser);
     }
 
