@@ -1,5 +1,7 @@
 package com.example.Final.entity.listingservice;
 
+import com.example.Final.entity.rentalservice.RentalHistory;
+import com.example.Final.entity.salesservice.SalesHistory;
 import com.example.Final.entity.securityservice.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,6 +32,8 @@ public class Properties {
     private boolean isAvailable;
     @Column(name = "property_interior")
     private String propertyInterior;
+    @Column(name = "property_legal_papers")
+    private String propertyLegal;
     @Column(name = "property_description")
     private String propertyDescription;
     @Column(name = "property_floor")
@@ -52,9 +56,18 @@ public class Properties {
 
     @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
+
     @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL, orphanRemoval = true)
     private Contact contact;
 
+    @OneToMany(mappedBy = "properties", cascade = CascadeType.ALL)
+    private List<RentalHistory> rentalHistories;
 
+    @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL)
+    private SalesHistory salesHistories;
+
+    @ManyToOne
+    @JoinColumn(name = "history_list_id")
+    private HistoryListing historyListing;
 }
 

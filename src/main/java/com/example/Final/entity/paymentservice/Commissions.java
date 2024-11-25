@@ -1,7 +1,7 @@
 package com.example.Final.entity.paymentservice;
 
-import com.example.Final.entity.rentalservice.Rental;
-import com.example.Final.entity.salesservice.SalesTransactions;
+import com.example.Final.entity.rentalservice.RentalHistory;
+import com.example.Final.entity.salesservice.SalesHistory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,11 +30,11 @@ public class Commissions {
 
     @OneToOne
     @JoinColumn(name = "transaction_id")
-    private SalesTransactions salesTransaction;
+    private SalesHistory salesTransaction;
 
     @OneToOne
     @JoinColumn(name = "rental_listing_id")
-    private Rental rentalTransaction;
+    private RentalHistory rentalTransaction;
 
     @OneToOne(mappedBy = "commission", cascade = CascadeType.ALL, orphanRemoval = true)
     private Payment payment;

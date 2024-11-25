@@ -35,6 +35,7 @@
         border: 1px solid black;
         border-radius: 6px;
     }
+
 </style>
 
 <body>
@@ -42,23 +43,39 @@
 <div class="container mt-4" style="padding-top: 100px;">
     <div class="row d-flex justify-content-center">
         <div class="col-md-10">
-            <div class="input-group row mt-3 d-flex justify-content-center rounded-2"
-                 style="background-color: whitesmoke;">
+            <div class="input-group row d-flex justify-content-center rounded-2">
                 <form th:action="@{/search}" method="get" class="col-md-10 m-4">
-                    <div class="container">
-                        <div class="btn btn-sm btn-outline-dark btn-active">
-                            Nhà đất bán
-                            <input type="hidden" value="for-sale">
+                    <!--                        <div class="container">-->
+                    <!--                            <div class="btn btn-sm btn-outline-dark btn-active">-->
+                    <!--                                Nhà đất bán-->
+                    <!--                                <input type="hidden" value="for-sale">-->
+                    <!--                            </div>-->
+                    <!--                            <div class="btn btn-sm btn-outline-dark btn-re-active">-->
+                    <!--                                Nhà đất cho thuê-->
+                    <!--                                <input type="hidden" value="for-rental">-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <div class="container d-flex  my-2 form-control"
+                         style="max-width: 830px;background-color: whitesmoke">
+                        <div class="location border border-white d-flex flex-nowrap align-items-center"
+                             style="width: 180px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path
+                                        d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                            </svg>
+                            <h6 class="m-2">
+                                Hồ Chí Minh
+                            </h6>
                         </div>
-                        <div class="btn btn-sm btn-outline-dark btn-re-active">
-                            Nhà đất cho thuê
-                            <input type="hidden" value="for-rental">
+                        <div class="mt-1 mx-2"
+                             style="transform: rotate(180deg);background:gray; height: 30px; width: 1px;">
+
                         </div>
-                    </div>
-                    <div class="container d-flex justify-content-center my-2">
-                        <input name="searchKey" id="search" type="text" class="form-control border border-dark"
+                        <input name="searchKey" id="search" type="text" class="border border-white rounded-3"
                                placeholder="Tìm kiếm trên toàn quốc" aria-label="Search"
-                               aria-describedby="button-addon2">
+                               aria-describedby="button-addon2" style="background-color: whitesmoke;width: 650px;">
                         <div class="input-group-append p-0">
                             <button class="btn btn-primary" type="submit" id="button-addon2">
                                 <i class="fas fa-search"></i>
@@ -66,29 +83,30 @@
                         </div>
                     </div>
                     <!-- <div class="container d-flex justify-content-center my-2">
-                    <div class="province-district-ward">
-                        <select class="text-start btn" name="city" id="city" style="width: 270px">
-                            <option value="">Tỉnh/Thành phố</option>
-                        </select>
-                    </div>
-                    <div class="province-district-ward mx-2">
-                        <select class="text-start btn" name="district" id="district" style="width: 267px">
-                            <option value="">Quận/Huyện</option>
-                        </select>
-                    </div>
-                    <div class="province-district-ward">
-                        <select class="text-start btn" name="ward" id="ward" style="width: 270px">
-                            <option value="">Phường/Xã</option>
-                        </select>
-                    </div>
-                </div> -->
+                <div class="province-district-ward">
+                    <select class="text-start btn" name="city" id="city" style="width: 270px">
+                        <option value="">Tỉnh/Thành phố</option>
+                    </select>
+                </div>
+                <div class="province-district-ward mx-2">
+                    <select class="text-start btn" name="district" id="district" style="width: 267px">
+                        <option value="">Quận/Huyện</option>
+                    </select>
+                </div>
+                <div class="province-district-ward">
+                    <select class="text-start btn" name="ward" id="ward" style="width: 270px">
+                        <option value="">Phường/Xã</option>
+                    </select>
+                </div>
+            </div> -->
                     <div class="container d-flex justify-content-center">
                         <div class="dropdown">
-                            <button class="btn btn-outline-dark  text-start " style="width: 200px" type="button"
+                            <button class="btn btn-outline-dark  text-start " style="width: 200px;opacity: 0.6"
+                                    type="button"
                                     id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 Loại nhà đất
                             </button>
-                            <ul class="dropdown-menu mt-2" style="width: 270px"
+                            <ul class="dropdown-menu mt-2" style="width: 270px;"
                                 aria-labelledby="dropdownMenuButton1">
                                 <li>
                                     <h6 class="text-uppercase text-center m-2">Loại nhà đất</h6>
@@ -122,7 +140,8 @@
                             </ul>
                         </div>
                         <div class="dropdown mx-2">
-                            <button class="btn btn-outline-dark dropdown-toggle1 text-start " style="width: 200px"
+                            <button class="btn btn-outline-dark dropdown-toggle1 text-start "
+                                    style="width: 200px;opacity: 0.6;"
                                     type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 Mức giá
@@ -165,7 +184,8 @@
                             </ul>
                         </div>
                         <div class="dropdown mx-2">
-                            <button class="btn btn-outline-dark dropdown-toggle1 text-start" style="width: 200px"
+                            <button class="btn btn-outline-dark dropdown-toggle1 text-start"
+                                    style="width: 200px;opacity: 0.6;"
                                     type="button" id="dropdownMenuButton00" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 Diện tích
@@ -208,7 +228,7 @@
 
 
                         <div class="dropdown">
-                            <button class="btn btn-outline-dark dropdown-toggle1 text-start " style="width: 200px"
+                            <button class="btn btn-outline-dark dropdown-toggle1 text-start " style="width: 200px;opacity: 0.6;"
                                     type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                 Số phòng ngủ
@@ -254,18 +274,32 @@
     <div class="row d-flex justify-content-center">
         <div class="col-md-10" th:each="property:${properties}">
             <!-- Nội dụng lấy từ đây -->
-            <a th:href="@{/listing/listing-info/{id}(id=${property.propertyId})}"
+            <a style="z-index: 1;" th:href="@{/listing/listing-info/{id}(id=${property.propertyId})}"
                class="input-group row mt-3 d-flex justify-content-center rounded-2 text-decoration-none">
                 <div class="container rounded-3 shadow my-4" style="max-width: 80%; background-color: whitesmoke;">
-                    <div th:each="image:${property.listImages}" class="image d-flex justify-content-center">
-                        <img style="max-width: 100%;" class="rounded-2"
-                             th:src="${image.imageUrl}"
-                             alt="photo">
+
+                    <div class="image d-flex justify-content-center">
+                        <!-- Cần suwrsae lại giá rị của get(0) -->
+                        <div class="row shadow" style="background-color: whitesmoke;">
+                            <div class="col-md-8 p-0 text-center">
+                                <img style="max-width: 100%;padding-right: 2px; object-fit: cover;"
+                                     class="rounded-3" th:src="${property.listImages.get(0).imageUrl}"
+                                     alt="photo">
+                            </div>
+                            <div class="col-md-4 p-0 text-center">
+                                <img style="max-width: 84%; margin-bottom: 2px; object-fit: cover;"
+                                     class="rounded-3" th:src="${property.listImages.get(1).imageUrl}" alt="photo">
+                                <img style="max-width: 84%; object-fit: cover;" class="rounded-3"
+                                     th:src="${property.listImages.get(2).imageUrl}" alt="photo">
+                            </div>
+                        </div>
                     </div>
+
+
                     <div class=" mt-4 text-uppercase mx-4">
-                        <h5 th:text="${property.propertyTitle}" class="text-dark"> 8 suất ngoại giao - hàng đẹp -
+                        <h6 th:text="${property.propertyTitle}" class="text-dark"> 8 suất ngoại giao - hàng đẹp -
                             góc-Penthouse- shop-căn hộ Masteri Grand View - The Global
-                            City</h5>
+                            City</h6>
                     </div>
                     <div class="information row">
                         <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
@@ -279,27 +313,32 @@
                         </div>
                         <div class="col-md-1 d-flex justify-content-center">
                             <span th:text="${property.bedrooms}" class="text-dark">1</span>
-                            <svg class="mt-1" width="16" height="16" fill="black"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 640 512">
+                            <svg class="mt-1 mx-2" width="16" height="16" fill="black"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                 <!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                 <path
                                         d="M32 32c17.7 0 32 14.3 32 32l0 256 224 0 0-160c0-17.7 14.3-32 32-32l224 0c53 0 96 43 96 96l0 224c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-32-224 0-32 0L64 416l0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32L0 64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/>
                             </svg>
                         </div>
                         <div class="col-md-1 d-flex justify-content-center">
-                            <span th:text="${property.bathrooms}" class="text-dark">1</span>
-                            <svg class="mt-1" width="16" height="16" fill="black"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 512 512">
+                            <span th:text="${property.bathrooms}+' '" class="text-dark">1</span>
+                            <svg class="mt-1 mx-2" width="16" height="16" fill="black"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                 <path
                                         d="M96 77.3c0-7.3 5.9-13.3 13.3-13.3c3.5 0 6.9 1.4 9.4 3.9l14.9 14.9C130 91.8 128 101.7 128 112c0 19.9 7.2 38 19.2 52c-5.3 9.2-4 21.1 3.8 29c9.4 9.4 24.6 9.4 33.9 0L289 89c9.4-9.4 9.4-24.6 0-33.9c-7.9-7.9-19.8-9.1-29-3.8C246 39.2 227.9 32 208 32c-10.3 0-20.2 2-29.2 5.5L163.9 22.6C149.4 8.1 129.7 0 109.3 0C66.6 0 32 34.6 32 77.3L32 256c-17.7 0-32 14.3-32 32s14.3 32 32 32l448 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 256 96 77.3zM32 352l0 16c0 28.4 12.4 54 32 71.6L64 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-16 256 0 0 16c0 17.7 14.3 32 32 32s32-14.3 32-32l0-40.4c19.6-17.6 32-43.1 32-71.6l0-16L32 352z"/>
                             </svg>
                         </div>
-                        <div class="col-md-3 d-flex justify-content-center">
-                            <h6 th:text="${property.address.district}+' '+${property.address.province}"
-                                class="text-body fw-light">Quận 2, Hồ Chí Minh</h6>
+                        <div class="col-md-3 d-flex justify-content-center text-dark">
+                                <span th:if="${property.address.district.substring(0,5).equals('Quận ')}"
+                                      th:text="${property.address.district}+', '">Hà nội</span>
+                            <span th:if="${property.address.province.substring(0,10).equals('Thành phố ')}"
+                                  th:text="${property.address.province.substring(10)}">Long biên</span>
+                            <span th:if="${property.address.district.substring(0,6).equals('Huyện ')}"
+                                  th:text="${property.address.district.substring(6)}+', '">Hà nội</span>
+                            <span th:if="${property.address.province.substring(0,5).equals('Tỉnh ')}"
+                                  th:text="${property.address.province.substring(5)}">Long biên</span>
+
                         </div>
                     </div>
                     <div class="description mx-4">
@@ -329,14 +368,15 @@
                                         20/11/2024</span>
                             </div>
                         </div>
-                        <div class="btn btn-sm btn-info d-flex align-items-center justify-content-center rounded-pill"
-                             style="width: 200px;">
+                        <div class="btn btn-sm btn-info d-flex align-items-center justify-content-center rounded-pill mt-2"
+                             style="width: 200px; height: 35px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-telephone" viewBox="0 0 16 16">
                                 <path
                                         d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                             </svg>
-                            <span th:text="'Liên hệ: '+${property.contact.phone}" class="mx-2">Liên hệ: <strong>0345738256</strong></span>
+                            <span th:text="'Liên hệ: '+${property.contact.phone}" class="mx-2">Liên hệ:
+                                    <strong>0345738256</strong></span>
                         </div>
                     </div>
                 </div>

@@ -32,6 +32,7 @@ public class UserService implements UserDetailsService {
         saveUser.setPassword(passwordEncoder.encode(user.getPassword()));
         saveUser.setFullName(user.getFullName());
         saveUser.setConfirmPassword(user.getConfirmPassword());
+        saveUser.setImages(null);
         saveUser.setRoles(Collections.singletonList(rolesRepository.findRolesByName("ROLE_REALTOR")));
         return userRepository.save(saveUser);
     }

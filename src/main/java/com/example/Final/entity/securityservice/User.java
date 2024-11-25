@@ -1,5 +1,6 @@
 package com.example.Final.entity.securityservice;
 
+import com.example.Final.entity.listingservice.HistoryListing;
 import com.example.Final.entity.listingservice.Images;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -45,6 +46,9 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Images images;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private HistoryListing historyListing;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id")

@@ -14,37 +14,33 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "rental_listing")
-public class Rental {
+@Table(name = "rental_history")
+public class RentalHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rental_listing_id")
+    @Column(name = "rental_history_id")
     private int rentalListingId;
 
-    @Column(name = "rental_price")
+    @Column(name = "price")
     private double rentalPrice;
-    @Column(name = "lease_start_date")
-    private Date leaseStartDate;
 
-    @Column(name = "lease_end_date")
-    private Date leaseEndDate;
     @Column(name = "status")
     private String status;
 
     @Column(name = "created_at")
-    private Date createdAt;
-    @Column(name = "updated_at")
-    private Date updatedAt;
+    private String createdAt;
 
+    @Column(name = "source")
+    private String source;
     @ManyToOne
     @JoinColumn(name = "properties_id")
     private Properties properties;
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
-    private List<RentalPayment> payments;
+
 }
 

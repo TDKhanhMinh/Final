@@ -13,11 +13,11 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "sales_transaction")
-public class SalesTransactions {
+@Table(name = "sales_history")
+public class SalesHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transaction_id")
+    @Column(name = "history_id")
     private int transactionId;
 
     @Column(name = "price")
@@ -26,10 +26,13 @@ public class SalesTransactions {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "trans_date")
-    private Date transactionDate;
+    @Column(name = "create_date")
+    private String createDate;
 
-    @ManyToOne
+    @Column(name = "source")
+    private String source;
+
+    @OneToOne
     @JoinColumn(name = "properties_id")
     private Properties properties;
 
