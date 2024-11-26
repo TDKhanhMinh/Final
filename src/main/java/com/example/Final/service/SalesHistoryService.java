@@ -17,13 +17,16 @@ public class SalesHistoryService {
     public void createSalesHistory(Properties properties) {
         SalesHistory salesHistory = new SalesHistory();
         salesHistory.setPrice(properties.getPropertyPrice());
+
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = currentDate.format(formatter);
+
         salesHistory.setCreateDate(formattedDate);
         salesHistory.setProperties(properties);
-        salesHistory.setStatus("Nhà bán");
-        salesHistory.setSource("Đại lý cung cấp");
+        salesHistory.setStatus("Bán");
+        salesHistory.setSource("Người môi giới cung cấp");
+
         salesHistoryRepo.save(salesHistory);
     }
 }

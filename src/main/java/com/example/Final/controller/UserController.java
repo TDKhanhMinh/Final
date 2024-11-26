@@ -1,9 +1,13 @@
 package com.example.Final.controller;
 
+import com.example.Final.entity.listingservice.Address;
 import com.example.Final.entity.listingservice.Images;
+import com.example.Final.entity.listingservice.Properties;
 import com.example.Final.entity.securityservice.User;
+import com.example.Final.repository.AddressRepo;
 import com.example.Final.repository.ImagesRepo;
 import com.example.Final.service.ImageUploadService;
+import com.example.Final.service.PropertyService;
 import com.example.Final.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -31,6 +35,8 @@ public class UserController {
     private final BCryptPasswordEncoder encoder;
     private final ImageUploadService imageUploadService;
     private final ImagesRepo imagesRepo;
+    private final PropertyService propertyService;
+    private final AddressRepo addressRepo;
 
     @GetMapping("/register")
     public String getRegister(Model model) {
@@ -151,5 +157,98 @@ public class UserController {
         session.invalidate();
         System.out.println("User logged out");
         return "user/login";
+    }
+
+
+    @GetMapping("/listing-manager")
+    public String getListingManager(Model model, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        List<Properties> propertiesList = propertyService.getAllByUser(user);
+        propertiesList.removeIf(properties -> !properties.isAvailable());
+        model.addAttribute("properties", propertiesList);
+        return "user/listing-manager";
+    }
+
+    @GetMapping("/update-post/{id}")
+    public String updatePost(Model model, Principal principal, @PathVariable int id) {
+        User user = userService.findUserByEmail(principal.getName());
+        List<Properties> propertiesList = propertyService.getAllByUser(user);
+        model.addAttribute("user", user);
+        for (Properties properties : propertiesList) {
+            if (properties.getPropertyId() == id) {
+                model.addAttribute("property", properties);
+                return "user/update-post";
+            }
+        }
+        return "user/update-post";
+    }
+
+    @PostMapping("/update-post")
+    public String updatePost(@ModelAttribute("property") Properties properties,
+                             @RequestParam("propertyId") int id,
+                             @Param("city") String city,
+                             @Param("district") String district,
+                             @Param("ward") String ward,
+                             @Param("location") String location,
+
+                             @Param("property-type") String propertyType,
+                             @Param("paper") String legal,
+                             @Param("interior") String interior,
+                             @Param("images") ArrayList<MultipartFile> images) throws Exception {
+        Properties oldProperties = propertyService.getById(id);
+        Address address = oldProperties.getAddress();
+
+        if (propertyType != null) {
+            oldProperties.setPropertyType(propertyType);
+        }
+        if (legal != null) {
+            oldProperties.setPropertyLegal(legal);
+        }
+        if (interior != null) {
+            oldProperties.setPropertyInterior(interior);
+        }
+
+        if (city != null) {
+            address.setProvince(city);
+            address.setDistrict(district);
+            address.setWard(ward);
+            address.setStreet(location);
+            addressRepo.save(address);
+        }
+
+        oldProperties.setAddress(address);
+        propertyService.save(oldProperties);
+
+
+//        if (images != null) {
+//            List<Images> imageList = oldProperties.getListImages();
+//            for (MultipartFile file : images) {
+//                String path = imageUploadService.uploadImage(file);
+//                Images image = new Images();
+//                image.setImageUrl(path);
+//                image.setProperty(oldProperties);
+//                imagesRepo.save(image);
+//                imageList.add(image);
+//            }
+//            oldProperties.setListImages(imageList);
+//            propertyService.save(oldProperties);
+//        }
+
+        propertyService.updateProperty(properties);
+
+        return "redirect:/user/listing-manager";
+    }
+
+
+    @GetMapping("/delete-post/{id}")
+    public String deletePost(@PathVariable int id) {
+        propertyService.deleteById(id);
+        return "redirect:/user/listing-manager";
+    }
+
+    @GetMapping("/map")
+    public String getMap() {
+        return "listing/map-api";
     }
 }

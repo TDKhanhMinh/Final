@@ -292,7 +292,8 @@
                         </svg>
                         Đăng mới
                     </a>
-                    <a th:href="@{/user/listing-manager}" class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                    <a th:href="@{/user/listing-manager}"
+                       class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
                        style="min-height: 40px;width: 200px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-list-check" viewBox="0 0 16 16">
@@ -393,11 +394,11 @@
                         </svg>
                         <strong>Hướng dẫn</strong>
                     </div>
-                    <a th:href="@{/listing/post-payment}" class="text-start btn btn-outline-secondary mx-2 choose-info mb-2"
+                    <a class="text-start btn btn-outline-secondary mx-2 choose-info mb-2"
                        style="min-height: 40px;width: 200px;">
                         Hướng dẫn sử dụng
                     </a>
-                    <a th:href="@{/user/map}" class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                    <a class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
                        style="min-height: 40px;width: 200px;">
                         Hướng dẫn thanh toán
                     </a>
@@ -406,183 +407,71 @@
         </ul>
     </div>
 
-    <div class="col-md-1">
 
-    </div>
-
-    <div class="col-md-9" style="padding-top: 120px;">
-        <div class="container-sm" style="width: 90%;">
-            <div class="profile " style="max-width: 75%;">
-                <div class="profile-header">
-                    <div class="profile-cover-photo bg_cover">
-                        <img src="https://png.pngtree.com/thumb_back/fw800/background/20231019/pngtree-exquisite-dark-blue-watercolor-background-premium-texture-with-unparalleled-high-resolution-image_13674889.png"
-                             alt="">
-                    </div>
-                    <div class=" profile-author d-sm-flex flex-row-reverse justify-content-between align-items-end">
-                        <div class="profile-photo">
-
-                            <img style="object-fit: cover;" class="photo-profile rounded-circle"
-                                 th:src="${user.images != null} ? ${user.images.imageUrl} : 'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'"
-                                 alt="Profile Photo"/>
-                        </div>
-                        <div class="profile-name">
-                            <h4 th:text="${user.fullName}" class="name">
-                            </h4>
-                            <p th:text="${user.email}" class="email">
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profile-body">
-                    <div class="profile-title">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mt-2">Thông tin cá nhân</h5>
-                            <button type="button" class="btn btn-secondary mt-1" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                Chỉnh sửa thông tin
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="profile-details">
-                        <div class="single-details-item d-flex flex-wrap">
-                            <div class="details-title">
-                                <h6 class="title">Tên đầy đủ:</h6>
-                            </div>
-                            <div class="details-content media-body">
-                                <p th:text="${user.fullName}">
-                                </p>
-
-                            </div>
-                        </div>
-
-
-                        <div class="single-details-item d-flex flex-wrap">
-                            <div class="details-title">
-                                <h6 class="title">Email:
-                                </h6>
-                            </div>
-                            <div class="details-content media-body">
-                                <p th:text="${user.email}">
-                                </p>
-                            </div>
-                        </div>
-                        <div class="single-details-item d-flex flex-wrap">
-                            <div class="details-title">
-                                <h6 class="title">Số điện thoại:
-                                </h6>
-                            </div>
-                            <div class="details-content media-body">
-                                <p th:text="${user.phone}">
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="profile-title mt-4">
-                        <h5 class="title">Đổi mật khẩu</h5>
-                        <a th:href="@{/user/changePassword}" class="profile-link">Chỉnh sửa
+    <div class="col-md-9" style="padding-top: 120px; background-color: whitesmoke">
+        <div class="container bg-light shadow rounded-3">
+            <h3 class="my-2 py-2">Tin đã đăng</h3>
+            <table th:if="${!properties.isEmpty()}" class="table table-hover mx-2">
+                <thead>
+                <tr class="table-secondary  ">
+                    <th scope="col">Mã tin</th>
+                    <th scope="col">Ảnh</th>
+                    <th scope="col">Tiêu đề</th>
+                    <th scope="col">Ngày đăng</th>
+                    <th class="text-center" scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="property:${properties}">
+                    <td th:text="${property.propertyId}"></td>
+                    <td><img class="rounded-3" th:src="${property.listImages.get(0).imageUrl}"
+                             style="width: 120px; height: 90px"
+                             alt="Property Image"/></td>
+                    <td th:text="${property.propertyTitle}"></td>
+                    <td th:text="${property.contact.datePost}"></td>
+                    <td class="text-center">
+                        <a th:href="@{/user/update-post/{id}(id=${property.propertyId})}" id="updateBtn"
+                           class="btn btn-info btn-sm ">
+                            Chỉnh sửa
                         </a>
-                    </div>
-                    <div class="profile-title mt-3">
-                        <div class="d-flex justify-content-between">
-                            <h5 style="font-size: 17px;" class="mt-2">Ảnh đại diện</h5>
-                            <button type="button" class="btn btn-secondary mt-1" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal1">
-                                Chỉnh sửa ảnh đại diện
-                            </button>
+<!--                        <a th:href="@{/user/delete-post/{id}(id=${property.propertyId})}"-->
+<!--                           class="btn btn-sm btn-danger">Xóa</a>-->
+                        <!--End update category-->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            Xóa bài đăng
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Xóa bài đăng</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Bạn có chắc chắn muốn xóa bài đăng này không ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng
+                                        </button>
+                                        <a th:href="@{/user/delete-post/{id}(id=${property.propertyId})}"
+                                           class="btn btn-primary">Xóa</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h5 class="modal-title " id="exampleModalLabel">Chỉnh sửa thông tin</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/user/update-info}" method="post" th:object="${user}"
-                      enctype="multipart/form-data">
-                    <div data-mdb-input-init class="form-outline mb-2">
-                        <label class="form-label mx-2" for="form3Example1cg"><strong>Họ và tên</strong></label>
-                        <input th:field="*{fullName}" type="text" name="fullName" id="form3Example1cg"
-                               class="form-control rounded-pill"/>
-
-                    </div>
-
-                    <div data-mdb-input-init class="form-outline mb-2">
-                        <label class="form-label mx-2" for="form3Example3cg"><strong>
-                            Email</strong></label>
-                        <input th:field="*{email}" type="email" name="email" id="form3Example3cg"
-                               class="form-control rounded-pill"/>
-
-                    </div>
-
-                    <div data-mdb-input-init class="form-outline mb-2">
-                        <label class="form-label mx-2" for="form3Example4cg1"><strong>Số điện
-                            thoại</strong></label>
-                        <input th:field="*{phone}" type="number" name="phone" id="form3Example4cg1"
-                               class="form-control rounded-pill"/>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" value="Submit" class="btn btn-primary">Lưu</button>
-                    </div>
-
-                </form>
-
-            </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
         </div>
     </div>
-</div>
-
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h5 class="modal-title " id="exampleModalLabel1">Chỉnh sửa thông tin</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/user/update-image}" method="post"
-                      enctype="multipart/form-data">
-                    <div class="container-sm border place-address">
-                        <h5 class="py-3 mx-2"><strong>Hình ảnh</strong></h5>
-                        <!-- Khu vực hiển thị hình ảnh đã tải lên -->
-                        <div class="uploaded-images" id="uploadedImages"></div>
-
-                        <!-- Khu vực tải ảnh -->
-                        <div class="upload-area" id="uploadArea">
-                            <p>Kéo thả ảnh vào đây <br> hoặc</p>
-                            <button type="button" class="upload-btn" id="uploadBtn">Thêm ảnh lên từ thiết
-                                bị
-                            </button>
-                            <input type="file" id="fileInput" name="images" class="form-control" multiple
-                                   style="display:none;">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" value="Submit" class="btn btn-primary">Lưu</button>
-                    </div>
-
-                </form>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
 </div>
 
 
@@ -602,47 +491,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
 
-<script>
-    const uploadBtn = document.getElementById('uploadBtn');
-    const fileInput = document.getElementById('fileInput');
-    const uploadedImages = document.getElementById('uploadedImages');
 
-    // Click nút thêm ảnh
-    uploadBtn.addEventListener('click', () => fileInput.click());
-
-    // Khi người dùng chọn ảnh
-    fileInput.addEventListener('change', (event) => {
-        const files = event.target.files;
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const imageItem = document.createElement('div');
-                imageItem.classList.add('image-item');
-                imageItem.innerHTML = `
-                            <img src="${e.target.result}" alt="Uploaded Image">
-                            <button type="button" class="edit-btn">Thêm mô tả</button>
-                        `;
-                uploadedImages.appendChild(imageItem);
-            };
-            reader.readAsDataURL(file);
-        });
-    });
-
-    // Chỉnh sửa mô tả
-    document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('edit-btn')) {
-            const description = prompt("Nhập mô tả cho ảnh:");
-            if (description) {
-                const descriptionElement = document.createElement('p');
-                descriptionElement.textContent = description;
-                descriptionElement.style.fontSize = '12px';
-                descriptionElement.style.marginTop = '4px';
-                event.target.parentElement.appendChild(descriptionElement);
-                event.target.textContent = 'Chỉnh sửa mô tả';
-            }
-        }
-    });
-</script>
 </body>
 
 </html>

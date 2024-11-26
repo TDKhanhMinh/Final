@@ -39,7 +39,7 @@ public class UserConfig {
                         .loginPage("/user/login")
                         .loginProcessingUrl("/login")
                         .successHandler(userSuccessHandler)
-                        .failureUrl("/login?error=true")
+                        .failureUrl("/user/login?error=true")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")

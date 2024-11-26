@@ -21,8 +21,11 @@ public class Contact {
     private String fullName;
     private String email;
     private String phone;
+
+
     private String datePost;
     private String dateEnd;
+    private double payment;
 
     @OneToOne
     @JoinColumn(name = "contact_property_id")

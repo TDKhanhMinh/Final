@@ -32,6 +32,8 @@ public class RentalHistory {
 
     @Column(name = "source")
     private String source;
+
+
     @ManyToOne
     @JoinColumn(name = "properties_id")
     private Properties properties;

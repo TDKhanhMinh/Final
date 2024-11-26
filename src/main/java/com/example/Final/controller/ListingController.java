@@ -101,8 +101,9 @@ public class ListingController {
                                  Principal principal) {
 
         propertyService.updateInfo(propertyId, type, legal, interior, squareMeters, price, floatFloors, bedrooms, bathrooms);
-        if (propertyService.getById(propertyId).getPropertyType().equals("rent")) {
+        if (propertyService.getById(propertyId).getPropertyTypeTransaction().equals("rent")) {
             rentalHistoryService.createRentalHistory(propertyService.getById(propertyId));
+
         } else {
             salesHistoryService.createSalesHistory(propertyService.getById(propertyId));
         }
@@ -135,6 +136,7 @@ public class ListingController {
 
         properties.setUser(userService.findUserByEmail(principal.getName()));
         properties.setContact(contactRepo.save(contact));
+        properties.setAvailable(true);
         propertyService.save(properties);
         model.addAttribute("property", properties);
         return "listing/post-image";
@@ -155,6 +157,7 @@ public class ListingController {
             imageList.add(image);
         }
         properties.setListImages(imageList);
+
         propertyService.updateImages(properties);
 
         return "redirect:/home/home ";
@@ -177,9 +180,16 @@ public class ListingController {
                 .toList();
         model.addAttribute("randomProperty",random);
         model.addAttribute("property", property);
+
         model.addAttribute("historyListing", propertyService.getByHistoryListing(historyListingService.getByUser(userService.findUserByEmail(principal.getName()))));
         //model.addAttribute("historyListing", historyListingService);
         return "listing/listing-info";
+    }
+
+
+    @GetMapping("/post-payment")
+    public String postPayment(){
+        return "/listing/post-payment";
     }
 
 }

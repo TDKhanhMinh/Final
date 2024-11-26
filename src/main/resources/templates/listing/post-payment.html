@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo bài đăng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/access/css/home.css}">
+</head>
+<style>
+    .place-address {
+        border-radius: 16px;
+        padding: 16px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+
+    .uploaded-images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 16px;
+    }
+
+    .image-item {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #f3f3f3;
+    }
+
+    .image-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .edit-btn {
+        position: absolute;
+        bottom: 4px;
+        left: 4px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 2px 6px;
+        font-size: 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .upload-area {
+        text-align: center;
+        margin-top: 16px;
+        padding: 16px;
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        background-color: #fafafa;
+    }
+
+    .upload-area p {
+        margin-bottom: 8px;
+    }
+
+    .upload-btn {
+        background: #007bff;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .container-fix-60 {
+        max-width: 60%;
+        margin: auto;
+    }
+
+    .place-address-choice.selected {
+        background-color: #dcfeff;
+        border: 1px solid black;
+    }
+
+    .place-address-choice:hover {
+        cursor: pointer;
+    }
+
+    .choose-hover input[type="radio"]:checked+span {
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+    }
+
+    .choose-hover:hover {
+        cursor: pointer;
+        background-color: rgb(229, 252, 252);
+    }
+
+    input[type="radio"]:checked+.choose-option {
+        background-color: #dcfeff;
+        color: white;
+        border-color: rgb(0, 0, 0);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+</style>
+
+<body>
+    <th:block th:insert="~{ home/header :: header}"></th:block>
+
+    <div class="container" style="padding-top: 100px;">
+        <div class="my-4">
+            <div class="d-flex justify-content-between">
+                <div class="step-1">
+                    <h4 class=""><strong>Thanh toán</strong></h4>
+                    <span><strong>Bước 4: Thanh toán</strong></span>
+                </div>
+                <div class="exit">
+                    <a th:href="@{/home/home}" class="btn btn-outline-dark rounded-pill btn-lg fw-light">Thoát</a>
+                </div>
+            </div>
+            <hr>
+            <form th:action="@{/listing/complete}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="propertyId">
+
+                <div class="container-sm border place-address container-fix-60">
+                    <h4 class="pb-4">Cấu hình tin đăng</h4>
+                    <h6 class="mx-4 mb-4">Chọn loại tin</h6>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="container-sm border shadow rounded-3 border border-dark choose-hover">
+                                <div class="text-center my-3">
+                                    <h6>Tin thường</h6>
+                                    <span style="font-size: 12px;">Từ <strong>2000</strong> đ/ngày</span>
+                                    <div class="h4 mt-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                                            <path
+                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                                        </svg>
+                                        x2
+                                    </div>
+                                    <span style="font-size: 12px;">lượt xem tin</span>
+                                </div>
+
+                                <div class="text-center my-3">
+                                    <input type="radio" name="ad-type" id="option" value="Tin thường" hidden>
+                                    <label for="option" class="choose-option border border-dark rounded-3 btn">
+                                        <span class="mx-3 chosen">Chọn</span>
+                                    </label>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="container-sm border shadow rounded-3 border border-dark choose-hover">
+                                <div class="text-center my-3">
+                                    <h6 style="color: grey;">VIP Bạc</h6>
+                                    <span style="font-size: 12px;">Từ <strong>40.000</strong> đ/ngày</span>
+                                    <div class="h4 mt-4" style="color: grey;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                                            <path
+                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                                        </svg>
+                                        x10
+                                    </div>
+                                    <span style="font-size: 12px;">lượt xem tin</span>
+                                </div>
+
+                                <div class="text-center my-3">
+                                    <input type="radio" name="ad-type" id="option1" value="VIP Bạc" hidden>
+                                    <label for="option1" class="choose-option border border-dark rounded-3 btn">
+                                        <span class="mx-3 chosen">Chọn</span>
+                                    </label>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="container-sm border shadow rounded-3 border border-dark choose-hover">
+                                <div class="text-center my-3">
+                                    <h6 style="color: goldenrod;">VIP Vàng</h6>
+                                    <span style="font-size: 12px;">Từ <strong>40.000</strong> đ/ngày</span>
+                                    <div class="h4 mt-4" style="color: goldenrod;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                                            <path
+                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                                        </svg>
+                                        x10
+                                    </div>
+                                    <span style="font-size: 12px;">lượt xem tin</span>
+                                </div>
+
+                                <div class="text-center my-3">
+                                    <input type="radio" name="ad-type" id="option2" value="VIP Vàng" hidden>
+                                    <label for="option2" class="choose-option border border-dark rounded-3 btn">
+                                        <span class="mx-3 chosen">Chọn</span>
+                                    </label>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="container-sm border shadow rounded-3 border border-dark choose-hover">
+                                <div class="text-center my-3">
+                                    <h6 style="color: rgb(0, 172, 172);">VIP Kim Cương</h6>
+                                    <span style="font-size: 12px;">Từ <strong>40.000</strong> đ/ngày</span>
+                                    <div class="h4 mt-4" style="color: rgb(0, 172, 172);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                                            <path
+                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                                        </svg>
+                                        x10
+                                    </div>
+                                    <span style="font-size: 12px;">lượt xem tin</span>
+                                </div>
+
+                                <div class="text-center my-3">
+                                    <input type="radio" name="ad-type" id="option3" value="VIP Kim Cương" hidden>
+                                    <label for="option3" class="choose-option border border-dark rounded-3 btn">
+                                        <span class="mx-3 chosen">Chọn</span>
+                                    </label>
+                                </div>
+
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <!-- --------- -->
+                    <h6 class="mx-4 mb-4">Số ngày đăng tin</h6>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div
+                                class="border choose-hover border-dark container-sm place-address-choice d-flex align-items-center rounded-2 shadow justify-content-start mb-4">
+                                <input type="radio" value="7" id="sell2" name="option" class="mx-2">
+                                <div class="my-2">
+                                    <h6 class="mt-2">7 ngày</h6>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-3">
+                            <div
+                                class="border choose-hover border-dark container-sm place-address-choice d-flex align-items-center rounded-2 shadow justify-content-start mb-4">
+                                <input type="radio" value="14" id="rent" name="option" class="mx-2">
+                                <div class="my-2">
+                                    <h6 class="mt-2">14 ngày</h6>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div
+                                class="border choose-hover border-dark container-sm place-address-choice d-flex align-items-center rounded-2 shadow justify-content-start mb-4">
+                                <input type="radio" value="21" id="sell" name="option" class="mx-2">
+                                <div class="my-2">
+                                    <h6 class="mt-2">21 ngày</h6>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div
+                                class="border choose-hover border-dark container-sm place-address-choice d-flex align-items-center rounded-2 shadow justify-content-start mb-4">
+                                <input type="radio" value="30" id="sell1" name="option" class="mx-2">
+                                <div class="my-2">
+                                    <h6 class="mt-2">30 ngày</h6>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-sm border place-address container-fix-60 mt-4">
+                    <h4 class="pb-2">Thanh toán</h4>
+
+                    <div class="d-flex m-2 justify-content-between">
+                        <div class="">Loại tin</div>
+                        <div class="post-type"><strong>Tin thường</strong></div>
+                    </div>
+                    <!-- <div class="d-flex m-2 justify-content-between">
+                        <div class="">Đơn giá / ngày</div>
+                        <div class=""><strong>2000 đ</strong></div>
+                    </div> -->
+
+                    <div class="d-flex m-2 justify-content-between">
+                        <div class="">Thời gian đăng tin</div>
+                        <div class=""><strong id="selected-value">Chưa chọn</strong></div>
+                    </div>
+                    <hr>
+                    <div class="d-flex m-2 justify-content-between">
+                        <div class="">Phí đăng tin</div>
+                        <div class=""><strong>27.000 đ</strong></div>
+                    </div>
+                    <div class="d-flex m-2 justify-content-between">
+                        <div class="">Khuyến mãi</div>
+                        <div class=""><strong>0 đ</strong></div>
+                    </div>
+                    <hr>
+                    <!-- <div class="d-flex mx-2 justify-content-between">
+                        <div class="">Tạm tính</div>
+                        <div class="fs-5"><strong>189.000 đ</strong></div>
+                    </div> -->
+
+                    <div class="container-sm mt-4 d-flex justify-content-end container-fix-80">
+                        <button type="submit" value="Submit" class="btn btn-primary rounded-pill">Thanh toán và đăng
+                            tin</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <th:block th:insert="~{ home/footer :: footer}"></th:block>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+
+    <script>
+
+        document.querySelectorAll('.place-address-choice').forEach(div => {
+
+            div.addEventListener('click', () => {
+                document.querySelectorAll('.place-address-choice').forEach(item => {
+                    item.classList.remove('selected');
+
+
+                });
+
+                div.classList.add('selected');
+
+
+                const radioInput = div.querySelector('input[type="radio"]');
+                if (radioInput) {
+
+                    radioInput.checked = true;
+
+                    const h6Element = div.querySelector('h6');
+                    if (h6Element) {
+                        h6Element.textContent = radioInput.value + " ngày";
+                    }
+
+
+                    const selectedValueElement = document.getElementById('selected-value');
+                    if (selectedValueElement) {
+                        selectedValueElement.textContent = radioInput.value + " ngày";
+                    }
+                }
+            });
+        });
+
+
+    </script>
+    <script>
+
+        const radioButtons = document.querySelectorAll('input[name="ad-type"]');
+        const postTypeElement = document.querySelector('.post-type strong');
+
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.checked) {
+                    postTypeElement.textContent = radio.value;
+
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

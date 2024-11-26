@@ -17,8 +17,8 @@ import java.sql.Date;
 public class SalesHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "history_id")
-    private int transactionId;
+    @Column(name = "sale_history_id")
+    private int saleListingId;
 
     @Column(name = "price")
     private double price;
@@ -32,7 +32,7 @@ public class SalesHistory {
     @Column(name = "source")
     private String source;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "properties_id")
     private Properties properties;
 

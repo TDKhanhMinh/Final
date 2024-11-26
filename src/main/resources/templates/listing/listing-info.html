@@ -478,13 +478,19 @@
             <td th:text="${item.status}">Otto</td>
             <td th:text="${item.source}">@mdo</td>
         </tr>
-
+        <tr th:each="item:${property.salesHistories}">
+            <td th:text="${item.createDate}">Mark</td>
+            <td th:text="${item.price}">Mark</td>
+            <td th:text="${item.status}">Otto</td>
+            <td th:text="${item.source}">@mdo</td>
+        </tr>
         </tbody>
     </table>
 </div>
 
-
 <!--END LỊCH SỬ GIÁ-->
+
+
 <!-- GỢI Ý CHO BẠN -->
 <div class="container-fluid mt-4">
     <h4 class="mx-4 pt-4">
@@ -600,7 +606,6 @@
         </button>
     </div>
 </div>
-
 
 <!--END LỊCH SỬ ĐÃ XEM-->
 

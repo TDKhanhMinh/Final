@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>User information</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"
+        integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/access/css/update-post.css}">
+
+</head>
+
+<body class="bg-gradient-primary">
+    <th:block th:insert="~{ home/header :: header}"></th:block>
+    <div class="row d-flex flex-nowrap" style="padding-left: 18px;">
+
+        <div class="col-md-3" style="width: 20%;">
+            <ul th:fragment="user-sidebar " class="navbar-nav border border-end " id="accordionSidebar"
+                style="padding-top: 100px; list-style: none;">
+                <div class="contact rounded-2" style="background-color: whitesmoke;">
+                    <div class="contact-info"></div>
+                    <img class="rounded-circle m-2" style="object-fit: cover; width: 50px; height: 50px;"
+                        th:src="${user.images != null} ? ${user.images.imageUrl} : 'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'"
+                        alt="photo">
+                    <span th:text="${user.fullName}" style="font-size: 16px;" class=" fw-bold mt-1 text-dark">Nguyễn
+                        Trường
+                        Nam</span>
+
+                </div>
+                <hr class=" border border-1 border-dark ">
+                <li style="height: 200px;">
+                    <div class="container border rounded-2" style="width: 95%;background-color: whitesmoke;">
+                        <h6 class="py-2">Số dư tài khoản</h6>
+                        <div class=" d-flex justify-content-between  my-2">
+                            <span>TK Chính</span>
+                            <span>0 VNĐ</span>
+                        </div>
+                        <div class=" d-flex justify-content-between my-2">
+                            <span>TK Khuyến mãi</span>
+                            <span>0 VNĐ</span>
+                        </div>
+                        <div class="d-flex justify-content-center my-2 mt-4">
+                            <div class="btn btn-outline-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-window-plus" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1M4 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                                    <path
+                                        d="M0 4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4a.5.5 0 0 1-1 0V7H1v5a1 1 0 0 0 1 1h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-2zm1 2h13V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1z" />
+                                    <path
+                                        d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5" />
+                                </svg>
+                                Nạp tiền
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="" style="min-height: 48px;">
+                    <div class="mx-4 text-decoration-none mb-4" style="min-width: 180px;">
+                        <div style="min-height: 42px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                <path
+                                    d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                                <path
+                                    d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                            </svg>
+                            <strong>Quản lý bài đăng</strong>
+                        </div>
+                        <a th:href="@{/listing/post-address}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                            </svg>
+                            Đăng mới
+                        </a>
+                        <a th:href="@{/user/listing-manager}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-list-check" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                            </svg>
+                            Danh sách tin
+                        </a>
+                    </div>
+                </li>
+                <li class="" style="min-height: 48px;">
+                    <div class="mx-4 text-decoration-none mb-4" style="min-width: 180px;">
+                        <div style="min-height: 42px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-person-fill-gear" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4m9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0" />
+                            </svg>
+                            <strong>Quản lý tài khoản</strong>
+                        </div>
+                        <a th:href="@{/user/user-info}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-gear" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
+                                <path
+                                    d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
+                            </svg>
+                            Chỉnh sửa thông tin
+                        </a>
+                        <a th:href="@{/user/changePassword}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-person-lock" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m0 5.996V14H3s-1 0-1-1 1-4 6-4q.845.002 1.544.107a4.5 4.5 0 0 0-.803.918A11 11 0 0 0 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664zM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1" />
+                            </svg>
+                            Đổi mật khẩu
+                        </a>
+                    </div>
+                </li>
+                <li class="" style="min-height: 48px;">
+                    <div class="mx-4 text-decoration-none mb-4" style="min-width: 180px;">
+                        <div style="min-height: 42px;">
+                            <svg font-size="24px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.0001 5.63636C13.0042 5.63636 13.8182 4.82233 13.8182 3.81818C13.8182 2.81403 13.0042 2 12.0001 2C10.9959 2 10.1819 2.81403 10.1819 3.81818C10.1819 4.82233 10.9959 5.63636 12.0001 5.63636Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="square">
+                                </path>
+                                <path
+                                    d="M20.1819 10.1818C21.1861 10.1818 22.0001 9.36774 22.0001 8.36359C22.0001 7.35944 21.1861 6.54541 20.1819 6.54541C19.1778 6.54541 18.3638 7.35944 18.3638 8.36359C18.3638 9.36774 19.1778 10.1818 20.1819 10.1818Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="square">
+                                </path>
+                                <path
+                                    d="M3.81818 10.1818C4.82233 10.1818 5.63636 9.36774 5.63636 8.36359C5.63636 7.35944 4.82233 6.54541 3.81818 6.54541C2.81403 6.54541 2 7.35944 2 8.36359C2 9.36774 2.81403 10.1818 3.81818 10.1818Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="square">
+                                </path>
+                                <path
+                                    d="M9.85698 16.9995L6.73805 18.8002C6.06987 19.0865 5.63623 19.7438 5.63623 20.4715V21.9997H18.3635V20.4715C18.3635 19.7443 17.9299 19.087 17.2617 18.8002L14.1427 16.9995"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></path>
+                                <path
+                                    d="M12 17.7141C10.4221 17.7141 9.14282 16.2927 9.14282 14.5395V13.7459C9.14282 11.9927 10.4221 10.5713 12 10.5713C13.5778 10.5713 14.8571 11.9927 14.8571 13.7459V14.5395C14.8571 16.2927 13.5778 17.7141 12 17.7141Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="square">
+                                </path>
+                            </svg>
+                            <strong>Gói hội viên</strong>
+                        </div>
+                        <a class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-bag" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                            </svg>
+                            Đăng ký mua
+                        </a>
+
+                    </div>
+                <li class="" style="min-height: 48px;">
+                    <div class="mx-4 text-decoration-none" style="min-width: 180px;">
+                        <div style="min-height: 42px;">
+                            <svg style="margin-left: 8px" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z" />
+                                <path
+                                    d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
+                                <path
+                                    d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
+                            </svg>
+                            <strong>Hướng dẫn</strong>
+                        </div>
+                        <a class="text-start btn btn-outline-secondary mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            Hướng dẫn sử dụng
+                        </a>
+                        <a class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            Hướng dẫn thanh toán
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-md-9 pb-2 rounded-3" style="padding-top: 120px; background-color: whitesmoke">
+            <div class="container bg-light shadow rounded-3">
+                <h4 class="my-2 py-2">Chỉnh sửa bài đăng</h4>
+
+
+
+                <form class="pb-4" th:object="${property}" action="#" th:action="@{/user/update-post}" method="POST"
+                    enctype="multipart/form-data">
+                    <input type="hidden" th:value="${property.propertyId}" name="propertyId">
+                    <div class="container-sm border place-address" style="width: 80%;">
+                        <h5 class="py-3 mx-2"><strong>Nhu cầu</strong></h5>
+                        <div class="container-sm d-flex flex-nowrap justify-content-between">
+                            <div class="border rounded-pill place-address-choice d-flex align-items-center justify-content-start mb-4"
+                                style="width: 350px;height: 50px;">
+                                <input th:field="*{propertyTypeTransaction}" type="radio" value="sell" id="sell"
+                                    name="option" class="mx-2">
+                                <i class=" mx-2 fa-solid fa-tag"></i>Bán
+                            </div>
+                            <div class="border rounded-pill place-address-choice d-flex align-items-center justify-content-start mb-4"
+                                style="width: 350px;height: 50px;">
+                                <input th:field="*{propertyTypeTransaction}" type="radio" value="rent" id="rent"
+                                    name="option" class="mx-2">
+                                <i class="mx-2 fa-solid fa-key"></i> Cho thuê
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-sm border place-address my-4" style="width: 80%;">
+                        <h5 class="py-3 mx-2"><strong>Địa chỉ bất động sản</strong></h5>
+                        <div class="container d-flex flex-nowrap mb-2">
+                            <div class="province-district-ward border rounded-3">
+                                <select th:field="*{address.province}" class="text-start btn" name="city" id="city"
+                                    style="width: 235px">
+                                    <option value="">Tỉnh/Thành phố</option>
+                                </select>
+                            </div>
+                            <div class="province-district-ward border rounded-3 mx-2">
+                                <select  class="text-start btn" name="district"
+                                    id="district" style="width: 235px">
+                                    <option value="">Quận/Huyện</option>
+                                </select>
+                            </div>
+                            <div class="province-district-ward border rounded-3">
+                                <select  class="text-start btn" name="ward" id="ward"
+                                    style="width: 235px">
+                                    <option value="">Phường/Xã</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label for="location" class="m-2">Địa chỉ cụ thể</label>
+                        <input type="text" value="" id="location" name="location"
+                            class="form-control mx-4 mb-4 location" style="max-width: 725px;"
+                            placeholder="Địa chỉ cụ thể">
+                        <label for="location" class="m-2">Địa chỉ hiển thị trên tin</label>
+                        <input
+                            th:value="${property.address.street}+', '+${property.address.ward}+', '+ ${property.address.district}+', '+${property.address.province}"
+                            type="text" class="form-control mx-4 mb-4 location" style="max-width: 725px;"
+                            placeholder="Địa chỉ cụ thể" readonly>
+                    </div>
+
+                    <div class="container-sm border place-address my-4 container-fix-80">
+                        <h5 class="py-3 mx-2"><strong>Tiêu đề và Mô tả</strong></h5>
+                        <div class="container">
+                            <h6>Tiêu đề</h6>
+                            <div class="input-group">
+                                <textarea th:field="*{propertyTitle}" name="title" class="form-control description"
+                                    aria-label="With textarea"
+                                    placeholder="Mô tả ngắn gọn về loại hình bất đọng sản, diện tích, địa chỉ"></textarea>
+                            </div>
+                        </div>
+                        <div class="container my-4">
+                            <h6>Mô tả</h6>
+                            <div class="input-group">
+                                <textarea th:field="*{propertyDescription}" name="description"
+                                    class="form-control description" aria-label="With textarea"
+                                    placeholder="Mô tả chi tiết về: loại hình bất đọng sản, vị trí, diện tích, tiện ích, tình trạng nội thất, ..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-sm border place-address container-fix-80">
+                        <h5 class="py-3 mx-2"><strong>Thông tin chính</strong></h5>
+                        <div class="container mb-4">
+                            <h6>Loại BĐS</h6>
+                            <select class="text-start btn btn-outline-secondary rounded-pill " name="property-type"
+                                id="type" style="width:100%">
+                                <option th:text="*{propertyType}">-- Chọn loại BĐS --</option > 
+                                <option value="Căn hộ">Căn hộ chung cư</option>
+                                <option value="Nhà riêng">Nhà riêng</option>
+                                <option value="Biệt thự">Nhà biệt thự</option>
+                                <option value="Nhà mặt phố">Nhà mặt phố</option>
+                                <option value="Nhà trọ">Nhà trọ/Phòng trọ</option>
+                            </select>
+                        </div>
+                        <div class="container my-4">
+                            <h6>Diện tích</h6>
+                            <div class="d-flex flex-nowrap">
+                                <input th:field="*{squareMeters}" name="square-meters" type="number"
+                                    class="form-control" placeholder="Nhập diện tích">
+                                <div class="btn rounded-pill option-unit "> m²</div>
+                            </div>
+                        </div>
+                        <div class="container my-4">
+                            <h6>Mức giá</h6>
+                            <div class="d-flex flex-nowrap">
+                                <input th:field="*{propertyPrice}" name="price" type="number" class="form-control "
+                                    placeholder="Nhập giá">
+                                <div class="btn rounded-pill option-unit"> VNĐ</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-sm border place-address my-4 container-fix-80">
+                        <h6 class="py-3 mx-2"><strong>Thông tin khác</strong></h6>
+                        <div class="container">
+                            <h6>Giấy tờ pháp lý</h6>
+                            <select class="text-start btn btn-outline-secondary rounded-pill mb-4" name="paper"
+                                id="paper" style="width:100%">
+                                <option th:text="*{propertyLegal}">-- Chọn giấy tờ pháp lý --</option>
+                                <option value="Sổ đỏ/Sổ hồng">Sổ đỏ/Sổ hồng</option>
+                                <option value="Hợp đồng mua bán">Hợp đồng mua bán</option>
+                                <option value="Đang chờ sổ">Đang chờ sổ</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                        </div>
+                        <div class="container">
+                            <h6>Nội thất</h6>
+                            <select class="text-start btn btn-outline-secondary rounded-pill" name="interior" id="house"
+                                style="width:100%">
+                                <option th:text="*{propertyInterior}">-- Chọn nội thất --</option>
+                                <option value="Đầy đủ">Đầy đủ</option>
+                                <option value="Cơ bản">Cơ bản</option>
+                                <option value="Không">Không có nội thất</option>
+                            </select>
+                        </div>
+                        <div class="container my-4">
+                            <h6>Số tầng</h6>
+                            <div class="">
+                                <input th:field="*{propertyFloor}" name="floors" type="number" class="form-control "
+                                    placeholder="Nhập số tầng">
+                            </div>
+                        </div>
+                        <div class="container my-4">
+                            <h6>Số phòng ngủ</h6>
+                            <div class="">
+                                <input th:field="*{bedrooms}" name="bedroom" type="number" class="form-control "
+                                    placeholder="Nhập số phòng ngủ">
+                            </div>
+                        </div>
+                        <div class="container my-4">
+                            <h6>Số phòng tắm/vệ sinh</h6>
+                            <div class="">
+                                <input th:field="*{bathrooms}" name="bathroom" type="number" class="form-control"
+                                    placeholder="Nhập số phòng tắm/vệ sinh">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-sm border place-address container-fix-80">
+                        <h5 class="py-3 mx-2"><strong>Hình ảnh</strong></h5>
+                        <span class="mx-4">- Đăng tối thiểu 3 hình ảnh, tối đa 10 với tất cả các loại tin</span>
+                        <!-- Khu vực hiển thị hình ảnh đã tải lên -->
+                        <div class="uploaded-images" id="uploadedImages">
+                            <div th:each="image:*{listImages}" class="row d-flex flex-nowrap">
+                                <img class="image-item" th:src="${image.imageUrl}" style="object-fit: cover">
+                            </div>
+                        </div>
+
+                        <!-- Khu vực tải ảnh -->
+                        <div class="upload-area" id="uploadArea">
+                            <p>Kéo thả ảnh vào đây <br> hoặc</p>
+                            <button type="button" class="upload-btn" id="uploadBtn">Thêm ảnh lên từ thiết bị</button>
+                            <input type="file" id="fileInput" name="images" class="form-control" multiple
+                                style="display:none;">
+                        </div>
+                    </div>
+                    <div class="container-sm border place-address container-fix-80 my-4">
+                        <h5 class="py-3 mx-2"><strong>Thông tin liên hệ</strong></h5>
+                        <div class="container">
+                            <h6>Họ và tên</h6>
+                            <input th:field="*{contact.fullName}" type="text" name="contact-user" id=""
+                                class="form-control" placeholder="Nhập họ và tên">
+                        </div>
+                        <div class="container my-4">
+                            <h6>Email</h6>
+                            <div class="">
+                                <input th:field="*{contact.email}" type="email" class="form-control"
+                                    name="contact-email" placeholder="Nhập email">
+                            </div>
+                        </div>
+                        <div class="container my-4">
+                            <h6>Số điện thoại</h6>
+                            <div class="">
+                                <input th:field="*{contact.phone}" type="text" name="contact-phone" class="form-control"
+                                    placeholder="Nhập số điện thoại">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-sm my-4 d-flex justify-content-end container-fix-80">
+                        <button type="submit" value="Submit" class="btn btn-primary rounded-pill">Tiếp theo</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:insert="~{ home/footer :: footer}"></th:block>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        referrerpolicy="no-referrer"></script>
+    <script th:src="@{/access/js/apiprovince.js}"></script>
+    <script>document.querySelectorAll('.place-address-choice').forEach(div => {
+            div.addEventListener('click', () => {
+                document.querySelectorAll('.place-address-choice').forEach(item => {
+                    item.classList.remove('selected');
+                });
+
+                const radioInput = div.querySelector('input[type="radio"]');
+                if (radioInput) {
+                    radioInput.checked = true;
+                    div.classList.add('selected');
+                }
+            });
+        });
+
+    </script>
+    <script>
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInput = document.getElementById('fileInput');
+        const uploadedImages = document.getElementById('uploadedImages');
+
+        // Click nút thêm ảnh
+        uploadBtn.addEventListener('click', () => fileInput.click());
+
+        // Khi người dùng chọn ảnh
+        fileInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const imageItem = document.createElement('div');
+                    imageItem.classList.add('image-item');
+                    imageItem.innerHTML = `
+                    <img src="${e.target.result}" alt="Uploaded Image">
+<!--                    <button type="button" class="edit-btn">Thêm mô tả</button>-->
+                `;
+                    uploadedImages.appendChild(imageItem);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

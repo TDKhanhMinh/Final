@@ -54,19 +54,19 @@ public class Properties {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Images> listImages;
 
-    @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL)
     private Contact contact;
 
-    @OneToMany(mappedBy = "properties", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "properties", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RentalHistory> rentalHistories;
 
-    @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL)
-    private SalesHistory salesHistories;
+    @OneToMany(mappedBy = "properties", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SalesHistory> salesHistories;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "history_list_id")
     private HistoryListing historyListing;
 }
