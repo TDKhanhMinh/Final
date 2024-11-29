@@ -22,206 +22,7 @@
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    <style>
-        .profile .profile-header .profile-cover-photo img {
-            width: 100%;
-            height: 240px;
-            border-radius: 8px;
-        }
-
-        .bg_cover {
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            width: 100%;
-            height: 100%;
-        }
-
-        .profile .profile-header .profile-author {
-            padding: 20px 32px 32px;
-            position: relative;
-            z-index: 9;
-            margin-top: -80px;
-        }
-
-        .profile .profile-title {
-            position: relative;
-            background-color: #F2F2F2;
-            height: 48px;
-            padding: 0 16px;
-            border-radius: 8px;
-        }
-
-        .profile .profile-title .title {
-            line-height: 48px;
-            color: #000;
-            font-weight: 500;
-            font-size: 16px;
-        }
-
-
-        .profile .profile-details .single-details-item {
-            padding: 8px 16px 0;
-        }
-
-        .profile .profile-details .single-details-item .details-title {
-            width: 145px;
-            margin-top: 8px;
-        }
-
-        .profile .profile-details .single-details-item .details-title .title {
-            font-size: 14px;
-            line-height: 22px;
-            font-weight: 400;
-            color: #4C4C4C;
-        }
-
-        .profile .profile-details .single-details-item .details-content {
-            margin-top: 8px;
-        }
-
-        .profile .profile-details .single-details-item .details-content p {
-            font-size: 16px;
-            line-height: 22px;
-            color: #000;
-            font-weight: 400;
-        }
-
-        .profile .profile-title {
-            position: relative;
-            background-color: #F2F2F2;
-            height: 48px;
-            padding: 0 16px;
-            border-radius: 8px;
-        }
-
-        .profile .profile-title .title {
-            line-height: 48px;
-            color: #000;
-            font-weight: 500;
-            font-size: 16px;
-        }
-
-        .profile .profile-title .profile-link {
-            font-size: 16px;
-            text-decoration: none;
-            line-height: 24px;
-            font-weight: 700;
-            color: #542DED;
-            position: absolute;
-            top: 50%;
-            right: 16px;
-            transform: translateY(-50%);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .profile .single-card-info {
-            padding: 16px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-            margin-top: 16px;
-            border-radius: 8px;
-            align-items: center;
-        }
-
-        .profile .single-card-info .card-info {
-            padding-left: 16px;
-        }
-
-        .profile .single-card-info .card-info .card-name {
-            font-size: 16px;
-            line-height: 22px;
-            font-weight: 400;
-            color: #000;
-        }
-
-        .profile .single-card-info .card-info .card-number {
-            font-size: 14px;
-            line-height: 20px;
-            font-weight: 400;
-            color: #4C4C4C;
-            margin-top: 5px;
-        }
-
-        .profile .single-card-info .card-info .card-number span {
-            margin-left: 8px;
-        }
-
-        .profile .profile-header .profile-author .profile-photo .photo-profile {
-            width: 160px;
-            height: 150px;
-            border-radius: 50%;
-        }
-
-        .place-address {
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-        }
-
-        .uploaded-images {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .image-item {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #f3f3f3;
-        }
-
-        .image-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .edit-btn {
-            position: absolute;
-            bottom: 4px;
-            left: 4px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 2px 6px;
-            font-size: 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .upload-area {
-            text-align: center;
-            margin-top: 16px;
-            padding: 16px;
-            border: 2px dashed #ccc;
-            border-radius: 8px;
-            background-color: #fafafa;
-        }
-
-        .upload-area p {
-            margin-bottom: 8px;
-        }
-
-        .upload-btn {
-            background: #007bff;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .container-fix-60 {
-            max-width: 60%;
-            margin: auto;
-        }
-    </style>
+<link rel="stylesheet" th:href="@{/access/css/use-info.css}">
 </head>
 
 <body class="bg-gradient-primary">
@@ -247,11 +48,11 @@
                     <h6 class="py-2">Số dư tài khoản</h6>
                     <div class=" d-flex justify-content-between  my-2">
                         <span>TK Chính</span>
-                        <span>0 VNĐ</span>
+                        <span class="priceSale" th:text="${user.accountBalance}">0 VNĐ</span>
                     </div>
                     <div class=" d-flex justify-content-between my-2">
                         <span>TK Khuyến mãi</span>
-                        <span>0 VNĐ</span>
+                        <span class="priceSale">0 VNĐ</span>
                     </div>
                     <div class="d-flex justify-content-center my-2 mt-4">
                         <div class="btn btn-outline-success">
@@ -601,7 +402,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
-
+<script th:src="@{/access/js/price-format.js}"></script>
 <script>
     const uploadBtn = document.getElementById('uploadBtn');
     const fileInput = document.getElementById('fileInput');
@@ -620,7 +421,7 @@
                 imageItem.classList.add('image-item');
                 imageItem.innerHTML = `
                             <img src="${e.target.result}" alt="Uploaded Image">
-                            <button type="button" class="edit-btn">Thêm mô tả</button>
+<!--                            <button type="button" class="edit-btn">Thêm mô tả</button>-->
                         `;
                 uploadedImages.appendChild(imageItem);
             };
@@ -628,21 +429,9 @@
         });
     });
 
-    // Chỉnh sửa mô tả
-    document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('edit-btn')) {
-            const description = prompt("Nhập mô tả cho ảnh:");
-            if (description) {
-                const descriptionElement = document.createElement('p');
-                descriptionElement.textContent = description;
-                descriptionElement.style.fontSize = '12px';
-                descriptionElement.style.marginTop = '4px';
-                event.target.parentElement.appendChild(descriptionElement);
-                event.target.textContent = 'Chỉnh sửa mô tả';
-            }
-        }
-    });
+
 </script>
+
 </body>
 
 </html>

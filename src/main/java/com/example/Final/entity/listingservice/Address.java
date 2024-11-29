@@ -23,6 +23,8 @@ public class Address {
     private String district;
     @Column(name = "province")
     private String province;
+    @Column(name = "full_address")
+    private String fullAddress;
     @OneToOne
     @JoinColumn(name = "property_id")
     private Properties properties;

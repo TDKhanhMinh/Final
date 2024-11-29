@@ -88,7 +88,14 @@
                                           th:errors="*{email}"
                                           class="error mx-3"></span>
                                 </div>
-
+                                <div data-mdb-input-init class="form-outline mb-2">
+                                    <label class="form-label mx-2" for="form3Example4cdg2"><strong>Phone</strong></label>
+                                    <input th:field="*{phone}" type="tel" id="form3Example4cdg2"
+                                           class="form-control rounded-pill"/>
+                                    <span th:field="${#fields.hasErrors('phone')}"
+                                          th:errors="*{phone}"
+                                          class="error mx-3"></span>
+                                </div>
                                 <div data-mdb-input-init class="form-outline mb-2">
                                     <label class="form-label mx-2"
                                            for="form3Example4cg"><strong>Password</strong></label>

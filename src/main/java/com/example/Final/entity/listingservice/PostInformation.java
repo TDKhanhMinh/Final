@@ -5,15 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "contact")
-public class Contact {
+public class PostInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_id")
@@ -25,6 +22,8 @@ public class Contact {
 
     private String datePost;
     private String dateEnd;
+    private String typePost;
+    private int daysRemaining;
     private double payment;
 
     @OneToOne

@@ -1,5 +1,6 @@
 package com.example.Final.entity.paymentservice;
 
+import com.example.Final.entity.listingservice.Properties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,18 +17,18 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id")
-    private int transactionId;
+    private int paymentId;
     @Column(name = "payment_amount")
-    private int amount;
+    private double amount;
     @Column(name = "payment_date")
-    private Date date;
+    private String date;
     @Column(name = "status")
     private String status;
     @Column(name = "payment_method")
     private String paymentMethod;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "commission", referencedColumnName = "commission_id")
-    private Commissions commission;
+    @OneToOne
+    @JoinColumn(name = "payment_property_id")
+    private Properties properties;
 
 }

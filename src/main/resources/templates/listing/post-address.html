@@ -15,6 +15,100 @@
 
 </head>
 <style>
+
+    .suggestions {
+        position: absolute;
+        background: #1a1d24;
+        width: 100%;
+        max-height: 300px;
+        overflow-y: auto;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        z-index: 1000;
+        display: none;
+        margin-top: 3px;
+        color: #ffffff;
+        border: 1px solid #3f4451;
+    }
+
+    .suggestion-item {
+        padding: 12px 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #3f4451;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        color: #000000;
+        background: #ffffff;
+    }
+
+    .suggestion-item:last-child {
+        border-bottom: none;
+    }
+
+    .suggestion-item:before {
+        content: "🏴";
+        margin-right: 10px;
+        font-size: 1.1em;
+        transition: transform 0.3s ease;
+    }
+
+    .suggestion-item:hover {
+        background: #3a4150;
+        color: #ffffff;
+        padding-left: 24px;
+    }
+
+    .suggestion-item:hover:before {
+        transform: scale(1.2);
+    }
+
+    .suggestion-item:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: whitesmoke;
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+    }
+
+    .suggestion-item:hover:after {
+        transform: scaleY(1);
+    }
+
+    .address-container {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    /* Tùy chỉnh thanh cuộn */
+    .suggestions::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .suggestions::-webkit-scrollbar-track {
+        background: #1a1d24;
+        border-radius: 8px;
+    }
+
+    .suggestions::-webkit-scrollbar-thumb {
+        background: #3f4451;
+        border-radius: 8px;
+    }
+
+    .suggestions::-webkit-scrollbar-thumb:hover {
+        background: #4f5565;
+    }
+
+    #phone {
+        filter: blur(5px)
+    }
+
     .place-address {
         border-radius: 16px;
         border: 1px solid black;
@@ -57,7 +151,7 @@
             <div th:if="${error}">
                 <div class="alert alert-danger rounded-pill" th:text="${error}"></div>
             </div>
-            <form th:object="${address}" action="#" th:action="@{/listing/address}" method="POST">
+            <form action="#" th:action="@{/listing/address}" method="POST">
                 <div class="container-sm border place-address" style="width: 60%;">
                     <h5 class="py-3 mx-2"><strong>Nhu cầu</strong></h5>
                     <div class="container-sm d-flex flex-nowrap justify-content-between">
@@ -75,29 +169,72 @@
                 </div>
                 <div class="container-sm border place-address my-4" style="width: 60%;">
                     <h5 class="py-3 mx-2"><strong>Địa chỉ bất động sản</strong></h5>
-                    <div class="container d-flex flex-nowrap mb-2">
-                        <div class="province-district-ward">
-                            <select th:field="*{province}" class="text-start btn" name="city" id="city"
-                                    style="width: 235px">
-                                <option value="">Tỉnh/Thành phố</option>
-                            </select>
+                    <div class="address-container">
+                        <label class="m-2" for="address">Địa chỉ</label>
+                        <input class="form-control border border-dark shadow mx-2 rounded-pill" type="text" id="address"
+                               name="address"
+
+                               placeholder="Nhập địa chỉ của bạn"
+                               autocomplete="off">
+                        <div id="suggestions" class="suggestions"></div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="m-2">
+                            <label class="m-2" for="city-api" hidden="hidden">Tỉnh/Thành phố</label>
+                            <input class="form-control border border-dark" type="text" id="city-api" name="city"
+                                   placeholder="Nhập tỉnh/thành phố" hidden="hidden">
                         </div>
-                        <div class="province-district-ward mx-2">
-                            <select th:field="*{district}" class="text-start btn" name="district" id="district"
-                                    style="width: 235px">
-                                <option value="">Quận/Huyện</option>
-                            </select>
+                        <div class="m-2">
+                            <label class="m-2" for="district-api" hidden="hidden">Quận/Huyện</label>
+                            <input class="form-control border border-dark" type="text" id="district-api" name="district"
+                                   placeholder="Nhập quận/huyện" hidden="hidden">
                         </div>
-                        <div class="province-district-ward">
-                            <select th:field="*{ward}" class="text-start btn" name="ward" id="ward"
-                                    style="width: 235px">
-                                <option value="">Phường/Xã</option>
-                            </select>
+                        <div class="m-2">
+                            <label class="m-2" for="ward-api" hidden="hidden">Phường/Xã</label>
+                            <input class="form-control border border-dark mb-4" type="text" id="ward-api" name="ward"
+                                   placeholder="Nhập phường/xã" hidden="hidden">
                         </div>
                     </div>
-                    <label for="location" class="m-2">Địa chỉ cụ thể</label>
-                    <input type="text" value="" id="location" name="location" class="form-control mx-2 mb-4 location"
-                           style="max-width: 725px;" placeholder="Địa chỉ cụ thể">
+                    <div class="mx-4">
+                        <p>
+                            Tìm kiếm bằng cách nhập tên quận huyện, phường xã, đường phố.
+                        </p>
+                        <p><strong>Hoặc</strong></p>
+                    </div>
+                    <button class="btn btn-outline-secondary border border-dark mx-2  mb-4 shadow rounded-pill"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <strong class="">Chọn địa chỉ</strong>
+                    </button>
+                    <div class="collapse" id="collapseExample">
+                        <div class=" mt-4 mb-4 card card-body">
+                            <div class="container d-flex flex-nowrap mb-2">
+                                <div class="province-district-ward">
+                                    <select class="text-start btn" name="city" id="city"
+                                            style="width: 225px">
+                                        <option value="">Tỉnh/Thành phố</option>
+                                    </select>
+                                </div>
+                                <div class="province-district-ward mx-2">
+                                    <select class="text-start btn" name="district" id="district"
+                                            style="width: 225px">
+                                        <option value="">Quận/Huyện</option>
+                                    </select>
+                                </div>
+                                <div class="province-district-ward">
+                                    <select class="text-start btn" name="ward" id="ward"
+                                            style="width: 225px">
+                                        <option value="">Phường/Xã</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label for="location" class="m-2">Địa chỉ cụ thể</label>
+                            <input type="text" value="" id="location" name="location"
+                                   class="form-control mx-2 mb-4 location"
+                                   style="max-width: 705px;" placeholder="Địa chỉ cụ thể">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="container-sm my-4 d-flex justify-content-end" style="width: 60%;">
@@ -125,6 +262,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
 <script th:src="@{/access/js/apiprovince.js}"></script>
+
 <script>document.querySelectorAll('.place-address-choice').forEach(div => {
     div.addEventListener('click', () => {
         document.querySelectorAll('.place-address-choice').forEach(item => {
@@ -138,6 +276,76 @@
         }
     });
 });
+
+</script>
+
+<script>
+    const apiKey = 'KeONrT42qDbhvyFK5oLjywhE0EAcrxeHh0NTznDz';
+    const addressInput = document.getElementById('address');
+    const suggestionsContainer = document.getElementById('suggestions');
+    const cityInput = document.getElementById('city-api');
+    const districtInput = document.getElementById('district-api');
+    const wardInput = document.getElementById('ward-api');
+    let sessionToken = crypto.randomUUID();
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    const debouncedSearch = debounce((query) => {
+        if (query.length < 2) {
+            suggestionsContainer.style.display = 'none';
+            return;
+        }
+
+
+        fetch(`https://rsapi.goong.io/Place/AutoComplete?api_key=${apiKey}&input=${encodeURIComponent(query)}&sessiontoken=${sessionToken}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'OK') {
+                    suggestionsContainer.innerHTML = '';
+                    suggestionsContainer.style.display = 'block';
+
+                    data.predictions.forEach(prediction => {
+                        const div = document.createElement('div');
+                        div.className = 'suggestion-item';
+                        div.textContent = prediction.description;
+                        div.addEventListener('click', () => {
+                            addressInput.value = prediction.description || '';
+                            suggestionsContainer.style.display = 'none';
+
+                            // Tự động điền các trường địa chỉ từ compound
+                            if (prediction.compound) {
+                                cityInput.value = prediction.compound.province || '';
+                                districtInput.value = prediction.compound.district || '';
+                                wardInput.value = prediction.compound.commune || '';
+
+                            }
+                            console.log("Address updated:", addressInput.value);
+                        });
+                        suggestionsContainer.appendChild(div);
+                    });
+                }
+            })
+            .catch(error => console.error('Lỗi:', error));
+    }, 300);
+
+    addressInput.addEventListener('input', (e) => debouncedSearch(e.target.value));
+
+    document.addEventListener('click', function (e) {
+        if (!suggestionsContainer.contains(e.target) && e.target !== addressInput) {
+            suggestionsContainer.style.display = 'none';
+        }
+    });
+
 
 </script>
 </body>

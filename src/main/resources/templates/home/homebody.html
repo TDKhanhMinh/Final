@@ -74,26 +74,28 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-10">
                 <div class="input-group row mt-3 d-flex justify-content-center bg-secondary rounded-2">
-                    <form th:action="@{/search}" method="get" class="col-md-10 m-4">
+                    <form th:action="@{/home/searchForm}" method="post" class="col-md-10 m-4">
                         <div class="container">
                             <div class="btn btn-sm btn-outline-light btn-active">
                                 Nhà đất bán
-                                <input type="hidden" value="for-sale">
+                                <input name="optionType" type="radio" value="sell" hidden="hidden">
                             </div>
                             <div class="btn btn-sm btn-outline-light btn-re-active">
                                 Nhà đất cho thuê
-                                <input type="hidden" value="for-rental">
+                                <input name="optionType" type="radio" value="rent" hidden="hidden">
                             </div>
                         </div>
                         <div class="container d-flex flex-nowrap my-2">
-                            <input name="searchKey" id="search" type="text" class="form-control"
-                                placeholder="Tìm kiếm trên toàn quốc" aria-label="Search"
-                                aria-describedby="button-addon2">
-                            <div class="input-group-append p-0">
-                                <button class="btn btn-primary" type="submit" id="button-addon2">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
+<!--                            <form th:action="@{/home/searchByKey}" method="post">-->
+                                <input name="searchKey" id="search" type="text" class="form-control"
+                                       placeholder="Tìm kiếm trên toàn quốc" aria-label="Search"
+                                       aria-describedby="button-addon2">
+                                <div class="input-group-append p-0">
+                                    <button class="btn btn-primary" type="submit" id="button-addon2">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+<!--                            </form>-->
                         </div>
                         <div class="container d-flex flex-nowrap my-2">
                             <div class="province-district-ward">
@@ -133,23 +135,37 @@
                                                 <path
                                                     d="M5.793 1a1 1 0 0 1 1.414 0l.647.646a.5.5 0 1 1-.708.708L6.5 1.707 2 6.207V12.5a.5.5 0 0 0 .5.5.5.5 0 0 1 0 1A1.5 1.5 0 0 1 1 12.5V7.207l-.146.147a.5.5 0 0 1-.708-.708zm3 1a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708zm.707.707L5 7.207V13.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V7.207z" />
                                             </svg>
-                                            Tất cả nhà đất</span><input class="mx-2" type="checkbox"></li>
+                                            Tất cả nhà đất</span><input value="all" name="houseType" class="mx-2"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2"><i
                                                 class="fa-solid fa-hotel mx-1"></i>
-                                            Căn hộ chung cư</span><input class="mx-2" type="checkbox"></li>
+                                            Căn hộ chung cư</span><input value="Căn hộ" name="houseType" class="mx-2"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2"><svg
                                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-house mx-1" viewBox="0 0 16 16">
                                                 <path
                                                     d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
                                             </svg>
-                                            Nhà riêng</span><input class="mx-2" type="checkbox"></li>
+                                            Nhà riêng</span><input value="Nhà riêng" name="houseType" class="mx-2"
+                                            type="radio"></li>
                                     <li class="d-flex justify-content-between"><span class="mx-2"><i
                                                 class="fa-solid fa-house-user mx-1"></i>
-                                            Nhà biệt thự</span><input class="mx-2" type="checkbox"></li>
+                                            Nhà biệt thự</span><input value="Biệt thự" name="houseType" class="mx-2"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2"><i
                                                 class="fa-solid fa-house-chimney mx-1"></i>
-                                            Nhà mặt phố</span><input class="mx-2" type="checkbox"></li>
+                                            Nhà mặt phố</span><input value="Nhà mặt phố" name="houseType" class="mx-2"
+                                            type="radio">
+                                    </li>
+                                    <li class="d-flex justify-content-between"><span class="mx-2"><i
+                                                class="fa-solid fa-house-chimney mx-1"></i>
+                                            Nhà trọ/Phòng trọ</span><input value="Nhà trọ" name="houseType" class="mx-2"
+                                            type="radio">
+                                    </li>
                                 </ul>
                             </div>
                             <div class="dropdown mx-2">
@@ -168,31 +184,67 @@
                                         <hr class="fw-light">
                                     </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            Tất cả mức giá</span><input class="mx-2" type="checkbox"></li>
+                                            Tất cả mức giá</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'all'}" type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            Dưới 500 triệu</span><input class="mx-2" type="checkbox"></li>
+                                            Dưới 500 triệu</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'0,500000000'}" type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            500 - 800 triệu</span><input class="mx-2" type="checkbox"></li>
+                                            500 - 800 triệu</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'500000000,800000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            800 triệu - 1 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            800 triệu - 1 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'800000000,1000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            1 - 2 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            1 - 2 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'1000000000,2000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            2 - 3 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            2 - 3 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'2000000000,3000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            3 - 5 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            3 - 5 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'3000000000,5000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            5 - 7 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            5 - 7 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'5000000000,7000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            7 - 10 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            7 - 10 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'7000000000,10000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            10 - 20 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            10 - 20 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'10000000000,20000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            20 - 30 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            20 - 30 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'20000000000,30000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            30 - 40 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            30 - 40 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'30000000000,40000000000'}"
+                                            type="radio">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            Trên 40 tỷ</span><input class="mx-2" type="checkbox"></li>
+                                            Trên 40 tỷ</span>
+                                        <input name="rangePrice" class="mx-2" th:value="${'40000000000'}" type="radio">
+                                    </li>
                                 </ul>
                             </div>
                             <div class="dropdown">
@@ -212,28 +264,46 @@
                                     </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
                                             Tất cả diện tích
-                                        </span><input class="mx-2" type="checkbox"></li>
+                                        </span><input th:value="${'all'}" class="mx-2" type="radio" name="sqmtRange">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
                                             Dưới 30 m²
-                                        </span><input class="mx-2" type="checkbox"></li>
+                                        </span><input th:value="${'0,30'}" class="mx-2" type="radio" name="sqmtRange">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            30 - 50 m²</span><input class="mx-2" type="checkbox"></li>
+                                            30 - 50 m²</span><input th:value="${'30,50'}" class="mx-2" type="radio"
+                                            name="sqmtRange"></li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            50 - 80 m²</span><input class="mx-2" type="checkbox"></li>
+                                            50 - 80 m²</span><input th:value="${'50,80'}" class="mx-2" type="radio"
+                                            name="sqmtRange"></li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            80 - 100 m²</span><input class="mx-2" type="checkbox"></li>
+                                            80 - 100 m²</span><input th:value="${'80,100'}" class="mx-2" type="radio"
+                                            name="sqmtRange">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            100 - 150 m²</span><input class="mx-2" type="checkbox"></li>
+                                            100 - 150 m²</span><input th:value="${'100,150'}" class="mx-2" type="radio"
+                                            name="sqmtRange">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            150 - 200 m²</span><input class="mx-2" type="checkbox"></li>
+                                            150 - 200 m²</span><input th:value="${'150,200'}" class="mx-2" type="radio"
+                                            name="sqmtRange">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            200 - 250 m²</span><input class="mx-2" type="checkbox"></li>
+                                            200 - 250 m²</span><input th:value="${'200,250'}" class="mx-2" type="radio"
+                                            name="sqmtRange">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            250 - 300 m²</span><input class="mx-2" type="checkbox"></li>
+                                            250 - 300 m²</span><input th:value="${'250,300'}" class="mx-2" type="radio"
+                                            name="sqmtRange">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            300 - 500 m²</span><input class="mx-2" type="checkbox"></li>
+                                            300 - 500 m²</span><input th:value="${'300,500'}" class="mx-2" type="radio"
+                                            name="sqmtRange">
+                                    </li>
                                     <li class="d-flex justify-content-between"><span class="mx-2">
-                                            Trên 500 m²</span><input class="mx-2" type="checkbox"></li>
+                                            Trên 500 m²</span><input th:value="${'500'}" class="mx-2" type="radio"
+                                            name="sqmtRange">
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -293,11 +363,6 @@
     </div>
 
 
-
-
-
-
-
     <!-- BẤT ĐỌNG SẢN DÀNH CHO BẠN -->
     <div class="container-sm rounded-3 mt-4" style="width: 78%; background-color: #F5F5F5;">
         <div class="mx-2 pt-4">
@@ -311,14 +376,19 @@
                     <img class="rounded-top" style="width: 250px;height: 150px;"
                         th:src="${property.listImages[0].imageUrl}" alt="home-photo">
                     <div class="mx-3">
-                        <h6 th:text="${property.propertyTitle}" style="width: 100%;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long biên</h6>
+                        <h6 th:text="${property.propertyTitle}" style="
+                                                       width: 200px;
+                                                       white-space: nowrap;
+                                                       overflow: hidden;
+                                                       text-overflow: ellipsis;" class="my-2">Chi 10 tỷ có nhà ở long
+                            biên</h6>
                         <div class="fw-bold">
-                            <span th:text="${property.propertyPrice}" class="text-danger">4.1 tỷ</span>
+                            <span th:if="${property.propertyPrice>1000000000}"
+                                th:text="${property.propertyPrice/1000000000}+' tỷ'" class="text-danger">4.1 tỷ</span>
+                            <span th:if="${property.propertyPrice<1000000000}"
+                                th:text="${property.propertyPrice/100000000}+' triệu'" class="text-danger">4.1 tỷ</span>
                             <span class="mx-2">.</span>
-                            <span th:text="${property.squareMeters}" class="text-danger">30 m2</span>
+                            <span th:text="${property.squareMeters}+' m²'" class="text-danger">30 m2</span>
                         </div>
                         <div class="my-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -328,17 +398,13 @@
                                 <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
 
                             </svg>
-                            <span th:if="${property.address.district.substring(0,5).equals('Quận ')}"
-                                th:text="${property.address.district}+', '">Hà nội</span>
-                            <span th:if="${property.address.province.substring(0,10).equals('Thành phố ')}"
-                                th:text="${property.address.province.substring(10)}">Long biên</span>
-                            <span th:if="${property.address.district.substring(0,6).equals('Huyện ')}"
-                                th:text="${property.address.district.substring(6)}+', '">Hà nội</span>
-                            <span th:if="${property.address.province.substring(0,5).equals('Tỉnh ')}"
-                                th:text="${property.address.province.substring(5)}">Long biên</span>
+
+                            <span th:text="${property.address.province.split(',')[0]}">Long biên</span>
+                            <span th:if="${property.address.province.startsWith(',')}"
+                                th:text="${property.address.province.split(',')[1]}">Long biên</span>
                         </div>
                         <div class="my-4">
-                            <p th:text="'Đăng ngày '+${property.contact.datePost}"
+                            <p th:text="'Đăng ngày '+${property.postInformation.datePost}"
                                 style="opacity: 0.5; font-size: 12px;">Đăng hôm nay</p>
                         </div>
                     </div>
@@ -463,18 +529,22 @@
         document.addEventListener('DOMContentLoaded', function () {
             const btnActive = document.querySelector('.btn-active');
             const btnReActive = document.querySelector('.btn-re-active');
+            const inputActive = btnActive.querySelector('input');
+            const inputReActive = btnReActive.querySelector('input');
 
-            function activateButton(clickedButton, otherButton) {
+            function activateButton(clickedButton, otherButton, clickedInput, otherInput) {
                 clickedButton.classList.add('active');
                 otherButton.classList.remove('active');
+                clickedInput.checked = true;  // Đánh dấu input tương ứng là checked
+                otherInput.checked = false;   // Bỏ chọn input còn lại
             }
 
             btnActive.addEventListener('click', function () {
-                activateButton(btnActive, btnReActive);
+                activateButton(btnActive, btnReActive, inputActive, inputReActive);
             });
 
             btnReActive.addEventListener('click', function () {
-                activateButton(btnReActive, btnActive);
+                activateButton(btnReActive, btnActive, inputReActive, inputActive);
             });
         });
 

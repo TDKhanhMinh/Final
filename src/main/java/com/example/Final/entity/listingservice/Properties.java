@@ -1,5 +1,6 @@
 package com.example.Final.entity.listingservice;
 
+import com.example.Final.entity.paymentservice.Payment;
 import com.example.Final.entity.rentalservice.RentalHistory;
 import com.example.Final.entity.salesservice.SalesHistory;
 import com.example.Final.entity.securityservice.User;
@@ -58,7 +59,7 @@ public class Properties {
     private Address address;
 
     @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL)
-    private Contact contact;
+    private PostInformation postInformation;
 
     @OneToMany(mappedBy = "properties", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RentalHistory> rentalHistories;
@@ -69,5 +70,8 @@ public class Properties {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "history_list_id")
     private HistoryListing historyListing;
+
+    @OneToOne(mappedBy = "properties", cascade = CascadeType.ALL)
+    private Payment payment;
 }
 

@@ -1,9 +1,9 @@
 package com.example.Final.repository;
 
-import com.example.Final.entity.listingservice.PostInformation;
+import com.example.Final.entity.paymentservice.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ContactRepo extends JpaRepository<PostInformation, Integer> {
+public interface PaymentRepo extends JpaRepository<Payment, Integer> {
 }

@@ -1,6 +1,7 @@
 package com.example.Final.controller;
 
 import com.example.Final.entity.listingservice.*;
+import com.example.Final.entity.securityservice.User;
 import com.example.Final.repository.AddressRepo;
 import com.example.Final.repository.ContactRepo;
 import com.example.Final.repository.ImagesRepo;
@@ -34,11 +35,12 @@ public class ListingController {
     private final RentalHistoryService rentalHistoryService;
     private final SalesHistoryService salesHistoryService;
     private final HistoryListingService historyListingService;
+    private final PaymentService paymentService;
 
 
     @GetMapping("/post-address")
     public String getPost(Model model) {
-        model.addAttribute("address", new Address());
+
         return "listing/post-address";
     }
 
@@ -61,44 +63,52 @@ public class ListingController {
     }
 
     @PostMapping("/address")
-    public String listProperties(Model model,
-                                 RedirectAttributes redirectAttributes,
+    public String listProperties(Model model, RedirectAttributes redirectAttributes,
                                  @Param("location") String location,
-                                 @Param("option") String option,
-                                 @ModelAttribute("address") Address address) {
-        if (location != null && option != null && address != null && !location.trim().isEmpty()) {
+                                 @RequestParam("option") String option,
+                                 @RequestParam("city") String city,
+                                 @RequestParam("district") String district,
+                                 @RequestParam("ward") String ward,
+                                 @RequestParam("address") String addressInput) {
+        Address address = new Address();
+
+        if (!location.trim().isEmpty()) {
             address.setStreet(location);
-
-            Properties properties = new Properties();
-            address.setProperties(properties);
-            properties.setAddress(address);
-            properties.setPropertyTypeTransaction(option);
-            propertyService.create(properties);
-
-
-            model.addAttribute("address", address);
-            model.addAttribute("propertyOld", properties);
-            // model.addAttribute("propertyNew", properties);
-            return "listing/post-information";
-        } else {
-            redirectAttributes.addFlashAttribute("error", "Hãy điền tất cả thông tin");
-            return "redirect:/listing/post-address";
+            address.setFullAddress(location + " " + ward + " " + district + " " + city);
+        }
+        if (!addressInput.trim().isEmpty()) {
+            String[] list = addressInput.split(",");
+            if (list.length == 5) {
+                String tmp = list[0] + "," + list[1];
+                address.setStreet(tmp);
+            } else if (list.length > 5) {
+                String tmp = list[0] + "," + list[1] + "," + list[2];
+                address.setStreet(tmp);
+            } else {
+                address.setStreet(addressInput.split(",")[0]);
+            }
+            address.setFullAddress(addressInput);
         }
 
+        address.setProvince(city);
+        address.setDistrict(district);
+        address.setWard(ward);
+
+        Properties properties = new Properties();
+        address.setProperties(properties);
+        properties.setAddress(address);
+        properties.setPropertyTypeTransaction(option);
+        propertyService.create(properties);
+
+
+        model.addAttribute("address", address);
+        model.addAttribute("propertyOld", properties);
+        // model.addAttribute("propertyNew", properties);
+        return "listing/post-information";
     }
 
     @PostMapping("/information")
-    public String listProperties(Model model,
-                                 @RequestParam("propertyId") int propertyId,
-                                 @RequestParam("property-type") String type,
-                                 @RequestParam("paper") String legal,
-                                 @RequestParam("interior") String interior,
-                                 @RequestParam("square-meters") double squareMeters,
-                                 @RequestParam("price") double price,
-                                 @RequestParam("floors") int floatFloors,
-                                 @RequestParam("bedroom") int bedrooms,
-                                 @RequestParam("bathroom") int bathrooms,
-                                 Principal principal) {
+    public String listProperties(Model model, @RequestParam("propertyId") int propertyId, @RequestParam("property-type") String type, @RequestParam("paper") String legal, @RequestParam("interior") String interior, @RequestParam("square-meters") double squareMeters, @RequestParam("price") double price, @RequestParam("floors") int floatFloors, @RequestParam("bedroom") int bedrooms, @RequestParam("bathroom") int bathrooms, Principal principal) {
 
         propertyService.updateInfo(propertyId, type, legal, interior, squareMeters, price, floatFloors, bedrooms, bathrooms);
         if (propertyService.getById(propertyId).getPropertyTypeTransaction().equals("rent")) {
@@ -110,32 +120,28 @@ public class ListingController {
 
         model.addAttribute("properties", propertyService.getById(propertyId));
         model.addAttribute("userName", principal.getName());
-        model.addAttribute("contact", new Contact());
+        model.addAttribute("contact", new PostInformation());
         return "listing/post-description-contact";
     }
 
     @PostMapping("/contact")
-    public String getContact(@RequestParam("propertyId") int id,
-                             @RequestParam("title") String title,
-                             @RequestParam("description") String description,
-                             @ModelAttribute("contact") Contact contact,
-                             Model model, Principal principal) {
+    public String getContact(@RequestParam("propertyId") int id, @RequestParam("title") String title, @RequestParam("description") String description, @ModelAttribute("contact") PostInformation postInformation, Model model, Principal principal) {
         Properties properties = propertyService.getById(id);
         properties.setPropertyDescription(description);
         properties.setPropertyTitle(title);
-        contact.setProperties(properties);
+        postInformation.setProperties(properties);
 
         LocalDate currentDate = LocalDate.now();
-        LocalDate endDate = currentDate.plusDays(7);
+//        LocalDate endDate = currentDate.plusDays(7);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = currentDate.format(formatter);
-        String formattedEndDate = endDate.format(formatter);
-        contact.setDatePost(formattedDate);
-        contact.setDateEnd(formattedEndDate);
-
+//        String formattedEndDate = endDate.format(formatter);
+        postInformation.setDatePost(formattedDate);
+//        contact.setDateEnd(formattedEndDate);
+        postInformation.setDaysRemaining(0);
 
         properties.setUser(userService.findUserByEmail(principal.getName()));
-        properties.setContact(contactRepo.save(contact));
+        properties.setPostInformation(contactRepo.save(postInformation));
         properties.setAvailable(true);
         propertyService.save(properties);
         model.addAttribute("property", properties);
@@ -143,10 +149,12 @@ public class ListingController {
     }
 
     @PostMapping("/complete")
-    public String complete(Model model,
-                           @RequestParam("images") ArrayList<MultipartFile> images,
-                           @RequestParam("propertyId") int propertyId) throws Exception {
+    public String complete(Model model, @RequestParam("images") ArrayList<MultipartFile> images,
+                           @RequestParam("propertyId") int propertyId,
+                           Principal principal) throws Exception {
         Properties properties = propertyService.getById(propertyId);
+        User user = userService.findUserByEmail(principal.getName());
+
         List<Images> imageList = new ArrayList<>();
         for (MultipartFile file : images) {
             String path = imageUploadService.uploadImage(file);
@@ -157,15 +165,15 @@ public class ListingController {
             imageList.add(image);
         }
         properties.setListImages(imageList);
-
         propertyService.updateImages(properties);
 
-        return "redirect:/home/home ";
+        model.addAttribute("property", properties);
+        model.addAttribute("user", user);
+        return "listing/post-payment";
     }
 
     @GetMapping("/listing-info/{id}")
-    public String getListingInfo(@PathVariable int id, Model model,
-                                 Principal principal) {
+    public String getListingInfo(@PathVariable int id, Model model, Principal principal) {
         Properties property = propertyService.getById(id);
         if (property.getHistoryListing() == null) {
             HistoryListing historyListing = historyListingService.createHistoryListing(property, userService.findUserByEmail(principal.getName()));
@@ -175,21 +183,79 @@ public class ListingController {
 
         List<Properties> result = propertyService.getAll();
         Collections.shuffle(result);
-        List<Properties> random = result.stream()
-                .limit(8)
-                .toList();
-        model.addAttribute("randomProperty",random);
+        List<Properties> random = result.stream().limit(8).toList();
+        List<Properties> history = propertyService.getByHistoryListing(historyListingService.getByUser(userService.findUserByEmail(principal.getName())));
+        model.addAttribute("randomProperty", random);
         model.addAttribute("property", property);
+        if (!history.isEmpty()) {
+            model.addAttribute("historyListing", history);
+        }
 
-        model.addAttribute("historyListing", propertyService.getByHistoryListing(historyListingService.getByUser(userService.findUserByEmail(principal.getName()))));
-        //model.addAttribute("historyListing", historyListingService);
+        model.addAttribute("historySize", history.size());
         return "listing/listing-info";
     }
 
 
-    @GetMapping("/post-payment")
-    public String postPayment(){
-        return "/listing/post-payment";
+
+    @PostMapping("/payment-post")
+    public String postPaymentPost(Model model,
+                                  @RequestParam("propertyId") int propertyId,
+                                  @RequestParam("userId") int userId,
+                                  @RequestParam("ad-type") String adType,
+                                  @RequestParam("option-day") int optionDay) {
+        User user = userService.findUserById(userId);
+
+        Properties properties = propertyService.getById(propertyId);
+
+        PostInformation postInformation = properties.getPostInformation();
+
+        double postPrice;
+        switch (adType) {
+            case "VIP Kim Cương" -> {
+                postInformation.setTypePost(adType);
+                postPrice = 200000;
+            }
+            case "VIP Bạc" -> {
+                postInformation.setTypePost(adType);
+                postPrice = 40000;
+            }
+            case "VIP Vàng" -> {
+                postInformation.setTypePost(adType);
+                postPrice = 100000;
+            }
+            default -> {
+
+                postInformation.setTypePost(adType);
+                postPrice = 2000;
+            }
+        }
+        double payment = postPrice * optionDay;
+        LocalDate currentDate = LocalDate.now();
+        LocalDate endDate = currentDate.plusDays(optionDay);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = currentDate.format(formatter);
+        String formattedEndDate = endDate.format(formatter);
+
+        postInformation.setDatePost(formattedDate);
+        postInformation.setDateEnd(formattedEndDate);
+        postInformation.setProperties(properties);
+        postInformation.setPayment(payment);
+        postInformation.setDaysRemaining(optionDay);
+
+        properties.setPostInformation(contactRepo.save(postInformation));
+
+        propertyService.save(properties);
+
+        paymentService.savePayment(payment, formattedDate, properties);
+        user.setAccountBalance(user.getAccountBalance() - payment);
+
+        userService.save(user);
+        return "redirect:/user/listing-manager";
     }
 
+    @PostMapping("/test")
+    public String test(@RequestParam("address") String addressInput) {
+        System.out.println(addressInput);
+        return "redirect:/user/listing-manager";
+    }
 }

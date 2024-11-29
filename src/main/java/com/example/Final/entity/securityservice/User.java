@@ -41,8 +41,11 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
-
+    @NotNull(message = "Please fill in this field")
+    @Size(min = 1, message = "Please fill in this field")
     private String phone;
+
+    private double accountBalance;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Images images;

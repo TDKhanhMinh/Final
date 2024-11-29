@@ -100,7 +100,7 @@ public class UserController {
     }
 
     @GetMapping("/changePassword")
-    public String changePassword(Model model, Principal principal) {
+    public String changePassword() {
         return "user/change-password";
     }
 
@@ -187,15 +187,17 @@ public class UserController {
     @PostMapping("/update-post")
     public String updatePost(@ModelAttribute("property") Properties properties,
                              @RequestParam("propertyId") int id,
+
                              @Param("city") String city,
                              @Param("district") String district,
                              @Param("ward") String ward,
                              @Param("location") String location,
-
                              @Param("property-type") String propertyType,
                              @Param("paper") String legal,
                              @Param("interior") String interior,
-                             @Param("images") ArrayList<MultipartFile> images) throws Exception {
+                             @Param("images") ArrayList<MultipartFile> images,
+                             Principal principal,
+                             Model model) throws Exception {
         Properties oldProperties = propertyService.getById(id);
         Address address = oldProperties.getAddress();
 
@@ -221,6 +223,14 @@ public class UserController {
         propertyService.save(oldProperties);
 
 
+        User user = userService.findUserByEmail(principal.getName());
+        model.addAttribute("property", oldProperties);
+        model.addAttribute("user", user);
+//        User user = userService.findUserByEmail(principal.getName());
+//        model.addAttribute("property", properties);
+//        model.addAttribute("user", user);
+
+
 //        if (images != null) {
 //            List<Images> imageList = oldProperties.getListImages();
 //            for (MultipartFile file : images) {
@@ -237,7 +247,7 @@ public class UserController {
 
         propertyService.updateProperty(properties);
 
-        return "redirect:/user/listing-manager";
+        return "listing/post-payment";
     }
 
 
@@ -247,8 +257,5 @@ public class UserController {
         return "redirect:/user/listing-manager";
     }
 
-    @GetMapping("/map")
-    public String getMap() {
-        return "listing/map-api";
-    }
+
 }

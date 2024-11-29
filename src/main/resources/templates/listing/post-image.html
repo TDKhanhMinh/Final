@@ -148,7 +148,7 @@
                 imageItem.classList.add('image-item');
                 imageItem.innerHTML = `
                     <img src="${e.target.result}" alt="Uploaded Image">
-                    <button type="button" class="edit-btn">Thêm mô tả</button>
+<!--                    <button type="button" class="edit-btn">Thêm mô tả</button>-->
                 `;
                 uploadedImages.appendChild(imageItem);
             };
@@ -156,20 +156,8 @@
         });
     });
 
-    // Chỉnh sửa mô tả
-    document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('edit-btn')) {
-            const description = prompt("Nhập mô tả cho ảnh:");
-            if (description) {
-                const descriptionElement = document.createElement('p');
-                descriptionElement.textContent = description;
-                descriptionElement.style.fontSize = '12px';
-                descriptionElement.style.marginTop = '4px';
-                event.target.parentElement.appendChild(descriptionElement);
-                event.target.textContent = 'Chỉnh sửa mô tả';
-            }
-        }
-    });
+
+
 </script>
 </body>
 

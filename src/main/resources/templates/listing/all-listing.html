@@ -35,7 +35,6 @@
         border: 1px solid black;
         border-radius: 6px;
     }
-
 </style>
 
 <body>
@@ -65,7 +64,7 @@
                                         d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
                                 <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                             </svg>
-                            <h6 class="m-2">
+                            <h6 th:text="${city}" class="m-2">
                                 Hồ Chí Minh
                             </h6>
                         </div>
@@ -83,27 +82,27 @@
                         </div>
                     </div>
                     <!-- <div class="container d-flex justify-content-center my-2">
-                <div class="province-district-ward">
-                    <select class="text-start btn" name="city" id="city" style="width: 270px">
-                        <option value="">Tỉnh/Thành phố</option>
-                    </select>
-                </div>
-                <div class="province-district-ward mx-2">
-                    <select class="text-start btn" name="district" id="district" style="width: 267px">
-                        <option value="">Quận/Huyện</option>
-                    </select>
-                </div>
-                <div class="province-district-ward">
-                    <select class="text-start btn" name="ward" id="ward" style="width: 270px">
-                        <option value="">Phường/Xã</option>
-                    </select>
-                </div>
-            </div> -->
+            <div class="province-district-ward">
+                <select class="text-start btn" name="city" id="city" style="width: 270px">
+                    <option value="">Tỉnh/Thành phố</option>
+                </select>
+            </div>
+            <div class="province-district-ward mx-2">
+                <select class="text-start btn" name="district" id="district" style="width: 267px">
+                    <option value="">Quận/Huyện</option>
+                </select>
+            </div>
+            <div class="province-district-ward">
+                <select class="text-start btn" name="ward" id="ward" style="width: 270px">
+                    <option value="">Phường/Xã</option>
+                </select>
+            </div>
+        </div> -->
                     <div class="container d-flex justify-content-center">
                         <div class="dropdown">
                             <button class="btn btn-outline-dark  text-start " style="width: 200px;opacity: 0.6"
-                                    type="button"
-                                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                 Loại nhà đất
                             </button>
                             <ul class="dropdown-menu mt-2" style="width: 270px;"
@@ -141,9 +140,8 @@
                         </div>
                         <div class="dropdown mx-2">
                             <button class="btn btn-outline-dark dropdown-toggle1 text-start "
-                                    style="width: 200px;opacity: 0.6;"
-                                    type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                    style="width: 200px;opacity: 0.6;" type="button" id="dropdownMenuButton5"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                 Mức giá
                             </button>
                             <ul class="dropdown-menu mt-2 "
@@ -185,9 +183,8 @@
                         </div>
                         <div class="dropdown mx-2">
                             <button class="btn btn-outline-dark dropdown-toggle1 text-start"
-                                    style="width: 200px;opacity: 0.6;"
-                                    type="button" id="dropdownMenuButton00" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                    style="width: 200px;opacity: 0.6;" type="button" id="dropdownMenuButton00"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                 Diện tích
                             </button>
                             <ul class="dropdown-menu mt-2 "
@@ -228,9 +225,9 @@
 
 
                         <div class="dropdown">
-                            <button class="btn btn-outline-dark dropdown-toggle1 text-start " style="width: 200px;opacity: 0.6;"
-                                    type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                            <button class="btn btn-outline-dark dropdown-toggle1 text-start "
+                                    style="width: 200px;opacity: 0.6;" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                 Số phòng ngủ
                             </button>
                             <ul class="dropdown-menu mt-2 "
@@ -282,14 +279,13 @@
                         <!-- Cần suwrsae lại giá rị của get(0) -->
                         <div class="row shadow" style="background-color: whitesmoke;">
                             <div class="col-md-8 p-0 text-center">
-                                <img style="max-width: 100%;padding-right: 2px; object-fit: cover;"
-                                     class="rounded-3" th:src="${property.listImages.get(0).imageUrl}"
-                                     alt="photo">
+                                <img style="max-width: 100%;padding-right: 2px; object-fit: fill;" class="rounded-3"
+                                     th:src="${property.listImages.get(0).imageUrl}" alt="photo">
                             </div>
                             <div class="col-md-4 p-0 text-center">
-                                <img style="max-width: 84%; margin-bottom: 2px; object-fit: cover;"
+                                <img style="max-width: 100%; margin-bottom: 2px; object-fit: fill;"
                                      class="rounded-3" th:src="${property.listImages.get(1).imageUrl}" alt="photo">
-                                <img style="max-width: 84%; object-fit: cover;" class="rounded-3"
+                                <img style="max-width: 100%; object-fit: fill;" class="rounded-3"
                                      th:src="${property.listImages.get(2).imageUrl}" alt="photo">
                             </div>
                         </div>
@@ -297,19 +293,36 @@
 
 
                     <div class=" mt-4 text-uppercase mx-4">
-                        <h6 th:text="${property.propertyTitle}" class="text-dark"> 8 suất ngoại giao - hàng đẹp -
+                        <h6 th:text="${property.propertyTitle}"
+                            class="text-dark"> 8 suất ngoại giao - hàng đẹp -
                             góc-Penthouse- shop-căn hộ Masteri Grand View - The Global
                             City</h6>
                     </div>
                     <div class="information row">
-                        <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;">
-                            <h6 th:text="${property.propertyPrice}" class="text-danger fw-bold">Giá thỏa thuận</h6>
+                        <div class="col-md-12 d-flex justify-content-start text-dark mx-4 mb-4">
+                            <span th:text="${property.address.fullAddress}">Long biên</span>
                         </div>
-                        <div class="col-md-1 d-flex justify-content-center">
-                            <h6 th:text="${property.squareMeters}+'m2'" class="text-danger fw-bold">52 m2</h6>
+                        <div class="col-md-2 d-flex justify-content-center" style="margin-left: 20px;font-weight: bold">
+                                <span th:if="${property.propertyPrice>1000000000}"
+                                      th:text="${property.propertyPrice/1000000000}+' tỷ'"
+                                      class="text-danger">4.1 tỷ</span>
+                            <span th:if="${property.propertyPrice<1000000000}"
+                                  th:text="${property.propertyPrice/100000000}+' triệu'"
+                                  class="text-danger">4.1 tỷ</span>
                         </div>
                         <div class="col-md-2 d-flex justify-content-center">
-                            <h6 class="text-dark ">7.1 tỷ/m2</h6>
+                            <h6 th:text="${property.squareMeters}+' m²'" class="text-danger fw-bold">52 m2</h6>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center" style="font-weight: bold">
+                               <span th:if="${property.propertyPrice>1000000000 && (property.propertyPrice/1000000000)/property.squareMeters > 1 }"
+                                     th:text="${(property.propertyPrice/1000000000)/property.squareMeters}+' tỷ/m²'"
+                                     class="text-danger">4.1 tỷ</span>
+                            <span th:if="${property.propertyPrice>1000000000 && (property.propertyPrice/1000000000)/property.squareMeters < 1 }"
+                                  th:text="${(property.propertyPrice/1000000000)/property.squareMeters*1000}+' triệu/m²'"
+                                  class="text-danger">4.1 tỷ</span>
+                            <span th:if="${property.propertyPrice<1000000000}"
+                                  th:text="${(property.propertyPrice/1000000000)/property.squareMeters}+' triệu/m²'"
+                                  class="text-dark">4.1 tỷ</span>
                         </div>
                         <div class="col-md-1 d-flex justify-content-center">
                             <span th:text="${property.bedrooms}" class="text-dark">1</span>
@@ -329,17 +342,7 @@
                                         d="M96 77.3c0-7.3 5.9-13.3 13.3-13.3c3.5 0 6.9 1.4 9.4 3.9l14.9 14.9C130 91.8 128 101.7 128 112c0 19.9 7.2 38 19.2 52c-5.3 9.2-4 21.1 3.8 29c9.4 9.4 24.6 9.4 33.9 0L289 89c9.4-9.4 9.4-24.6 0-33.9c-7.9-7.9-19.8-9.1-29-3.8C246 39.2 227.9 32 208 32c-10.3 0-20.2 2-29.2 5.5L163.9 22.6C149.4 8.1 129.7 0 109.3 0C66.6 0 32 34.6 32 77.3L32 256c-17.7 0-32 14.3-32 32s14.3 32 32 32l448 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 256 96 77.3zM32 352l0 16c0 28.4 12.4 54 32 71.6L64 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-16 256 0 0 16c0 17.7 14.3 32 32 32s32-14.3 32-32l0-40.4c19.6-17.6 32-43.1 32-71.6l0-16L32 352z"/>
                             </svg>
                         </div>
-                        <div class="col-md-3 d-flex justify-content-center text-dark">
-                                <span th:if="${property.address.district.substring(0,5).equals('Quận ')}"
-                                      th:text="${property.address.district}+', '">Hà nội</span>
-                            <span th:if="${property.address.province.substring(0,10).equals('Thành phố ')}"
-                                  th:text="${property.address.province.substring(10)}">Long biên</span>
-                            <span th:if="${property.address.district.substring(0,6).equals('Huyện ')}"
-                                  th:text="${property.address.district.substring(6)}+', '">Hà nội</span>
-                            <span th:if="${property.address.province.substring(0,5).equals('Tỉnh ')}"
-                                  th:text="${property.address.province.substring(5)}">Long biên</span>
 
-                        </div>
                     </div>
                     <div class="description mx-4">
                         <p th:text="${property.propertyDescription}" style="width: 100%;
@@ -360,10 +363,10 @@
                                  src="https://file4.batdongsan.com.vn/resize/200x200/2024/07/30/20240730153731-b584.jpg"
                                  alt="photo">
                             <div class="contact-info row">
-                                    <span th:text="${property.contact.fullName}" style="font-size: 12px;"
+                                    <span th:text="${property.postInformation.fullName}" style="font-size: 12px;"
                                           class="col-md-12 fw-bold mt-1 text-dark">Nguyễn Trường
                                         Nam</span>
-                                <span th:text="${property.contact.datePost}" class="col-md-12 text-body "
+                                <span th:text="${property.postInformation.datePost}" class="col-md-12 text-body "
                                       style="font-size: 12px;">Đăng ngày
                                         20/11/2024</span>
                             </div>
@@ -375,14 +378,13 @@
                                 <path
                                         d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                             </svg>
-                            <span th:text="'Liên hệ: '+${property.contact.phone}" class="mx-2">Liên hệ:
+                            <span th:text="'Liên hệ: '+${property.postInformation.phone}" class="mx-2">Liên hệ:
                                     <strong>0345738256</strong></span>
                         </div>
                     </div>
                 </div>
             </a>
             <!-- Tới đây -->
-
 
         </div>
     </div>
@@ -405,7 +407,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
 <script th:src="@{/access/js/apiprovince.js}"></script>
-
+<script th:src="@{/access/js/price-format.js}"></script>
 </body>
 
 </html>

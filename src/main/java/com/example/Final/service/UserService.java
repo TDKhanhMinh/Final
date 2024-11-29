@@ -34,7 +34,11 @@ public class UserService implements UserDetailsService {
         saveUser.setConfirmPassword(user.getConfirmPassword());
         saveUser.setImages(null);
         saveUser.setRoles(Collections.singletonList(rolesRepository.findRolesByName("ROLE_REALTOR")));
+        saveUser.setPhone(user.getPhone());
         return userRepository.save(saveUser);
+    }
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     public User update(User user) {

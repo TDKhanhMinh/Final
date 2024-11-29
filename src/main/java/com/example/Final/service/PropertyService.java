@@ -1,7 +1,7 @@
 package com.example.Final.service;
 
-import com.example.Final.entity.listingservice.Contact;
 import com.example.Final.entity.listingservice.HistoryListing;
+import com.example.Final.entity.listingservice.PostInformation;
 import com.example.Final.entity.listingservice.Properties;
 import com.example.Final.entity.securityservice.User;
 import com.example.Final.repository.ContactRepo;
@@ -87,13 +87,13 @@ public class PropertyService {
         oldProperties.setPropertyFloor(properties.getPropertyFloor());
         oldProperties.setBedrooms(properties.getBedrooms());
         oldProperties.setBathrooms(properties.getBathrooms());
-        Contact contact = oldProperties.getContact();
+        PostInformation postInformation = oldProperties.getPostInformation();
 
-        if (properties.getContact() != null) {
-            contact.setEmail(properties.getContact().getEmail());
-            contact.setFullName(properties.getContact().getFullName());
-            contact.setPhone(properties.getContact().getPhone());
-            contactRepo.save(contact);
+        if (properties.getPostInformation() != null) {
+            postInformation.setEmail(properties.getPostInformation().getEmail());
+            postInformation.setFullName(properties.getPostInformation().getFullName());
+            postInformation.setPhone(properties.getPostInformation().getPhone());
+            contactRepo.save(postInformation);
         }
 
         if (properties.getPropertyPrice() != oldProperties.getPropertyPrice()) {
@@ -106,8 +106,20 @@ public class PropertyService {
                 oldProperties.setPropertyPrice(properties.getPropertyPrice());
             }
         }
-        oldProperties.setContact(contact);
+        oldProperties.setPostInformation(postInformation);
         propertyRepo.save(oldProperties);
+    }
+
+    public List<Properties> findPropertiesByKey(String key) {
+        return propertyRepo.findPropertiesByKey(key);
+    }
+
+    public List<Properties> findPropertiesByForm(String optionType, String city,
+                                                 String district, String ward,
+                                                 String houseType, Double priceMin,
+                                                 Double priceMax, Double sqmtMin,
+                                                 Double sqmtMax) {
+        return propertyRepo.findByForm(optionType, city, district, ward, houseType, priceMin, priceMax, sqmtMin, sqmtMax);
     }
 
 }
