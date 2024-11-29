@@ -61,7 +61,7 @@ public class HomeController {
         return "user/login";
     }
 
-    @PostMapping("/searchForm")
+    @GetMapping("/searchForm")
     public String getSearch(@Param("optionType") String optionType,
                             @Param("city") String city,
                             @Param("district") String district,
@@ -71,7 +71,6 @@ public class HomeController {
                             @Param("sqmtRange") String sqmtRange,
                             Model model
     ) {
-
         Double minPrice = null;
         Double maxPrice = null;
         Double minSqmt = null;
@@ -116,9 +115,19 @@ public class HomeController {
 
         }
 
-
-        List<Properties> propertiesList = propertyService.findPropertiesByForm(optionType, city, district, ward, houseType, minPrice, maxPrice, minSqmt, maxSqmt);
-        model.addAttribute("properties", propertiesList);
+        String replace = city.replace(",", "").replace("Tỉnh ", "").replace("Thành phố ", "");
+        List<Properties> propertiesList = propertyService.findPropertiesByForm(optionType,
+                replace,
+                district.replace(",", "").replace("Huyện ", "").replace("Thị xã ", ""),
+                ward.replace(",", "").replace("Xã ", ""), houseType, minPrice, maxPrice, minSqmt, maxSqmt);
+        System.out.println(replace);
+        if (city.isEmpty() && city.trim().isEmpty()) {
+            model.addAttribute("city", "Toàn quốc");
+            model.addAttribute("properties", propertyService.getAll());
+        } else {
+            model.addAttribute("city", replace);
+            model.addAttribute("properties", propertiesList);
+        }
         System.out.println(propertiesList);
         return "listing/all-listing";
     }
@@ -127,7 +136,14 @@ public class HomeController {
     public String getSearchProductPage(@RequestParam("searchKey") String searchKey, Model model) {
         List<Properties> propertiesList = propertyService.findPropertiesByKey(searchKey);
         model.addAttribute("properties", propertiesList);
+        return "listing/all-listing";
+    }
 
+    @GetMapping("/searchCity")
+    public String getSearchCity(Model model, @RequestParam("city") String city) {
+        List<Properties> propertiesList = propertyService.findPropertiesByProvince(city);
+        model.addAttribute("properties", propertiesList);
+        model.addAttribute("city", city);
         return "listing/all-listing";
     }
 }

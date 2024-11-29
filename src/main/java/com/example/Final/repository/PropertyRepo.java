@@ -43,4 +43,7 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
                                 @Param("priceMax") Double priceMax,
                                 @Param("sqmtMin") Double sqmtMin,
                                 @Param("sqmtMax") Double sqmtMax);
+
+
+    List<Properties> findByAddress_Province(String province);
 }

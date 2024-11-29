@@ -90,9 +90,9 @@ public class ListingController {
             address.setFullAddress(addressInput);
         }
 
-        address.setProvince(city);
-        address.setDistrict(district);
-        address.setWard(ward);
+        address.setProvince(city.replace(",", "").replace("Tỉnh ", "").replace("Thành phố ", ""));
+        address.setDistrict(district.replace(",", "").replace("Huyện ", "").replace("Thị xã ", ""));
+        address.setWard(ward.replace(",", "").replace("Xã ", ""));
 
         Properties properties = new Properties();
         address.setProperties(properties);
@@ -194,7 +194,6 @@ public class ListingController {
         model.addAttribute("historySize", history.size());
         return "listing/listing-info";
     }
-
 
 
     @PostMapping("/payment-post")

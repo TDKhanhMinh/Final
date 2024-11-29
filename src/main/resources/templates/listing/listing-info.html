@@ -497,19 +497,21 @@
         <tbody>
         <tr th:each="item:${property.rentalHistories}">
             <td th:text="${item.createdAt}">Mark</td>
-            <td th:text="${item.rentalPrice}">Mark</td>
+            <td th:if="${property.propertyPrice>1000000000}" th:text="${item.rentalPrice/1000000000+' tỷ'}">Mark</td>
             <td th:text="${item.status}">Otto</td>
             <td th:text="${item.source}">@mdo</td>
         </tr>
         <tr th:each="item:${property.salesHistories}">
             <td th:text="${item.createDate}">Mark</td>
-            <td th:text="${item.price}">Mark</td>
+            <td th:if="${property.propertyPrice>1000000000}" th:text="${item.price/1000000000+' tỷ'}">Mark</td>
+            <td th:if="${property.propertyPrice<1000000000}" th:text="${item.price/100000000+' triệu'}">Mark</td>
             <td th:text="${item.status}">Otto</td>
             <td th:text="${item.source}">@mdo</td>
         </tr>
         </tbody>
     </table>
 </div>
+
 
 <!--END LỊCH SỬ GIÁ-->
 

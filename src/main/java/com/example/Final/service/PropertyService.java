@@ -122,4 +122,8 @@ public class PropertyService {
         return propertyRepo.findByForm(optionType, city, district, ward, houseType, priceMin, priceMax, sqmtMin, sqmtMax);
     }
 
+    public List<Properties> findPropertiesByProvince(String province) {
+        return propertyRepo.findByAddress_Province(province);
+    }
+
 }
