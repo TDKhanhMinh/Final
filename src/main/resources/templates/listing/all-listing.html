@@ -251,7 +251,12 @@
 <!-- TẤT CẢ BÀI ĐĂNG -->
 
 <div class="container mt-4">
+
     <div class="row d-flex justify-content-center">
+        <h4 th:if="${city.equals('Toàn quốc')}" class="col-md-8"><strong>Mua bán và cho thuê nhà trên toàn quốc</strong>
+        </h4>
+        <h4 th:if="${!city.equals('Toàn quốc')}" th:text="${'Mua bán và cho thuê nhà tại '+city}" class="col-md-8 fw-bold"></h4>
+
         <div class="col-md-10" th:each="property:${properties}">
             <!-- Nội dụng lấy từ đây -->
             <a style="z-index: 1;" th:href="@{/listing/listing-info/{id}(id=${property.propertyId})}"

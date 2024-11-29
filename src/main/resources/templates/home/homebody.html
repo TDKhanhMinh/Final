@@ -73,20 +73,12 @@
 <div class="container mt-4">
     <div class="row d-flex justify-content-center">
         <div class="col-md-10">
-            <div class="input-group row mt-3 d-flex justify-content-center bg-secondary rounded-2">
-                <form th:action="@{/home/searchForm}" method="get" class="col-md-10 m-4">
-                    <div class="container">
-                        <div class="btn btn-sm btn-outline-light btn-active">
-                            Nhà đất bán
-                            <input name="optionType" type="radio" value="sell" hidden="hidden">
-                        </div>
-                        <div class="btn btn-sm btn-outline-light btn-re-active">
-                            Nhà đất cho thuê
-                            <input name="optionType" type="radio" value="rent" hidden="hidden">
-                        </div>
-                    </div>
-                    <div class="container d-flex flex-nowrap my-2">
-                        <!--                            <form th:action="@{/home/searchByKey}" method="post">-->
+            <div class="input-group row mt-3 d-flex justify-content-center rounded-2" style="background-color: #c3c2c2">
+
+                <form th:action="@{/home/searchByKey}" method="post"
+                      class="col-md-10  m-4 d-flex justify-content-center">
+                    <div class="d-flex justify-content-center flex-nowrap form-control "
+                         style="background-color: whitesmoke;max-width: 95%">
                         <input name="searchKey" id="search" type="text" class="form-control"
                                placeholder="Tìm kiếm trên toàn quốc" aria-label="Search"
                                aria-describedby="button-addon2">
@@ -95,219 +87,253 @@
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
-                        <!--                            </form>-->
                     </div>
-                    <div class="container d-flex flex-nowrap my-2">
-                        <div class="province-district-ward">
-                            <select class="text-start btn" name="city" id="city" style="width: 270px">
-                                <option value="">Tỉnh/Thành phố</option>
-                            </select>
-                        </div>
-                        <div class="province-district-ward mx-2">
-                            <select class="text-start btn" name="district" id="district" style="width: 267px">
-                                <option value="">Quận/Huyện</option>
-                            </select>
-                        </div>
-                        <div class="province-district-ward">
-                            <select class="text-start btn" name="ward" id="ward" style="width: 270px">
-                                <option value="">Phường/Xã</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="container d-flex flex-nowrap">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle text-start " style="width: 270px"
-                                    type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                Loại nhà đất
-                            </button>
-                            <ul class="dropdown-menu mt-2" style="width: 270px"
-                                aria-labelledby="dropdownMenuButton1">
-                                <li>
-                                    <h6 class="text-uppercase text-center m-2">Loại nhà đất</h6>
-                                </li>
-                                <li>
-                                    <hr class="fw-light">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-houses mx-1" viewBox="0 0 16 16">
+                </form>
+                <button style="max-width: 76%" class="btn btn-primary rounded-2 mb-3" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Tìm kiếm chi tiết
+                </button>
+                <div class="collapse my-2" id="collapseExample">
+                    <div class="card card-body d-flex justify-content-center">
+
+                        <form style="padding-left: 50px" th:action="@{/home/searchForm}" method="get" class="col-md-10 mx-4 mt-2 mb-2">
+                            <div class="container">
+                                <div class="btn btn-sm btn-outline-dark btn-active">
+                                    Nhà đất bán
+                                    <input name="optionType" type="radio" value="sell" hidden="hidden">
+                                </div>
+                                <div class="btn btn-sm btn-outline-dark btn-re-active">
+                                    Nhà đất cho thuê
+                                    <input name="optionType" type="radio" value="rent" hidden="hidden">
+                                </div>
+                            </div>
+
+                            <div class="container d-flex flex-nowrap my-2">
+                                <div class="province-district-ward">
+                                    <select class="text-start btn" name="city" id="city" style="width: 270px">
+                                        <option value="">Tỉnh/Thành phố</option>
+                                    </select>
+                                </div>
+                                <div class="province-district-ward mx-2">
+                                    <select class="text-start btn" name="district" id="district" style="width: 267px">
+                                        <option value="">Quận/Huyện</option>
+                                    </select>
+                                </div>
+                                <div class="province-district-ward">
+                                    <select class="text-start btn" name="ward" id="ward" style="width: 270px">
+                                        <option value="">Phường/Xã</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container d-flex flex-nowrap">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-dark dropdown-toggle text-start "
+                                            style="width: 270px"
+                                            type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Loại nhà đất
+                                    </button>
+                                    <ul class="dropdown-menu mt-2" style="width: 270px"
+                                        aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <h6 class="text-uppercase text-center m-2">Loại nhà đất</h6>
+                                        </li>
+                                        <li>
+                                            <hr class="fw-light">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-houses mx-1" viewBox="0 0 16 16">
                                                 <path
                                                         d="M5.793 1a1 1 0 0 1 1.414 0l.647.646a.5.5 0 1 1-.708.708L6.5 1.707 2 6.207V12.5a.5.5 0 0 0 .5.5.5.5 0 0 1 0 1A1.5 1.5 0 0 1 1 12.5V7.207l-.146.147a.5.5 0 0 1-.708-.708zm3 1a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708zm.707.707L5 7.207V13.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V7.207z"/>
                                             </svg>
                                             Tất cả nhà đất</span><input value="all" name="houseType" class="mx-2"
                                                                         type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2"><i
-                                        class="fa-solid fa-hotel mx-1"></i>
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2"><i
+                                                class="fa-solid fa-hotel mx-1"></i>
                                             Căn hộ chung cư</span><input value="Căn hộ" name="houseType" class="mx-2"
                                                                          type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-house mx-1" viewBox="0 0 16 16">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-house mx-1" viewBox="0 0 16 16">
                                                 <path
                                                         d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                                             </svg>
                                             Nhà riêng</span><input value="Nhà riêng" name="houseType" class="mx-2"
                                                                    type="radio"></li>
-                                <li class="d-flex justify-content-between"><span class="mx-2"><i
-                                        class="fa-solid fa-house-user mx-1"></i>
+                                        <li class="d-flex justify-content-between"><span class="mx-2"><i
+                                                class="fa-solid fa-house-user mx-1"></i>
                                             Nhà biệt thự</span><input value="Biệt thự" name="houseType" class="mx-2"
                                                                       type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2"><i
-                                        class="fa-solid fa-house-chimney mx-1"></i>
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2"><i
+                                                class="fa-solid fa-house-chimney mx-1"></i>
                                             Nhà mặt phố</span><input value="Nhà mặt phố" name="houseType" class="mx-2"
                                                                      type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2"><i
-                                        class="fa-solid fa-house-chimney mx-1"></i>
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2"><i
+                                                class="fa-solid fa-house-chimney mx-1"></i>
                                             Nhà trọ/Phòng trọ</span><input value="Nhà trọ" name="houseType" class="mx-2"
                                                                            type="radio">
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="dropdown mx-2">
-                            <button class="btn btn-outline-light dropdown-toggle1 text-start " style="width: 270px"
-                                    type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                Mức giá
-                            </button>
-                            <ul class="dropdown-menu mt-2 "
-                                style="width: 270px; max-height: 250px; overflow-y: scroll;"
-                                aria-labelledby="dropdownMenuButton1">
-                                <li>
-                                    <h6 class="text-uppercase text-center m-2">Mức giá</h6>
-                                </li>
-                                <li>
-                                    <hr class="fw-light">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown mx-2">
+                                    <button class="btn btn-outline-dark dropdown-toggle1 text-start "
+                                            style="width: 270px"
+                                            type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Mức giá
+                                    </button>
+                                    <ul class="dropdown-menu mt-2 "
+                                        style="width: 270px; max-height: 250px; overflow-y: scroll;"
+                                        aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <h6 class="text-uppercase text-center m-2">Mức giá</h6>
+                                        </li>
+                                        <li>
+                                            <hr class="fw-light">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             Tất cả mức giá</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'all'}" type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'all'}" type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             Dưới 500 triệu</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'0,500000000'}" type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'0,500000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             500 - 800 triệu</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'500000000,800000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'500000000,800000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             800 triệu - 1 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'800000000,1000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'800000000,1000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             1 - 2 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'1000000000,2000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'1000000000,2000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             2 - 3 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'2000000000,3000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'2000000000,3000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             3 - 5 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'3000000000,5000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'3000000000,5000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             5 - 7 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'5000000000,7000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'5000000000,7000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             7 - 10 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'7000000000,10000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'7000000000,10000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             10 - 20 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'10000000000,20000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2"
+                                                   th:value="${'10000000000,20000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             20 - 30 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'20000000000,30000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2"
+                                                   th:value="${'20000000000,30000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             30 - 40 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'30000000000,40000000000'}"
-                                           type="radio">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2"
+                                                   th:value="${'30000000000,40000000000'}"
+                                                   type="radio">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             Trên 40 tỷ</span>
-                                    <input name="rangePrice" class="mx-2" th:value="${'40000000000'}" type="radio">
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle1 text-start " style="width: 270px"
-                                    type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                Diện tích
-                            </button>
-                            <ul class="dropdown-menu mt-2 "
-                                style="width: 270px; max-height: 250px; overflow-y: scroll;"
-                                aria-labelledby="dropdownMenuButton1">
-                                <li>
-                                    <h6 class="text-uppercase text-center m-2">Diện tích</h6>
-                                </li>
-                                <li>
-                                    <hr class="fw-light">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                            <input name="rangePrice" class="mx-2" th:value="${'40000000000'}"
+                                                   type="radio">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-dark dropdown-toggle1 text-start "
+                                            style="width: 270px"
+                                            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Diện tích
+                                    </button>
+                                    <ul class="dropdown-menu mt-2 "
+                                        style="width: 270px; max-height: 250px; overflow-y: scroll;"
+                                        aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <h6 class="text-uppercase text-center m-2">Diện tích</h6>
+                                        </li>
+                                        <li>
+                                            <hr class="fw-light">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             Tất cả diện tích
                                         </span><input th:value="${'all'}" class="mx-2" type="radio" name="sqmtRange">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             Dưới 30 m²
                                         </span><input th:value="${'0,30'}" class="mx-2" type="radio" name="sqmtRange">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             30 - 50 m²</span><input th:value="${'30,50'}" class="mx-2" type="radio"
                                                                     name="sqmtRange"></li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             50 - 80 m²</span><input th:value="${'50,80'}" class="mx-2" type="radio"
                                                                     name="sqmtRange"></li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             80 - 100 m²</span><input th:value="${'80,100'}" class="mx-2" type="radio"
                                                                      name="sqmtRange">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             100 - 150 m²</span><input th:value="${'100,150'}" class="mx-2" type="radio"
                                                                       name="sqmtRange">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             150 - 200 m²</span><input th:value="${'150,200'}" class="mx-2" type="radio"
                                                                       name="sqmtRange">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             200 - 250 m²</span><input th:value="${'200,250'}" class="mx-2" type="radio"
                                                                       name="sqmtRange">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             250 - 300 m²</span><input th:value="${'250,300'}" class="mx-2" type="radio"
                                                                       name="sqmtRange">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             300 - 500 m²</span><input th:value="${'300,500'}" class="mx-2" type="radio"
                                                                       name="sqmtRange">
-                                </li>
-                                <li class="d-flex justify-content-between"><span class="mx-2">
+                                        </li>
+                                        <li class="d-flex justify-content-between"><span class="mx-2">
                                             Trên 500 m²</span><input th:value="${'500'}" class="mx-2" type="radio"
                                                                      name="sqmtRange">
-                                </li>
-                            </ul>
-                        </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="input-group-append p-0 text-end mt-2">
+                                <button class="btn btn-primary" type="submit" id="button-addon">
+                                    Tìm kiếm
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -398,7 +424,8 @@
                             <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
 
                         </svg>
-                        <span th:if="${!property.address.district.split(',')[0].equals(property.address.province.split(',')[0])}" th:text="${property.address.district.split(',')[0]+','}">Long biên</span>
+                        <span th:if="${!property.address.district.split(',')[0].equals(property.address.province.split(',')[0])}"
+                              th:text="${property.address.district.split(',')[0]+','}">Long biên</span>
                         <span th:text="${property.address.province.split(',')[0]}">Long biên</span>
 
                         <span th:if="${property.address.province.startsWith(',')}"

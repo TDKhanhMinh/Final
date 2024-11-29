@@ -427,8 +427,8 @@
                     <td><img class="rounded-3" th:src="${property.listImages.get(0).imageUrl}"
                              style="width: 120px; height: 90px"
                              alt="Property Image"/></td>
-                    <td style="width: 450px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
-                        th:text="${property.propertyTitle}"></td>
+                    <td><h6 style="width: 450px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
+                            th:text="${property.propertyTitle}"></h6></td>
                     <td th:text="${property.postInformation.datePost}"></td>
                     <td class="text-center">
                         <a th:href="@{/user/update-post/{id}(id=${property.propertyId})}" id="updateBtn"

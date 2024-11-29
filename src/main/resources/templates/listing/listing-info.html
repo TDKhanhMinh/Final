@@ -481,10 +481,9 @@
     </div>
 </div>
 
-
 <!--LỊCH SỬ GIÁ-->
-<div class="container mt-4 d-flex justify-content-center flex-wrap" style="max-width: 80%;">
-    <h5 class="py-3">Lịch sử giá của bất động sản này</h5>
+<div th:if="${property.rentalHistories.size()>0}" class="container rent mt-4 d-flex justify-content-center flex-wrap " id="rentDiv" style="max-width: 80%;">
+    <h5 class="py-3">Lịch sử giá thuê của bất động sản này</h5>
     <table class="table table-hover" style="max-width: 80%">
         <thead style="background-color: whitesmoke" class="rounded-top">
         <tr>
@@ -501,6 +500,22 @@
             <td th:text="${item.status}">Otto</td>
             <td th:text="${item.source}">@mdo</td>
         </tr>
+
+        </tbody>
+    </table>
+</div>
+<div th:if="${property.salesHistories.size()>0}"  class="container sale mt-4 d-flex justify-content-center flex-wrap" id="saleDiv"  style="max-width: 80%; display: none;">
+    <h5 class="py-3">Lịch sử giá bán của bất động sản này</h5>
+    <table class="table table-hover" style="max-width: 80%">
+        <thead style="background-color: whitesmoke" class="rounded-top">
+        <tr>
+            <th scope="col">Ngày đăng</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Nguồn</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr th:each="item:${property.salesHistories}">
             <td th:text="${item.createDate}">Mark</td>
             <td th:if="${property.propertyPrice>1000000000}" th:text="${item.price/1000000000+' tỷ'}">Mark</td>
@@ -557,6 +572,8 @@
                                     d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
                             <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                         </svg>
+                        <span th:if="${!item.address.district.split(',')[0].equals(property.address.province.split(',')[0])}"
+                              th:text="${item.address.district.split(',')[0]+','}">Long biên</span>
                         <span th:text="${item.address.province.split(',')[0]}">Long biên</span>
 
                         <span th:if="${item.address.province.startsWith(',')}"
@@ -625,6 +642,8 @@
                                 <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
                                 <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                             </svg>
+                            <span th:if="${!item.address.district.split(',')[0].equals(property.address.province.split(',')[0])}"
+                                  th:text="${item.address.district.split(',')[0]+','}">Long biên</span>
                             <span th:text="${item.address.province.split(',')[0]}">Long biên</span>
 
                             <span th:if="${item.address.province.startsWith(',')}"
@@ -733,6 +752,7 @@
         }, 3000);
     });
 </script>
+
 </body>
 
 </html>

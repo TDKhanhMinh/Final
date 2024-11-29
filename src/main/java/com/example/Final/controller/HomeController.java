@@ -136,6 +136,7 @@ public class HomeController {
     public String getSearchProductPage(@RequestParam("searchKey") String searchKey, Model model) {
         List<Properties> propertiesList = propertyService.findPropertiesByKey(searchKey);
         model.addAttribute("properties", propertiesList);
+        model.addAttribute("city", "Toàn quốc");
         return "listing/all-listing";
     }
 
