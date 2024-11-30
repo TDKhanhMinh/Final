@@ -240,16 +240,22 @@ public class ListingController {
         postInformation.setProperties(properties);
         postInformation.setPayment(payment);
         postInformation.setDaysRemaining(optionDay);
-
         properties.setPostInformation(contactRepo.save(postInformation));
 
         propertyService.save(properties);
 
-        paymentService.savePayment(payment, formattedDate, properties);
-        user.setAccountBalance(user.getAccountBalance() - payment);
+        if (user.getAccountBalance() < payment) {
+            paymentService.savePaymentFailure(payment, formattedDate, properties);
+            return "redirect:/user/listing-manager";
+        } else {
+            paymentService.savePaymentSuccess(payment, formattedDate, properties);
+            user.setAccountBalance(user.getAccountBalance() - payment);
+            userService.save(user);
+            return "redirect:/user/listing-manager";
+        }
 
-        userService.save(user);
-        return "redirect:/user/listing-manager";
+
+
     }
 
     @PostMapping("/test")

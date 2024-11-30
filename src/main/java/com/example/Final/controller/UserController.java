@@ -170,6 +170,16 @@ public class UserController {
         return "user/listing-manager";
     }
 
+    @GetMapping("/listing-manager-draft")
+    public String getListingManagerDraft(Model model, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        List<Properties> propertiesList = propertyService.getAllByUser(user);
+        propertiesList.removeIf(Properties::isAvailable);
+        model.addAttribute("properties", propertiesList);
+        return "user/draft-manager";
+    }
+
     @GetMapping("/update-post/{id}")
     public String updatePost(Model model, Principal principal, @PathVariable int id) {
         User user = userService.findUserByEmail(principal.getName());

@@ -46,4 +46,20 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
 
 
     List<Properties> findByAddress_Province(String province);
+
+    @Query("select p from Properties p where " +
+            "(:city is null or p.address.province = :city )" +
+            "and (:houseType is null or p.propertyType = :houseType )" +
+            "and (:priceMin is null or p.propertyPrice >= :priceMin )" +
+            "and (:priceMax is null or p.propertyPrice <= :priceMax )" +
+            "and (:sqmtMin is null or p.squareMeters>= :sqmtMin )" +
+            "and (:sqmtMax is null or p.squareMeters <= :sqmtMax )" +
+            "and (:bedroom is null or p.bedrooms = :bedroom)")
+    List<Properties> findByCity(@Param("city") String city,
+                                @Param("houseType") String houseType,
+                                @Param("priceMin") Double priceMin,
+                                @Param("priceMax") Double priceMax,
+                                @Param("sqmtMin") Double sqmtMin,
+                                @Param("sqmtMax") Double sqmtMax,
+                                @Param("bedroom") Integer bedroom);
 }

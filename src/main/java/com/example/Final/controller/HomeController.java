@@ -128,7 +128,7 @@ public class HomeController {
             model.addAttribute("city", replace);
             model.addAttribute("properties", propertiesList);
         }
-        System.out.println(propertiesList);
+        System.out.println(city);
         return "listing/all-listing";
     }
 
@@ -147,4 +147,66 @@ public class HomeController {
         model.addAttribute("city", city);
         return "listing/all-listing";
     }
+
+    @GetMapping("/searchByCity")
+    public String getSearchByCity(Model model, @RequestParam("city") String city,
+                                  @Param("houseType") String houseType,
+                                  @Param("rangePrice") String rangePrice,
+                                  @Param("sqmtRange") String sqmtRange,
+                                  @Param("bedroom") String bedroom) {
+
+
+        Double minPrice = null;
+        Double maxPrice = null;
+        Double minSqmt = null;
+        Double maxSqmt = null;
+        Integer bed = null;
+        if (bedroom != null && !bedroom.isEmpty()) {
+            bed = Integer.valueOf(bedroom);
+        }
+        if (rangePrice != null && !rangePrice.isEmpty()) {
+            String[] rangeParts = rangePrice.split("&");
+            List<Double> allPrices = new ArrayList<>();
+
+            for (String part : rangeParts) {
+                if (part.contains(",")) {
+                    String[] prices = part.split(",");
+                    for (String price : prices) {
+                        allPrices.add(Double.valueOf(price));
+                    }
+                } else {
+                    allPrices.add(Double.valueOf(part));
+                }
+            }
+            if (!allPrices.isEmpty()) {
+                minPrice = Collections.min(allPrices);
+                maxPrice = Collections.max(allPrices);
+            }
+        }
+        if (sqmtRange != null && !sqmtRange.isEmpty()) {
+            String[] rangeParts = sqmtRange.split("&");
+            List<Double> allSqmt = new ArrayList<>();
+
+            for (String part : rangeParts) {
+                if (part.contains(",")) {
+                    String[] prices = part.split(",");
+                    for (String price : prices) {
+                        allSqmt.add(Double.valueOf(price));
+                    }
+                } else {
+                    allSqmt.add(Double.valueOf(part));
+                }
+            }
+            if (!allSqmt.isEmpty()) {
+                minSqmt = Collections.min(allSqmt);
+                maxSqmt = Collections.max(allSqmt);
+            }
+
+        }
+        List<Properties> propertiesList = propertyService.findByCity(city, houseType, minPrice, maxPrice, minSqmt, maxSqmt, bed);
+        model.addAttribute("properties", propertiesList);
+        model.addAttribute("city", city);
+        return "listing/all-listing";
+    }
+
 }

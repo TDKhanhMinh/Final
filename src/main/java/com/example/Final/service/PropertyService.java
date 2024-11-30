@@ -126,4 +126,10 @@ public class PropertyService {
         return propertyRepo.findByAddress_Province(province);
     }
 
+    public List<Properties> findByCity(String city, String houseType, Double priceMin,
+                                       Double priceMax, Double sqmtMin,
+                                       Double sqmtMax, Integer bedroom) {
+        return propertyRepo.findByCity(city, houseType, priceMin, priceMax, sqmtMin, sqmtMax, bedroom);
+    }
+
 }
