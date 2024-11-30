@@ -75,69 +75,52 @@ public class HomeController {
                             @Param("city") String city,
                             @Param("district") String district,
                             @Param("ward") String ward,
-                            @Param("houseType") String houseType,
-                            @Param("rangePrice") String rangePrice,
-                            @Param("sqmtRange") String sqmtRange,
+                            @Param("houseType") Integer houseType,
+                            @Param("rangePrice") Integer rangePrice,
+                            @Param("sqmtRange") Integer sqmtRange,
                             Model model
     ) {
-        Double minPrice = null;
-        Double maxPrice = null;
-        Double minSqmt = null;
-        Double maxSqmt = null;
-        if (rangePrice != null && !rangePrice.isEmpty()) {
-            String[] rangeParts = rangePrice.split("&");
-            List<Double> allPrices = new ArrayList<>();
+        System.out.println("controller");
+        System.out.println("Option: "+optionType);
+        System.out.println("City: "+city);
+        System.out.println("District: "+district);
+        System.out.println("Ward: "+ward);
+        System.out.println("HouseType: "+houseType);
+        System.out.println("RangePrice: "+rangePrice);
+        System.out.println("SqmtRange: "+sqmtRange);
 
-            for (String part : rangeParts) {
-                if (part.contains(",")) {
-                    String[] prices = part.split(",");
-                    for (String price : prices) {
-                        allPrices.add(Double.valueOf(price));
-                    }
-                } else {
-                    allPrices.add(Double.valueOf(part));
-                }
-            }
-            if (!allPrices.isEmpty()) {
-                minPrice = Collections.min(allPrices);
-                maxPrice = Collections.max(allPrices);
-            }
-        }
-        if (sqmtRange != null && !sqmtRange.isEmpty()) {
-            String[] rangeParts = sqmtRange.split("&");
-            List<Double> allSqmt = new ArrayList<>();
-
-            for (String part : rangeParts) {
-                if (part.contains(",")) {
-                    String[] prices = part.split(",");
-                    for (String price : prices) {
-                        allSqmt.add(Double.valueOf(price));
-                    }
-                } else {
-                    allSqmt.add(Double.valueOf(part));
-                }
-            }
-            if (!allSqmt.isEmpty()) {
-                minSqmt = Collections.min(allSqmt);
-                maxSqmt = Collections.max(allSqmt);
-            }
-
+        if(city.equals("")){
+            city = null;
+            System.out.println("city Null");
+        }else{
+            city = city.replace(",", "").replace("Tỉnh ", "").replace("Thành phố ", "");
+            System.out.println(city);
         }
 
-        String replace = city.replace(",", "").replace("Tỉnh ", "").replace("Thành phố ", "");
-        List<Properties> propertiesList = propertyService.findPropertiesByForm(optionType,
-                replace,
-                district.replace(",", "").replace("Huyện ", "").replace("Thị xã ", ""),
-                ward.replace(",", "").replace("Xã ", ""), houseType, minPrice, maxPrice, minSqmt, maxSqmt);
-        System.out.println(replace);
-        if (city.isEmpty() && city.trim().isEmpty()) {
-            model.addAttribute("city", "Toàn quốc");
-            model.addAttribute("properties", propertyService.getAll());
-        } else {
-            model.addAttribute("city", replace);
-            model.addAttribute("properties", propertiesList);
+        if(district.equals("")){
+            System.out.println("district Null");
+            district = null;
+        }else{
+            district = district.replace(",", "").replace("Huyện ", "").replace("Thị xã ", "");
+            System.out.println(district);
         }
-        System.out.println(city);
+
+        if(ward.equals("")){
+            System.out.println("ward Null");
+            ward = null;
+        }else{
+            ward = ward.replace(",", "").replace("Xã ", "");
+            System.out.println(ward);
+        }
+
+        List<Properties> propertiesList = propertyService.findPropertiesByForm(optionType, city, district, ward, houseType, rangePrice, sqmtRange);
+        for (Properties properties : propertiesList) {
+            System.out.println(properties.getPropertyPrice());
+        }
+        model.addAttribute("city", city);
+        model.addAttribute("properties", propertiesList);
+
+
         return "listing/all-listing";
     }
 
