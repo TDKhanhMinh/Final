@@ -55,7 +55,7 @@
                         <span>0 VNĐ</span>
                     </div>
                     <div class="d-flex justify-content-center my-2 mt-4">
-                        <div class="btn btn-outline-success">
+                        <a th:href="@{/payment/deposit}" class="btn btn-outline-success">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-window-plus" viewBox="0 0 16 16">
                                 <path
@@ -66,7 +66,7 @@
                                         d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5"/>
                             </svg>
                             Nạp tiền
-                        </div>
+                        </a>
                     </div>
                 </div>
             </li>
@@ -221,13 +221,14 @@
 
     <div class="col-md-9" style="padding-top: 120px; background-color: whitesmoke">
         <div class="container bg-light shadow rounded-3">
-            <h3 class="my-2 py-2">Tin đã đăng</h3>
+            <h3 class="my-2 py-2">Tin nháp</h3>
             <table th:if="${!properties.isEmpty()}" class="table table-hover mx-2">
                 <thead>
                 <tr class="table-secondary  ">
                     <th scope="col">Mã tin</th>
                     <th scope="col">Ảnh</th>
                     <th scope="col">Tiêu đề</th>
+                    <th scope="col">Trạng thái</th>
                     <th scope="col">Ngày đăng</th>
                     <th class="text-center" scope="col">Action</th>
                 </tr>
@@ -238,23 +239,23 @@
                     <td><img class="rounded-3" th:src="${property.listImages.get(0).imageUrl}"
                              style="width: 120px; height: 90px"
                              alt="Property Image"/></td>
-                    <td><h6 style="width: 450px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
+                    <td><h6 style="width: 300px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
                             th:text="${property.propertyTitle}"></h6></td>
+                    <td th:text="${property.payment.status}"></td>
                     <td th:text="${property.postInformation.datePost}"></td>
                     <td class="text-center">
+                        <a th:href="@{/payment/payment/{id}(id=${property.propertyId})}"  class="btn btn-sm btn-success">
+                            Thanh toán
+                        </a>
                         <a th:href="@{/user/update-post/{id}(id=${property.propertyId})}" id="updateBtn"
                            class="btn btn-info btn-sm ">
                             Chỉnh sửa
                         </a>
-                        <!--                        <a th:href="@{/user/delete-post/{id}(id=${property.propertyId})}"-->
-                        <!--                           class="btn btn-sm btn-danger">Xóa</a>-->
-                        <!--End update category-->
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-danger mt-2" style="width: 170px;" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                             Xóa bài đăng
                         </button>
-
+                        
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">

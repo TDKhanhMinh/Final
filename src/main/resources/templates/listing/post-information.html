@@ -54,15 +54,16 @@
             </div>
         </div>
         <hr>
-        <form th:action="@{/listing/information}"  method="post">
+        <form th:action="@{/listing/information}" class="was-validated" method="post">
             <input type="hidden" th:value="${propertyOld.propertyId}" name="propertyId">
             <div class="container-sm border place-address container-fix-60">
                 <h5 class="py-3 mx-2"><strong>Thông tin chính</strong></h5>
                 <div class="container mb-4">
                     <h6>Loại BĐS</h6>
-                    <select class="text-start btn btn-outline-secondary rounded-pill " name="property-type" id="type"
-                            style="width: 660px">
-                        <option>-- Chọn loại BĐS --</option>
+                    <select class="text-start btn btn-outline-secondary rounded-pill " name="property-type"
+                            id="type"
+                            style="width: 660px" required>
+                        <option disabled selected value="">-- Chọn loại BĐS --</option>
                         <option value="Căn hộ">Căn hộ chung cư</option>
                         <option value="Nhà riêng">Nhà riêng</option>
                         <option value="Biệt thự">Nhà biệt thự</option>
@@ -74,14 +75,17 @@
                     <h6>Diện tích</h6>
                     <div class="d-flex flex-nowrap">
                         <input name="square-meters" type="number" class="form-control"
-                               placeholder="Nhập diện tích">
+                               placeholder="Nhập diện tích " required>
                         <div class="btn rounded-pill option-unit "> m²</div>
                     </div>
+<!--                    <div class="invalid-feedback mx-2">-->
+<!--                        Vui lòng chọn loại BĐS-->
+<!--                    </div>-->
                 </div>
                 <div class="container my-4">
                     <h6>Mức giá</h6>
                     <div class="d-flex flex-nowrap">
-                        <input name="price" type="number" class="form-control " placeholder="Nhập giá">
+                        <input name="price" type="number" class="form-control " placeholder="Nhập giá" required>
                         <div class="btn rounded-pill option-unit"> VNĐ</div>
                     </div>
                 </div>
@@ -90,9 +94,9 @@
                 <h6 class="py-3 mx-2"><strong>Thông tin khác</strong></h6>
                 <div class="container">
                     <h6>Giấy tờ pháp lý</h6>
-                    <select  class="text-start btn btn-outline-secondary rounded-pill mb-4" name="paper"
-                             id="paper" style="width: 660px">
-                        <option>-- Chọn giấy tờ pháp lý --</option>
+                    <select class="text-start btn btn-outline-secondary rounded-pill mb-4" name="paper"
+                            id="paper" style="width: 660px" required>
+                        <option disabled selected value="">-- Chọn giấy tờ pháp lý --</option>
                         <option value="Sổ đỏ/Sổ hồng">Sổ đỏ/Sổ hồng</option>
                         <option value="Hợp đồng mua bán">Hợp đồng mua bán</option>
                         <option value="Đang chờ sổ">Đang chờ sổ</option>
@@ -101,9 +105,9 @@
                 </div>
                 <div class="container">
                     <h6>Nội thất</h6>
-                    <select  class="text-start btn btn-outline-secondary rounded-pill" name="interior"
-                            id="house" style="width: 660px">
-                        <option>-- Chọn nội thất --</option>
+                    <select class="text-start btn btn-outline-secondary rounded-pill" name="interior"
+                            id="house" style="width: 660px" required>
+                        <option disabled selected value="">-- Chọn nội thất --</option>
                         <option value="Đầy đủ">Đầy đủ</option>
                         <option value="Cơ bản">Cơ bản</option>
                         <option value="Không">Không có nội thất</option>
@@ -113,26 +117,26 @@
                     <h6>Số tầng</h6>
                     <div class="">
                         <input name="floors" type="number" class="form-control "
-                               placeholder="Nhập số tầng">
+                               placeholder="Nhập số tầng" required>
                     </div>
                 </div>
                 <div class="container my-4">
                     <h6>Số phòng ngủ</h6>
                     <div class="">
                         <input name="bedroom" type="number" class="form-control "
-                               placeholder="Nhập số phòng ngủ">
+                               placeholder="Nhập số phòng ngủ" required>
                     </div>
                 </div>
                 <div class="container my-4">
                     <h6>Số phòng tắm/vệ sinh</h6>
                     <div class="">
                         <input name="bathroom" type="number" class="form-control"
-                               placeholder="Nhập số phòng tắm/vệ sinh">
+                               placeholder="Nhập số phòng tắm/vệ sinh" required>
                     </div>
                 </div>
             </div>
             <div class="container-sm my-4 d-flex justify-content-end container-fix-60">
-<!--                <a th:href="@{/listing/post-address}" class="btn btn-primary rounded-pill">Quay lại</a>-->
+                <!--                <a th:href="@{/listing/post-address}" class="btn btn-primary rounded-pill">Quay lại</a>-->
                 <button type="submit" value="Submit" class="btn btn-primary rounded-pill ">Tiếp theo</button>
             </div>
         </form>

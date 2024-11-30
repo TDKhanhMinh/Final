@@ -118,8 +118,11 @@ public class ListingController {
             salesHistoryService.createSalesHistory(propertyService.getById(propertyId));
         }
 
+        User user = userService.findUserByEmail(principal.getName());
+
         model.addAttribute("properties", propertyService.getById(propertyId));
         model.addAttribute("userName", principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("contact", new PostInformation());
         return "listing/post-description-contact";
     }
@@ -142,7 +145,7 @@ public class ListingController {
 
         properties.setUser(userService.findUserByEmail(principal.getName()));
         properties.setPostInformation(contactRepo.save(postInformation));
-        properties.setAvailable(true);
+        //properties.setAvailable(true);
         propertyService.save(properties);
         model.addAttribute("property", properties);
         return "listing/post-image";
@@ -196,71 +199,9 @@ public class ListingController {
     }
 
 
-    @PostMapping("/payment-post")
-    public String postPaymentPost(Model model,
-                                  @RequestParam("propertyId") int propertyId,
-                                  @RequestParam("userId") int userId,
-                                  @RequestParam("ad-type") String adType,
-                                  @RequestParam("option-day") int optionDay) {
-        User user = userService.findUserById(userId);
+    @GetMapping("/test")
+    public String test() {
 
-        Properties properties = propertyService.getById(propertyId);
-
-        PostInformation postInformation = properties.getPostInformation();
-
-        double postPrice;
-        switch (adType) {
-            case "VIP Kim Cương" -> {
-                postInformation.setTypePost(adType);
-                postPrice = 200000;
-            }
-            case "VIP Bạc" -> {
-                postInformation.setTypePost(adType);
-                postPrice = 40000;
-            }
-            case "VIP Vàng" -> {
-                postInformation.setTypePost(adType);
-                postPrice = 100000;
-            }
-            default -> {
-
-                postInformation.setTypePost(adType);
-                postPrice = 2000;
-            }
-        }
-        double payment = postPrice * optionDay;
-        LocalDate currentDate = LocalDate.now();
-        LocalDate endDate = currentDate.plusDays(optionDay);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedDate = currentDate.format(formatter);
-        String formattedEndDate = endDate.format(formatter);
-
-        postInformation.setDatePost(formattedDate);
-        postInformation.setDateEnd(formattedEndDate);
-        postInformation.setProperties(properties);
-        postInformation.setPayment(payment);
-        postInformation.setDaysRemaining(optionDay);
-        properties.setPostInformation(contactRepo.save(postInformation));
-
-        propertyService.save(properties);
-
-        if (user.getAccountBalance() < payment) {
-            paymentService.savePaymentFailure(payment, formattedDate, properties);
-            return "redirect:/user/listing-manager";
-        } else {
-            paymentService.savePaymentSuccess(payment, formattedDate, properties);
-            user.setAccountBalance(user.getAccountBalance() - payment);
-            userService.save(user);
-            return "redirect:/user/listing-manager";
-        }
-
-
-
-    }
-
-    @PostMapping("/test")
-    public String test(@RequestParam("address") String addressInput) {
-        System.out.println(addressInput);
-        return "redirect:/user/listing-manager";
+        return "user/payment";
     }
 }

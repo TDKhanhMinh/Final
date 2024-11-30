@@ -25,6 +25,7 @@ public class PostInformation {
     private String typePost;
     private int daysRemaining;
     private double payment;
+    private double payPerDay;
 
     @OneToOne
     @JoinColumn(name = "contact_property_id")

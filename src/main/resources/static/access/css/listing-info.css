@@ -1,0 +1,105 @@
+
+
+    .province-district-ward select {
+        border: 1px solid black;
+        border-radius: 6px;
+    }
+
+    .option-choose:hover {
+        opacity: 0.7;
+    }
+
+
+    .thumbnails-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    .thumbnails-container {
+        overflow: hidden;
+        flex-grow: 1;
+        margin: 0 10px;
+
+    }
+
+    .thumbnails {
+        display: flex;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .thumbnails img {
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .prev-btn,
+    .next-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        width: 30px;
+        height: 35px;
+        cursor: pointer;
+        font-size: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+
+    }
+
+    .prev-btn:hover,
+    .next-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .prev-btn:disabled,
+    .next-btn:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+
+    /*    ===========------========*/
+    .scrollable-wrapper {
+        position: relative;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    #property-list {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+    }
+
+    /* Nút cuộn */
+    .scroll-button {
+        position: absolute;
+        top: 50%; /* Đưa nút vào giữa theo chiều cao */
+        transform: translateY(-50%); /* Căn chỉnh chính giữa */
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 24px;
+        z-index: 10;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .scroll-button:hover {
+        background-color: #f0f0f0;
+    }
+
+    .scroll-prev {
+        left: 10px;
+    }
+
+    .scroll-next {
+        right: 10px;
+    }
+
+

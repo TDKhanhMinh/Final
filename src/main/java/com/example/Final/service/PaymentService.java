@@ -35,6 +35,7 @@ public class PaymentService {
         }
 
     }
+
     public void savePaymentFailure(double payment_amount, String dayPost, Properties properties) {
         if (properties.getPayment() == null) {
             Payment payment = new Payment();
@@ -54,5 +55,9 @@ public class PaymentService {
             paymentRepo.save(payment);
         }
 
+    }
+
+    public void save(Payment payment) {
+        paymentRepo.save(payment);
     }
 }

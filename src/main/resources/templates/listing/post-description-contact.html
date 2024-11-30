@@ -50,24 +50,27 @@
             </div>
         </div>
         <hr>
-        <form th:action="@{/listing/contact}" th:object="${contact}" method="post">
+        <form class="was-validated" th:action="@{/listing/contact}" th:object="${contact}" method="post">
             <input type="hidden" th:value="${properties.propertyId}" name="propertyId">
             <div class="container-sm border place-address container-fix-60">
                 <h5 class="py-3 mx-2"><strong>Thông tin liên hệ</strong></h5>
                 <div class="container">
                     <h6>Họ và tên</h6>
-                    <input th:field="*{fullName}" type="text" name="contact-user" id="" class="form-control" placeholder="Nhập họ và tên">
+                    <input th:field="*{fullName}" type="text" name="contact-user" id="" class="form-control"
+                           placeholder="Nhập họ và tên" required>
                 </div>
                 <div class="container my-4">
                     <h6>Email</h6>
                     <div class="">
-                        <input th:field="*{email}" type="email" class="form-control" name="contact-email" placeholder="Nhập email">
+                        <input th:field="*{email}" type="email" class="form-control" name="contact-email"
+                               placeholder="Nhập email" required>
                     </div>
                 </div>
                 <div class="container my-4">
                     <h6>Số điện thoại</h6>
                     <div class="">
-                        <input th:field="*{phone}" type="text" name="contact-phone" class="form-control" placeholder="Nhập số điện thoại">
+                        <input th:field="*{phone}" type="text" name="contact-phone" class="form-control"
+                               placeholder="Nhập số điện thoại" required>
 
                     </div>
                 </div>
@@ -78,14 +81,16 @@
                     <h6>Tiêu đề</h6>
                     <div class="input-group">
                             <textarea name="title" class="form-control description" aria-label="With textarea"
-                                      placeholder="Mô tả ngắn gọn về loại hình bất đọng sản, diện tích, địa chỉ"></textarea>
+                                      placeholder="Mô tả ngắn gọn về loại hình bất đọng sản, diện tích, địa chỉ"
+                                      required></textarea>
                     </div>
                 </div>
                 <div class="container my-4">
                     <h6>Mô tả</h6>
                     <div class="input-group">
                             <textarea name="description" class="form-control description" aria-label="With textarea"
-                                      placeholder="Mô tả chi tiết về: loại hình bất đọng sản, vị trí, diện tích, tiện ích, tình trạng nội thất, ..."></textarea>
+                                      placeholder="Mô tả chi tiết về: loại hình bất động sản, vị trí, diện tích, tiện ích, tình trạng nội thất, ..."
+                                      required></textarea>
                     </div>
                 </div>
             </div>

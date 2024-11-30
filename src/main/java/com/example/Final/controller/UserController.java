@@ -166,6 +166,7 @@ public class UserController {
         model.addAttribute("user", user);
         List<Properties> propertiesList = propertyService.getAllByUser(user);
         propertiesList.removeIf(properties -> !properties.isAvailable());
+        propertiesList.removeIf(properties -> properties.getPayment().getStatus().equals("Chưa thanh toán"));
         model.addAttribute("properties", propertiesList);
         return "user/listing-manager";
     }
@@ -175,7 +176,7 @@ public class UserController {
         User user = userService.findUserByEmail(principal.getName());
         model.addAttribute("user", user);
         List<Properties> propertiesList = propertyService.getAllByUser(user);
-        propertiesList.removeIf(Properties::isAvailable);
+        propertiesList.removeIf(properties -> !properties.getPayment().getStatus().equals("Chưa thanh toán"));
         model.addAttribute("properties", propertiesList);
         return "user/draft-manager";
     }
@@ -257,7 +258,7 @@ public class UserController {
 
         propertyService.updateProperty(properties);
 
-        return "listing/post-payment";
+        return "redirect:/user/listing-manager";
     }
 
 
@@ -266,6 +267,7 @@ public class UserController {
         propertyService.deleteById(id);
         return "redirect:/user/listing-manager";
     }
+
 
 
 }

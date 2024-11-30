@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo bài đăng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" th:href="@{/access/css/home.css}">
+    <link rel="stylesheet" th:href="@{/access/css/payment.css}">
+</head>
+
+
+<body>
+<th:block th:insert="~{ home/header :: header}"></th:block>
+
+<div class="container" style="padding-top: 100px;">
+    <div class="my-4">
+        <div class="d-flex justify-content-between">
+            <div class="step-1">
+                <h4 class=""><strong>Thanh toán</strong></h4>
+                <span><strong>Bước 4: Thanh toán</strong></span>
+            </div>
+            <div class="exit">
+                <a th:href="@{/home/home}" class="btn btn-outline-dark rounded-pill btn-lg fw-light">Thoát</a>
+            </div>
+        </div>
+        <hr>
+        <div th:if="${error}" class="container-sm d-flex justify-content-center mt-4">
+            <div class="alert alert-warning text-center" style="width: 80%" role="alert">
+                <h5><strong>Tài khoản hiện không đủ tiền để thanh toán vui lòng nạp tiền thêm.</strong>
+                </h5>
+                <a th:href="@{/home/home}" class="form-control btn btn-outline-dark mt-4"
+                   style="width: 50%;"><strong>Nạp tiền</strong></a>
+            </div>
+        </div>
+        <form th:action="@{/payment/user-payment}" method="post">
+            <input type="hidden" th:value="${property.propertyId}" name="propertyId">
+            <input type="hidden" th:value="${user.userId}" name="userId">
+
+            <div class="container-sm border place-address container-fix-60">
+
+                <h4 class="pb-4">Thông tin thanh toán</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img style="object-fit: cover;width: 230px;height: 100px;"
+                             th:src="${property.listImages.get(0).imageUrl}"
+                             src="https://th.bing.com/th?id=ORMS.6b541224df7609e7d4effc1de183ee54&pid=Wdp&w=612&h=304&qlt=90&c=1&rs=1&dpr=1.25&p=0"
+                             alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <h6 th:text="${property.propertyTitle}" class="text-uppercase">BÁN GẤP CĂN HỘ CHUNG CƯ TẠI XÃ AN
+                            PHÚ TÂY, 5 TỶ VND, 200M2 </h6>
+                        <span th:text="${property.address.fullAddress}">Xã An Phú Tây, Bình Chánh, Hồ Chí Minh</span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="container-sm border place-address container-fix-60 mt-4">
+                <h4 class="pb-2">Thanh toán</h4>
+
+                <div class="d-flex m-2 justify-content-between">
+                    <div class="">Loại tin</div>
+                    <div class="post-type"><strong th:text="${property.postInformation.typePost}">Tin thường</strong>
+                    </div>
+                </div>
+                <div class="d-flex m-2 justify-content-between">
+                    <div class="">Đơn giá / ngày</div>
+                    <div class="priceSale fw-bold"><strong th:text="${property.postInformation.payPerDay+' VNĐ/ngày'}">2000 đ</strong>
+                    </div>
+                </div>
+
+                <div class="d-flex m-2 justify-content-between">
+                    <div class="">Số ngày đăng</div>
+                    <div class=""><strong th:text="${property.postInformation.daysRemaining+' ngày'}">Chưa chọn</strong>
+                    </div>
+                </div>
+                <div class="d-flex m-2 justify-content-between">
+                    <div class="">Thời gia kết thúc</div>
+                    <div class=""><strong th:text="${property.postInformation.dateEnd}">Chưa chọn</strong></div>
+                </div>
+                <hr>
+                <div class="d-flex m-2 justify-content-between">
+                    <div class="">Phí đăng tin</div>
+                    <div class="post-fee priceSale fw-bold"><strong th:text="${property.postInformation.payment}">27.000
+                        đ</strong></div>
+                </div>
+
+                <hr>
+                <div class="d-flex mx-2 justify-content-between">
+                    <div class="fs-5 fw-bold">Tổng tiền</div>
+                    <div class="fs-5 priceSale fw-bold"><strong th:text="${property.postInformation.payment}">189.000
+                        đ</strong></div>
+                </div>
+
+                <div class="container-sm mt-4 d-flex justify-content-end container-fix-80">
+                    <button type="submit" value="Submit" class="btn btn-primary rounded-pill">Thanh toán
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<th:block th:insert="~{ home/footer :: footer}"></th:block>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script th:src="@{/access/js/price-format.js}"></script>
+
+
+</body>
+
+</html>

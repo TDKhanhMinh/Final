@@ -10,103 +10,9 @@
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" th:href="@{/access/css/home.css}">
+    <link rel="stylesheet" th:href="@{/access/css/payment.css}">
 </head>
-<style>
-    .place-address {
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
-    }
 
-    .uploaded-images {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 16px;
-    }
-
-    .image-item {
-        position: relative;
-        width: 120px;
-        height: 120px;
-        border-radius: 8px;
-        overflow: hidden;
-        background-color: #f3f3f3;
-    }
-
-    .image-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .edit-btn {
-        position: absolute;
-        bottom: 4px;
-        left: 4px;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 2px 6px;
-        font-size: 12px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    .upload-area {
-        text-align: center;
-        margin-top: 16px;
-        padding: 16px;
-        border: 2px dashed #ccc;
-        border-radius: 8px;
-        background-color: #fafafa;
-    }
-
-    .upload-area p {
-        margin-bottom: 8px;
-    }
-
-    .upload-btn {
-        background: #007bff;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    .container-fix-60 {
-        max-width: 60%;
-        margin: auto;
-    }
-
-    .place-address-choice.selected {
-        background-color: #dcfeff;
-        border: 1px solid black;
-    }
-
-    .place-address-choice:hover {
-        cursor: pointer;
-    }
-
-    .choose-hover input[type="radio"]:checked + span {
-        color: rgb(0, 0, 0);
-        font-weight: bold;
-    }
-
-    .choose-hover:hover {
-        cursor: pointer;
-        background-color: rgb(229, 252, 252);
-    }
-
-    input[type="radio"]:checked + .choose-option {
-        background-color: #dcfeff;
-        color: white;
-        border-color: rgb(0, 0, 0);
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-</style>
 
 <body>
 <th:block th:insert="~{ home/header :: header}"></th:block>
@@ -123,7 +29,15 @@
             </div>
         </div>
         <hr>
-        <form th:action="@{/listing/payment-post}" method="post">
+        <div th:if="${error}" class="container-sm d-flex justify-content-center mt-4">
+            <div class="alert alert-success text-center" style="width: 80%" role="alert">
+                <h5><strong>Tài khoản hiện không đủ tiền vui lòng nạp tiền thêm.</strong>
+                </h5>
+                <a th:href="@{/home/home}" class="form-control btn btn-outline-dark mt-4"
+                   style="width: 50%;"><strong>Nạp tiền</strong></a>
+            </div>
+        </div>
+        <form th:action="@{/payment/payment-post}" method="post">
             <input type="hidden" th:value="${property.propertyId}" name="propertyId">
             <input type="hidden" th:value="${user.userId}" name="userId">
 

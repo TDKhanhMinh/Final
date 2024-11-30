@@ -25,6 +25,14 @@ public class HomeController {
     @GetMapping("/home")
     public String getHome(Model model) {
         List<Properties> result = propertyService.getAll();
+//        for (Properties property : result) {
+//            if (property.getPropertyType() == null ||
+//                    property.getPropertyDescription() == null ||
+//                    property.getListImages() == null) {
+//                propertyService.delete(property);
+//            }
+//        }
+        result.removeIf(properties -> !properties.isAvailable());
         Collections.shuffle(result);
         List<Properties> random = result.stream()
                 .limit(8)
@@ -36,6 +44,7 @@ public class HomeController {
     @GetMapping("/all-listings")
     public String getAllListings(Model model) {
         List<Properties> propertiesList = propertyService.getAll();
+        propertiesList.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("properties", propertiesList);
         return "listing/all-listing";
     }

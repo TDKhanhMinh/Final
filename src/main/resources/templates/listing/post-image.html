@@ -98,7 +98,7 @@
             </div>
         </div>
         <hr>
-        <form th:action="@{/listing/complete}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/listing/complete}" method="post" class="was-validated" enctype="multipart/form-data">
             <input type="hidden" th:value="${property.propertyId}" name="propertyId">
             <div class="container-sm border place-address container-fix-60">
                 <span>Tải lên tối thiểu 3 hình ảnh và tối đa 10 hình ảnh</span>
@@ -111,7 +111,7 @@
                     <p>Kéo thả ảnh vào đây <br> hoặc</p>
                     <button type="button" class="upload-btn" id="uploadBtn">Thêm ảnh lên từ thiết bị</button>
                     <input type="file" id="fileInput" name="images" class="form-control" multiple
-                           style="display:none;">
+                           style="display:none;" required>
                 </div>
             </div>
             <div class="container-sm my-4 d-flex justify-content-end container-fix-60">

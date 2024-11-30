@@ -151,18 +151,18 @@
             <div th:if="${error}">
                 <div class="alert alert-danger rounded-pill" th:text="${error}"></div>
             </div>
-            <form action="#" th:action="@{/listing/address}" method="POST">
+            <form class="was-validated" action="#" th:action="@{/listing/address}" method="POST">
                 <div class="container-sm border place-address" style="width: 60%;">
                     <h5 class="py-3 mx-2"><strong>Nhu cầu</strong></h5>
                     <div class="container-sm d-flex flex-nowrap justify-content-between">
                         <div class="border rounded-pill place-address-choice d-flex align-items-center justify-content-start mb-4"
                              style="width: 350px;height: 50px;">
-                            <input type="radio" value="sell" id="sell" name="option" class="mx-2">
+                            <input type="radio" value="sell" id="sell" name="option" class="mx-2" required>
                             <i class=" mx-2 fa-solid fa-tag"></i>Bán
                         </div>
                         <div class="border rounded-pill place-address-choice d-flex align-items-center justify-content-start mb-4"
                              style="width: 350px;height: 50px;">
-                            <input type="radio" value="rent" id="rent" name="option" class="mx-2">
+                            <input type="radio" value="rent" id="rent" name="option" class="mx-2" required>
                             <i class="mx-2 fa-solid fa-key"></i> Cho thuê
                         </div>
                     </div>
