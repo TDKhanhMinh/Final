@@ -9,6 +9,7 @@ import com.example.Final.repository.PropertyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -114,13 +115,6 @@ public class PropertyService {
         return propertyRepo.findPropertiesByKey(key);
     }
 
-    public List<Properties> findPropertiesByForm(String optionType, String city,
-                                                 String district, String ward,
-                                                 String houseType, Double priceMin,
-                                                 Double priceMax, Double sqmtMin,
-                                                 Double sqmtMax) {
-        return propertyRepo.findByForm(optionType, city, district, ward, houseType, priceMin, priceMax, sqmtMin, sqmtMax);
-    }
 
     public List<Properties> findPropertiesByProvince(String province) {
         return propertyRepo.findByAddress_Province(province);
@@ -132,4 +126,257 @@ public class PropertyService {
         return propertyRepo.findByCity(city, houseType, priceMin, priceMax, sqmtMin, sqmtMax, bedroom);
     }
 
+    public List<Properties> findPropertiesByForm(String optionType, String city,
+                                                 String district, String ward,
+                                                 Integer houseType, Integer priceRange,
+                                                 Integer sqrtRange) {
+        List<Properties> propertiesList = propertyRepo.findByAddress(city, district, ward);
+        System.out.println("service");
+        for (Properties p : propertiesList){
+            System.out.println(p.getAddress().getWard());
+        }
+        propertiesList = filterByType(propertiesList, houseType);
+        propertiesList = filterByType(propertiesList, priceRange);
+        propertiesList = filterByType(propertiesList, sqrtRange);
+        return propertiesList;
+
+    }
+
+
+    public List<Properties> filterByType(List<Properties> properties, Integer option) {
+        if (option == null){
+            return properties;
+        }
+        System.out.println("sort by type");
+        List<Properties> filterProperties = new ArrayList<>();
+        switch (option) {
+            case 1:
+                filterProperties = properties;
+                break;
+            case 2:
+                for (Properties p : properties) {
+                    if (p.getPropertyType().equals("Căn hộ")){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 3:
+                for (Properties p : properties) {
+                    if(p.getPropertyType().equals("Nhà riêng")){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 4:
+                for (Properties p : properties) {
+                    if(p.getPropertyType().equals("Biệt thự")){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 5:
+                for (Properties p : properties) {
+                    if(p.getPropertyType().equals("Nhà mặt phố")){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 6:
+                for (Properties p : properties) {
+                    if(p.getPropertyType().equals("Nhà trọ")){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return filterProperties;
+    }
+    public List<Properties> filterPrice(List<Properties> properties, Integer option) {
+        if (option == null){
+            return properties;
+        }
+        System.out.println("sort by price");
+        List<Properties> filterProperties = new ArrayList<>();
+        switch (option) {
+
+            case 1:
+                filterProperties = properties;
+                break;
+            case 2:
+                for (Properties p : properties) {
+                    if(p.getPropertyPrice()<=500000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 3:
+                for (Properties p : properties) {
+                    if(p.getPropertyPrice()>500000000.0 && p.getPropertyPrice()<=800000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 4:
+                for (Properties p : properties) {
+                    if(p.getPropertyPrice()>800000000.0 && p.getPropertyPrice()<=1000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 5:
+                for (Properties p : properties) {
+                    if(p.getPropertyPrice()>1000000000.0 && p.getPropertyPrice()<=2000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 6:
+                for (Properties p : properties) {
+                    if (p.getPropertyPrice()>2000000000.0 && p.getPropertyPrice()<=3000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 7:
+                for (Properties p : properties) {
+                    if (p.getPropertyPrice()>3000000000.0 && p.getPropertyPrice()<=5000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 8:
+                for (Properties p : properties) {
+                    if (p.getPropertyPrice()>5000000000.0 && p.getPropertyPrice()<=7000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 9:
+                for (Properties p : properties) {
+                    if (p.getPropertyPrice()>7000000000.0 && p.getPropertyPrice()<=10000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 10:
+                for (Properties p : properties) {
+                    if (p.getPropertyPrice()>10000000000.0 && p.getPropertyPrice()<=20000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 11:
+                for (Properties p : properties) {
+                    if (p.getPropertyPrice()>20000000000.0 && p.getPropertyPrice()<=30000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 12:
+                for (Properties p : properties) {
+                    if (p.getPropertyPrice()>30000000000.0 && p.getPropertyPrice()<=40000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 13:
+                for (Properties p : properties) {
+                    if (p.getPropertyPrice()>40000000000.0){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return filterProperties;
+    }
+
+    public List<Properties> filterSqrt(List<Properties> properties, Integer option) {
+        if (option == null){
+            return properties;
+        }
+        System.out.println("sort by sqrt");
+        List<Properties> filterProperties = new ArrayList<>();
+        switch (option) {
+            case 1:
+                filterProperties = properties;
+                break;
+            case 2:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()<=30){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 3:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>30 && p.getSquareMeters()<=50){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 4:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>50 && p.getSquareMeters()<=80){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 5:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>80 && p.getSquareMeters()<=100){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 6:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>100 && p.getSquareMeters()<=150){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 7:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>150 && p.getSquareMeters()<=200){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 8:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>200 && p.getSquareMeters()<=250){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 9:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>250 && p.getSquareMeters()<=300){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 10:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>300 && p.getSquareMeters()<=500){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            case 11:
+                for (Properties p : properties) {
+                    if (p.getSquareMeters()>500){
+                        filterProperties.add(p);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return filterProperties;
+    }
 }
