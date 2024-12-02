@@ -30,6 +30,5 @@ public class Images {
     @JoinColumn(name = "image_user_id")
     private User user;
 
-
 }
 

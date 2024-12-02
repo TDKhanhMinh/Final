@@ -135,7 +135,6 @@ public class PropertyService {
                                                  Integer houseType, Integer priceRange,
                                                  Integer sqrtRange) {
         List<Properties> propertiesList = propertyRepo.findByAddress(city, district, ward);
-        System.out.println("service");
         for (Properties p : propertiesList){
             System.out.println(p.getAddress().getWard());
         }

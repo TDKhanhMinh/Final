@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>User information</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"
+        integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" th:href="@{/access/css/use-info.css}">
+</head>
+<style>
+    .option-payment:hover {
+        border: 1px solid black;
+    }
+
+    .option:hover {
+        cursor: pointer;
+    }
+
+    .countdown {
+        font-size: 16px;
+        color: #ff6600;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .time-box {
+        border: 2px solid #ff6600;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        background: #fff;
+        text-align: center;
+    }
+</style>
+
+<body class="bg-gradient-primary">
+    <th:block th:insert="~{ home/header :: header}"></th:block>
+    <div class="row d-flex flex-nowrap" style="padding-left: 18px;background-color: whitesmoke;">
+
+        <div class="col-md-3" style="width: 20%; background-color: white;">
+            <ul th:fragment="user-sidebar " class="navbar-nav border border-end " id="accordionSidebar"
+                style="padding-top: 100px; list-style: none;">
+                <div class="contact rounded-2" style="background-color: whitesmoke;">
+                    <div class="contact-info"></div>
+                    <img class="rounded-circle m-2" style="object-fit: cover; width: 50px; height: 50px;"
+                        th:src="${user.images != null} ? ${user.images.imageUrl} : 'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'"
+                        alt="photo">
+                    <span th:text="${user.fullName}" style="font-size: 16px;" class=" fw-bold mt-1 text-dark">Nguyễn
+                        Trường
+                        Nam</span>
+
+                </div>
+                <hr class=" border border-1 border-dark ">
+                <li style="height: 200px;">
+                    <div class="container border rounded-2" style="width: 95%;background-color: whitesmoke;">
+                        <h6 class="py-2">Số dư tài khoản</h6>
+                        <div class=" d-flex justify-content-between  my-2">
+                            <span>TK Chính</span>
+                            <span class="priceSale">0 VNĐ</span>
+                        </div>
+                        <div class=" d-flex justify-content-between my-2">
+                            <span>TK Khuyến mãi</span>
+                            <span class="priceSale">0 VNĐ</span>
+                        </div>
+                        <div class="d-flex justify-content-center my-2 mt-4">
+                            <a th:href="@{/payment/deposit}" class="btn btn-outline-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-window-plus" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1M4 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                                    <path
+                                        d="M0 4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4a.5.5 0 0 1-1 0V7H1v5a1 1 0 0 0 1 1h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-2zm1 2h13V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1z" />
+                                    <path
+                                        d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5" />
+                                </svg>
+                                Nạp tiền
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="" style="min-height: 48px;">
+                    <div class="mx-4 text-decoration-none mb-4" style="min-width: 180px;">
+                        <div style="min-height: 42px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                <path
+                                    d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                                <path
+                                    d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                            </svg>
+                            <strong>Quản lý bài đăng</strong>
+                        </div>
+                        <a th:href="@{/listing/post-address}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                            </svg>
+                            Đăng mới
+                        </a>
+                        <a th:href="@{/user/listing-manager}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-list-check" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                            </svg>
+                            Tin đã đăng
+                        </a>
+                        <a th:href="@{/user/listing-manager-draft}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-list-check" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+                            </svg>
+                            Tin nháp
+                        </a>
+                    </div>
+                </li>
+                <li class="" style="min-height: 48px;">
+                    <div class="mx-4 text-decoration-none mb-4" style="min-width: 180px;">
+                        <div style="min-height: 42px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-person-fill-gear" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4m9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0" />
+                            </svg>
+                            <strong>Quản lý tài khoản</strong>
+                        </div>
+                        <a th:href="@{/user/user-info}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-gear" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
+                                <path
+                                    d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
+                            </svg>
+                            Chỉnh sửa thông tin
+                        </a>
+                        <a th:href="@{/user/changePassword}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-person-lock" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m0 5.996V14H3s-1 0-1-1 1-4 6-4q.845.002 1.544.107a4.5 4.5 0 0 0-.803.918A11 11 0 0 0 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664zM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1" />
+                            </svg>
+                            Đổi mật khẩu
+                        </a>
+                    </div>
+                </li>
+                <li class="" style="min-height: 48px;">
+                    <div class="mx-4 text-decoration-none mb-4" style="min-width: 180px;">
+                        <div style="min-height: 42px;">
+                            <svg font-size="24px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.0001 5.63636C13.0042 5.63636 13.8182 4.82233 13.8182 3.81818C13.8182 2.81403 13.0042 2 12.0001 2C10.9959 2 10.1819 2.81403 10.1819 3.81818C10.1819 4.82233 10.9959 5.63636 12.0001 5.63636Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="square">
+                                </path>
+                                <path
+                                    d="M20.1819 10.1818C21.1861 10.1818 22.0001 9.36774 22.0001 8.36359C22.0001 7.35944 21.1861 6.54541 20.1819 6.54541C19.1778 6.54541 18.3638 7.35944 18.3638 8.36359C18.3638 9.36774 19.1778 10.1818 20.1819 10.1818Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="square">
+                                </path>
+                                <path
+                                    d="M3.81818 10.1818C4.82233 10.1818 5.63636 9.36774 5.63636 8.36359C5.63636 7.35944 4.82233 6.54541 3.81818 6.54541C2.81403 6.54541 2 7.35944 2 8.36359C2 9.36774 2.81403 10.1818 3.81818 10.1818Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="square">
+                                </path>
+                                <path
+                                    d="M9.85698 16.9995L6.73805 18.8002C6.06987 19.0865 5.63623 19.7438 5.63623 20.4715V21.9997H18.3635V20.4715C18.3635 19.7443 17.9299 19.087 17.2617 18.8002L14.1427 16.9995"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></path>
+                                <path
+                                    d="M12 17.7141C10.4221 17.7141 9.14282 16.2927 9.14282 14.5395V13.7459C9.14282 11.9927 10.4221 10.5713 12 10.5713C13.5778 10.5713 14.8571 11.9927 14.8571 13.7459V14.5395C14.8571 16.2927 13.5778 17.7141 12 17.7141Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="square">
+                                </path>
+                            </svg>
+                            <strong>Gói hội viên</strong>
+                        </div>
+                        <a class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-bag" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                            </svg>
+                            Đăng ký mua
+                        </a>
+
+                    </div>
+                <li class="" style="min-height: 48px;">
+                    <div class="mx-4 text-decoration-none" style="min-width: 180px;">
+                        <div style="min-height: 42px;">
+                            <svg style="margin-left: 8px" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z" />
+                                <path
+                                    d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
+                                <path
+                                    d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
+                            </svg>
+                            <strong>Hướng dẫn</strong>
+                        </div>
+                        <a th:href="@{/listing/post-payment}"
+                            class="text-start btn btn-outline-secondary mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            Hướng dẫn sử dụng
+                        </a>
+                        <a th:href="@{/listing/test}"
+                            class="text-start btn btn-outline-secondary  mx-2 choose-info mb-2"
+                            style="min-height: 40px;width: 200px;">
+                            Hướng dẫn thanh toán
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-md-9" style="padding-top: 120px;background-color: whitesmoke; ">
+            <h3>Nạp tiền vào tài khoản</h3>
+            <div class="container mb-4">
+                <div class="row mt-4 d-flex justify-content-center" style="width: 100%;">
+                    <div class="col-md-2">
+                        <div class="btn option-payment shadow d-flex flex-wrap align-items-center justify-content-center"
+                            style="height: 50px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
+                                fill="none">
+                                <path d="M24.3074 22.4922H22.4908V24.3088H24.3074V22.4922Z" fill="#2C2C2C"></path>
+                                <path d="M18.8578 17.042H17.0413V18.8586H18.8578V17.042Z" fill="#2C2C2C"></path>
+                                <path d="M20.6744 18.8584H18.8578V20.675H20.6744V18.8584Z" fill="#2C2C2C"></path>
+                                <path d="M18.8577 20.6748H17.0411V22.4914H18.8577V20.6748Z" fill="#2C2C2C"></path>
+                                <path d="M20.6744 22.4922H18.8578V24.3088H20.6744V22.4922Z" fill="#2C2C2C"></path>
+                                <path d="M22.491 20.6748H20.6744V22.4914H22.491V20.6748Z" fill="#2C2C2C"></path>
+                                <path d="M22.491 17.042H20.6744V18.8586H22.491V17.042Z" fill="#2C2C2C"></path>
+                                <path d="M24.3074 18.8584H22.4908V20.675H24.3074V18.8584Z" fill="#2C2C2C"></path>
+                                <rect x="8.61536" y="8.61523" width="5.53846" height="5.53846" stroke="#2C2C2C"
+                                    stroke-width="1.7" stroke-linejoin="round"></rect>
+                                <rect x="8.61523" y="17.8457" width="5.53846" height="5.53846" stroke="#2C2C2C"
+                                    stroke-width="1.7" stroke-linejoin="round"></rect>
+                                <rect x="17.8461" y="8.61523" width="5.53846" height="5.53846" stroke="#2C2C2C"
+                                    stroke-width="1.7" stroke-linejoin="round"></rect>
+                                <path d="M10.4615 4H4V10.4615" stroke="#E03C31" stroke-width="1.7"
+                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M21.5385 28H28V21.5385" stroke="#E03C31" stroke-width="1.7"
+                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M21.5385 4H28V10.4615" stroke="#E03C31" stroke-width="1.7"
+                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M10.4615 28H4V21.5385" stroke="#E03C31" stroke-width="1.7"
+                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <h6>QR (VNPAY)</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="btn option-payment shadow d-flex flex-wrap align-items-center justify-content-center"
+                            style="height: 50px;">
+                            <svg width="36" height="36" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M25.7338 3H6.26625C4.46235 3 3 4.61363 3 6.60414V25.3959C3 27.3864 4.46235 29 6.26625 29H25.7338C27.5377 29 29 27.3864 29 25.3959V6.60414C29 4.61363 27.5377 3 25.7338 3Z"
+                                    fill="#A50064"></path>
+                                <path
+                                    d="M21.7314 7.00068C19.3765 7.00068 17.4677 8.81889 17.4677 11.0595C17.4677 13.3002 19.3815 15.1184 21.7314 15.1184C24.0812 15.1184 26 13.3002 26 11.0595C26 8.81889 24.0912 7.00068 21.7314 7.00068ZM21.7314 12.7913C21.2599 12.7999 20.8043 12.6226 20.4646 12.2983C20.1249 11.9741 19.9289 11.5294 19.9198 11.062C19.9441 10.602 20.1456 10.1687 20.4827 9.85166C20.8197 9.53457 21.2667 9.3578 21.7314 9.3578C22.1961 9.3578 22.643 9.53457 22.9801 9.85166C23.3172 10.1687 23.5186 10.602 23.543 11.062C23.5338 11.5294 23.3379 11.9741 22.9982 12.2983C22.6585 12.6226 22.2029 12.7999 21.7314 12.7913ZM16.2492 10.0491V15.1357H13.7872V10.0244C13.7872 9.83444 13.7111 9.65222 13.5755 9.51786C13.44 9.38351 13.2562 9.30803 13.0645 9.30803C12.8729 9.30803 12.6891 9.38351 12.5535 9.51786C12.418 9.65222 12.3419 9.83444 12.3419 10.0244V15.1357H9.88986V10.0244C9.88986 9.83444 9.81372 9.65222 9.6782 9.51786C9.54268 9.38351 9.35887 9.30803 9.16721 9.30803C8.97555 9.30803 8.79174 9.38351 8.65622 9.51786C8.52069 9.65222 8.44456 9.83444 8.44456 10.0244V15.1357H6V10.0491C6.01832 9.22442 6.36561 8.4405 6.96579 7.86911C7.56597 7.29772 8.37012 6.98544 9.20209 7.00068C9.89083 6.99928 10.5624 7.21371 11.1209 7.61334C11.6789 7.21466 12.3493 7.0003 13.0371 7.00068C13.8706 6.98345 14.677 7.29477 15.2792 7.8663C15.8814 8.43783 16.2302 9.22289 16.2492 10.0491ZM21.7314 16.865C19.3765 16.865 17.4677 18.6807 17.4677 20.9238C17.4677 23.167 19.3815 24.9901 21.7314 24.9901C24.0812 24.9901 25.995 23.1744 25.995 20.9337C25.995 18.6931 24.0912 16.865 21.7314 16.865ZM21.7314 22.6556C21.3896 22.6425 21.0592 22.5301 20.7813 22.3323C20.5034 22.1345 20.2903 21.8601 20.1686 21.5432C20.0468 21.2263 20.0217 20.8808 20.0964 20.5499C20.1712 20.219 20.3424 19.9171 20.5888 19.6819C20.8352 19.4467 21.1459 19.2885 21.4823 19.227C21.8187 19.1655 22.166 19.2034 22.4808 19.336C22.7956 19.4687 23.0642 19.6901 23.253 19.9729C23.4419 20.2556 23.5427 20.5872 23.543 20.9263C23.5397 21.1586 23.4903 21.3879 23.3974 21.6012C23.3045 21.8145 23.17 22.0074 23.0017 22.169C22.8333 22.3306 22.6345 22.4577 22.4165 22.5429C22.1985 22.6281 21.9657 22.6697 21.7314 22.6655V22.6556ZM16.2492 19.9233V25H13.7872V19.8962C13.7872 19.7062 13.7111 19.5239 13.5755 19.3896C13.44 19.2552 13.2562 19.1797 13.0645 19.1797C12.8729 19.1797 12.6891 19.2552 12.5535 19.3896C12.418 19.5239 12.3419 19.7062 12.3419 19.8962V25H9.88986V19.8962C9.88986 19.7062 9.81372 19.5239 9.6782 19.3896C9.54268 19.2552 9.35887 19.1797 9.16721 19.1797C8.97555 19.1797 8.79174 19.2552 8.65622 19.3896C8.52069 19.5239 8.44456 19.7062 8.44456 19.8962V25H6V19.9233C6.00746 19.514 6.09622 19.1102 6.26122 18.7349C6.42622 18.3596 6.66422 18.0202 6.96161 17.7362C7.259 17.4521 7.60995 17.229 7.99439 17.0795C8.37883 16.93 8.78922 16.8571 9.20209 16.865C9.8904 16.8639 10.5616 17.0773 11.1209 17.4752C11.6789 17.0769 12.3495 16.8634 13.0371 16.865C13.4507 16.8561 13.8621 16.9283 14.2475 17.0773C14.633 17.2263 14.985 17.4493 15.2833 17.7334C15.5817 18.0175 15.8206 18.3571 15.9864 18.7329C16.1521 19.1087 16.2414 19.5133 16.2492 19.9233Z"
+                                    fill="white"></path>
+                            </svg>
+                            <h6> Ví MoMo </h6>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="btn option-payment shadow d-flex flex-nowrap align-items-center justify-content-center"
+                            style="height: 50px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
+                                fill="none">
+                                <path d="M8.97908 13.2568H5.71802V27.4138H8.97908V13.2568Z" fill="#1DBABF"></path>
+                                <path d="M14.4139 13.2568H11.1528V27.4138H14.4139V13.2568Z" fill="#1DBABF"></path>
+                                <path d="M19.8494 13.2568H16.5884V27.4138H19.8494V13.2568Z" fill="#1DBABF"></path>
+                                <path d="M25.2843 13.2568H22.0232V27.4138H25.2843V13.2568Z" fill="#1DBABF"></path>
+                                <path
+                                    d="M27.7186 10.6005L15.7613 4.06653C15.6815 4.02288 15.592 4 15.501 4C15.41 4 15.3205 4.02288 15.2407 4.06653L3.28341 10.6005C3.1977 10.6473 3.12617 10.7165 3.07634 10.8006C3.02651 10.8847 3.00023 10.9807 3.00024 11.0786V14.3455C3.00024 14.49 3.05751 14.6284 3.15943 14.7306C3.26136 14.8327 3.39961 14.89 3.54375 14.89H27.4582C27.6024 14.89 27.7406 14.8327 27.8426 14.7306C27.9445 14.6284 28.0017 14.49 28.0017 14.3455V11.0786C28.0018 10.9807 27.9755 10.8847 27.9256 10.8006C27.8758 10.7165 27.8043 10.6473 27.7186 10.6005Z"
+                                    fill="#009BA1"></path>
+                                <path
+                                    d="M27.4582 25.7803H3.54375C3.39961 25.7803 3.26136 25.8376 3.15943 25.9398C3.05751 26.0419 3.00024 26.1804 3.00024 26.3248V27.4138C3.00024 27.5582 3.05751 27.6967 3.15943 27.7988C3.26136 27.9009 3.39961 27.9583 3.54375 27.9583H27.4582C27.6024 27.9583 27.7406 27.9009 27.8426 27.7988C27.9445 27.6967 28.0017 27.5582 28.0017 27.4138V26.3248C28.0017 26.1804 27.9445 26.0419 27.8426 25.9398C27.7406 25.8376 27.6024 25.7803 27.4582 25.7803Z"
+                                    fill="#009BA1"></path>
+                                <path
+                                    d="M15.5007 12.1675C16.7014 12.1675 17.6747 11.1924 17.6747 9.98951C17.6747 8.78664 16.7014 7.81152 15.5007 7.81152C14.3 7.81152 13.3267 8.78664 13.3267 9.98951C13.3267 11.1924 14.3 12.1675 15.5007 12.1675Z"
+                                    fill="#FFFFFF"></path>
+                            </svg>
+                            <h6>Chuyển khoản</h6>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container">
+                    <div class="container form-control shadow ">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="rounded-3 mt-4 d-flex flex-wrap align-items-center justify-content-center"
+                                        style="background-color: #e11b90;width: 500px; height: 530px; background-image: url(https://homepage.momocdn.net/jk/momo2020/img/intro/qrcode-pattern.png);">
+                                        <h5 class="text-white mt-4">Quét mã QR để thanh toán</h5>
+                                        <img class="rounded-3" style="width: 350px;height: 350px;"
+                                            th:src="@{/access/image/momo.jpg}" alt="">
+                                        <h6 class="text-white text-center" style="width: 300px;">Sử dụng <strong>App
+                                                MoMo</strong> hoặc ứng dụng camera hỗ trợ QR code để quét mã</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class=" mt-4 form-control" style="border-radius: 16px;">
+                                        <h5 class="mt-2">Thông tin thanh toán</h5>
+                                        <hr>
+                                        <h6 class="">Nhà cung cấp</h6>
+                                        <div class="py-2 d-flex flex-nowrap">
+                                            <div class="mx-3"><img class="rounded-circle"
+                                                    style="width: 40px;height: 40px;"
+                                                    th:src="@{/access/image/c085ad076c442c8191e6b7f48ef59aad.jpg}"
+                                                    alt=""></div>
+                                            <div style="width: 250px;" class="text-uppercase text-center fw-bold">Tập
+                                                đoàn Bất động sản Thỏ bảy màu VIỆT NAM</div>
+                                        </div>
+                                        <hr>
+                                        <div class="py-2 d-flex justify-content-between mx-2">
+                                            <h6 class="">Mã đơn hàng</h6>
+                                            <span th:text="${user.userPayment.paymentId}">152</span>
+                                        </div>
+                                        <hr>
+                                        <div class="py-2 d-flex justify-content-between mx-2">
+                                            <h6 class="">Mô tả</h6>
+                                            <span>Nạp tiền vào tài khoản</span>
+                                        </div>
+                                        <hr>
+                                        <div class="py-2 d-flex justify-content-between mx-2">
+                                            <h6 class="">Số tiền</h6>
+                                            <span th:text="${amount}" class="fw-bold fs-4 priceSale">500.000</span>
+                                        </div>
+                                        <h6 class="mt-4">Mã QR sẽ hết hiệu lực sau</h6>
+                                        <div class="d-flex justify-content-center mb-4">
+                                            <div class="countdown my-2">
+                                                <div class="time-box" id="minutes">14</div>:
+                                                <div class="time-box" id="seconds">40</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="mt-4">Các ngân hàng hỗ trợ thanh toán MOMO</h6>
+                            <div class="container">
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/viettinbank.383a3e0f.jpg"
+                                    alt="">
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/vietcombank.09686245.jpg"
+                                    alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/vietbank.900fbb42.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/sacombank.cb5dea80.jpg"
+                                    alt="">
+
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/scbbank.a1e6168c.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/eximbank.6bb847d8.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/bidvbank.6fad6a21.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/acbbank.27d13542.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/techcombank.558a0474.jpg"
+                                    alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/vpbank.fac02b82.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/vibbank.855e0c18.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/mbbank.31cee54a.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/argibank.934b954a.jpg" alt="">
+
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/hdbank.7768f4ba.jpg" alt="">
+                                <img class="m-2 shadow rounded-2" style="width: 90px;height: 30px;"
+                                    src="https://batdongsan.com.vn/sellernet/static/media/oceanbank.dd6ea7ce.jpg"
+                                    alt="">
+                            </div>
+                        </div>
+
+
+                        <div class=" text-end my-3">
+                            <a th:href="@{/user/user-info}" class="btn btn-primary" style="width: 150px;"
+                                type="submit">Về trang chủ</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <th:block th:insert="~{ home/footer :: footer}"></th:block>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        referrerpolicy="no-referrer"></script>
+    <script th:src="@{/access/js/price-format.js}"></script>
+    <script>
+
+        function toggleOption(selectedDiv) {
+            const input = selectedDiv.querySelector('input[type="radio"]');
+            const isAlreadyChecked = input.checked;
+
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.style.backgroundColor = "";
+                option.style.border = "1px solid gray";
+                const inputOption = option.querySelector('input[type="radio"]');
+                if (inputOption) {
+                    inputOption.checked = false;
+                }
+            });
+
+
+            if (!isAlreadyChecked) {
+                selectedDiv.style.backgroundColor = "whitesmoke";
+                selectedDiv.style.border = "1px solid black";
+                input.checked = true;
+
+
+                const value = parseFloat(input.value) || 0;
+                const VAT = (value * 10) / 100;
+
+                const result = value - VAT;
+
+                document.getElementById('VAT').textContent = `- ${VAT.toLocaleString()} VNĐ`;
+                document.getElementById('result').textContent = `${result.toLocaleString()} VNĐ`;
+            } else {
+                selectedDiv.style.backgroundColor = "";
+                selectedDiv.style.border = "1px solid gray";
+                input.checked = false;
+
+
+                document.getElementById('result').textContent = "0 VNĐ";
+            }
+        }
+    </script>
+    <script>
+        // Đặt thời gian đếm ngược ban đầu (phút và giây)
+        let minutes = 15;
+        let seconds = 60;
+
+        function updateCountdown() {
+            const minutesBox = document.getElementById("minutes");
+            const secondsBox = document.getElementById("seconds");
+
+            // Giảm thời gian
+            if (seconds === 0) {
+                if (minutes === 0) {
+                    clearInterval(countdownInterval); // Dừng khi hết giờ
+                } else {
+                    minutes--;
+                    seconds = 59;
+                }
+            } else {
+                seconds--;
+            }
+
+            // Cập nhật giao diện
+            minutesBox.textContent = minutes.toString().padStart(2, '0');
+            secondsBox.textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Cập nhật mỗi giây
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+
+</html>

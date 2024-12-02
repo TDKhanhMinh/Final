@@ -128,7 +128,10 @@ public class ListingController {
     }
 
     @PostMapping("/contact")
-    public String getContact(@RequestParam("propertyId") int id, @RequestParam("title") String title, @RequestParam("description") String description, @ModelAttribute("contact") PostInformation postInformation, Model model, Principal principal) {
+    public String getContact(@RequestParam("propertyId") int id, @RequestParam("title") String title,
+                             @RequestParam("description") String description,
+                             @ModelAttribute("contact") PostInformation postInformation,
+                             Model model, Principal principal) {
         Properties properties = propertyService.getById(id);
         properties.setPropertyDescription(description);
         properties.setPropertyTitle(title);
@@ -186,14 +189,14 @@ public class ListingController {
 
         List<Properties> result = propertyService.getAll();
         Collections.shuffle(result);
-        List<Properties> random = result.stream().limit(8).toList();
+        List<Properties> random = new ArrayList<>(result.stream().limit(8).toList());
         List<Properties> history = propertyService.getByHistoryListing(historyListingService.getByUser(userService.findUserByEmail(principal.getName())));
+        random.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("randomProperty", random);
         model.addAttribute("property", property);
         if (!history.isEmpty()) {
             model.addAttribute("historyListing", history);
         }
-
         model.addAttribute("historySize", history.size());
         return "listing/listing-info";
     }
@@ -202,6 +205,6 @@ public class ListingController {
     @GetMapping("/test")
     public String test() {
 
-        return "user/payment";
+        return "user/deposit-money";
     }
 }

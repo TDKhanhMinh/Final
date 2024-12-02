@@ -7,8 +7,10 @@ import com.example.Final.entity.securityservice.User;
 import com.example.Final.repository.ContactRepo;
 import com.example.Final.service.PaymentService;
 import com.example.Final.service.PropertyService;
+import com.example.Final.service.UserPaymentService;
 import com.example.Final.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -80,20 +82,8 @@ public class PaymentController {
         properties.setPostInformation(contactRepo.save(postInformation));
 
         propertyService.save(properties);
-
-        if (user.getAccountBalance() < payment) {
-            paymentService.savePaymentFailure(payment, formattedDate, properties);
-            model.addAttribute("error");
-            return "redirect:/user/listing-manager-draft";
-//            sửa cái này
-        } else {
-            paymentService.savePaymentSuccess(payment, formattedDate, properties);
-            user.setAccountBalance(user.getAccountBalance() - payment);
-            properties.setAvailable(true);
-            propertyService.save(properties);
-            userService.save(user);
-            return "redirect:/user/listing-manager";
-        }
+        paymentService.savePayment(payment, formattedDate, properties);
+        return "redirect:/payment/payment/" + propertyId;
     }
 
 
@@ -114,13 +104,14 @@ public class PaymentController {
         Payment payment = property.getPayment();
 
         if (user.getAccountBalance() < property.getPostInformation().getPayment()) {
+            paymentService.savePaymentFailure(property);
             redirectAttributes.addFlashAttribute("error", "Tài khoản hiện không đủ tiền vui lòng nạp tiền thêm.");
             return "redirect:/payment/payment/" + userId;
         } else {
             user.setAccountBalance(user.getAccountBalance() - property.getPostInformation().getPayment());
+            paymentService.savePaymentSuccess(property);
             userService.save(user);
-            payment.setStatus("Đã thanh toán");
-            paymentService.save(payment);
+            redirectAttributes.addFlashAttribute("success", "Thanh toán bài đăng thành công");
             return "user/listing-manager";
         }
 
@@ -132,4 +123,47 @@ public class PaymentController {
         model.addAttribute("user", user);
         return "user/deposit-money";
     }
+
+    @PostMapping("/payment-option")
+    public String getTransferVnPay(Model model, Principal principal,
+                                   @RequestParam("paymentOption") String paymentOption) {
+        User user = userService.findUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        model.addAttribute("paymentOption", paymentOption);
+        return "user/payment-option";
+    }
+
+    private final UserPaymentService userPaymentService;
+
+    @PostMapping("/payment-method")
+    public String getPaymentVnPay(Model model, Principal principal,
+                                  @RequestParam("paymentMethod") String paymentMethod,
+                                  @Param("money") String money,
+                                  @Param("moneyValue") String moneyValue) {
+        User user = userService.findUserByEmail(principal.getName());
+        if (paymentMethod.equals("vnpay")) {
+            double amount;
+            if (moneyValue == null) {
+                amount = Double.parseDouble(money);
+            } else {
+                amount = Double.parseDouble(moneyValue);
+            }
+            userPaymentService.createUserPayment(user, amount, paymentMethod);
+            model.addAttribute("user", user);
+            model.addAttribute("amount", amount);
+            return "user/payment-vnpay";
+        } else {
+            double amount;
+            if (moneyValue == null) {
+                amount = Double.parseDouble(money);
+            } else {
+                amount = Double.parseDouble(moneyValue);
+            }
+            userPaymentService.createUserPayment(user, amount, paymentMethod);
+            model.addAttribute("amount", amount);
+            model.addAttribute("user", user);
+            return "user/payment-momo";
+        }
+    }
+
 }

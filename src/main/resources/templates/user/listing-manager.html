@@ -27,9 +27,9 @@
 
 <body class="bg-gradient-primary">
 <th:block th:insert="~{ home/header :: header}"></th:block>
-<div class="row d-flex flex-nowrap" style="padding-left: 18px;">
+<div class="row d-flex flex-nowrap" style="padding-left: 18px;background-color: whitesmoke;">
 
-    <div class="col-md-3" style="width: 20%;">
+    <div class="col-md-3" style="width: 20%;background-color: white;">
         <ul th:fragment="user-sidebar " class="navbar-nav border border-end " id="accordionSidebar"
             style="padding-top: 100px; list-style: none;">
             <div class="contact rounded-2" style="background-color: whitesmoke;">
@@ -55,7 +55,7 @@
                         <span>0 VNĐ</span>
                     </div>
                     <div class="d-flex justify-content-center my-2 mt-4">
-                        <div class="btn btn-outline-success">
+                        <a th:href="@{/payment/deposit}" class="btn btn-outline-success">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-window-plus" viewBox="0 0 16 16">
                                 <path
@@ -66,7 +66,7 @@
                                         d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5"/>
                             </svg>
                             Nạp tiền
-                        </div>
+                        </a>
                     </div>
                 </div>
             </li>

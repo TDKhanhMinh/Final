@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "contact")
+@Table(name = "post_information")
 public class PostInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class PostInformation {
     private double payPerDay;
 
     @OneToOne
-    @JoinColumn(name = "contact_property_id")
+    @JoinColumn(name = "post_property_id")
     private Properties properties;
 
 }

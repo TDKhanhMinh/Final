@@ -63,8 +63,10 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
                                 @Param("sqmtMax") Double sqmtMax,
                                 @Param("bedroom") Integer bedroom);
     @Query("select p from Properties p where " +
-            "(p.address.province = :province or :province is null) and "+
-            "(p.address.district = :district or :district is null) and "+
+            "(p.address.province = :province or :province is null) and " +
+            "(p.address.district = :district or :district is null) and " +
             "(p.address.ward = :ward or :ward is null)")
-    List<Properties> findByAddress(@Param("province") String province, @Param("district") String district, @Param("ward") String ward);
+    List<Properties> findByAddress(@Param("province") String province,
+                                   @Param("district") String district,
+                                   @Param("ward") String ward);
 }

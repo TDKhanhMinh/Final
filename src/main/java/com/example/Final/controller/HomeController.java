@@ -80,46 +80,28 @@ public class HomeController {
                             @Param("sqmtRange") Integer sqmtRange,
                             Model model
     ) {
-        System.out.println("controller");
-        System.out.println("Option: "+optionType);
-        System.out.println("City: "+city);
-        System.out.println("District: "+district);
-        System.out.println("Ward: "+ward);
-        System.out.println("HouseType: "+houseType);
-        System.out.println("RangePrice: "+rangePrice);
-        System.out.println("SqmtRange: "+sqmtRange);
-
-        if(city.equals("")){
+        if (city.isEmpty()) {
             city = null;
             System.out.println("city Null");
-        }else{
+        } else {
             city = city.replace(",", "").replace("Tỉnh ", "").replace("Thành phố ", "");
-            System.out.println(city);
         }
-
-        if(district.equals("")){
-            System.out.println("district Null");
+        if (district.isEmpty()) {
             district = null;
-        }else{
+        } else {
             district = district.replace(",", "").replace("Huyện ", "").replace("Thị xã ", "");
-            System.out.println(district);
         }
-
-        if(ward.equals("")){
+        if (ward.isEmpty()) {
             System.out.println("ward Null");
             ward = null;
-        }else{
+        } else {
             ward = ward.replace(",", "").replace("Xã ", "");
-            System.out.println(ward);
         }
 
         List<Properties> propertiesList = propertyService.findPropertiesByForm(optionType, city, district, ward, houseType, rangePrice, sqmtRange);
-        for (Properties properties : propertiesList) {
-            System.out.println(properties.getPropertyPrice());
-        }
+        propertiesList.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("city", city);
         model.addAttribute("properties", propertiesList);
-
 
         return "listing/all-listing";
     }
@@ -127,6 +109,7 @@ public class HomeController {
     @PostMapping("/searchByKey")
     public String getSearchProductPage(@RequestParam("searchKey") String searchKey, Model model) {
         List<Properties> propertiesList = propertyService.findPropertiesByKey(searchKey);
+        propertiesList.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("properties", propertiesList);
         model.addAttribute("city", "Toàn quốc");
         return "listing/all-listing";
@@ -135,6 +118,7 @@ public class HomeController {
     @GetMapping("/searchCity")
     public String getSearchCity(Model model, @RequestParam("city") String city) {
         List<Properties> propertiesList = propertyService.findPropertiesByProvince(city);
+        propertiesList.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("properties", propertiesList);
         model.addAttribute("city", city);
         return "listing/all-listing";
@@ -196,6 +180,7 @@ public class HomeController {
 
         }
         List<Properties> propertiesList = propertyService.findByCity(city, houseType, minPrice, maxPrice, minSqmt, maxSqmt, bed);
+        propertiesList.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("properties", propertiesList);
         model.addAttribute("city", city);
         return "listing/all-listing";

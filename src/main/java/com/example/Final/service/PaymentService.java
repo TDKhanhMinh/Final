@@ -15,45 +15,32 @@ public class PaymentService {
     @Autowired
     private PropertyService propertyService;
 
-    public void savePaymentSuccess(double payment_amount, String dayPost, Properties properties) {
-        if (properties.getPayment() == null) {
-            Payment payment = new Payment();
-            payment.setAmount(payment_amount);
-            payment.setDate(dayPost);
-            payment.setStatus("Đã thanh toán");
-            payment.setProperties(properties);
-            payment.setPaymentMethod("Thanh toán online");
-            paymentRepo.save(payment);
-        } else {
-            Payment payment = properties.getPayment();
-            payment.setAmount(payment_amount);
-            payment.setDate(dayPost);
-            payment.setStatus("Đã thanh toán");
-            payment.setProperties(properties);
-            payment.setPaymentMethod("Thanh toán online");
-            paymentRepo.save(payment);
-        }
-
+    public void savePaymentSuccess(Properties properties) {
+        Payment payment = properties.getPayment();
+        payment.setStatus("Đã thanh toán");
+        paymentRepo.save(payment);
+        properties.setPropertyStatus("Chờ duyệt");
+        propertyService.save(properties);
     }
 
-    public void savePaymentFailure(double payment_amount, String dayPost, Properties properties) {
-        if (properties.getPayment() == null) {
-            Payment payment = new Payment();
-            payment.setAmount(payment_amount);
-            payment.setDate(dayPost);
-            payment.setStatus("Chưa thanh toán");
-            payment.setProperties(properties);
-            payment.setPaymentMethod("Thanh toán online");
-            paymentRepo.save(payment);
-        } else {
-            Payment payment = properties.getPayment();
-            payment.setAmount(payment_amount);
-            payment.setDate(dayPost);
-            payment.setStatus("Chưa thanh toán");
-            payment.setProperties(properties);
-            payment.setPaymentMethod("Thanh toán online");
-            paymentRepo.save(payment);
-        }
+    public void savePayment(double payment_amount, String dayPost, Properties properties) {
+        Payment payment = new Payment();
+        payment.setAmount(payment_amount);
+        payment.setDate(dayPost);
+        payment.setStatus("Chưa thanh toán");
+        payment.setProperties(properties);
+        payment.setPaymentMethod("Thanh toán online");
+        paymentRepo.save(payment);
+
+        properties.setPayment(payment);
+        propertyService.save(properties);
+    }
+
+    public void savePaymentFailure(Properties properties) {
+        Payment payment = properties.getPayment();
+        payment.setStatus("Chưa thanh toán");
+        paymentRepo.save(payment);
+
 
     }
 

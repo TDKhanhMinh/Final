@@ -1,9 +1,11 @@
 package com.example.Final.service;
 
 import com.example.Final.entity.listingservice.Images;
+import com.example.Final.entity.paymentservice.UserPayment;
 import com.example.Final.entity.securityservice.Roles;
 import com.example.Final.entity.securityservice.User;
 import com.example.Final.repository.RolesRepository;
+import com.example.Final.repository.UserPaymentRepo;
 import com.example.Final.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,9 +27,13 @@ public class UserService implements UserDetailsService {
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private RolesRepository rolesRepository;
+    @Autowired
+    private UserPaymentRepo userPaymentRepo;
 
     public User create(User user) {
         User saveUser = new User();
+        UserPayment userPayment = new UserPayment();
+        userPaymentRepo.save(userPayment);
         saveUser.setEmail(user.getEmail());
         saveUser.setPassword(passwordEncoder.encode(user.getPassword()));
         saveUser.setFullName(user.getFullName());
@@ -35,21 +41,19 @@ public class UserService implements UserDetailsService {
         saveUser.setImages(null);
         saveUser.setRoles(Collections.singletonList(rolesRepository.findRolesByName("ROLE_REALTOR")));
         saveUser.setPhone(user.getPhone());
-        return userRepository.save(saveUser);
+        saveUser.setUserPayment(userPayment);
+        userRepository.save(saveUser);
+
+        userPayment.setUser(saveUser);
+        userPaymentRepo.save(userPayment);
+        return saveUser;
+
     }
+
     public void save(User user) {
         userRepository.save(user);
     }
 
-    public User update(User user) {
-        User oldUser = userRepository.findById(user.getUserId()).orElseThrow();
-        oldUser.setEmail(user.getEmail());
-        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        oldUser.setConfirmPassword(user.getConfirmPassword());
-        oldUser.setFullName(user.getFullName());
-        oldUser.setRoles(oldUser.getRoles());
-        return userRepository.save(oldUser);
-    }
 
     public void updateByEmail(String email, String password, String confirmPassword) {
         User oldUser = userRepository.findUserByEmail(email);

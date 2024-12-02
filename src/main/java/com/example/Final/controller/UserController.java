@@ -176,7 +176,7 @@ public class UserController {
         User user = userService.findUserByEmail(principal.getName());
         model.addAttribute("user", user);
         List<Properties> propertiesList = propertyService.getAllByUser(user);
-        propertiesList.removeIf(properties -> !properties.getPayment().getStatus().equals("Chưa thanh toán"));
+            propertiesList.removeIf(properties -> !properties.getPayment().getStatus().equals("Chưa thanh toán"));
         model.addAttribute("properties", propertiesList);
         return "user/draft-manager";
     }
