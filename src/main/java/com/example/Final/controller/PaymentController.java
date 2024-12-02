@@ -97,7 +97,8 @@ public class PaymentController {
     }
 
     @PostMapping("/user-payment")
-    public String getPayment(Model model, RedirectAttributes redirectAttributes, @RequestParam(value = "propertyId") int propertyId,
+    public String getPayment(Model model, RedirectAttributes redirectAttributes,
+                             @RequestParam(value = "propertyId") int propertyId,
                              @RequestParam(value = "userId") int userId) {
         User user = userService.findUserById(userId);
         Properties property = propertyService.getById(propertyId);
@@ -112,7 +113,7 @@ public class PaymentController {
             paymentService.savePaymentSuccess(property);
             userService.save(user);
             redirectAttributes.addFlashAttribute("success", "Thanh toán bài đăng thành công");
-            return "user/listing-manager";
+            return "redirect:/user/listing-manager";
         }
 
     }

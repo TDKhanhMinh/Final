@@ -18,18 +18,20 @@ public class UserPaymentService {
     private UserPaymentDetailsRepo userPaymentDetailsRepo;
     @Autowired
     private UserPaymentRepo userPaymentRepo;
+    @Autowired
+    private UserService userService;
 
     public void createUserPayment(User user, double amount, String paymentMethod) {
 
         UserPayment userPayment = user.getUserPayment();
         List<UserPaymentDetails> detailsList = userPayment.getPaymentDetails();
 
+        double balance = amount - amount * 0.1;
         UserPaymentDetails paymentDetails = new UserPaymentDetails();
 
         paymentDetails.setPaymentMethod(paymentMethod);
-        paymentDetails.setAmount(amount-amount*0.1);
-        paymentDetails.setStatus("Chờ duyệt");
-
+        paymentDetails.setAmount(balance);
+        paymentDetails.setStatus("Đã thanh toán");
         LocalDate currentDate = LocalDate.now();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -43,6 +45,8 @@ public class UserPaymentService {
         userPayment.setPaymentDetails(detailsList);
 
         userPaymentRepo.save(userPayment);
+        user.setAccountBalance(user.getAccountBalance() + balance);
+        userService.save(user);
 
     }
 }

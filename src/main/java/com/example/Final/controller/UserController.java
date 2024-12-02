@@ -165,8 +165,10 @@ public class UserController {
         User user = userService.findUserByEmail(principal.getName());
         model.addAttribute("user", user);
         List<Properties> propertiesList = propertyService.getAllByUser(user);
-        propertiesList.removeIf(properties -> !properties.isAvailable());
-        propertiesList.removeIf(properties -> properties.getPayment().getStatus().equals("Chưa thanh toán"));
+
+//        chinhr cais nay
+//        propertiesList.removeIf(properties -> !properties.isAvailable());
+//        propertiesList.removeIf(properties -> properties.getPayment().getStatus().equals("Chưa thanh toán"));
         model.addAttribute("properties", propertiesList);
         return "user/listing-manager";
     }
@@ -176,7 +178,7 @@ public class UserController {
         User user = userService.findUserByEmail(principal.getName());
         model.addAttribute("user", user);
         List<Properties> propertiesList = propertyService.getAllByUser(user);
-            propertiesList.removeIf(properties -> !properties.getPayment().getStatus().equals("Chưa thanh toán"));
+        propertiesList.removeIf(properties -> !properties.getPayment().getStatus().equals("Chưa thanh toán"));
         model.addAttribute("properties", propertiesList);
         return "user/draft-manager";
     }
@@ -268,6 +270,12 @@ public class UserController {
         return "redirect:/user/listing-manager";
     }
 
+    @GetMapping("/payment-history")
+    public String paymentHistory(Model model, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        return "user/payment-history";
+    }
 
 
 }
