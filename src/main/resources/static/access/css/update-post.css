@@ -1,4 +1,11 @@
+.option-payment:hover {
+    border: 1px solid black;
+}
 
+.copyButton:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
 .profile .profile-header .profile-cover-photo img {
     width: 100%;
     height: 240px;

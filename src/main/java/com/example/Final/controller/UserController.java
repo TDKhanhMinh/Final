@@ -3,6 +3,7 @@ package com.example.Final.controller;
 import com.example.Final.entity.listingservice.Address;
 import com.example.Final.entity.listingservice.Images;
 import com.example.Final.entity.listingservice.Properties;
+import com.example.Final.entity.paymentservice.UserPaymentDetails;
 import com.example.Final.entity.securityservice.User;
 import com.example.Final.repository.AddressRepo;
 import com.example.Final.repository.ImagesRepo;
@@ -165,10 +166,7 @@ public class UserController {
         User user = userService.findUserByEmail(principal.getName());
         model.addAttribute("user", user);
         List<Properties> propertiesList = propertyService.getAllByUser(user);
-
-//        chinhr cais nay
-//        propertiesList.removeIf(properties -> !properties.isAvailable());
-//        propertiesList.removeIf(properties -> properties.getPayment().getStatus().equals("Chưa thanh toán"));
+        propertiesList.removeIf(properties -> properties.getPayment().getStatus().equals("Chưa thanh toán"));
         model.addAttribute("properties", propertiesList);
         return "user/listing-manager";
     }
@@ -274,6 +272,8 @@ public class UserController {
     public String paymentHistory(Model model, Principal principal) {
         User user = userService.findUserByEmail(principal.getName());
         model.addAttribute("user", user);
+        List<UserPaymentDetails> userPaymentList = user.getUserPayment().getPaymentDetails();
+        model.addAttribute("userPaymentList", userPaymentList);
         return "user/payment-history";
     }
 

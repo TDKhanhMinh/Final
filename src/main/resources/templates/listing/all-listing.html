@@ -38,16 +38,6 @@
             <div class="input-group row d-flex justify-content-center rounded-2">
                 <form th:action="@{/home/searchByCity}" method="get" class="col-md-10 m-4">
                     <input type="text" th:value="${city}" name="city" id="city" hidden="hidden">
-                    <div class="container">
-                        <div class="btn btn-sm btn-outline-dark btn-active">
-                            Nhà đất bán
-                            <input type="radio" value="sell" hidden="hidden">
-                        </div>
-                        <div class="btn btn-sm btn-outline-dark btn-re-active">
-                            Nhà đất cho thuê
-                            <input type="radio" value="rent" hidden="hidden">
-                        </div>
-                    </div>
                     <div class="container d-flex  my-2 form-control"
                          style="max-width: 830px;background-color: whitesmoke">
                         <div class="location border border-white d-flex flex-nowrap align-items-center"
@@ -319,11 +309,36 @@
 <div class="container mt-4">
 
     <div class="row d-flex justify-content-center">
-        <h4 th:if="${city.equals('Toàn quốc')}" class="col-md-8"><strong>Mua bán và cho thuê nhà trên toàn
-            quốc</strong>
-        </h4>
-        <h4 th:if="${!city.equals('Toàn quốc')}" th:text="${'Mua bán và cho thuê nhà tại '+city}"
-            class="col-md-8 fw-bold"></h4>
+        <div class="d-flex justify-content-between" style="width: 80%">
+            <h4 th:if="${city.equals('Toàn quốc')}" class="col-md-8"><strong>Mua bán và cho thuê nhà trên toàn
+                quốc</strong>
+            </h4>
+            <h4 th:if="${!city.equals('Toàn quốc')}" th:text="${'Mua bán và cho thuê nhà tại '+city}"
+                class="col-md-8 fw-bold"></h4>
+            <div class="dropdown">
+                <button style="width: 200px;"
+                        class=" rounded-3 d-flex justify-content-between bg-white border border-gray" type="button"
+                        id="dropdownMenuButton07"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="mx-4">Thông thường</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-caret-down mt-1" viewBox="0 0 16 16">
+                        <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
+                    </svg>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton07">
+                    <li><a th:href="@{/home/sortByCity(city=${city}, sortOption=${'priceDesc'})}" class="dropdown-item">Giá
+                        cao đến thấp</a></li>
+                    <li><a th:href="@{/home/sortByCity(city=${city}, sortOption=${'priceAsc'})}" class="dropdown-item">Giá
+                        thấp đến cao</a></li>
+                    <li><a th:href="@{/home/sortByCity(city=${city}, sortOption=${'sqftDesc'})}" class="dropdown-item">Diện
+                        tích cao đến thấp</a></li>
+                    <li><a th:href="@{/home/sortByCity(city=${city}, sortOption=${'sqftAsc'})}" class="dropdown-item">Diện
+                        tích thấp đến cao</a></li>
+
+                </ul>
+            </div>
+        </div>
         <div th:if="${properties.isEmpty()}" class="container-sm d-flex justify-content-center mt-4">
             <div class="alert alert-success text-center" style="width: 80%" role="alert">
                 <h5><strong>Hiện tại chưa có bài đăng về địa điểm này.</strong>
@@ -371,7 +386,8 @@
                              style="margin-left: 20px;font-weight: bold">
 
                             <span
-                                  th:text="${(property.propertyPrice/100000000)/2}+' triệu/tháng'" class="text-danger">4.1
+                                    th:text="${(property.propertyPrice/100000000)/2}+' triệu/tháng'"
+                                    class="text-danger">4.1
                                     tỷ</span>
                         </div>
                         <div th:if="${property.propertyTypeTransaction.equals('sell')}"

@@ -1,95 +1,103 @@
+.option-payment:hover {
+    border: 1px solid black;
+}
 
-    .place-address {
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
-    }
+.copyButton:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
 
-    .uploaded-images {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 16px;
-    }
+.place-address {
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
 
-    .image-item {
-        position: relative;
-        width: 120px;
-        height: 120px;
-        border-radius: 8px;
-        overflow: hidden;
-        background-color: #f3f3f3;
-    }
+.uploaded-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+}
 
-    .image-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+.image-item {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f3f3f3;
+}
 
-    .edit-btn {
-        position: absolute;
-        bottom: 4px;
-        left: 4px;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 2px 6px;
-        font-size: 12px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-    .upload-area {
-        text-align: center;
-        margin-top: 16px;
-        padding: 16px;
-        border: 2px dashed #ccc;
-        border-radius: 8px;
-        background-color: #fafafa;
-    }
+.edit-btn {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 6px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-    .upload-area p {
-        margin-bottom: 8px;
-    }
+.upload-area {
+    text-align: center;
+    margin-top: 16px;
+    padding: 16px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
 
-    .upload-btn {
-        background: #007bff;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+.upload-area p {
+    margin-bottom: 8px;
+}
 
-    .container-fix-60 {
-        max-width: 60%;
-        margin: auto;
-    }
+.upload-btn {
+    background: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-    .place-address-choice.selected {
-        background-color: #dcfeff;
-        border: 1px solid black;
-    }
+.container-fix-60 {
+    max-width: 60%;
+    margin: auto;
+}
 
-    .place-address-choice:hover {
-        cursor: pointer;
-    }
+.place-address-choice.selected {
+    background-color: #dcfeff;
+    border: 1px solid black;
+}
 
-    .choose-hover input[type="radio"]:checked + span {
-        color: rgb(0, 0, 0);
-        font-weight: bold;
-    }
+.place-address-choice:hover {
+    cursor: pointer;
+}
 
-    .choose-hover:hover {
-        cursor: pointer;
-        background-color: rgb(229, 252, 252);
-    }
+.choose-hover input[type="radio"]:checked + span {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
 
-    input[type="radio"]:checked + .choose-option {
-        background-color: #dcfeff;
-        color: white;
-        border-color: rgb(0, 0, 0);
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
+.choose-hover:hover {
+    cursor: pointer;
+    background-color: rgb(229, 252, 252);
+}
+
+input[type="radio"]:checked + .choose-option {
+    background-color: #dcfeff;
+    color: white;
+    border-color: rgb(0, 0, 0);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

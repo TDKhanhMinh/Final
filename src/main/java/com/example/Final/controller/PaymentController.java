@@ -102,8 +102,6 @@ public class PaymentController {
                              @RequestParam(value = "userId") int userId) {
         User user = userService.findUserById(userId);
         Properties property = propertyService.getById(propertyId);
-        Payment payment = property.getPayment();
-
         if (user.getAccountBalance() < property.getPostInformation().getPayment()) {
             paymentService.savePaymentFailure(property);
             redirectAttributes.addFlashAttribute("error", "Tài khoản hiện không đủ tiền vui lòng nạp tiền thêm.");
@@ -152,6 +150,7 @@ public class PaymentController {
             userPaymentService.createUserPayment(user, amount, paymentMethod);
             model.addAttribute("user", user);
             model.addAttribute("amount", amount);
+            model.addAttribute("paymentOption", paymentMethod);
             return "user/payment-vnpay";
         } else {
             double amount;
@@ -163,6 +162,8 @@ public class PaymentController {
             userPaymentService.createUserPayment(user, amount, paymentMethod);
             model.addAttribute("amount", amount);
             model.addAttribute("user", user);
+            model.addAttribute("paymentOption", paymentMethod);
+
             return "user/payment-momo";
         }
     }

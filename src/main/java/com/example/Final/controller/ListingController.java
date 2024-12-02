@@ -148,7 +148,7 @@ public class ListingController {
 
         properties.setUser(userService.findUserByEmail(principal.getName()));
         properties.setPostInformation(contactRepo.save(postInformation));
-        //properties.setAvailable(true);
+        properties.setPropertyStatus("Chưa thanh toán");
         propertyService.save(properties);
         model.addAttribute("property", properties);
         return "listing/post-image";
@@ -202,9 +202,5 @@ public class ListingController {
     }
 
 
-    @GetMapping("/test")
-    public String test() {
 
-        return "user/deposit-money";
-    }
 }

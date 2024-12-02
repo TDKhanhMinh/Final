@@ -1,4 +1,27 @@
+.option-payment:hover {
+    border: 1px solid black;
+}
 
+.copyButton:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
+.countdown {
+    font-size: 16px;
+    color: #ff6600;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.time-box {
+    border: 2px solid #ff6600;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    background: #fff;
+    text-align: center;
+}
 .profile .profile-header .profile-cover-photo img {
     width: 100%;
     height: 240px;

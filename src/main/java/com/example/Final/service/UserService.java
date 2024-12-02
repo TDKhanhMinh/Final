@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Random;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -42,6 +43,11 @@ public class UserService implements UserDetailsService {
         saveUser.setRoles(Collections.singletonList(rolesRepository.findRolesByName("ROLE_REALTOR")));
         saveUser.setPhone(user.getPhone());
         saveUser.setUserPayment(userPayment);
+        saveUser.setActive(true);
+        int randomNumber = new Random().nextInt(40000000) + 10000000;
+        String paymentCode = "T7M" + randomNumber;
+        saveUser.setPaymentCode(paymentCode);
+
         userRepository.save(saveUser);
 
         userPayment.setUser(saveUser);

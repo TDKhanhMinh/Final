@@ -3,7 +3,6 @@ package com.example.Final.entity.securityservice;
 import com.example.Final.entity.listingservice.HistoryListing;
 import com.example.Final.entity.listingservice.Images;
 import com.example.Final.entity.paymentservice.UserPayment;
-import com.example.Final.entity.paymentservice.UserPaymentDetails;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
-import java.util.List;
 
 @Data
 @Entity
@@ -47,6 +45,10 @@ public class User {
     @NotNull(message = "Please fill in this field")
     @Size(min = 1, message = "Please fill in this field")
     private String phone;
+
+    private boolean isActive ;
+
+    private String paymentCode;
 
     private double accountBalance;
 

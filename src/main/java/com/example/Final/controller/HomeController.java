@@ -46,6 +46,7 @@ public class HomeController {
         List<Properties> propertiesList = propertyService.getAll();
         propertiesList.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("properties", propertiesList);
+        model.addAttribute("city", "Toàn quốc");
         return "listing/all-listing";
     }
 
@@ -82,7 +83,7 @@ public class HomeController {
     ) {
         if (city.isEmpty()) {
             city = null;
-            System.out.println("city Null");
+
         } else {
             city = city.replace(",", "").replace("Tỉnh ", "").replace("Thành phố ", "");
         }
@@ -92,7 +93,6 @@ public class HomeController {
             district = district.replace(",", "").replace("Huyện ", "").replace("Thị xã ", "");
         }
         if (ward.isEmpty()) {
-            System.out.println("ward Null");
             ward = null;
         } else {
             ward = ward.replace(",", "").replace("Xã ", "");
@@ -122,6 +122,86 @@ public class HomeController {
         model.addAttribute("properties", propertiesList);
         model.addAttribute("city", city);
         return "listing/all-listing";
+    }
+
+    @GetMapping("/sortByCity")
+    public String getSortByCity(Model model, @RequestParam("city") String city,
+                                @RequestParam("sortOption") String option) {
+        System.out.println(city);
+        if (!city.equals("Toàn quốc")) {
+            switch (option) {
+                case "priceDesc" -> {
+                    List<Properties> propertiesList = propertyService.sortPriceByCityDESC(city);
+                    propertiesList.removeIf(properties -> !properties.isAvailable());
+
+                    model.addAttribute("properties", propertiesList);
+                    model.addAttribute("city", city);
+                    return "listing/all-listing";
+
+                }
+                case "priceAsc" -> {
+                    List<Properties> propertiesList = propertyService.sortPriceByCityASC(city);
+                    propertiesList.removeIf(properties -> !properties.isAvailable());
+
+                    model.addAttribute("properties", propertiesList);
+                    model.addAttribute("city", city);
+                    return "listing/all-listing";
+                }
+                case "sqftDesc" -> {
+                    List<Properties> propertiesList = propertyService.sortSqftByCityDESC(city);
+                    propertiesList.removeIf(properties -> !properties.isAvailable());
+
+                    model.addAttribute("properties", propertiesList);
+                    model.addAttribute("city", city);
+                    return "listing/all-listing";
+                }
+                default -> {
+                    List<Properties> propertiesList = propertyService.sortSqftByCityASC(city);
+                    propertiesList.removeIf(properties -> !properties.isAvailable());
+
+                    model.addAttribute("properties", propertiesList);
+                    model.addAttribute("city", city);
+                    return "listing/all-listing";
+                }
+            }
+        } else {
+            switch (option) {
+
+                case "priceDesc" -> {
+                    List<Properties> propertiesList = propertyService.sortPriceByAllDESC();
+                    propertiesList.removeIf(properties -> !properties.isAvailable());
+
+                    model.addAttribute("properties", propertiesList);
+                    model.addAttribute("city", city);
+                    return "listing/all-listing";
+
+                }
+                case "priceAsc" -> {
+                    List<Properties> propertiesList = propertyService.sortPriceByAllASC();
+                    propertiesList.removeIf(properties -> !properties.isAvailable());
+
+                    model.addAttribute("properties", propertiesList);
+                    model.addAttribute("city", city);
+                    return "listing/all-listing";
+                }
+                case "sqftDesc" -> {
+                    List<Properties> propertiesList = propertyService.sortSqftByAllDESC();
+                    propertiesList.removeIf(properties -> !properties.isAvailable());
+
+                    model.addAttribute("properties", propertiesList);
+                    model.addAttribute("city", city);
+                    return "listing/all-listing";
+                }
+                default -> {
+                    List<Properties> propertiesList = propertyService.sortSqftByAllASC();
+                    propertiesList.removeIf(properties -> !properties.isAvailable());
+                    model.addAttribute("properties", propertiesList);
+                    model.addAttribute("city", city);
+                    return "listing/all-listing";
+                }
+            }
+        }
+
     }
 
     @GetMapping("/searchByCity")
@@ -185,5 +265,6 @@ public class HomeController {
         model.addAttribute("city", city);
         return "listing/all-listing";
     }
+
 
 }

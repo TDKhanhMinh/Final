@@ -16,6 +16,14 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
 
     List<Properties> getPropertiesByUser(User user);
 
+    List<Properties> getPropertiesByOrderByPropertyPriceDesc();
+
+    List<Properties> getPropertiesByOrderByPropertyPriceAsc();
+
+    List<Properties> getPropertiesByOrderBySquareMetersDesc();
+
+    List<Properties> getPropertiesByOrderBySquareMetersAsc();
+
     @Query("select p from Properties p where " +
             "lower(p.propertyTitle) like lower(concat('%',:searchKey,'%')) or " +
             "lower(p.propertyDescription) like lower(concat('%',:searchKey,'%')) or " +
@@ -62,6 +70,7 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
                                 @Param("sqmtMin") Double sqmtMin,
                                 @Param("sqmtMax") Double sqmtMax,
                                 @Param("bedroom") Integer bedroom);
+
     @Query("select p from Properties p where " +
             "(p.address.province = :province or :province is null) and " +
             "(p.address.district = :district or :district is null) and " +
@@ -69,4 +78,26 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
     List<Properties> findByAddress(@Param("province") String province,
                                    @Param("district") String district,
                                    @Param("ward") String ward);
+
+
+    @Query("select p from Properties p where " +
+            "(p.address.province = :city or :city is null)" +
+            "order by p.propertyPrice asc ")
+    List<Properties> sortPriceByCityASC(@Param("city") String city);
+
+    @Query("select p from Properties p where " +
+            "(p.address.province = :city or :city is null)" +
+            "order by p.propertyPrice desc ")
+    List<Properties> sortPriceByCityDESC(@Param("city") String city);
+
+    @Query("select p from Properties p where " +
+            "(p.address.province = :city or :city is null)" +
+            "order by p.squareMeters asc ")
+    List<Properties> sortSqftByCityASC(@Param("city") String city);
+
+    @Query("select p from Properties p where " +
+            "(p.address.province = :city or :city is null)" +
+            "order by p.squareMeters desc ")
+    List<Properties> sortSqftByCityDESC(@Param("city") String city);
+
 }
