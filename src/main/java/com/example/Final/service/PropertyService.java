@@ -144,6 +144,19 @@ public class PropertyService {
         return propertiesList;
 
     }
+    public List<Properties> caseGetAll(int option){
+        switch (option) {
+            case 1:
+                return propertyRepo.findAll();
+            case 2:
+                return propertyRepo.findByIsAvailable(true);
+            case 3:
+                return propertyRepo.findByIsAvailable(false);
+            default:
+                return propertyRepo.findAll();
+        }
+    }
+
 
 
     public List<Properties> filterByType(List<Properties> properties, Integer option) {

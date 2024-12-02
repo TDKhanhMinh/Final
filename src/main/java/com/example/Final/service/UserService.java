@@ -18,7 +18,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+<<<<<<< HEAD
 import java.util.Random;
+=======
+import java.util.List;
+>>>>>>> fbaea95054c4a1367c3cca925ab2753613b28ae3
 
 @Service
 public class UserService implements UserDetailsService {
@@ -118,4 +122,9 @@ public class UserService implements UserDetailsService {
         }
         return authorities;
     }
+
+    public List<User> getAll(){
+        return userRepository.findAll();
+    }
+
 }

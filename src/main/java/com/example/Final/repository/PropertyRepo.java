@@ -79,6 +79,7 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
                                    @Param("district") String district,
                                    @Param("ward") String ward);
 
+<<<<<<< HEAD
 
     @Query("select p from Properties p where " +
             "(p.address.province = :city or :city is null)" +
@@ -100,4 +101,7 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
             "order by p.squareMeters desc ")
     List<Properties> sortSqftByCityDESC(@Param("city") String city);
 
+=======
+    List<Properties> findByIsAvailable(boolean b);
+>>>>>>> fbaea95054c4a1367c3cca925ab2753613b28ae3
 }
