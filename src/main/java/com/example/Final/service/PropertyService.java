@@ -144,19 +144,6 @@ public class PropertyService {
         return propertiesList;
 
     }
-    public List<Properties> caseGetAll(int option){
-        switch (option) {
-            case 1:
-                return propertyRepo.findAll();
-            case 2:
-                return propertyRepo.findByIsAvailable(true);
-            case 3:
-                return propertyRepo.findByIsAvailable(false);
-            default:
-                return propertyRepo.findAll();
-        }
-    }
-
 
 
     public List<Properties> filterByType(List<Properties> properties, Integer option) {
@@ -431,5 +418,18 @@ public class PropertyService {
 
     public List<Properties> sortSqftByAllDESC(String city) {
         return propertyRepo.sortSqftByCityDESC(city);
+    }
+
+    public List<Properties> caseGetAll(int option){
+        switch (option) {
+            case 1:
+                return propertyRepo.findAll();
+            case 2:
+                return propertyRepo.findByIsAvailable(true);
+            case 3:
+                return propertyRepo.findByIsAvailable(false);
+            default:
+                return propertyRepo.findAll();
+        }
     }
 }
