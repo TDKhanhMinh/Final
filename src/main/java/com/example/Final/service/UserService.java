@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -112,4 +113,9 @@ public class UserService implements UserDetailsService {
         }
         return authorities;
     }
+
+    public List<User> getAll(){
+        return userRepository.findAll();
+    }
+
 }

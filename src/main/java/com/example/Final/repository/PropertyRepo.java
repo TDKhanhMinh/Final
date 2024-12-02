@@ -69,4 +69,6 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
     List<Properties> findByAddress(@Param("province") String province,
                                    @Param("district") String district,
                                    @Param("ward") String ward);
+
+    List<Properties> findByIsAvailable(boolean b);
 }

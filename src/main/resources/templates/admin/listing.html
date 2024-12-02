@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex h-screen bg-[#F5F5F5] flex-col">
+<div class="w-full h-32 shadow-md bg-white shadow-md items-center content-center">
+  <div class="flex items-center align-center">
+    <a class="flex justify-content-center m-5" th:href="@{/home/home}">
+      <img style="width: 50px; height: 50px"
+           th:src="@{/access/image/c085ad076c442c8191e6b7f48ef59aad.jpg}" alt="image of logo"
+           class="rounded-full">
+    </a>
+    <div class="flex justify-center w-full">
+      <div class="text-4xl font-bold text-blue-400">ADMIN CENTER</div>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center fixed top-32 left-64 text-center px-5 space-x-1" >
+  <a href="/admin/listings?option=1" class="px-3 py-1 border shadow-md hover:bg-gray-300">Tất cả</a>
+  <a href="/admin/listings?option=2" class="px-3 py-1 border shadow-md hover:bg-gray-300">Đã duyệt</a>
+  <a href="/admin/listings?option=3" class="px-3 py-1 border shadow-md hover:bg-gray-300">Chờ duyệt</a>
+</div>
+<div th:if="${notification != null}" th:text="${notification}" class="fixed top-32 right-5 border border-green-700 flex items-center p-4 mb-4 text-green-700 bg-green-100 rounded-lg shadow-lg z-50" role="alert" id="notification">
+  haha</div>
+<div class="flex flex-row h-screen">
+  <aside class="flex h-full py-10 w-64 flex-col bg-white shadow">
+    <nav class="flex-grow">
+      <ul class="mt-4 space-y-2">
+        <li class="px-3">
+          <a href="/admin/products" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-500 hover:text-white">
+            Product
+            <svg xmlns="http://www.w3.org/2000/svg" stroke-width="35" fill="none" stroke="currentColor" class="text size-6" viewBox="0 0 640 512"><path d="M274.9 34.3c-28.1-28.1-73.7-28.1-101.8 0L34.3 173.1c-28.1 28.1-28.1 73.7 0 101.8L173.1 413.7c28.1 28.1 73.7 28.1 101.8 0L413.7 274.9c28.1-28.1 28.1-73.7 0-101.8L274.9 34.3zM200 224a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM96 200a24 24 0 1 1 0 48 24 24 0 1 1 0-48zM224 376a24 24 0 1 1 0-48 24 24 0 1 1 0 48zM352 200a24 24 0 1 1 0 48 24 24 0 1 1 0-48zM224 120a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm96 328c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-114.3 0c11.6 36 3.1 77-25.4 105.5L320 413.8l0 34.2zM480 328a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" /></svg>
+          </a>
+        </li>
+        <li class="px-3">
+          <a href="/admin/categories" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-500 hover:text-white">
+            Category
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+            </svg>
+          </a>
+        </li>
+        <li class="px-3">
+          <a href="/admin/allOrder" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 bg-blue-300 shadow-md hover:bg-blue-500 hover:text-white">
+            Order
+            <svg xmlns="http://www.w3.org/2000/svg" stroke-width="35" fill="none" stroke="currentColor" class="text size-6" viewBox="0 0 640 512">
+              <path d="M48 0C21.5 0 0 21.5 0 48L0 368c0 26.5 21.5 48 48 48l16 0c0 53 43 96 96 96s96-43 96-96l128 0c0 53 43 96 96 96s96-43 96-96l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64 0-32 0-18.7c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7L416 96l0-48c0-26.5-21.5-48-48-48L48 0zM416 160l50.7 0L544 237.3l0 18.7-128 0 0-96zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+            </svg>
+          </a>
+        </li>
+        <li class="px-3">
+          <a href="/admin/users" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-500 hover:text-white">
+            User
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="p-6">
+      <a href="/loginPage?logout" class="block rounded-lg bg-red-600 text-white px-6 py-2.5 text-center hover:bg-red-500"> Logout </a>
+    </div>
+  </aside>
+  <div class="w-10/12 h-7/12 flex justify-center items-center">
+    <div class="h-full w-full shadow-md pt-20 flex flex-col space-y-2">
+      <div class="flex justify-center py-10" th:if="${properties.isEmpty()}">
+        <div class="flex flex-col items-center justify-center space-y-6 mt-30 bg-white w-1/2 py-10 mx-5 rounded-md shadow-md">
+          <img src="/images/empty-cart.jpg" alt="empty-cart.jpg" class="size-64   ">
+          <p class="text-center text-xl text-gray-600">There is no order</p>
+        </div>
+      </div>
+      <div class="px-5 pb-10 overflow-y-auto" th:if="${!properties.isEmpty()}">
+        <div class="grid w-full min-w-[620px] grid-cols-10 p-4 px-4 bg-white shadow-md space-x-2">
+          <div class="flex justify-start pb-1 px-3 border-r-2">ID</div>
+          <div class="flex justify-center pb-1 col-span-2 border-r-2">Nguời đăng</div>
+          <div class="flex justify-center pb-1 border-r-2">Phân loại</div>
+          <div class="flex justify-center pb-1 border-r-2">Hình thức GD</div>
+          <div class="flex justify-center pb-1 col-span-2 border-r-2">Mô tả</div>
+          <div class="flex justify-center pb-1 border-r-2">Trạng thái</div>
+          <div class="flex justify-center pb-1 pl-5 col-span-2">Action</div>
+        </div>
+        <div class="h-2"></div>
+        <div class="flex flex-col space-y-2">
+          <div th:each="property : ${properties}" class="flex space-y-2 flex-col">
+            <div class="shadow-gray-200 shadow-md">
+              <div class="grid w-full min-w-[620px] grid-cols-10 bg-white pt-6 px-4 items-center space-x-2">
+                <div th:text="${property.propertyId}" class="px-3 border-r-2"></div>
+                <div th:text="${property.user.fullName}" class="col-span-2 border-r-2"></div>
+                <div th:text="${property.propertyType}" class="border-r-2 flex justify-center"></div>
+                <div th:text="${property.propertyTypeTransaction}" class="flex justify-center border-r-2"></div>
+                <div th:text="${property.propertyDescription}" class="col-span-2 text-ellipsis overflow-hidden whitespace-nowrap border-r-2"></div>
+                <div th:text="${property.propertyStatus}" class="border-r-2 flex justify-center"></div>
+                <div class="flex justify-end col-span-2 space-x-5 pr-2">
+                  <div th:if="${!property.isAvailable()}" class="flex items-center space-x-5">
+                    <form th:action="@{/admin/checked}" method="post">
+                      <input type="hidden" th:value="${property.propertyId}" name="id">
+                      <button type="submit" class="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-2 py-1 rounded-md font-bold ">Duyệt</button>
+                    </form>
+                    <form th:action="@{/admin/denied}" method="post">
+                      <input type="hidden" th:value="${property.propertyId}" name="id">
+                      <button type="submit" class="border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white px-2 py-1 rounded-md font-bold ">Từ chối</button>
+                    </form>
+                  </div>
+                  <form th:action="@{/admin/deleteListing}" method="post">
+                    <input type="hidden" name="id" th:value="${property.propertyId}">
+                    <button type="submit" class="border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-1 py-1 rounded-md font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg></button>
+                  </form>
+                </div>
+                <div class="flex flex-col justify-center col-span-full child-div-2">
+                  <div class="w-full flex justify-center">
+                    <button type="button" class="bg-gray-200 hover:bg-gray-300 rounded-full px-4 shadow m-1 items-center content-center" id="showProduct" th:data-id="${property.propertyId}">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    <button type="button" class="bg-gray-200 hover:bg-gray-300 rounded-full px-4 shadow m-1 hidden" id="hideProduct" th:data-id="${property.propertyId}">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-center hidden" th:data-id="${property.propertyId}" id="productList">
+              <div class="w-11/12 flex justify-center items-center">
+                <div class="h-full w-full py-1 pb-2 flex flex-col space-y-2" >
+                  <div class="px-5">
+                    <div class="grid w-full min-w-[620px] grid-cols-8 p-4 px-4 bg-white shadow-md">
+                      <div class="col-span-2 flex justify-start pb-1 px-1">Địa chỉ</div>
+                      <div class="flex justify-center pb-1 px-2 ">Mức giá</div>
+                      <div class="flex justify-center pb-1 px-1">Diện tích</div>
+                      <div class="flex justify-center  pb-1 px-1">Số phòng ngủ</div>
+                      <div class="flex justify-center pb-1 px-1">Số phòng tắm</div>
+                      <div class="flex justify-center pb-1 px-1">Pháp lý</div>
+                      <div class="flex justify-center pb-1 px-1">Nội thất</div>
+                    </div>
+                    <div class="h-2"></div>
+                    <div class="flex flex-col space-y-2 w-full">
+                      <div class="grid w-full min-w-[620px] grid-cols-8 p-4 px-4 bg-white shadow-gray-200 shadow-md">
+                        <div class="px-2 col-span-2 flex justify-start items-center bg-transparent pb-1" th:text="${property.address.fullAddress}"></div>
+                        <div class="px-2 flex justify-center text-red-500 items-center bg-transparent pb-1" th:text="${property.propertyPrice}"></div>
+                        <div class="px-1 flex justify-center items-center bg-transparent pb-1 " th:text="${property.squareMeters}"></div>
+                        <div class="px-1 flex justify-center items-center bg-transparent pb-1" th:text="${property.bedrooms}"></div>
+                        <div class="px-1 flex justify-center items-center bg-transparent pb-1" th:text="${property.bathrooms}"></div>
+                        <div class="px-1 flex justify-center items-center bg-transparent pb-1" th:text="${property.propertyLegal}"></div>
+                        <div class="px-1 flex justify-center items-center bg-transparent pb-1" th:text="${property.propertyInterior}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex">
+
+
+
+  <div class="w-10/12 flex justify-center items-center">
+
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const showButtons = document.querySelectorAll('#showProduct');
+    const hideButtons = document.querySelectorAll('#hideProduct');
+
+
+    showButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+
+        const propertyId = button.getAttribute('data-id');
+
+
+        const productList = document.querySelector(`#productList[data-id="${propertyId}"]`);
+        if (productList) {
+          productList.classList.remove('hidden');
+        }
+
+        button.classList.add('hidden');
+        const hideButton = document.querySelector(`#hideProduct[data-id="${propertyId}"]`);
+        if (hideButton) {
+          hideButton.classList.remove('hidden');
+        }
+      });
+    });
+
+    hideButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const propertyId = button.getAttribute('data-id');
+
+
+        const productList = document.querySelector(`#productList[data-id="${propertyId}"]`);
+        if (productList) {
+          productList.classList.add('hidden');
+        }
+
+        button.classList.add('hidden');
+        const showButton = document.querySelector(`#showProduct[data-id="${propertyId}"]`);
+        if (showButton) {
+          showButton.classList.remove('hidden');
+        }
+      });
+    });
+  });
+
+</script>
+</body>
+</html>
+
+
+
+

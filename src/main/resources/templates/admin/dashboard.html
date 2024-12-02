@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex h-screen bg-[#F5F5F5] flex-col">
+<div class="w-full h-32 shadow-md bg-white shadow-md">
+    <div class="flex items-center align-center">
+
+        <div class="flex justify-center w-full">
+            <div class="text-4xl font-bold text-blue-400">ADMIN CENTER</div>
+        </div>
+    </div>
+</div>
+<div class="flex h-screen">
+    <aside class="flex h-full w-64 flex-col  bg-white py-10 shadow">
+        <nav class="flex-grow">
+            <ul class="mt-4 space-y-2">
+                <li class="px-3">
+                    <a href="/admin/products" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-500 hover:text-white">
+                        Product
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="35" fill="none" stroke="currentColor" class="text size-6" viewBox="0 0 640 512"><path d="M274.9 34.3c-28.1-28.1-73.7-28.1-101.8 0L34.3 173.1c-28.1 28.1-28.1 73.7 0 101.8L173.1 413.7c28.1 28.1 73.7 28.1 101.8 0L413.7 274.9c28.1-28.1 28.1-73.7 0-101.8L274.9 34.3zM200 224a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM96 200a24 24 0 1 1 0 48 24 24 0 1 1 0-48zM224 376a24 24 0 1 1 0-48 24 24 0 1 1 0 48zM352 200a24 24 0 1 1 0 48 24 24 0 1 1 0-48zM224 120a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm96 328c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-114.3 0c11.6 36 3.1 77-25.4 105.5L320 413.8l0 34.2zM480 328a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" /></svg>
+                    </a>
+                </li>
+                <li class="px-3">
+                    <a href="/admin/categories" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-500 hover:text-white">
+                        Category
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="px-3">
+                    <a href="/admin/allOrder" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-500 hover:text-white">
+                        Order
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="35" fill="none" stroke="currentColor" class="text size-6" viewBox="0 0 640 512">
+                            <!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path d="M48 0C21.5 0 0 21.5 0 48L0 368c0 26.5 21.5 48 48 48l16 0c0 53 43 96 96 96s96-43 96-96l128 0c0 53 43 96 96 96s96-43 96-96l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64 0-32 0-18.7c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7L416 96l0-48c0-26.5-21.5-48-48-48L48 0zM416 160l50.7 0L544 237.3l0 18.7-128 0 0-96zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="px-3">
+                    <a href="/admin/users" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-500 hover:text-white">
+                        User
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Logout -->
+        <div class="p-6">
+            <a href="/loginPage?logout" class="block rounded-lg bg-red-600 text-white px-6 py-2.5 text-center hover:bg-red-500"> Đăng xuất </a>
+        </div>
+    </aside>
+    <div class="w-10/12 flex justify-center items-center p-20">
+        <div class="bg-white h-full w-full shadow-md rounded-xl p-20 flex flex-col space-y-2" >
+            <div class="text-5xl font-bold">Welcome back!</div>
+            <div class="text-xl">You're in BlindBox system control center</div>
+            <div class="text-4xl pt-20">Start your task now</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
