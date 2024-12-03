@@ -6,6 +6,9 @@ import com.example.Final.repository.PaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class PaymentService {
     @Autowired
@@ -46,5 +49,15 @@ public class PaymentService {
 
     public void save(Payment payment) {
         paymentRepo.save(payment);
+    }
+
+    public Optional<Payment> getPaymentByPropertiesId(int id) {
+        return Optional.ofNullable(paymentRepo.findByPropertiesPropertyId(id));
+    }
+    public List<Payment> getAllPayments() {
+        return paymentRepo.findAll();
+    }
+    public void deletePayment(int id) {
+        paymentRepo.deleteById(id);
     }
 }

@@ -35,7 +35,7 @@ public class Properties {
     private String propertyInterior;
     @Column(name = "property_legal_papers")
     private String propertyLegal;
-    @Column(name = "property_description")
+    @Column(name = "property_description", length = Integer.MAX_VALUE)
     private String propertyDescription;
     @Column(name = "property_floor")
     private int propertyFloor;

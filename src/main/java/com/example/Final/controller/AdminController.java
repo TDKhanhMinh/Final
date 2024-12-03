@@ -1,22 +1,22 @@
 package com.example.Final.controller;
 
 import com.example.Final.entity.listingservice.Properties;
+import com.example.Final.entity.paymentservice.Payment;
+import com.example.Final.entity.paymentservice.UserPayment;
 import com.example.Final.entity.securityservice.User;
-import com.example.Final.service.HistoryListingService;
-import com.example.Final.service.PropertyService;
-import com.example.Final.service.UserService;
+import com.example.Final.service.*;
+import jakarta.validation.Valid;
 import org.springframework.aop.config.AopNamespaceHandler;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,12 +25,16 @@ public class AdminController {
     private final HistoryListingService historyListingService;
     private final PropertyService propertyService;
     private final LocalValidatorFactoryBean defaultValidator;
+    private final PaymentService paymentService;
+    private final UserPaymentService userPaymentService;
 
-    public AdminController(UserService userService, HistoryListingService historyListingService, PropertyService propertyService, LocalValidatorFactoryBean defaultValidator) {
+    public AdminController(UserService userService, HistoryListingService historyListingService, PropertyService propertyService, LocalValidatorFactoryBean defaultValidator, PaymentService paymentService, PaymentService paymentService1, UserPaymentService userPaymentService) {
         this.userService = userService;
         this.historyListingService = historyListingService;
         this.propertyService = propertyService;
         this.defaultValidator = defaultValidator;
+        this.paymentService = paymentService1;
+        this.userPaymentService = userPaymentService;
     }
 
     @GetMapping("/dashboard")
@@ -40,7 +44,7 @@ public class AdminController {
 
     @GetMapping("/users")
     public String user(Model model) {
-
+        model.addAttribute("user", new User());
         model.addAttribute("users", userService.getAll());
         return "/admin/user";
     }
@@ -64,6 +68,14 @@ public class AdminController {
     @PostMapping("/denied")
     public String listingDenied(Model model, @RequestParam("id") int id) {
         Properties property = propertyService.getById(id);
+        User author = userService.findUserById(property.getUser().getUserId());
+        double cost = 0;
+        Optional<Payment> optionalPayment = paymentService.getPaymentByPropertiesId(id);
+        if(optionalPayment.isPresent()) {
+            Payment payment = optionalPayment.get();
+            cost = payment.getAmount();
+        }
+        author.setAccountBalance(author.getAccountBalance()+cost);
         property.setPropertyStatus("Từ chối");
         propertyService.save(property);
         model.addAttribute("properties", propertyService.caseGetAll(1));
@@ -76,5 +88,51 @@ public class AdminController {
         model.addAttribute("properties", propertyService.caseGetAll(1));
         model.addAttribute("notification", "Listing deleted successfully");
         return "/admin/listing";
+    }
+    @PostMapping("deleteUser")
+    public String deleteUser(Model model, @RequestParam("id") int id) {
+        for (Properties property : propertyService.getAll()) {
+            if (property.getUser().getUserId() == id) {
+                propertyService.delete(property);
+            }
+        }
+        for (UserPayment payment : userPaymentService.getAll()){
+            if (payment.getUser().getUserId() == id){
+                paymentService.deletePayment(payment.getPaymentId());
+                userPaymentService.deleteUserPayment(payment);
+
+            }
+        }
+
+        userService.deleteById(id);
+        model.addAttribute("users", userService.getAll());
+        model.addAttribute("user", new User());
+        model.addAttribute("notification", "User deleted successfully");
+        return "/admin/user";
+    }
+    @PostMapping("/register")
+    public String getRegisterForm(@Valid
+                                  @ModelAttribute("user") User user,
+                                  BindingResult result,
+                                  Model model) {
+        model.addAttribute("users", userService.getAll());
+        if (result.hasErrors()) {
+            model.addAttribute("user", user);
+            model.addAttribute("notification", "User registration failed");
+            return "admin/user";
+        }
+        if (userService.findUserByEmail(user.getEmail()) != null) {
+            model.addAttribute("user", user);
+            model.addAttribute("notification", "Email has already been registered");
+            return "admin/user";
+        }
+        if (user.getPassword().equals(user.getConfirmPassword())) {
+            userService.create(user);
+            model.addAttribute("notification", "Registration successfully");
+            return "admin/user";
+        } else {
+            model.addAttribute("notification", "Password is not same");
+            return "admin/user";
+        }
     }
 }

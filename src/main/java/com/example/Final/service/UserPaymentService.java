@@ -49,4 +49,12 @@ public class UserPaymentService {
         userService.save(user);
 
     }
+
+    public List<UserPayment> getAll() {
+        return userPaymentRepo.findAll();
+    }
+
+    public void deleteUserPayment(UserPayment userPayment) {
+        userPaymentRepo.delete(userPayment);
+    }
 }

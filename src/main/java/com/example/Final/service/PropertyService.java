@@ -87,7 +87,6 @@ public class PropertyService {
         oldProperties.setPropertyTypeTransaction(properties.getPropertyTypeTransaction());
         oldProperties.setPropertyTitle(properties.getPropertyTitle());
         oldProperties.setPropertyDescription(properties.getPropertyDescription());
-        oldProperties.setPropertyStatus(properties.getPropertyStatus());
         oldProperties.setSquareMeters(properties.getSquareMeters());
         oldProperties.setPropertyFloor(properties.getPropertyFloor());
         oldProperties.setBedrooms(properties.getBedrooms());
@@ -427,7 +426,9 @@ public class PropertyService {
             case 2:
                 return propertyRepo.findByIsAvailable(true);
             case 3:
-                return propertyRepo.findByIsAvailable(false);
+                return propertyRepo.findByPropertyStatus("Chờ duyệt");
+            case 4:
+                return propertyRepo.findByPropertyStatus("Từ chối");
             default:
                 return propertyRepo.findAll();
         }

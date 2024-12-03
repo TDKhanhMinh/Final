@@ -101,4 +101,6 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
             "order by p.squareMeters desc ")
     List<Properties> sortSqftByCityDESC(@Param("city") String city);
 
+    List<Properties> findByPropertyStatus(String propertyStatus);
+
 }
