@@ -44,27 +44,32 @@ public class PaymentController {
         PostInformation postInformation = properties.getPostInformation();
 
         double postPrice;
+        int priority;
         switch (adType) {
             case "VIP Kim Cương" -> {
                 postInformation.setTypePost(adType);
                 postPrice = 200000;
                 postInformation.setPayPerDay(postPrice);
+                priority = 1;
             }
             case "VIP Bạc" -> {
                 postInformation.setTypePost(adType);
                 postPrice = 40000;
                 postInformation.setPayPerDay(postPrice);
+                priority = 3;
             }
             case "VIP Vàng" -> {
                 postInformation.setTypePost(adType);
                 postPrice = 100000;
                 postInformation.setPayPerDay(postPrice);
+                priority = 2;
             }
             default -> {
 
                 postInformation.setTypePost(adType);
                 postPrice = 2000;
                 postInformation.setPayPerDay(postPrice);
+                priority = 4;
             }
         }
         double payment = postPrice * optionDay;
@@ -80,6 +85,7 @@ public class PaymentController {
         postInformation.setPayment(payment);
         postInformation.setDaysRemaining(optionDay);
         properties.setPostInformation(contactRepo.save(postInformation));
+        properties.setPropertyPriority(priority);
 
         propertyService.save(properties);
         paymentService.savePayment(payment, formattedDate, properties);

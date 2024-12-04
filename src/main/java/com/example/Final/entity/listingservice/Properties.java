@@ -47,6 +47,8 @@ public class Properties {
     private int bathrooms;
     @Column(name = "property_square_meters")
     private double squareMeters;
+    @Column(name = "property_priority")
+    private int propertyPriority;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

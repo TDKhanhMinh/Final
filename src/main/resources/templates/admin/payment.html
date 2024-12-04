@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex h-screen bg-[#F5F5F5] flex-col">
+<div class="w-full h-32 shadow-md bg-white shadow-md items-center content-center">
+    <div class="flex items-center align-center">
+        <a class="flex justify-content-center m-5" th:href="@{/home/home}">
+            <img style="width: 50px; height: 50px"
+                 th:src="@{/access/image/c085ad076c442c8191e6b7f48ef59aad.jpg}" alt="image of logo"
+                 class="rounded-full">
+        </a>
+        <div class="flex justify-center w-full">
+            <div class="text-4xl font-bold text-blue-400">ADMIN CENTER</div>
+        </div>
+    </div>
+</div>
+<div class="flex justify-center fixed top-32 left-64 text-center px-5 space-x-1" >
+    <a href="/admin/payments?option=0" class="px-3 py-1 border shadow-md hover:bg-gray-300">Tất cả</a>
+    <a href="/admin/payments?option=1" class="px-3 py-1 border shadow-md hover:bg-gray-300">Nạp tiền</a>
+    <a href="/admin/payments?option=2" class="px-3 py-1 border shadow-md hover:bg-gray-300">Đăng bài</a>
+</div>
+<div th:if="${notification != null}" th:text="${notification}" class="fixed top-32 right-5 border border-green-700 flex items-center p-4 mb-4 text-green-700 bg-green-100 rounded-lg shadow-lg z-50" role="alert" id="notification">
+    haha</div>
+<div class="flex flex-row h-screen">
+    <aside class="flex h-full w-64 flex-col  bg-white py-10 shadow">
+        <nav class="flex-grow">
+            <ul class="mt-4 space-y-2">
+                <li class="px-3">
+                    <a href="/admin/users" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-700 hover:text-white">
+                        Người Dùng
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="px-3">
+                    <a href="/admin/listings" class="flex flex-row justify-between rounded-lg border px-6 py-2.5 shadow-md hover:bg-blue-700 hover:text-white">
+                        Bài Đăng
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="px-3">
+                    <a href="/admin/payments" class="flex flex-row justify-between rounded-lg border bg-blue-500 text-white px-6 py-2.5 shadow-md hover:bg-blue-700 hover:text-white">
+                        Lịch sử giao dịch
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Logout -->
+        <div class="p-6">
+            <a href="/loginPage?logout" class="block rounded-lg bg-red-600 text-white px-6 py-2.5 text-center hover:bg-red-500"> Đăng xuất </a>
+        </div>
+    </aside>
+    <div class="w-10/12 h-7/12 flex justify-center items-center">
+        <div class="h-full w-full shadow-md pt-20 flex flex-col space-y-2">
+            <div class="flex justify-center py-10" th:if="${payments.isEmpty() and userPayments.isEmpty()}">
+                <div class="flex flex-col items-center justify-center space-y-6 mt-30 bg-white w-1/2 py-10 mx-5 rounded-md shadow-md">
+                    <img th:src="@{/access/image/empty-cart.jpg}" alt="empty-cart.jpg" class="size-64   ">
+                    <p class="text-center text-xl text-gray-600">Không có giao dịch nào</p>
+                </div>
+            </div>
+            <div class="px-5 pb-10 overflow-y-auto" th:if="${!payments.isEmpty() or !userPayments.isEmpty()}">
+                <div class="grid w-full min-w-[620px] grid-cols-10 p-4 px-4 bg-white shadow-md space-x-2">
+                    <div class="flex justify-start pb-1 px-3 border-r-2">ID</div>
+                    <div class="flex justify-center pb-1 col-span-2 border-r-2">Người dùng</div>
+                    <div class="flex justify-center pb-1 pl-5 border-r-2">Thời gian</div>
+                    <div class="flex justify-center pb-1 border-r-2">Phân loại</div>
+                    <div class="flex justify-center pb-1 border-r-2 col-span-2">Hình thức GD</div>
+                    <div class="flex justify-center pb-1 border-r-2">Khoảng tiền</div>
+                    <div class="flex justify-center pb-1 col-span-2">Trạng thái</div>
+                </div>
+                <div class="h-2"></div>
+                <div class="flex flex-col space-y-2" th:if="${!payments.isEmpty()}">
+                    <div  th:each="payment : ${payments}" class="flex space-y-2 flex-col">
+                        <div class="shadow-gray-200 shadow-md">
+                            <div class="grid w-full min-w-[620px] grid-cols-10 bg-white px-4 py-5 items-center space-x-2">
+                                <div th:text="${payment.paymentId}" class="px-3 border-r-2"></div>
+                                <div th:text="${payment.properties.user.fullName}" class="col-span-2 border-r-2"></div>
+                                <div th:text="${payment.date}" class="border-r-2 flex justify-center"></div>
+                                <div class="flex justify-center border-r-2">Đăng bài</div>
+                                <div th:text="${payment.paymentMethod}" class="col-span-2 text-ellipsis overflow-hidden whitespace-nowrap border-r-2"></div>
+                                <div th:text="${payment.amount}" class="border-r-2 flex justify-center"></div>
+                                <div th:text="${payment.status}" class=" flex justify-center col-span-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-2"></div>
+                <div class="flex flex-col space-y-2" th:if="${!userPayments.isEmpty()}">
+                    <div th:if="${!userPayments.isEmpty()}" th:each="userPayment : ${userPayments}" class="flex space-y-2 flex-col">
+                        <div class="shadow-gray-200 shadow-md">
+                            <div class="grid w-full min-w-[620px] grid-cols-10 bg-white px-4 py-5 items-center space-x-2">
+                                <div th:text="${userPayment.payment.paymentId}" class="px-3 border-r-2"></div>
+                                <div th:text="${userPayment.payment.user.fullName}" class="col-span-2 border-r-2"></div>
+                                <div th:text="${userPayment.date}" class="border-r-2 flex justify-center"></div>
+                                <div class="flex justify-center border-r-2">Nạp tiền</div>
+                                <div th:text="${userPayment.paymentMethod}" class="col-span-2 text-ellipsis overflow-hidden whitespace-nowrap border-r-2"></div>
+                                <div th:text="${userPayment.amount}" class="border-r-2 flex justify-center"></div>
+                                <div th:text="${userPayment.status}" class=" flex justify-center col-span-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', () => {-->
+
+<!--        const showButtons = document.querySelectorAll('#showProduct');-->
+<!--        const hideButtons = document.querySelectorAll('#hideProduct');-->
+
+
+<!--        showButtons.forEach((button) => {-->
+<!--            button.addEventListener('click', () => {-->
+
+<!--                const propertyId = button.getAttribute('data-id');-->
+
+
+<!--                const productList = document.querySelector(`#productList[data-id="${propertyId}"]`);-->
+<!--                if (productList) {-->
+<!--                    productList.classList.remove('hidden');-->
+<!--                }-->
+
+<!--                button.classList.add('hidden');-->
+<!--                const hideButton = document.querySelector(`#hideProduct[data-id="${propertyId}"]`);-->
+<!--                if (hideButton) {-->
+<!--                    hideButton.classList.remove('hidden');-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+
+<!--        hideButtons.forEach((button) => {-->
+<!--            button.addEventListener('click', () => {-->
+<!--                const propertyId = button.getAttribute('data-id');-->
+
+
+<!--                const productList = document.querySelector(`#productList[data-id="${propertyId}"]`);-->
+<!--                if (productList) {-->
+<!--                    productList.classList.add('hidden');-->
+<!--                }-->
+
+<!--                button.classList.add('hidden');-->
+<!--                const showButton = document.querySelector(`#showProduct[data-id="${propertyId}"]`);-->
+<!--                if (showButton) {-->
+<!--                    showButton.classList.remove('hidden');-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<script>
+    window.onload = function () {
+        const notification = document.getElementById('notification');
+
+        if (notification) {
+            setTimeout(() => {
+                notification.style.transition = 'opacity 0.5s';
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+    };
+</script>
+</body>
+</html>
+
+
+
+

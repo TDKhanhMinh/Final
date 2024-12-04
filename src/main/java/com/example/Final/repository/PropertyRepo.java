@@ -103,4 +103,5 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
 
     List<Properties> findByPropertyStatus(String propertyStatus);
 
+    List<Properties> findAllByOrderByPropertyPriorityAsc();
 }

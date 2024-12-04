@@ -4,6 +4,7 @@ import com.example.Final.entity.listingservice.Properties;
 import com.example.Final.entity.paymentservice.Payment;
 import com.example.Final.entity.paymentservice.UserPayment;
 import com.example.Final.entity.securityservice.User;
+import com.example.Final.repository.UserPaymentDetailsRepo;
 import com.example.Final.service.*;
 import jakarta.validation.Valid;
 import org.springframework.aop.config.AopNamespaceHandler;
@@ -15,6 +16,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,14 +29,16 @@ public class AdminController {
     private final LocalValidatorFactoryBean defaultValidator;
     private final PaymentService paymentService;
     private final UserPaymentService userPaymentService;
+    private final UserPaymentDetailsService userPaymentDetailsService;
 
-    public AdminController(UserService userService, HistoryListingService historyListingService, PropertyService propertyService, LocalValidatorFactoryBean defaultValidator, PaymentService paymentService, PaymentService paymentService1, UserPaymentService userPaymentService) {
+    public AdminController(UserService userService, HistoryListingService historyListingService, PropertyService propertyService, LocalValidatorFactoryBean defaultValidator, PaymentService paymentService, PaymentService paymentService1, UserPaymentService userPaymentService, UserPaymentDetailsRepo userPaymentDetailsRepo, UserPaymentDetailsService userPaymentDetailsService) {
         this.userService = userService;
         this.historyListingService = historyListingService;
         this.propertyService = propertyService;
         this.defaultValidator = defaultValidator;
         this.paymentService = paymentService1;
         this.userPaymentService = userPaymentService;
+        this.userPaymentDetailsService = userPaymentDetailsService;
     }
 
     @GetMapping("/dashboard")
@@ -133,6 +137,30 @@ public class AdminController {
         } else {
             model.addAttribute("notification", "Password is not same");
             return "admin/user";
+        }
+    }
+
+    @GetMapping("/payments")
+    public String payment(Model model,
+                          @RequestParam(name = "option", defaultValue = "0") int option ) {
+        switch (option) {
+            case 0:
+                model.addAttribute("payments", paymentService.getAllPayments());
+                model.addAttribute("userPayments", userPaymentDetailsService.getAll());
+                return "admin/payment";
+            case 1:
+                model.addAttribute("userPayments", userPaymentDetailsService.getAll());
+                model.addAttribute("payments", new ArrayList<Payment>());
+
+                return "admin/payment";
+            case 2:
+                model.addAttribute("payments", paymentService.getAllPayments());
+                model.addAttribute("userPayments", new ArrayList<UserPayment>());
+                return "admin/payment";
+            default:
+                model.addAttribute("payments", new ArrayList<Payment>());
+                model.addAttribute("userPayments", new ArrayList<UserPayment>());
+                return "admin/payment";
         }
     }
 }

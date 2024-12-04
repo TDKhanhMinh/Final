@@ -25,7 +25,7 @@ public class PropertyService {
 
 
     public List<Properties> getAll() {
-        return propertyRepo.findAll();
+        return propertyRepo.findAllByOrderByPropertyPriorityAsc();
     }
 
     public List<Properties> getAllByUser(User user) {
