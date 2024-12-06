@@ -1,7 +1,12 @@
 package com.example.Final.controller;
 
+import com.example.Final.payback.Properties;
+import com.example.Final.payback.Address;
+import com.example.Final.payback.PostInformation;
+import com.example.Final.payback.Images;
 import com.example.Final.entity.listingservice.*;
 import com.example.Final.entity.securityservice.User;
+import com.example.Final.payback.paybackService;
 import com.example.Final.repository.AddressRepo;
 import com.example.Final.repository.ContactRepo;
 import com.example.Final.repository.ImagesRepo;
@@ -23,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
+@SessionAttributes({"property", "address", "contact", "images"})
 @RequestMapping("/listing")
 @RequiredArgsConstructor
 public class ListingController {
@@ -33,10 +39,9 @@ public class ListingController {
     private final ContactRepo contactRepo;
     private final ImageUploadService imageUploadService;
     private final ImagesRepo imagesRepo;
-    private final RentalHistoryService rentalHistoryService;
-    private final SalesHistoryService salesHistoryService;
     private final HistoryListingService historyListingService;
-    private final PaymentService paymentService;
+    private final paybackService paybackService;
+
 
 
     @GetMapping("/post-address")
@@ -68,18 +73,16 @@ public class ListingController {
     }
 
     @PostMapping("/address")
-    public String listProperties(Model model, RedirectAttributes redirectAttributes,
-                                 @Param("location") String location,
+    public String listProperties(Model model, HttpSession session,
+                                 @RequestParam("location") String location,
                                  @RequestParam("option") String option,
                                  @RequestParam("city") String city,
                                  @RequestParam("district") String district,
                                  @RequestParam("ward") String ward,
                                  @RequestParam("address") String addressInput,
-                                 @RequestParam("addressID") String addressID,
                                  @RequestParam("longitude") String longitude,
                                  @RequestParam("latitude") String latitude) {
         Address address = new Address();
-
         if (!location.trim().isEmpty()) {
             address.setStreet(location);
             address.setFullAddress(location + " " + ward + " " + district + " " + city);
@@ -106,20 +109,18 @@ public class ListingController {
         address.setProperties(properties);
         properties.setAddress(address);
         properties.setPropertyTypeTransaction(option);
-        propertyService.create(properties);
-
 
         properties.setPropertyLatitude(Double.parseDouble(latitude));
         properties.setPropertyLongitude(Double.parseDouble(longitude));
-        propertyService.save(properties);
 
-        model.addAttribute("address", address);
-        model.addAttribute("propertyOld", properties);
+        session.setAttribute("address", address);
+        session.setAttribute("propertyOld", properties);
         return "listing/post-information";
     }
 
+
     @PostMapping("/information")
-    public String listProperties(Model model, @RequestParam("propertyId") int propertyId,
+    public String listProperties(Model model, HttpSession session,
                                  @RequestParam("property-type") String type,
                                  @RequestParam("paper") String legal,
                                  @RequestParam("interior") String interior,
@@ -129,74 +130,80 @@ public class ListingController {
                                  @RequestParam("bedroom") int bedrooms,
                                  @RequestParam("bathroom") int bathrooms,
                                  Principal principal) {
-
-        propertyService.updateInfo(propertyId, type, legal, interior, squareMeters, price, floatFloors, bedrooms, bathrooms);
-        if (propertyService.getById(propertyId).getPropertyTypeTransaction().equals("rent")) {
-            rentalHistoryService.createRentalHistory(propertyService.getById(propertyId));
-
-        } else {
-            salesHistoryService.createSalesHistory(propertyService.getById(propertyId));
-        }
+        Properties properties = (Properties) session.getAttribute("propertyOld");
+        Address address = (Address) session.getAttribute("address");
+        paybackService.updateProperty(properties, type, legal, interior, squareMeters, price, floatFloors, bedrooms, bathrooms);
 
         User user = userService.findUserByEmail(principal.getName());
 
-        model.addAttribute("properties", propertyService.getById(propertyId));
+        session.setAttribute("properties", properties);
+        session.setAttribute("address", address);
         model.addAttribute("userName", principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("contact", new PostInformation());
+
         return "listing/post-description-contact";
     }
 
+
     @PostMapping("/contact")
-    public String getContact(@RequestParam("propertyId") int id, @RequestParam("title") String title,
+    public String getContact(HttpSession session,
+                             @RequestParam("title") String title,
                              @RequestParam("description") String description,
                              @ModelAttribute("contact") PostInformation postInformation,
                              Model model, Principal principal) {
-        Properties properties = propertyService.getById(id);
+
+        Properties properties = (Properties) session.getAttribute("propertyOld");
+        Address address = (Address) session.getAttribute("address");
         properties.setPropertyDescription(description);
         properties.setPropertyTitle(title);
         postInformation.setProperties(properties);
 
         LocalDate currentDate = LocalDate.now();
-//        LocalDate endDate = currentDate.plusDays(7);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = currentDate.format(formatter);
-//        String formattedEndDate = endDate.format(formatter);
         postInformation.setDatePost(formattedDate);
-//        contact.setDateEnd(formattedEndDate);
         postInformation.setDaysRemaining(0);
 
         properties.setUser(userService.findUserByEmail(principal.getName()));
-        properties.setPostInformation(contactRepo.save(postInformation));
+        properties.setPostInformation(postInformation);
         properties.setPropertyStatus("Chưa thanh toán");
-        propertyService.save(properties);
-        model.addAttribute("property", properties);
+
+        session.setAttribute("property", properties);
+        session.setAttribute("address", address);
+        session.setAttribute("contact", postInformation);
         return "listing/post-image";
     }
 
-    @PostMapping("/complete")
-    public String complete(Model model, @RequestParam("images") ArrayList<MultipartFile> images,
-                           @RequestParam("propertyId") int propertyId,
-                           Principal principal) throws Exception {
-        Properties properties = propertyService.getById(propertyId);
-        User user = userService.findUserByEmail(principal.getName());
 
+    @PostMapping("/complete")
+    public String complete(Model model, HttpSession session,
+                           @RequestParam("images") ArrayList<MultipartFile> images,
+                           Principal principal) throws Exception {
+
+        User user = userService.findUserByEmail(principal.getName());
+        session.removeAttribute("images");
+        session.setAttribute("images", new ArrayList<>());
+        Properties properties = (Properties) session.getAttribute("propertyOld");
+        Address address = (Address) session.getAttribute("address");
+        PostInformation postInformation = (PostInformation) session.getAttribute("contact");
         List<Images> imageList = new ArrayList<>();
         for (MultipartFile file : images) {
             String path = imageUploadService.uploadImage(file);
             Images image = new Images();
             image.setImageUrl(path);
             image.setProperty(properties);
-            imagesRepo.save(image);
             imageList.add(image);
         }
         properties.setListImages(imageList);
-        propertyService.updateImages(properties);
-
-        model.addAttribute("property", properties);
+        session.setAttribute("property", properties);
+        session.setAttribute("address", address);
+        session.setAttribute("contact", postInformation);
+        session.setAttribute("images", imageList);
         model.addAttribute("user", user);
         return "listing/post-payment";
     }
+
 
     @GetMapping("/listing-info/{id}")
     public String getListingInfo(@PathVariable int id, Model model,
@@ -205,17 +212,17 @@ public class ListingController {
             model.addAttribute("error", "Hãy đăng nhập để xem thông tin");
             return "user/login";
         } else {
-            Properties property = propertyService.getById(id);
+            com.example.Final.entity.listingservice.Properties property = propertyService.getById(id);
             if (property.getHistoryListing() == null) {
                 HistoryListing historyListing = historyListingService.createHistoryListing(property, userService.findUserByEmail(principal.getName()));
                 property.setHistoryListing(historyListing);
                 propertyService.save(property);
             }
 
-            List<Properties> result = propertyService.getAll();
+            List<com.example.Final.entity.listingservice.Properties> result = propertyService.getAll();
             Collections.shuffle(result);
-            List<Properties> random = new ArrayList<>(result.stream().limit(8).toList());
-            List<Properties> history = propertyService.getByHistoryListing(historyListingService.getByUser(userService.findUserByEmail(principal.getName())));
+            ArrayList<com.example.Final.entity.listingservice.Properties> random = new ArrayList<>(result.stream().limit(8).toList());
+            List<com.example.Final.entity.listingservice.Properties> history = propertyService.getByHistoryListing(historyListingService.getByUser(userService.findUserByEmail(principal.getName())));
             random.removeIf(properties -> !properties.isAvailable());
             model.addAttribute("randomProperty", random);
             model.addAttribute("property", property);

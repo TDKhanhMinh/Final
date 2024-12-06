@@ -4,6 +4,7 @@ import com.example.Final.entity.securityservice.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "images")
+@EqualsAndHashCode(exclude = "property")
 public class Images {
 
     @Id

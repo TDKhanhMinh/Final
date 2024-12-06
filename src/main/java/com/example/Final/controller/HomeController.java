@@ -4,6 +4,7 @@ import com.example.Final.entity.listingservice.Properties;
 import com.example.Final.service.PropertyService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import java.util.List;
 public class HomeController {
 
     private final PropertyService propertyService;
+    private final TaskExecutionProperties taskExecutionProperties;
 
     @GetMapping("/home")
     public String getHome(Model model) {
@@ -45,16 +47,11 @@ public class HomeController {
 
     @GetMapping("/all-listings")
     public String getAllListings(Model model, HttpSession session) {
-        if (session.getAttribute("USERNAME") == null) {
-            model.addAttribute("error", "Hãy đăng nhập để xem tin");
-            return "user/login";
-        } else {
-            List<Properties> propertiesList = propertyService.getAll();
-            propertiesList.removeIf(properties -> !properties.isAvailable());
-            model.addAttribute("properties", propertiesList);
-            model.addAttribute("city", "Toàn quốc");
-            return "listing/all-listing";
-        }
+        List<Properties> propertiesList = propertyService.getAll();
+        propertiesList.removeIf(properties -> !properties.isAvailable());
+        model.addAttribute("properties", propertiesList);
+        model.addAttribute("city", "Toàn quốc");
+        return "listing/all-listing";
     }
 
 
@@ -95,14 +92,15 @@ public class HomeController {
     ) {
         if (city.isEmpty()) {
             city = null;
-
+            model.addAttribute("city", "Toàn quốc");
         } else {
             city = city.replace(",", "").replace("Tỉnh ", "").replace("Thành phố ", "");
+            model.addAttribute("city", city);
         }
         if (district.isEmpty()) {
             district = null;
         } else {
-            district = district.replace(",", "").replace("Huyện ", "").replace("Thị xã ", "");
+            district = district.replace(",", "").replace("Huyện ", "").replace("Thị xã ", "").replace("Quận ", "").replace("Thành phố ", "");
         }
         if (ward.isEmpty()) {
             ward = null;
@@ -112,7 +110,6 @@ public class HomeController {
 
         List<Properties> propertiesList = propertyService.findPropertiesByForm(optionType, city, district, ward, houseType, rangePrice, sqmtRange);
         propertiesList.removeIf(properties -> !properties.isAvailable());
-        model.addAttribute("city", city);
         model.addAttribute("properties", propertiesList);
         return "listing/all-listing";
     }
@@ -147,7 +144,6 @@ public class HomeController {
     @GetMapping("/sortByCity")
     public String getSortByCity(Model model, @RequestParam("city") String city,
                                 @RequestParam("sortOption") String option, HttpSession session) {
-        System.out.println(city);
 
         if (!city.equals("Toàn quốc")) {
             switch (option) {
@@ -231,17 +227,17 @@ public class HomeController {
                                   @Param("rangePrice") String rangePrice,
                                   @Param("sqmtRange") String sqmtRange,
                                   @Param("bedroom") String bedroom) {
-
-
         Double minPrice = null;
         Double maxPrice = null;
         Double minSqmt = null;
         Double maxSqmt = null;
         Integer bed = null;
-        if (bedroom != null && !bedroom.isEmpty()) {
+
+        if (bedroom != null && !bedroom.isEmpty() && !"all".equalsIgnoreCase(bedroom)) {
             bed = Integer.valueOf(bedroom);
         }
-        if (rangePrice != null && !rangePrice.isEmpty()) {
+
+        if (rangePrice != null && !rangePrice.isEmpty() && !"all".equalsIgnoreCase(rangePrice)) {
             String[] rangeParts = rangePrice.split("&");
             List<Double> allPrices = new ArrayList<>();
 
@@ -260,15 +256,16 @@ public class HomeController {
                 maxPrice = Collections.max(allPrices);
             }
         }
-        if (sqmtRange != null && !sqmtRange.isEmpty()) {
+
+        if (sqmtRange != null && !sqmtRange.isEmpty() && !"all".equalsIgnoreCase(sqmtRange)) {
             String[] rangeParts = sqmtRange.split("&");
             List<Double> allSqmt = new ArrayList<>();
 
             for (String part : rangeParts) {
                 if (part.contains(",")) {
-                    String[] prices = part.split(",");
-                    for (String price : prices) {
-                        allSqmt.add(Double.valueOf(price));
+                    String[] sqmts = part.split(",");
+                    for (String sqmt : sqmts) {
+                        allSqmt.add(Double.valueOf(sqmt));
                     }
                 } else {
                     allSqmt.add(Double.valueOf(part));
@@ -278,14 +275,25 @@ public class HomeController {
                 minSqmt = Collections.min(allSqmt);
                 maxSqmt = Collections.max(allSqmt);
             }
-
         }
-        if (city.equals("Toàn quốc")) {
+
+        System.out.println("Controller");
+        System.out.println(houseType);
+        System.out.println(bed);
+        System.out.println(minPrice);
+        System.out.println(maxPrice);
+        System.out.println(minSqmt);
+        System.out.println(maxSqmt);
+
+        if (houseType != null && houseType.equals("all")){
+            houseType = null;
+        }
+        if ("Toàn quốc".equals(city)) {
             city = null;
             List<Properties> propertiesList = propertyService.findByCity(city, houseType, minPrice, maxPrice, minSqmt, maxSqmt, bed);
             propertiesList.removeIf(properties -> !properties.isAvailable());
             model.addAttribute("properties", propertiesList);
-            model.addAttribute("city","Toàn quốc");
+            model.addAttribute("city", "Toàn quốc");
         } else {
             List<Properties> propertiesList = propertyService.findByCity(city, houseType, minPrice, maxPrice, minSqmt, maxSqmt, bed);
             propertiesList.removeIf(properties -> !properties.isAvailable());

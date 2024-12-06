@@ -99,11 +99,9 @@
         </div>
         <hr>
         <form th:action="@{/listing/complete}" method="post" class="was-validated" enctype="multipart/form-data">
-            <input type="hidden" th:value="${property.propertyId}" name="propertyId">
             <div class="container-sm border place-address container-fix-60">
                 <span>Tải lên tối thiểu 3 hình ảnh và tối đa 10 hình ảnh</span>
                 <h5 class="py-3 mx-2"><strong>Hình ảnh</strong></h5>
-                <!-- Khu vực hiển thị hình ảnh đã tải lên -->
                 <div class="uploaded-images" id="uploadedImages"></div>
 
                 <!-- Khu vực tải ảnh -->

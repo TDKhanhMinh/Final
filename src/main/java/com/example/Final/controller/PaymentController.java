@@ -1,14 +1,15 @@
 package com.example.Final.controller;
 
+import com.example.Final.entity.listingservice.Address;
 import com.example.Final.entity.listingservice.PostInformation;
 import com.example.Final.entity.listingservice.Properties;
 import com.example.Final.entity.paymentservice.Payment;
 import com.example.Final.entity.securityservice.User;
+import com.example.Final.payback.Images;
 import com.example.Final.repository.ContactRepo;
-import com.example.Final.service.PaymentService;
-import com.example.Final.service.PropertyService;
-import com.example.Final.service.UserPaymentService;
-import com.example.Final.service.UserService;
+import com.example.Final.repository.ImagesRepo;
+import com.example.Final.service.*;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/payment")
@@ -30,19 +34,64 @@ public class PaymentController {
     private final UserService userService;
     private final PaymentService paymentService;
     private final ContactRepo contactRepo;
+    private final RentalHistoryService rentalHistoryService;
+    private final SalesHistoryService salesHistoryService;
+    private final ImagesRepo imagesRepo;
 
     @PostMapping("/payment-post")
-    public String postPaymentPost(Model model,
-                                  @RequestParam("propertyId") int propertyId,
+    public String postPaymentPost(Model model, HttpSession session,
                                   @RequestParam("userId") int userId,
                                   @RequestParam("ad-type") String adType,
                                   @RequestParam("option-day") int optionDay) {
         User user = userService.findUserById(userId);
+        com.example.Final.payback.Properties prop = (com.example.Final.payback.Properties) session.getAttribute("propertyOld");
+        com.example.Final.payback.Address addr = (com.example.Final.payback.Address) session.getAttribute("address");
+        com.example.Final.payback.PostInformation pi = (com.example.Final.payback.PostInformation) session.getAttribute("contact");
 
-        Properties properties = propertyService.getById(propertyId);
+        List<Images> images = (List<Images>) session.getAttribute("images");
+        if (images == null) {
+            images = new ArrayList<>();
+        }
 
-        PostInformation postInformation = properties.getPostInformation();
+        Properties properties = new Properties();
+        PostInformation postInformation = new PostInformation();
+        Address address = new Address();
+        List<com.example.Final.entity.listingservice.Images> imagesList = new ArrayList<>();
+        address.setProvince(addr.getProvince());
+        address.setDistrict(addr.getDistrict());
+        address.setWard(addr.getWard());
+        address.setProperties(properties);
+        properties.setAddress(address);
+        properties.setPropertyTypeTransaction(prop.getPropertyType());
+        propertyService.create(properties);
+        properties.setPropertyLatitude(prop.getPropertyLatitude());
+        properties.setPropertyLongitude(prop.getPropertyLongitude());
+        propertyService.updateInfo(properties.getPropertyId(),prop.getPropertyType(), prop.getPropertyLegal(), prop.getPropertyInterior(), prop.getSquareMeters(), prop.getPropertyPrice(), prop.getPropertyFloor(), prop.getBedrooms(), prop.getBathrooms());
+        if (properties.getPropertyTypeTransaction().equals("rent")) {
+            rentalHistoryService.createRentalHistory(properties);
 
+        } else {
+            salesHistoryService.createSalesHistory(properties);
+        }
+        properties.setPropertyDescription(prop.getPropertyDescription());
+        properties.setPropertyTitle(prop.getPropertyTitle());
+        postInformation.setProperties(properties);
+        postInformation.setDatePost(pi.getDatePost());
+        postInformation.setDaysRemaining(0);
+        properties.setPostInformation(postInformation);
+        properties.setPropertyStatus("Chưa thanh toán");
+        for (Images img : images) {
+            com.example.Final.entity.listingservice.Images image = new com.example.Final.entity.listingservice.Images();
+            image.setImageUrl(img.getImageUrl());
+            image.setProperty(properties);
+            imagesRepo.save(image);
+            imagesList.add(image);
+        }
+        properties.setListImages(imagesList);
+        properties.setUser(user);
+        propertyService.updateImages(properties);
+        propertyService.save(properties);
+        
         double postPrice;
         int priority;
         switch (adType) {
@@ -89,7 +138,7 @@ public class PaymentController {
 
         propertyService.save(properties);
         paymentService.savePayment(payment, formattedDate, properties);
-        return "redirect:/payment/payment/" + propertyId;
+        return "redirect:/payment/payment/" + properties.getPropertyId();
     }
 
 

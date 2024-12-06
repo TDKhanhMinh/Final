@@ -32,6 +32,12 @@
     .option:hover {
         cursor: pointer;
     }
+    .option {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70px;
+    }
 </style>
 
 <body class="bg-gradient-primary">
@@ -323,7 +329,7 @@
                         </form>
                     </div>
                     <div class="col-md-2">
-                        <form th:action="@{/payment/payment-option}" method="post">
+                        <form th:action="@{/payment/payment-option}" method="post" >
                             <input type="hidden" name="paymentOption" th:value="${'transfer'}">
                             <button th:styleappend="${paymentOption.equals('transfer')} ? ';border: 1px solid black'"
                                 class="btn option-payment shadow d-flex flex-nowrap align-items-center justify-content-center"
@@ -351,59 +357,61 @@
                 </div>
                 <hr>
                 <div th:if="${paymentOption.equals('vnpay') || paymentOption.equals('momo')}" class="container">
-                    <form th:action="@{/payment/payment-method}" method="post" class="container-sm form-control shadow "
+                    <form th:action="@{/payment/payment-method}" id="myForm" method="post" class="container-sm form-control shadow "
                         style="width: 70%;">
                         <input type="hidden" name="paymentMethod" th:value="${paymentOption}">
 
                         <label class="my-2 fw-bold" for="money">Nhập số tiền bạn muốn nạp (VNĐ)</label>
                         <input class="form-control" style="height: 50px;border-radius: 16px;"
                             placeholder="Nạp từ 2.000.000 VNĐ để nhận được khuyển mãi" type="number" name="money"
-                            id="money">
+                            id="money" min="0">
                         <h6 class="fw-light pt-4 pb-2">Hoặc chọn nhanh</h6>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="container border border-gray rounded-2 mb-2 option" style="height: 70px;"
                                     onclick="toggleOption(this)">
                                     <h5 class="my-2">500.000 VNĐ</h5>
-                                    <input type="radio" hidden name="moneyValue" id="money-choice" value="500000">
+                                    <input type="radio" hidden name="moneyValue"  value="500000">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="container border border-gray rounded-2 mb-2 option" style="height: 70px;"
                                     onclick="toggleOption(this)">
                                     <h5 class="my-2">1.000.000 VNĐ</h5>
-                                    <input type="radio" hidden name="moneyValue" id="money-choice" value="1000000">
+                                    <input type="radio" hidden name="moneyValue"  value="1000000">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="container border border-gray rounded-2 mb-2 option" style="height: 70px;"
                                     onclick="toggleOption(this)">
                                     <h5 class="my-2">2.000.000 VNĐ</h5>
-                                    <input type="radio" hidden name="moneyValue" id="money-choice" value="2000000">
+                                    <input type="radio" hidden name="moneyValue"  value="2000000">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="container border border-gray rounded-2 mb-2 option" style="height: 70px;"
                                     onclick="toggleOption(this)">
                                     <h5 class="my-2">5.000.000 VNĐ</h5>
-                                    <input type="radio" hidden name="moneyValue" id="money-choice" value="5000000">
+                                    <input type="radio" hidden name="moneyValue"  value="5000000">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="container border border-gray rounded-2 mb-2 option" style="height: 70px;"
                                     onclick="toggleOption(this)">
                                     <h5 class="my-2">7.000.000 VNĐ</h5>
-                                    <input type="radio" hidden name="moneyValue" id="money-choice" value="7000000">
+                                    <input type="radio" hidden name="moneyValue"  value="7000000">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="container border border-gray rounded-2 mb-2 option" style="height: 70px;"
                                     onclick="toggleOption(this)">
                                     <h5 class="my-2">10.000.000 VNĐ</h5>
-                                    <input type="radio" hidden name="moneyValue" id="money-choice" value="10000000">
+                                    <input type="radio" hidden name="moneyValue"  value="10000000">
                                 </div>
                             </div>
                         </div>
+                        <p id="errorMessage" style="color: red; display: none;">Vui lòng chọn số tiền cần nạp</p>
+
                         <h6 class="mt-4 fw-bold">Thông tin nạp tiền</h6>
                         <div class="d-flex justify-content-between">
                             <span class="mx-2">Khấu trừ thuế GTGT 10%</span>
@@ -628,15 +636,15 @@
         referrerpolicy="no-referrer"></script>
     <script th:src="@{/access/js/price-format.js}"></script>
     <script>
-
         function toggleOption(selectedDiv) {
             const input = selectedDiv.querySelector('input[type="radio"]');
-           
             const isAlreadyChecked = input.checked;
             const options = document.querySelectorAll('.option');
+            document.getElementById("money").value='';
             options.forEach(option => {
                 option.style.backgroundColor = "";
-                option.style.border = "1px solid gray";
+                option.style.border = "10px solid gray";
+                option.style.color = "";
                 const inputOption = option.querySelector('input[type="radio"]');
                 if (inputOption) {
                     inputOption.checked = false;
@@ -646,7 +654,8 @@
 
             if (!isAlreadyChecked) {
                 selectedDiv.style.backgroundColor = "whitesmoke";
-                selectedDiv.style.border = "1px solid black";
+                selectedDiv.style.border = "4px solid green";
+                selectedDiv.style.color = "green"
                 input.checked = true;
 
 
@@ -679,6 +688,55 @@
     </script>
 
     <script th:src="@{/access/js/copyText.js}"></script>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            const textInput = document.getElementById('money').value.trim();
+            const radioInputs = document.getElementsByName('moneyValue');
+            let isRadioChecked = false;
+
+            for (let i = 0; i < radioInputs.length; i++) {
+                if (radioInputs[i].checked) {
+                    isRadioChecked = true;
+                    break;
+                }
+            }
+
+            if (!textInput && !isRadioChecked) {
+                event.preventDefault();
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const textInput = document.getElementById('money');
+            const radioInputs = document.querySelectorAll('input[name="moneyValue"]');
+
+            textInput.addEventListener('input', function () {
+                console.log('Text input event triggered:', textInput.value);
+                if (textInput.value.trim() !== '') {
+                    const value = parseFloat(textInput.value) || 0;
+                    const VAT = (value * 10) / 100;
+                    const result = value - VAT;
+                    document.getElementById('VAT').textContent = `- ${VAT.toLocaleString()} VNĐ`;
+                    document.getElementById('result').textContent = `${result.toLocaleString()} VNĐ`;
+                    radioInputs.forEach(radio => {
+                        radio.checked = false;
+                        const label = radio.closest('.container');
+                        if (label) {
+                            label.style.backgroundColor = "";
+                            label.style.border = "10px solid gray";
+                            label.style.color = "";
+                        }
+                        console.log('Unchecking radio:', radio);
+                    });
+                }
+            });
+        });
+
+
+    </script>
 </body>
 
 </html>

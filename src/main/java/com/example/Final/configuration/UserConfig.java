@@ -32,11 +32,11 @@ public class UserConfig {
         httpSecurity.authorizeHttpRequests(config -> config
                         .requestMatchers("/").hasRole("REALTOR")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/user/register", "/home/login-page", "/listing/post-address",
-                                "/user/register", "/user/login", "/user/forgotPassword",
+                        .requestMatchers("/user/register", "/home/login-page",
+                                "/user/login", "/user/forgotPassword",
                                 "/user/resetPassword", "/home/all-listings", "/home/searchByCity",
                                 "/home/searchCity","/home/searchForm",
-                                "/home/searchByKey","/home/sortByCity").permitAll()
+                                "/home/searchByKey","/home/sortByCity", "/listing/listing-info/**").permitAll()
                         .anyRequest().authenticated())
 
                 .formLogin(login -> login

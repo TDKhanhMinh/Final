@@ -38,7 +38,6 @@
             </div>
         </div>
         <form th:action="@{/payment/payment-post}" method="post">
-            <input type="hidden" th:value="${property.propertyId}" name="propertyId">
             <input type="hidden" th:value="${user.userId}" name="userId">
 
             <div class="container-sm border place-address container-fix-60">
@@ -232,7 +231,6 @@
                     <div class="">Tạm tính</div>
                     <div class="fs-5"><strong>189.000 đ</strong></div>
                 </div> -->
-
                 <div class="container-sm mt-4 d-flex justify-content-end container-fix-80">
                     <button type="submit" value="Submit" class="btn btn-primary rounded-pill">Thanh toán và đăng
                         tin

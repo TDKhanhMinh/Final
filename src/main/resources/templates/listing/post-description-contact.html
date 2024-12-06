@@ -51,7 +51,6 @@
         </div>
         <hr>
         <form class="was-validated" th:action="@{/listing/contact}" th:object="${contact}" method="post">
-            <input type="hidden" th:value="${properties.propertyId}" name="propertyId">
             <div class="container-sm border place-address container-fix-60">
                 <h5 class="py-3 mx-2"><strong>Thông tin liên hệ</strong></h5>
                 <div class="container">

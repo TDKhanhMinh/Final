@@ -7,6 +7,7 @@ import com.example.Final.entity.securityservice.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "properties")
+@EqualsAndHashCode(exclude = {"address", "postInformation", "listImages", "user"})
 public class Properties {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

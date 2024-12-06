@@ -412,9 +412,9 @@
                         biên</h6>
                     <div class="fw-bold">
                             <span th:if="${property.propertyPrice>1000000000}"
-                                  th:text="${property.propertyPrice/1000000000}+' tỷ'" class="text-danger">4.1 tỷ</span>
+                                  th:text="${#numbers.formatDecimal(property.propertyPrice / 1000000000, 1, 2)} + ' tỷ'" class="text-danger">4.1 tỷ</span>
                         <span th:if="${property.propertyPrice<1000000000}"
-                              th:text="${property.propertyPrice/100000000}+' triệu'" class="text-danger">4.1 tỷ</span>
+                              th:text="${#numbers.formatDecimal(property.propertyPrice / 1000000, 1, 2)} + ' triệu'" class="text-danger">4.1 tỷ</span>
                         <span class="mx-2">.</span>
                         <span th:text="${property.squareMeters}+' m²'" class="text-danger">30 m2</span>
                     </div>

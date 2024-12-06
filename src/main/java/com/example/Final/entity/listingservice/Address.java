@@ -3,6 +3,7 @@ package com.example.Final.entity.listingservice;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "address")
+@EqualsAndHashCode(exclude = "properties")
 public class Address {
     @Id
     @Column(name = "address_id")

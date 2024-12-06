@@ -134,12 +134,9 @@ public class PropertyService {
                                                  Integer houseType, Integer priceRange,
                                                  Integer sqrtRange) {
         List<Properties> propertiesList = propertyRepo.findByAddress(city, district, ward);
-        for (Properties p : propertiesList) {
-            System.out.println(p.getAddress().getWard());
-        }
         propertiesList = filterByType(propertiesList, houseType);
-        propertiesList = filterByType(propertiesList, priceRange);
-        propertiesList = filterByType(propertiesList, sqrtRange);
+        propertiesList = filterPrice(propertiesList, priceRange);
+        propertiesList = filterSqrt(propertiesList, sqrtRange);
         return propertiesList;
 
     }
@@ -149,7 +146,6 @@ public class PropertyService {
         if (option == null) {
             return properties;
         }
-        System.out.println("sort by type");
         List<Properties> filterProperties = new ArrayList<>();
         switch (option) {
             case 1:
@@ -200,7 +196,6 @@ public class PropertyService {
         if (option == null) {
             return properties;
         }
-        System.out.println("sort by price");
         List<Properties> filterProperties = new ArrayList<>();
         switch (option) {
 
@@ -301,7 +296,6 @@ public class PropertyService {
         if (option == null) {
             return properties;
         }
-        System.out.println("sort by sqrt");
         List<Properties> filterProperties = new ArrayList<>();
         switch (option) {
             case 1:
