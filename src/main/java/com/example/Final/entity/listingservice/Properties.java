@@ -49,6 +49,10 @@ public class Properties {
     private double squareMeters;
     @Column(name = "property_priority")
     private int propertyPriority;
+    @Column(name = "property_longitude")
+    private Double propertyLongitude;
+    @Column(name = "property_latitude")
+    private Double propertyLatitude;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

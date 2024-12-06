@@ -46,7 +46,7 @@ public class PropertyService {
     }
 
     public void deleteById(int id) {
-        //propertyRepo.delete(propertyRepo.findById(id).orElseThrow(()-> new RuntimeException("Could not Found")));
+
         Properties properties = propertyRepo.findById(id).orElseThrow(() -> new RuntimeException("Not found property"));
         properties.setAvailable(false);
         propertyRepo.save(properties);
@@ -392,19 +392,19 @@ public class PropertyService {
     }
 
     public List<Properties> sortPriceByAllDESC() {
-        return propertyRepo.getPropertiesByOrderByPropertyPriceDesc();
+        return propertyRepo.getPropertiesByOrderByPropertyPriceDescPropertyPriorityAsc();
     }
 
     public List<Properties> sortSqftByAllDESC() {
-        return propertyRepo.getPropertiesByOrderBySquareMetersDesc();
+        return propertyRepo.getPropertiesByOrderBySquareMetersDescPropertyPriorityAsc();
     }
 
     public List<Properties> sortSqftByAllASC() {
-        return propertyRepo.getPropertiesByOrderBySquareMetersAsc();
+        return propertyRepo.getPropertiesByOrderBySquareMetersAscPropertyPriorityAsc();
     }
 
     public List<Properties> sortPriceByAllASC() {
-        return propertyRepo.getPropertiesByOrderByPropertyPriceAsc();
+        return propertyRepo.getPropertiesByOrderByPropertyPriceAscPropertyPriorityAsc();
     }
 
     public List<Properties> sortSqftByCityASC(String city) {
@@ -419,7 +419,7 @@ public class PropertyService {
         return propertyRepo.sortSqftByCityDESC(city);
     }
 
-    public List<Properties> caseGetAll(int option){
+    public List<Properties> caseGetAll(int option) {
         switch (option) {
             case 1:
                 return propertyRepo.findAll();

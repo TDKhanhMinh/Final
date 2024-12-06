@@ -255,6 +255,12 @@
     <div class="col-md-9" style="padding-top: 120px; background-color: whitesmoke">
         <div class="container bg-light shadow rounded-3">
             <h3 class="my-2 py-2">Lịch sử nạp tiền</h3>
+            <div class="container d-flex justify-content-center align-items-center" th:if="${userPaymentList.isEmpty()}" style="height: 500px;">
+                <div class="rounded-2">
+                    <img th:src="@{/access/image/icons8-cash-100.png}" alt="" style="padding-left: 30px;">
+                    <h6 class="py-2">Chưa có lịch sử nạp tiền</h6>
+                    <a class="btn btn-success" style="margin-left: 8px;width: 150px" th:href="@{/payment/deposit}">Nạp tiền</a></div>
+            </div>
             <table th:if="${!userPaymentList.isEmpty()}" class="table table-hover mx-2">
                 <thead>
                 <tr class="table-secondary  ">

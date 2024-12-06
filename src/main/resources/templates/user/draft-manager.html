@@ -251,6 +251,12 @@
     <div class="col-md-9" style="padding-top: 120px; background-color: whitesmoke">
         <div class="container bg-light shadow rounded-3">
             <h3 class="my-2 py-2">Tin nháp</h3>
+            <div class="container d-flex justify-content-center align-items-center" th:if="${properties.isEmpty()}" style="height: 400px;">
+                <div class="rounded-2">
+                    <img th:src="@{/access/image/icons8-paper-64.png}" alt="" style="padding-left: 40px;">
+                    <h6 class="py-2">Không có tin đăng nào</h6>
+                    <a class="btn btn-success" style="margin-left: 20px" th:href="@{/listing/post-address}">Đăng tin mới</a></div>
+            </div>
             <table th:if="${!properties.isEmpty()}" class="table table-hover mx-2">
                 <thead>
                 <tr class="table-secondary  ">

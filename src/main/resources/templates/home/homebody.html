@@ -17,7 +17,9 @@
 
 
 <body>
-<th:block th:insert="~{ home/header :: header}"></th:block>
+
+<th:block th:insert="~{ home/header :: header}" th:if="${session.USERNAME}"></th:block>
+<th:block th:insert="~{ home/header-off :: header-off}" th:unless="${session.USERNAME}"></th:block>
 <!-- CAROSELL VÀ TÌM KIẾM -->
 <div class="container-fluid" style="padding-top: 90px;">
     <div class="row d-flex align-items-center justify-content-center">

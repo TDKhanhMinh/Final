@@ -60,7 +60,7 @@
 
         <!-- Logout -->
         <div class="p-6">
-            <a href="/loginPage?logout" class="block rounded-lg bg-red-600 text-white px-6 py-2.5 text-center hover:bg-red-500"> Đăng xuất </a>
+            <a th:href="@{/admin/logout}" class="block rounded-lg bg-red-600 text-white px-6 py-2.5 text-center hover:bg-red-500"> Đăng xuất </a>
         </div>
     </aside>
     <div class="w-10/12 h-7/12 flex justify-center items-center">
@@ -91,7 +91,7 @@
                                 <div th:text="${payment.date}" class="border-r-2 flex justify-center"></div>
                                 <div class="flex justify-center border-r-2">Đăng bài</div>
                                 <div th:text="${payment.paymentMethod}" class="col-span-2 text-ellipsis overflow-hidden whitespace-nowrap border-r-2"></div>
-                                <div th:text="${payment.amount}" class="border-r-2 flex justify-center"></div>
+                                <div th:text="${payment.amount}" class="priceSale border-r-2 flex justify-center"></div>
                                 <div th:text="${payment.status}" class=" flex justify-center col-span-2"></div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                 <div th:text="${userPayment.date}" class="border-r-2 flex justify-center"></div>
                                 <div class="flex justify-center border-r-2">Nạp tiền</div>
                                 <div th:text="${userPayment.paymentMethod}" class="col-span-2 text-ellipsis overflow-hidden whitespace-nowrap border-r-2"></div>
-                                <div th:text="${userPayment.amount}" class="border-r-2 flex justify-center"></div>
+                                <div th:text="${userPayment.amount}" class="border-r-2 priceSale flex justify-center"></div>
                                 <div th:text="${userPayment.status}" class=" flex justify-center col-span-2"></div>
                             </div>
                         </div>
@@ -175,6 +175,8 @@
         }
     };
 </script>
+<script th:src="@{/access/js/price-format.js}"></script>
+
 </body>
 </html>
 

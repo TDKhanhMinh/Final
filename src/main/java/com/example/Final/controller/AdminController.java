@@ -6,6 +6,7 @@ import com.example.Final.entity.paymentservice.UserPayment;
 import com.example.Final.entity.securityservice.User;
 import com.example.Final.repository.UserPaymentDetailsRepo;
 import com.example.Final.service.*;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.aop.config.AopNamespaceHandler;
 import org.springframework.data.repository.query.Param;
@@ -39,6 +40,14 @@ public class AdminController {
         this.paymentService = paymentService1;
         this.userPaymentService = userPaymentService;
         this.userPaymentDetailsService = userPaymentDetailsService;
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session, Model model) {
+        model.addAttribute("success", "Log out successfully");
+        session.removeAttribute("USERNAME");
+        session.invalidate();
+        System.out.println("User logged out");
+        return "user/login";
     }
 
     @GetMapping("/dashboard")

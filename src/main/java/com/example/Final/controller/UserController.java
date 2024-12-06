@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -152,12 +153,19 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session, Model model) {
+    public String logout(HttpSession session, Model model,RedirectAttributes redirectAttributes) {
         model.addAttribute("success", "Log out successfully");
         session.removeAttribute("USERNAME");
         session.invalidate();
         System.out.println("User logged out");
-        return "user/login";
+        List<Properties> result = propertyService.getAll();
+        result.removeIf(properties -> !properties.isAvailable());
+        Collections.shuffle(result);
+        List<Properties> random = result.stream()
+                .limit(8)
+                .toList();
+        redirectAttributes.addAttribute("randomProperty", random);
+        return "redirect:/home/home";
     }
 
 
@@ -166,6 +174,7 @@ public class UserController {
         User user = userService.findUserByEmail(principal.getName());
         model.addAttribute("user", user);
         List<Properties> propertiesList = propertyService.getAllByUser(user);
+//        propertiesList.removeIf(properties -> properties.getPayment()==null);
         propertiesList.removeIf(properties -> properties.getPayment().getStatus().equals("Chưa thanh toán"));
         model.addAttribute("properties", propertiesList);
         return "user/listing-manager";
@@ -176,6 +185,7 @@ public class UserController {
         User user = userService.findUserByEmail(principal.getName());
         model.addAttribute("user", user);
         List<Properties> propertiesList = propertyService.getAllByUser(user);
+//        propertiesList.removeIf(properties -> properties.getPayment()==null);
         propertiesList.removeIf(properties -> !properties.getPayment().getStatus().equals("Chưa thanh toán"));
         model.addAttribute("properties", propertiesList);
         return "user/draft-manager";

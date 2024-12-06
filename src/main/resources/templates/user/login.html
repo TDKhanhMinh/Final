@@ -23,12 +23,6 @@
 <div class="vh-100 mt-4"
      style="background-image: url('https://farm2.staticflickr.com/1917/43285846020_2b950b8441_h.jpg'); object-fit:contain;">
     <div class="container h-custom">
-        <div th:if="${success}">
-            <div class="alert alert-success rounded-pill" th:text="${success}"></div>
-        </div>
-        <div th:if="${error}">
-            <div class="alert alert-danger rounded-pill" th:text="${error}"></div>
-        </div>
         <section class="vh-100">
             <div class="container-fluid">
                 <div class="row">
@@ -45,6 +39,13 @@
                                   style="max-width: 90%; border-radius: 16px;">
                                 <div th:if="${param.error}" class="alert alert-danger mt-3 text-center" role="alert">
                                     Tên tài khoản hoặc mật khẩu không chính xác.
+                                </div>
+                                <div th:if="${error}" class="alert alert-danger mt-3 text-center" role="alert">
+                                    <span th:text="${error}"></span>
+                                </div>
+                                <div th:if="${success}">
+                                    <div class="alert alert-success rounded-pill mt-3 text-center"
+                                         th:text="${success}"></div>
                                 </div>
                                 <h3 class="fw-normal m-2 px-2 pb-3 " style="letter-spacing: 1px;"><Strong>Log
                                     in</Strong>

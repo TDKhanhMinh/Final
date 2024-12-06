@@ -16,20 +16,22 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
 
     List<Properties> getPropertiesByUser(User user);
 
-    List<Properties> getPropertiesByOrderByPropertyPriceDesc();
+    List<Properties> getPropertiesByOrderByPropertyPriceDescPropertyPriorityAsc();
 
-    List<Properties> getPropertiesByOrderByPropertyPriceAsc();
+    List<Properties> getPropertiesByOrderByPropertyPriceAscPropertyPriorityAsc();
 
-    List<Properties> getPropertiesByOrderBySquareMetersDesc();
+    List<Properties> getPropertiesByOrderBySquareMetersDescPropertyPriorityAsc();
 
-    List<Properties> getPropertiesByOrderBySquareMetersAsc();
+    List<Properties> getPropertiesByOrderBySquareMetersAscPropertyPriorityAsc();
 
     List<Properties> findByIsAvailable(boolean b);
+
     @Query("select p from Properties p where " +
             "lower(p.propertyTitle) like lower(concat('%',:searchKey,'%')) or " +
             "lower(p.propertyDescription) like lower(concat('%',:searchKey,'%')) or " +
             "lower(p.propertyType) like lower(concat('%',:searchKey,'%')) or " +
-            "lower(p.propertyInterior) like lower(concat('%',:searchKey,'%'))"
+            "lower(p.propertyInterior) like lower(concat('%',:searchKey,'%'))" +
+            "order by p.propertyPriority asc "
     )
     List<Properties> findPropertiesByKey(@Param("searchKey") String keyword);
 
@@ -42,7 +44,8 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
             "and (:priceMin is null or p.propertyPrice >= :priceMin )" +
             "and (:priceMax is null or p.propertyPrice <= :priceMax )" +
             "and (:sqmtMin is null or p.squareMeters>= :sqmtMin )" +
-            "and (:sqmtMax is null or p.squareMeters <= :sqmtMax )")
+            "and (:sqmtMax is null or p.squareMeters <= :sqmtMax )" +
+            "order by p.propertyPriority asc ")
     List<Properties> findByForm(@Param("optionType") String optionType,
                                 @Param("city") String city,
                                 @Param("district") String district,
@@ -63,7 +66,8 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
             "and (:priceMax is null or p.propertyPrice <= :priceMax )" +
             "and (:sqmtMin is null or p.squareMeters>= :sqmtMin )" +
             "and (:sqmtMax is null or p.squareMeters <= :sqmtMax )" +
-            "and (:bedroom is null or p.bedrooms = :bedroom)")
+            "and (:bedroom is null or p.bedrooms = :bedroom)" +
+            "order by p.propertyPriority asc ")
     List<Properties> findByCity(@Param("city") String city,
                                 @Param("houseType") String houseType,
                                 @Param("priceMin") Double priceMin,
@@ -83,22 +87,22 @@ public interface PropertyRepo extends JpaRepository<Properties, Integer> {
 
     @Query("select p from Properties p where " +
             "(p.address.province = :city or :city is null)" +
-            "order by p.propertyPrice asc ")
+            "order by p.propertyPrice asc ,p.propertyPriority asc ")
     List<Properties> sortPriceByCityASC(@Param("city") String city);
 
     @Query("select p from Properties p where " +
             "(p.address.province = :city or :city is null)" +
-            "order by p.propertyPrice desc ")
+            "order by p.propertyPrice desc,p.propertyPriority asc  ")
     List<Properties> sortPriceByCityDESC(@Param("city") String city);
 
     @Query("select p from Properties p where " +
             "(p.address.province = :city or :city is null)" +
-            "order by p.squareMeters asc ")
+            "order by p.squareMeters asc ,p.propertyPriority asc   ")
     List<Properties> sortSqftByCityASC(@Param("city") String city);
 
     @Query("select p from Properties p where " +
             "(p.address.province = :city or :city is null)" +
-            "order by p.squareMeters desc ")
+            "order by p.squareMeters desc ,p.propertyPriority asc ")
     List<Properties> sortSqftByCityDESC(@Param("city") String city);
 
     List<Properties> findByPropertyStatus(String propertyStatus);

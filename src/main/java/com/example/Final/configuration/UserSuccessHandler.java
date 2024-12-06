@@ -33,6 +33,9 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
         User theUser = userService.findUserByEmail(userName);
         HttpSession session = request.getSession();
         if (theUser != null) {
+            if(theUser.getImages() != null) {
+                session.setAttribute("image",theUser.getImages().getImageUrl());
+            }
             session.setAttribute("USERNAME", theUser.getFullName());
             session.setAttribute("id", theUser.getUserId());
         } else {
@@ -44,7 +47,7 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
                 response.sendRedirect(request.getContextPath() + "/home/home");
                 return;
             } else if (authority.getAuthority().equals("ROLE_ADMIN")) {
-                response.sendRedirect(request.getContextPath() + "/home/home");
+                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
                 return;
             }
         }

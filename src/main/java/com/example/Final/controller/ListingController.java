@@ -6,6 +6,7 @@ import com.example.Final.repository.AddressRepo;
 import com.example.Final.repository.ContactRepo;
 import com.example.Final.repository.ImagesRepo;
 import com.example.Final.service.*;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -39,9 +40,13 @@ public class ListingController {
 
 
     @GetMapping("/post-address")
-    public String getPost(Model model) {
-
-        return "listing/post-address";
+    public String getPost(Model model, HttpSession session) {
+        if (session.getAttribute("USERNAME") == null) {
+            model.addAttribute("error", "Hãy đăng nhập để đăng tin");
+            return "user/login";
+        } else {
+            return "listing/post-address";
+        }
     }
 
     @GetMapping("/post-info/")
@@ -69,7 +74,10 @@ public class ListingController {
                                  @RequestParam("city") String city,
                                  @RequestParam("district") String district,
                                  @RequestParam("ward") String ward,
-                                 @RequestParam("address") String addressInput) {
+                                 @RequestParam("address") String addressInput,
+                                 @RequestParam("addressID") String addressID,
+                                 @RequestParam("longitude") String longitude,
+                                 @RequestParam("latitude") String latitude) {
         Address address = new Address();
 
         if (!location.trim().isEmpty()) {
@@ -101,14 +109,26 @@ public class ListingController {
         propertyService.create(properties);
 
 
+        properties.setPropertyLatitude(Double.parseDouble(latitude));
+        properties.setPropertyLongitude(Double.parseDouble(longitude));
+        propertyService.save(properties);
+
         model.addAttribute("address", address);
         model.addAttribute("propertyOld", properties);
-        // model.addAttribute("propertyNew", properties);
         return "listing/post-information";
     }
 
     @PostMapping("/information")
-    public String listProperties(Model model, @RequestParam("propertyId") int propertyId, @RequestParam("property-type") String type, @RequestParam("paper") String legal, @RequestParam("interior") String interior, @RequestParam("square-meters") double squareMeters, @RequestParam("price") double price, @RequestParam("floors") int floatFloors, @RequestParam("bedroom") int bedrooms, @RequestParam("bathroom") int bathrooms, Principal principal) {
+    public String listProperties(Model model, @RequestParam("propertyId") int propertyId,
+                                 @RequestParam("property-type") String type,
+                                 @RequestParam("paper") String legal,
+                                 @RequestParam("interior") String interior,
+                                 @RequestParam("square-meters") double squareMeters,
+                                 @RequestParam("price") double price,
+                                 @RequestParam("floors") int floatFloors,
+                                 @RequestParam("bedroom") int bedrooms,
+                                 @RequestParam("bathroom") int bathrooms,
+                                 Principal principal) {
 
         propertyService.updateInfo(propertyId, type, legal, interior, squareMeters, price, floatFloors, bedrooms, bathrooms);
         if (propertyService.getById(propertyId).getPropertyTypeTransaction().equals("rent")) {
@@ -179,28 +199,34 @@ public class ListingController {
     }
 
     @GetMapping("/listing-info/{id}")
-    public String getListingInfo(@PathVariable int id, Model model, Principal principal) {
-        Properties property = propertyService.getById(id);
-        if (property.getHistoryListing() == null) {
-            HistoryListing historyListing = historyListingService.createHistoryListing(property, userService.findUserByEmail(principal.getName()));
-            property.setHistoryListing(historyListing);
-            propertyService.save(property);
+    public String getListingInfo(@PathVariable int id, Model model,
+                                 Principal principal, HttpSession session) {
+        if (session.getAttribute("USERNAME") == null) {
+            model.addAttribute("error", "Hãy đăng nhập để xem thông tin");
+            return "user/login";
+        } else {
+            Properties property = propertyService.getById(id);
+            if (property.getHistoryListing() == null) {
+                HistoryListing historyListing = historyListingService.createHistoryListing(property, userService.findUserByEmail(principal.getName()));
+                property.setHistoryListing(historyListing);
+                propertyService.save(property);
+            }
+
+            List<Properties> result = propertyService.getAll();
+            Collections.shuffle(result);
+            List<Properties> random = new ArrayList<>(result.stream().limit(8).toList());
+            List<Properties> history = propertyService.getByHistoryListing(historyListingService.getByUser(userService.findUserByEmail(principal.getName())));
+            random.removeIf(properties -> !properties.isAvailable());
+            model.addAttribute("randomProperty", random);
+            model.addAttribute("property", property);
+            if (!history.isEmpty()) {
+                model.addAttribute("historyListing", history);
+            }
+            model.addAttribute("historySize", history.size());
+            return "listing/listing-info";
         }
 
-        List<Properties> result = propertyService.getAll();
-        Collections.shuffle(result);
-        List<Properties> random = new ArrayList<>(result.stream().limit(8).toList());
-        List<Properties> history = propertyService.getByHistoryListing(historyListingService.getByUser(userService.findUserByEmail(principal.getName())));
-        random.removeIf(properties -> !properties.isAvailable());
-        model.addAttribute("randomProperty", random);
-        model.addAttribute("property", property);
-        if (!history.isEmpty()) {
-            model.addAttribute("historyListing", history);
-        }
-        model.addAttribute("historySize", history.size());
-        return "listing/listing-info";
     }
-
 
 
 }

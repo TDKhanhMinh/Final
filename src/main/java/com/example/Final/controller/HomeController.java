@@ -2,6 +2,7 @@ package com.example.Final.controller;
 
 import com.example.Final.entity.listingservice.Properties;
 import com.example.Final.service.PropertyService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public String getHome(Model model) {
-        List<Properties> result = propertyService.getAll();
+
 //        for (Properties property : result) {
 //            if (property.getPropertyType() == null ||
 //                    property.getPropertyDescription() == null ||
@@ -32,6 +33,7 @@ public class HomeController {
 //                propertyService.delete(property);
 //            }
 //        }
+        List<Properties> result = propertyService.getAll();
         result.removeIf(properties -> !properties.isAvailable());
         Collections.shuffle(result);
         List<Properties> random = result.stream()
@@ -42,12 +44,17 @@ public class HomeController {
     }
 
     @GetMapping("/all-listings")
-    public String getAllListings(Model model) {
-        List<Properties> propertiesList = propertyService.getAll();
-        propertiesList.removeIf(properties -> !properties.isAvailable());
-        model.addAttribute("properties", propertiesList);
-        model.addAttribute("city", "Toàn quốc");
-        return "listing/all-listing";
+    public String getAllListings(Model model, HttpSession session) {
+        if (session.getAttribute("USERNAME") == null) {
+            model.addAttribute("error", "Hãy đăng nhập để xem tin");
+            return "user/login";
+        } else {
+            List<Properties> propertiesList = propertyService.getAll();
+            propertiesList.removeIf(properties -> !properties.isAvailable());
+            model.addAttribute("properties", propertiesList);
+            model.addAttribute("city", "Toàn quốc");
+            return "listing/all-listing";
+        }
     }
 
 
@@ -68,6 +75,11 @@ public class HomeController {
 
     @GetMapping("/access-denied")
     public String getAccessDenied() {
+        return "user/login";
+    }
+
+    @GetMapping("/login-page")
+    public String getLogin() {
         return "user/login";
     }
 
@@ -102,12 +114,12 @@ public class HomeController {
         propertiesList.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("city", city);
         model.addAttribute("properties", propertiesList);
-
         return "listing/all-listing";
     }
 
     @PostMapping("/searchByKey")
     public String getSearchProductPage(@RequestParam("searchKey") String searchKey, Model model) {
+
         List<Properties> propertiesList = propertyService.findPropertiesByKey(searchKey);
         propertiesList.removeIf(properties -> !properties.isAvailable());
         model.addAttribute("properties", propertiesList);
@@ -116,18 +128,27 @@ public class HomeController {
     }
 
     @GetMapping("/searchCity")
-    public String getSearchCity(Model model, @RequestParam("city") String city) {
-        List<Properties> propertiesList = propertyService.findPropertiesByProvince(city);
-        propertiesList.removeIf(properties -> !properties.isAvailable());
-        model.addAttribute("properties", propertiesList);
-        model.addAttribute("city", city);
-        return "listing/all-listing";
+    public String getSearchCity(Model model, @RequestParam("city") String city,
+                                HttpSession session) {
+
+        if (session.getAttribute("USERNAME") == null) {
+            model.addAttribute("error", "Hãy đăng nhập để đăng tin");
+            return "user/login";
+        } else {
+            List<Properties> propertiesList = propertyService.findPropertiesByProvince(city);
+            propertiesList.removeIf(properties -> !properties.isAvailable());
+            model.addAttribute("properties", propertiesList);
+            model.addAttribute("city", city);
+            return "listing/all-listing";
+        }
+
     }
 
     @GetMapping("/sortByCity")
     public String getSortByCity(Model model, @RequestParam("city") String city,
-                                @RequestParam("sortOption") String option) {
+                                @RequestParam("sortOption") String option, HttpSession session) {
         System.out.println(city);
+
         if (!city.equals("Toàn quốc")) {
             switch (option) {
                 case "priceDesc" -> {
@@ -259,10 +280,18 @@ public class HomeController {
             }
 
         }
-        List<Properties> propertiesList = propertyService.findByCity(city, houseType, minPrice, maxPrice, minSqmt, maxSqmt, bed);
-        propertiesList.removeIf(properties -> !properties.isAvailable());
-        model.addAttribute("properties", propertiesList);
-        model.addAttribute("city", city);
+        if (city.equals("Toàn quốc")) {
+            city = null;
+            List<Properties> propertiesList = propertyService.findByCity(city, houseType, minPrice, maxPrice, minSqmt, maxSqmt, bed);
+            propertiesList.removeIf(properties -> !properties.isAvailable());
+            model.addAttribute("properties", propertiesList);
+            model.addAttribute("city","Toàn quốc");
+        } else {
+            List<Properties> propertiesList = propertyService.findByCity(city, houseType, minPrice, maxPrice, minSqmt, maxSqmt, bed);
+            propertiesList.removeIf(properties -> !properties.isAvailable());
+            model.addAttribute("properties", propertiesList);
+            model.addAttribute("city", city);
+        }
         return "listing/all-listing";
     }
 
