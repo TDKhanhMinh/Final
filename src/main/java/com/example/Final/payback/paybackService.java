@@ -13,6 +13,8 @@ public class paybackService {
         properties.setPropertyInterior(interior);
         properties.setPropertyFloor(floatFloors);
         properties.setBedrooms(bedrooms);
+        properties.setPropertyPrice(price);
+        properties.setSquareMeters(squareMeters);
         properties.setBathrooms(bathrooms);
     }
 }

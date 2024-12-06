@@ -36,7 +36,8 @@ public class UserConfig {
                                 "/user/login", "/user/forgotPassword",
                                 "/user/resetPassword", "/home/all-listings", "/home/searchByCity",
                                 "/home/searchCity","/home/searchForm",
-                                "/home/searchByKey","/home/sortByCity", "/listing/listing-info/**").permitAll()
+                                "/home/searchByKey","/home/sortByCity",
+                                "/listing/listing-info/**","/listing/post-address").permitAll()
                         .anyRequest().authenticated())
 
                 .formLogin(login -> login

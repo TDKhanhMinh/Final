@@ -60,8 +60,11 @@ public class PaymentController {
         address.setProvince(addr.getProvince());
         address.setDistrict(addr.getDistrict());
         address.setWard(addr.getWard());
+        address.setStreet(addr.getStreet());
+        address.setFullAddress(addr.getFullAddress());
         address.setProperties(properties);
         properties.setAddress(address);
+
         properties.setPropertyTypeTransaction(prop.getPropertyType());
         propertyService.create(properties);
         properties.setPropertyLatitude(prop.getPropertyLatitude());
