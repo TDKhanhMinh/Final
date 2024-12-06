@@ -380,7 +380,7 @@
     </div>
 </div>
 <!--Bản đồ-->
-<div class="container" style="max-width: 70%;">
+<div class="container" th:if="${property.propertyLongitude!=null || property.propertyLatitude!=null}" style="max-width: 70%;">
     <h5>Xem trên bản đồ</h5>
     <div class="rounded-2" id="map" style="height: 400px;"></div>
     <input type="text" th:value="${property.propertyLongitude}" name="longitude" id="longitude" hidden>
