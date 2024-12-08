@@ -62,4 +62,5 @@ public class UserConfig {
         return (web) -> web.ignoring().requestMatchers("*/image/**", "*/css/**", "*/js/**");
     }
 
+
 }

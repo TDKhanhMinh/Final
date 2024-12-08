@@ -32,7 +32,7 @@ public class AdminController {
     private final UserPaymentService userPaymentService;
     private final UserPaymentDetailsService userPaymentDetailsService;
 
-    public AdminController(UserService userService, HistoryListingService historyListingService, PropertyService propertyService, LocalValidatorFactoryBean defaultValidator, PaymentService paymentService, PaymentService paymentService1, UserPaymentService userPaymentService, UserPaymentDetailsRepo userPaymentDetailsRepo, UserPaymentDetailsService userPaymentDetailsService) {
+    public AdminController(UserService userService, HistoryListingService historyListingService, PropertyService propertyService, LocalValidatorFactoryBean defaultValidator, PaymentService paymentService1, UserPaymentService userPaymentService, UserPaymentDetailsRepo userPaymentDetailsRepo, UserPaymentDetailsService userPaymentDetailsService) {
         this.userService = userService;
         this.historyListingService = historyListingService;
         this.propertyService = propertyService;

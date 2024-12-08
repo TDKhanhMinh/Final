@@ -63,6 +63,8 @@ public class PaymentController {
         address.setStreet(addr.getStreet());
         address.setFullAddress(addr.getFullAddress());
         address.setProperties(properties);
+        address.setFullAddress(addr.getFullAddress());
+        address.setStreet(addr.getStreet());
         properties.setAddress(address);
 
         properties.setPropertyTypeTransaction(prop.getPropertyType());
@@ -147,6 +149,8 @@ public class PaymentController {
 
     @GetMapping("/payment/{id}")
     public String getPayment(@PathVariable int id, Principal principal, Model model) {
+        System.out.println("getPayment");
+        System.out.println(id);
         User user = userService.findUserByEmail(principal.getName());
         Properties property = propertyService.getById(id);
         model.addAttribute("property", property);
@@ -158,12 +162,15 @@ public class PaymentController {
     public String getPayment(Model model, RedirectAttributes redirectAttributes,
                              @RequestParam(value = "propertyId") int propertyId,
                              @RequestParam(value = "userId") int userId) {
+        System.out.println(userId);
+        System.out.println(propertyId);
         User user = userService.findUserById(userId);
         Properties property = propertyService.getById(propertyId);
+        System.out.println(property.getPropertyPrice());
         if (user.getAccountBalance() < property.getPostInformation().getPayment()) {
             paymentService.savePaymentFailure(property);
             redirectAttributes.addFlashAttribute("error", "Tài khoản hiện không đủ tiền vui lòng nạp tiền thêm.");
-            return "redirect:/payment/payment/" + userId;
+            return "redirect:/payment/payment/" + propertyId;
         } else {
             user.setAccountBalance(user.getAccountBalance() - property.getPostInformation().getPayment());
             paymentService.savePaymentSuccess(property);

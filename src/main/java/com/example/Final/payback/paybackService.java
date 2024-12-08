@@ -16,5 +16,7 @@ public class paybackService {
         properties.setPropertyPrice(price);
         properties.setSquareMeters(squareMeters);
         properties.setBathrooms(bathrooms);
+        properties.setPropertyPrice(price);
+        properties.setSquareMeters(squareMeters);
     }
 }
