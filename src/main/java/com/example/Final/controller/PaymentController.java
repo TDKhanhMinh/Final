@@ -3,7 +3,6 @@ package com.example.Final.controller;
 import com.example.Final.entity.listingservice.Address;
 import com.example.Final.entity.listingservice.PostInformation;
 import com.example.Final.entity.listingservice.Properties;
-import com.example.Final.entity.paymentservice.Payment;
 import com.example.Final.entity.securityservice.User;
 import com.example.Final.payback.Images;
 import com.example.Final.repository.ContactRepo;
@@ -21,7 +20,6 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
